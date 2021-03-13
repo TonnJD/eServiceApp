@@ -1,0 +1,81 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>รายการเบิกอะไหล่</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="loadpage()">
+        <ion-icon slot="icon-only" name="refresh"></ion-icon>  
+    </ion-button>
+  </ion-buttons>
+
+    
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container-fluid">
+    <div class="row" style="padding: 5px;">
+      <div class="col-12" style="text-align: center; margin-top: 20px;" *ngIf="loads == false">
+        <label>ไม่พบข้อมูล</label>
+      </div>
+      <div class="col-md-12 col-12" *ngIf="loads == true">
+        <div class="portlet box blue">
+          <div class="portlet-title">
+            <div class="caption">
+              <i class="fa fa-user"></i>รายการเบิกอะไหล่</div>
+              <div class="tools">
+                  <span class="label label-sm label-success circle"
+                  (click)="NewSpare()">เปิดใบเบิกอะไหล่</span>
+              </div>
+          </div>
+          <div class="portlet-body">
+            <div class="tab-content">
+              <div class="tab-pane active">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="table-scrollable">
+                      <table class="table table-hover">
+                        <thead>
+                          <tr>
+                            <th> ลำดับที่ </th>
+                            <th> เลขที่เอกสาร </th>
+                            <th> ชื่อลูกค้า </th>
+                            <th> สถานะ </th>
+                            <th> วันที่สร้างเอกสาร </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let item of list; let i = index">
+                            <td> {{i+1}}</td>
+                            <td> {{item.ServiceReportNo}} </td>
+                            <td> {{item.CustomerName}} </td>
+                            <td> {{item.Status}} </td>
+                            <td> {{item.CreatedDate}} </td>
+                            <td *ngIf="item.Status != 'ช่างขอเบิกอะไหล่'; else lblEdit" > 
+                              <span class="label label-sm label-warning circle" #lblEdit
+                                (click)="Detail(item)">ดู</span>
+                            </td>
+                            <td *ngIf="item.Status == 'ช่างขอเบิกอะไหล่'; else lblView" > 
+                              <span class="label label-sm label-warning circle" #lblView
+                              (click)="Detail(item)">แก้ไข</span>
+                          </td>
+                          <td *ngIf="item.Status == 'ช่างขอเบิกอะไหล่'; else lblView" > 
+                            <span class="label label-sm label-danger circle" #lblView
+                            (click)="Delete(item)">ลบ</span>
+                        </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

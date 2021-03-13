@@ -1,0 +1,29 @@
+ion-content{
+    --ion-background-color:#EEEEEE;
+    font-size: 0.9em;
+}
+.btn{
+  text-align: left;
+    width: 100%;
+    border-radius: 5px!important;
+}
+label{
+  font-size: 0.9em;
+}
+// #Left
+// {
+//   width: 175px;
+//   height: 100%;
+//   background: green;
+//   position: fixed;
+//   height: 100%;
+// }
+
+// #Right
+// {
+// width: calc(100% - 175px);
+// left: 175px;
+// height: calc(100% + 50px);
+// float: right;
+// position: relative;
+// }

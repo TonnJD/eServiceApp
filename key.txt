@@ -1,0 +1,9 @@
+e-service keystore:
+file password: w1ngpluss0luti0n
+
+alias: devwingplus
+password: @0866556629
+
+Samut Prakan
+
+

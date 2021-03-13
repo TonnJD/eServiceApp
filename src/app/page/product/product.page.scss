@@ -1,0 +1,48 @@
+ion-content {
+    --ion-background-color: white;
+    font-size: 12px;
+}
+
+.container-fluid {
+    padding: 0px;
+}
+
+.portlet {
+    padding: 0px;
+
+    .portlet-body {
+        padding-top: 0px;
+        margin-bottom: 20px;
+    }
+}
+
+.tab {
+    color: black;
+    text-align: center;
+    font-size: 1em;
+    background-color: #BDBDBD;
+    margin: 0px;
+}
+
+.head {
+    font-size: 1em;
+    font-weight: bold;
+    padding: 0px;
+}
+
+.sub {
+    font-size: 1em;
+    padding: 0px;
+}
+
+ion-select{
+    font-size: 1em !important;
+    padding: 5px 7px 5px 0 !important;
+    max-width: 100% !important;
+}
+ion-label{
+    font-size: 1em;
+}
+li{
+    display: inline-block;
+}

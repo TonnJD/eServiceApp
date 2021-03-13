@@ -1,0 +1,62 @@
+ion-content {
+    --ion-background-color: #EEEEEE;
+}
+// .container-fluid {
+//     background-color: #EEEEEE;
+// }
+
+// .portlet {
+//     padding: 0px;
+
+//     .portlet-body {
+//         padding-top: 0px;
+//         margin-bottom: 20px;
+//     }
+// }
+
+// .tab {
+//     color: black;
+//     text-align: center;
+//     font-size: 0.9em;
+//     background-color: #BBDEFB;
+//     padding: 5px;
+//     margin-bottom: 10px;
+//     border-radius: 2px !important;
+// }
+
+
+// .list {
+//     color: black;
+//     font-size: 0.9em;
+//     background-color: #BDBDBD;
+//     margin-top: 5px;
+//     padding: 5px;
+//     margin-bottom: 5px;
+// }
+
+.box {
+    background-color: white;
+}
+
+.text {
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+// .subtext {
+//     font-size: 0.9em;
+// }
+// .padding{
+//     padding: 0px;
+// }
+
+.ex2 {
+    overflow-y: hidden;
+}
+
+.ex3 {
+    overflow-y: scroll;
+}
+.native-input sc-ion-input-md{
+    padding: 0px!important;
+}

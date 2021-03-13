@@ -1,0 +1,56 @@
+ion-content {
+    --ion-background-color: white;
+}
+ion-label{
+    font-size: 0.8em!important;
+}
+ion-input{
+    font-size: 0.8em!important;
+}
+ion-textarea{
+    font-size: 0.8em!important;
+}
+// ion-button{
+//     font-size: 1em!important;
+// }
+.container-fluid {
+    padding: 0px;
+}
+
+ion-select{
+    font-size: 0.8em!important;
+    --ion-background-color: white;
+    max-width: 100% !important;
+}
+
+ion-select-option{
+    font-size: 0.8em!important;
+    --ion-background-color: white;
+}
+
+ion-popover{
+    ion-backdrop{
+        opacity: 0.5 !important;  
+    }
+
+    .popover-wrapper{
+    .popover-content{
+      background-color: white;
+        width:100%!important;
+        left: 0px!important;
+        }
+    }
+}
+
+[class*=" fa-"]:not(.fa-stack),
+[class*=" glyphicon-"],
+[class*=" icon-"],
+[class^=fa-]:not(.fa-stack),
+[class^=glyphicon-],
+[class^=icon-] {
+    font-size: 1.0em !important;
+}
+
+label{
+    padding-top: 10px !important;
+}

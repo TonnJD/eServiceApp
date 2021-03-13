@@ -1,0 +1,8 @@
+[class*=" fa-"]:not(.fa-stack),
+[class*=" glyphicon-"],
+[class*=" icon-"],
+[class^=fa-]:not(.fa-stack),
+[class^=glyphicon-],
+[class^=icon-] {
+    font-size: 1.0em !important;
+}

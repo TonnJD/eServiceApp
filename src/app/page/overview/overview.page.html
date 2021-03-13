@@ -1,0 +1,141 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+            <ion-title>ภาพรวมการทำงาน</ion-title>
+        </ion-buttons>
+        <ion-buttons slot="primary">
+            <ion-button (click)="GetBarcode()">
+                <ion-icon slot="icon-only" name="barcode"></ion-icon>
+            </ion-button>
+            <!-- <ion-button (click)="Openpop($event)">
+                <i class="fa fa-bell"></i>&nbsp;{{job}}
+            </ion-button> -->
+            <!-- <ion-button (click)="loadpage()">
+                <ion-icon slot="icon-only" name="refresh"></ion-icon>
+            </ion-button> -->
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <div class="container-fluid">
+        <div class="page-content-inner">
+            <div class="row" style="padding:5px;">
+                <div class="col-md-8" style="padding-left:2px;padding-right: 2px;margin-top: 3px;">
+                    <div class="portlet box blue">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-dashboard" style="font-size:1em;"></i>สรุปภาพรวมการทำงาน
+                            </div>                            
+                        </div>
+                        <div class="portlet-body" style="padding: 2px;">
+                            <div class="btn-group btn-group btn-group-justified btn-lg"
+                                style="padding: 0px; width: 100%;">
+                                <button class="btn blue text-center" style="padding: 5px;" (click)="changeMonthBack()">
+                                    ย้อนกลับ
+                                </button>
+                                <button class="btn default" style="padding: 5px; width: 65%;" (click)="ChangeMonth()">
+                                    {{textShow}} </button>
+                                <button class="btn blue text-center" style="padding: 5px;" (click)="changeMonthNext()">
+                                    ถัดไป
+                                </button>
+                            </div>
+                            <!-- <ion-list>
+                            <ion-item>
+                              <ion-label>Name</ion-label>
+                              <ion-input type="text" [(ngModel)]="username"></ion-input>
+                            </ion-item>
+                            </ion-list> -->
+                            <div>
+                                <div style="border-bottom: 1px solid #e1e5ec;">
+                                    <label class="col-6">งานทั้งหมด</label>
+                                    <label class="col-6 text-right">{{workall}}</label>
+                                </div>
+                                <div style="border-bottom: 1px solid #e1e5ec;">
+                                    <label class="col-6">เสร็จไปแล้ว</label>
+                                    <label class="col-6 text-right">{{workfinish}}</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="portlet box blue" style="margin-top: 5px;">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-spinner"></i>งานที่ยัง UPLOAD ไม่เสร็จ
+                            </div>
+
+                        </div>
+                        <div class="portlet-body" style="padding: 2px;">
+                            <label class="col-6">ทั้งหมด</label>
+                            <label class="col-6 text-right">{{jobupload}}</label>
+                        </div>
+                    </div> -->
+                    <div class="portlet box blue" style="margin-top: 5px;">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-wrench"></i>งานที่ยังไม่เสร็จ
+                            </div>
+                        </div>
+                        <div class="portlet-body" style="padding: 2px;">
+                            <div (click)="next('worknew')" style="border-bottom: 1px solid #e1e5ec;">
+                                <label class="col-6">งาน CM ใหม่ / ติดตามงาน</label>
+                                <label class="col-6 text-right">{{worknew}}</label>
+                            </div>
+                            <div (click)="next('pm')" style="border-bottom: 1px solid #e1e5ec;">
+                                <label class="col-6">PM</label>
+                                <label class="col-6 text-right">{{pm}}</label>
+                            </div>
+                            <div (click)="next('cm')" style="border-bottom: 1px solid #e1e5ec;">
+                                <label class="col-6">CM</label>
+                                <label class="col-6 text-right">{{cm}}</label>
+                            </div>
+                            <div (click)="next('install')" style="border-bottom: 1px solid #e1e5ec;">
+                                <label class="col-6">INSTALL</label>
+                                <label class="col-6 text-right">{{install}}</label>
+                            </div>
+                            <div (click)="next('uninstall')" style="border-bottom: 1px solid #e1e5ec;">
+                                <label class="col-6">UNINSTALL</label>
+                                <label class="col-6 text-right">{{uninstall}}</label>
+                            </div>
+                            <div (click)="next('waiting')" style="border-bottom: 1px solid #e1e5ec;">
+                                <label class="col-6">รายการรอรับอะไหล่</label>
+                                <label class="col-6 text-right">{{wait}}</label>
+                            </div>
+                            <div (click)="next('ice')" style="border-bottom: 1px solid #e1e5ec;">
+                                <label class="col-6">ชั่งน้ำแข็ง</label>
+                                <label class="col-6 text-right">{{ice}}</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4" style="padding-left:2px;padding-right: 2px;margin-top: 3px;">
+                    <div class="portlet box blue">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="fa fa-user"></i>ข้อมูลพนักงาน
+                            </div>
+
+                        </div>
+                        <div class="portlet-body" style="padding: 3px;">
+                            <label class="col-4">ชื่อ</label>
+                            <label class="col-8">{{ name }}</label>
+                            <label class="col-4">ชื่อผู้ใช้</label>
+                            <label class="col-8">{{ username }}</label>
+                            <label class="col-4">หน้าที่</label>
+                            <label class="col-8">{{ position }}</label>
+                        </div>
+                    </div>
+                    <div class="col-md-12" style="margin-top: 5px;padding: 0;">
+                        <div class="tools" style="padding: 0px;margin-top: 2px;">
+                            <ion-button expand="block" color="success" size="small" (click)="loadpage()" style="width: 100%;height: 40px;">
+                                <ion-icon slot="icon-only" name="refresh"></ion-icon>&nbsp;&nbsp;โหลดข้อมูลล่าสุด                               
+                            </ion-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ion-content>
