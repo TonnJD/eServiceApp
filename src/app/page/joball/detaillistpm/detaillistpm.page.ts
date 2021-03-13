@@ -1,16 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, AlertController, ModalController } from '@ionic/angular';
 import { NavigationExtras } from '@angular/router';
 import { PostDataService } from '../../../post-data.service';
 import { StorageService } from '../../../storage.service';
 import { from } from 'rxjs';
-import { ModalController } from '@ionic/angular';
 import { ShowimginstallPage } from '../../job/showimginstall/showimginstall.page';
 import { CustomerevaluationPage } from '../detailofdetaillistpm/customerevaluation/customerevaluation.page';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { LogPage } from '../../detaillistpm/log/log.page';
-import { loadavg } from 'os';
+import { JobresponsPage } from '../../job/jobdetail/jobrespons/jobrespons.page'
 
 @Component({
   selector: 'app-detaillistpm',
@@ -54,6 +53,7 @@ export class DetaillistpmPage implements OnInit {
   statusserial;
   datacm;
   detailPM;
+  jobResponse;
   //#endregion
 
   //#region constructor
@@ -209,7 +209,7 @@ export class DetaillistpmPage implements OnInit {
       this.imgbf = true
       this.storageService.getUser().then(items => {
         this.items = items;
-           
+
         for (let i = 0; i < this.items.length; i++) {
           this.empID = this.items[i].empID;
         }
@@ -428,7 +428,7 @@ export class DetaillistpmPage implements OnInit {
           console.log(tran);
 
           this.postDataService.postTranService(tran).then(TranService => {
-            // console.log(TranService);  
+            // console.log(TranService);
           });
           let params = {
             planID: item.planID,
@@ -519,7 +519,7 @@ export class DetaillistpmPage implements OnInit {
                     console.log(tran);
 
                     this.postDataService.postTranService(tran).then(TranService => {
-                      // console.log(TranService);  
+                      // console.log(TranService);
                     });
                     let params = {
                       planID: item.planID,
@@ -564,7 +564,7 @@ export class DetaillistpmPage implements OnInit {
         console.log(tran);
 
         this.postDataService.postTranService(tran).then(TranService => {
-          // console.log(TranService);  
+          // console.log(TranService);
         });
         let params = {
           planID: item.planID,
@@ -607,7 +607,7 @@ export class DetaillistpmPage implements OnInit {
                 console.log(tran);
 
                 this.postDataService.postTranService(tran).then(TranService => {
-                  // console.log(TranService);  
+                  // console.log(TranService);
                 });
                 let params = {
                   planID: item.planID,
@@ -723,7 +723,7 @@ export class DetaillistpmPage implements OnInit {
   }
   //#endregion
 
-  //#region 
+  //#region
   showSpareHistory(value) {
     console.log(value);
     let params = {
@@ -749,7 +749,7 @@ export class DetaillistpmPage implements OnInit {
   }
   //#endregion
 
-  //#region 
+  //#region
   showSpare(value) {
     let params = {
       empID: this.empID,
@@ -862,27 +862,50 @@ export class DetaillistpmPage implements OnInit {
   }
 
   async assign(value) {
-    console.log(value);
-    let params = {
-      empID: this.empID,
-      insID: value.installId,
-      planID: value.planID,
-      item: this.item,
-      type: this.type,
-      date: this.date,
-      ItemsName: value.ItemsName,
-      Type: "jobrespons"
-    }
-    console.log(params);
+    // let params = {
+    //   empID: this.empID,
+    //   insID: value.installId,
+    //   planID: value.planID,
+    //   item: this.item,
+    //   type: this.type,
+    //   date: this.date,
+    //   ItemsName: value.ItemsName,
+    //   Type: "jobrespons"
+    // }
+    console.log('this.empID',this.empID);
 
-    const navigationExtras: NavigationExtras = {
-      queryParams: {
-        data: JSON.stringify(params)
-      }
-    };
-    this.navCtrl.navigateForward(['/jobrespons'], navigationExtras);
+    const modal = await this.modalController.create({
+      component: JobresponsPage,
+      cssClass: 'my-custom-modal-css',
+      componentProps: {
+        empID: this.empID,
+        planID: value.planID,
+        Type: "jobrespons"
+      }      
+    });
 
-    console.log(navigationExtras);
+    modal.onDidDismiss().then(res => {
+      this.planID = res.data;
+      
+      this.postDataService.CheckJobResponse(this.planID).then(res => {
+        this.jobResponse = res;
+        console.log('this.jobResponse', this.jobResponse.StatusID);
+        if (this.jobResponse.StatusID == 'Response') {
+          this.navCtrl.navigateRoot('/menu/overview');
+        }
+      });
+    })
+
+    return await modal.present();
+
+    // const navigationExtras: NavigationExtras = {
+    //   queryParams: {
+    //     data: JSON.stringify(params)
+    //   }
+    // };
+    // this.navCtrl.navigateForward(['/jobrespons'], navigationExtras);
+
+    // console.log(navigationExtras);
     // let alert = this.alertController.create({
     //   message: 'ตอบรับงาน',
     //   inputs: [
@@ -920,6 +943,7 @@ export class DetaillistpmPage implements OnInit {
     // });
     // (await alert).present();
   }
+
   saveAssign(data) {
     console.log(data);
     if (data.date == '' || data.time == '' || data.remark == '') {
@@ -956,7 +980,7 @@ export class DetaillistpmPage implements OnInit {
 
     await alert.present();
   }
-  //#endregion 
+  //#endregion
 
   async logs() {
     const modal = await this.modalController.create({

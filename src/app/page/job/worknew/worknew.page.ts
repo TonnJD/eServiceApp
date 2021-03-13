@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthServiceService } from '../../../auth-service.service';
 import { ActivatedRoute } from '@angular/router';
-import { NavController,AlertController } from '@ionic/angular';
+import { NavController,AlertController, ModalController } from '@ionic/angular';
 import { NavigationExtras } from '@angular/router';
 import { StorageService } from '../../../storage.service';
 import { PostDataService } from '../../../post-data.service';
@@ -37,7 +37,8 @@ export class WorknewPage implements OnInit {
     public alertController: AlertController,
     public navCtrl: NavController,
     private storageService: StorageService,
-    private postDataService: PostDataService) {
+    private postDataService: PostDataService,
+    private modalCtrl: ModalController) {
     this.json;
     this.listpmdetail = [];
     this.job = [];
@@ -84,14 +85,13 @@ export class WorknewPage implements OnInit {
           type: this.type,
           date: data.planDate,
         }
-        console.log('item', item.value);
+        
         let navigationExtras: NavigationExtras = {
           queryParams: {
             data: JSON.stringify(params)
           }
         };
-
-        console.log('navigationExtras', navigationExtras);
+        
         this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
   }
   //#endregion

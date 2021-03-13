@@ -336,5 +336,18 @@ export class PostDataService {
       });
     });
   }
+
+  CheckJobResponse(planID) {    
+    return new Promise((resovle, reject) => {
+      let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+      this.http.get(this.apiServer_url + '/API/WebService.asmx/CheckJobResponse?planID=' + planID, option).subscribe(data => {
+        resovle(data);
+      }, error => {
+        reject(error)
+      });
+    });
+  }
+
 }
 
