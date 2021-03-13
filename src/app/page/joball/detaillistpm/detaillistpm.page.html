@@ -185,10 +185,11 @@
                 <div [innerHTML]="data.value.sparepart"></div>
               </div>
             </div>
-            <!-- </div> -->  
+            <!-- </div> -->
 
             <div class="col-12">
-              <ion-button expand="block" size="small" (click)="Imgbf(data.value)" *ngIf="imgbefore">ภาพหน้างาน</ion-button>
+              <ion-button expand="block" size="small" (click)="Imgbf(data.value)" *ngIf="imgbefore">ภาพหน้างาน
+              </ion-button>
 
               <ion-button expand="block" color="warning" size="small" (click)="assign(data.value)"
                 *ngIf="data.value.JobType == 'CM' && data.value.status == 'Assign' else assigns" #assigns>ตอบรับงาน

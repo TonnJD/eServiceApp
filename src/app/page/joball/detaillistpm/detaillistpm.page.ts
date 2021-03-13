@@ -10,6 +10,7 @@ import { ShowimginstallPage } from '../../job/showimginstall/showimginstall.page
 import { CustomerevaluationPage } from '../detailofdetaillistpm/customerevaluation/customerevaluation.page';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { LogPage } from '../../detaillistpm/log/log.page';
+import { loadavg } from 'os';
 
 @Component({
   selector: 'app-detaillistpm',
@@ -68,51 +69,51 @@ export class DetaillistpmPage implements OnInit {
       this.myId = JSON.parse(params["data"]);
       this.detailPM = JSON.parse(params["data"]);
 
-      console.log('detail params', this.detailPM);      
+      console.log('detail params', this.detailPM);
 
       if (this.myId != "undefined") {
         this.item = this.myId.item
         this.type = this.myId.type
         this.date = this.myId.date
         this.datacm = this.myId.datacm
-       
+
         if (this.item == undefined || this.item == "undefined" || this.item == 'undefined') {
           this.cusID = this.myId.cusID
           this.planID = this.myId.planID
           this.workfinish = this.myId.workfinish
           this.month = this.myId.month
-          this.year = this.myId.year         
+          this.year = this.myId.year
         } else {
           this.cusID = this.item.cusID
           this.planID = this.item.planID
           this.workfinish = this.item.WorkFinish
           this.month = this.item.month
-          this.year = this.item.year     
+          this.year = this.item.year
           if (this.cusID == undefined || this.cusID == "undefined" || this.cusID == 'undefined') {
             this.cusID = this.myId.cusID
             this.planID = this.myId.planID
             this.workfinish = this.myId.workfinish
             this.month = this.myId.month
-            this.year = this.myId.year             
-          }  
+            this.year = this.myId.year
+          }
         }
-          
+
         if (this.type == "PM") {
           this.imgbefore = false
         }
 
         if (this.type == "getPM") {
           this.detaillistpm.PlanID = this.planID,
-          this.detaillistpm.jobtype = "SuccessPM"
-          
+            this.detaillistpm.jobtype = "SuccessPM"
+
           this.postDataService.postGetList(this.detaillistpm).then(work => {
             this.data = work;
-            
+
             for (let i = 0; i < this.data.length; i++) {
               this.Customername = this.data[i].CustomerName;
               this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
               for (let j = 0; j < this.data[i].productInstall.length; j++) {
-                
+
               }
             }
           });
@@ -121,11 +122,11 @@ export class DetaillistpmPage implements OnInit {
         else if (this.type == "getIN") {
           this.imgbf = true
           this.detaillistpm.PlanID = this.planID,
-          this.detaillistpm.jobtype = "SuccessIN"
-          
+            this.detaillistpm.jobtype = "SuccessIN"
+
           this.postDataService.postGetList(this.detaillistpm).then(work => {
             this.data = work;
-            
+
             for (let i = 0; i < this.data.length; i++) {
               this.Customername = this.data[i].CustomerName;
               this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
@@ -140,10 +141,10 @@ export class DetaillistpmPage implements OnInit {
           this.imgbf = true
           this.detaillistpm.PlanID = this.planID,
             this.detaillistpm.jobtype = "SuccessCM"
-          
+
           this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
             this.data = work;
-            
+
             for (let i = 0; i < this.data.length; i++) {
               this.Customername = this.data[i].CustomerName;
               this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
@@ -152,10 +153,10 @@ export class DetaillistpmPage implements OnInit {
           let workclose = {
             jobtype: "getworkclose"
           }
-          
+
           this.postDataService.SaveCaseAll(workclose).then(data => {
             this.getworkclose = data
-            
+
             for (let i = 0; i < this.getworkclose.length; i++) {
               console.log(this.getworkclose);
               if (i == 1) {
@@ -208,7 +209,7 @@ export class DetaillistpmPage implements OnInit {
       this.imgbf = true
       this.storageService.getUser().then(items => {
         this.items = items;
-        // console.log(items);      
+           
         for (let i = 0; i < this.items.length; i++) {
           this.empID = this.items[i].empID;
         }
@@ -223,7 +224,7 @@ export class DetaillistpmPage implements OnInit {
 
         this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
           this.data = work;
-          
+
           for (let i = 0; i < this.data.length; i++) {
             this.Customername = this.data[i].CustomerName;
             this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
@@ -234,10 +235,10 @@ export class DetaillistpmPage implements OnInit {
       let workclose = {
         jobtype: "getworkclose"
       }
-      
+
       this.postDataService.SaveCaseAll(workclose).then(data => {
         this.getworkclose = data
-        
+
         for (let i = 0; i < this.getworkclose.length; i++) {
           if (i == 1) {
             this.getworkclose1 = this.getworkclose[1].SystemDataName;
@@ -254,65 +255,65 @@ export class DetaillistpmPage implements OnInit {
           }
         }
       });
-    } else
-      if (this.type == "INSTALL") {
-        this.imgbf = true
-        this.storageService.getUser().then(items => {
-          this.items = items;
-            
-          for (let i = 0; i < this.items.length; i++) {
-            this.empID = this.items[i].empID;
-            
-          }
-          this.detaillistpm.cusID = this.cusID;
-          this.detaillistpm.planID = this.planID;
-          this.detaillistpm.month = this.month;
-          this.detaillistpm.year = this.year;
-          this.detaillistpm.type = this.type;
-          this.detaillistpm.date = this.date;
-          this.detaillistpm.empid = this.empID;
+    }
+    else if (this.type == "INSTALL") {
+      this.imgbf = true
+      this.storageService.getUser().then(items => {
+        this.items = items;
 
-          this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
-            this.data = work;
-            
-            for (let i = 0; i < this.data.length; i++) {
-              this.Customername = this.data[i].CustomerName;
-              this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
-              for (let j = 0; j < this.data[i].productInstall.length; j++) {
-                
-              }
+        for (let i = 0; i < this.items.length; i++) {
+          this.empID = this.items[i].empID;
+
+        }
+        this.detaillistpm.cusID = this.cusID;
+        this.detaillistpm.planID = this.planID;
+        this.detaillistpm.month = this.month;
+        this.detaillistpm.year = this.year;
+        this.detaillistpm.type = this.type;
+        this.detaillistpm.date = this.date;
+        this.detaillistpm.empid = this.empID;
+
+        this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
+          this.data = work;
+
+          for (let i = 0; i < this.data.length; i++) {
+            this.Customername = this.data[i].CustomerName;
+            this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+            for (let j = 0; j < this.data[i].productInstall.length; j++) {
+
             }
-          });
-        });
-      } else {
-        this.storageService.getUser().then(items => {
-          this.items = items;
-             
-          for (let i = 0; i < this.items.length; i++) {
-            this.empID = this.items[i].empID;
           }
-          this.detaillistpm.cusID = this.cusID;
-          this.detaillistpm.planID = this.planID;
-          this.detaillistpm.month = this.month;
-          this.detaillistpm.year = this.year;
-          this.detaillistpm.type = this.type;
-          this.detaillistpm.date = this.date;
-          this.detaillistpm.empid = this.empID;
-
-          this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
-            this.data = work;
-            
-            for (let i = 0; i < this.data.length; i++) {
-              this.Customername = this.data[i].CustomerName;
-              this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
-              for (let j = 0; j < this.data[i].productInstall.length; j++) {
-                
-              }
-            }
-          });
         });
-      }
+      });
+    }
+    else {
+      this.storageService.getUser().then(items => {
+        this.items = items;
 
+        for (let i = 0; i < this.items.length; i++) {
+          this.empID = this.items[i].empID;
+        }
+        this.detaillistpm.cusID = this.cusID;
+        this.detaillistpm.planID = this.planID;
+        this.detaillistpm.month = this.month;
+        this.detaillistpm.year = this.year;
+        this.detaillistpm.type = this.type;
+        this.detaillistpm.date = this.date;
+        this.detaillistpm.empid = this.empID;
+
+        this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
+          this.data = work;
+
+          for (let i = 0; i < this.data.length; i++) {
+            this.Customername = this.data[i].CustomerName;
+            this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+            for (let j = 0; j < this.data[i].productInstall.length; j++) {
+
+            }
+          }
+        });
+      });
+    }
   }
 
   //#endregion
@@ -414,7 +415,7 @@ export class DetaillistpmPage implements OnInit {
           buttons: ['OK']
         });
         await alert.present();
-      } else if (this.type == "CM") {        
+      } else if (this.type == "CM") {
         if (item.WorkCloseID != null) {
           let tran = {
             AssetID: item.AssetID,
@@ -687,7 +688,7 @@ export class DetaillistpmPage implements OnInit {
         console.log("sent", navigationExtras);
       }
     }
-  } 
+  }
   //#endregion
 
 
@@ -700,7 +701,7 @@ export class DetaillistpmPage implements OnInit {
     }
     console.log(params);
     this.postDataService.postdevice(params).then(status => {
-      console.log(status); 
+      console.log(status);
     });
   }
 

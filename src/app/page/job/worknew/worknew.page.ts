@@ -41,11 +41,11 @@ export class WorknewPage implements OnInit {
     this.json;
     this.listpmdetail = [];
     this.job = [];
-    this.route.queryParams.subscribe(params => {
-      this.listpm = null;
-      this.ngOnInit();
-      
-    });
+    // this.route.queryParams.subscribe(params => {
+    //   this.listpm = null;
+    //   this.ngOnInit();      
+    // });
+
     this.storageService.getUser().then(items => {
       this.items = items;
       // console.log(items);      
@@ -55,9 +55,10 @@ export class WorknewPage implements OnInit {
         console.log(this.myempID);
       }
     });
-    setTimeout(() => {
-      this.ngOnInit();
-    }, 500);
+    // setTimeout(() => {
+    //   this.ngOnInit();
+    // }, 500);
+
     this.ChangeMonth();
 
   }
@@ -77,22 +78,21 @@ export class WorknewPage implements OnInit {
   //#endregion
 
   //#region click
-  click(data) {
+  click(item, data) {
         let params = {
-          item: data,
+          item: item.value,
           type: this.type,
           date: data.planDate,
         }
+        console.log('item', item.value);
         let navigationExtras: NavigationExtras = {
           queryParams: {
             data: JSON.stringify(params)
           }
         };
-        console.log(navigationExtras);
+
+        console.log('navigationExtras', navigationExtras);
         this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
-          
-    console.log(data);
-    
   }
   //#endregion
 
@@ -183,6 +183,7 @@ export class WorknewPage implements OnInit {
         this.empid = this.items[i].empID
         this.name = this.items[i].name;
       }
+
       this.job.empID = this.empid;
       this.job.month = this.intMonth;
       this.job.year = this.intYear;
@@ -191,15 +192,11 @@ export class WorknewPage implements OnInit {
 
       this.postDataService.postJobList(this.job).then(work => {
         this.listpm = work;
-        console.log(this.listpm);
-
+        console.log('listpm', this.listpm);
 
         for (let i = 0; i < this.listpm.length; i++) {
           this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
         }
-
-        console.log('listpm', this.listpm);
-
       });
     });
   }
@@ -463,14 +460,14 @@ export class WorknewPage implements OnInit {
 
   //#region start
   ngOnInit() {
-    this.storageService.getUser().then(items => {
-      this.items = items;
-      // console.log(items);      
-      for (let i = 0; i < this.items.length; i++) {
-        this.empid = this.items[i].empID
-        this.name = this.items[i].name;
-      }
-    });
+    // this.storageService.getUser().then(items => {
+    //   this.items = items;
+    //   // console.log(items);      
+    //   for (let i = 0; i < this.items.length; i++) {
+    //     this.empid = this.items[i].empID
+    //     this.name = this.items[i].name;
+    //   }
+    // });
     this.storageService.getUser().then(items => {
       this.items = items;
       // console.log(items);      
@@ -484,12 +481,12 @@ export class WorknewPage implements OnInit {
       this.job.jobtype = this.type
       console.log(this.job);
 
-      this.postDataService.postJobList(this.job).then(work => {
-        this.listpm = work;
-        console.log(this.listpm);
-        console.log('listpm', this.listpm);
+      // this.postDataService.postJobList(this.job).then(work => {
+      //   this.listpm = work;
+      //   console.log(this.listpm);
+      //   console.log('listpm', this.listpm);
 
-      });
+      // });
     });
 
   }
