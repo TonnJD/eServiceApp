@@ -6,50 +6,187 @@
 </ion-toolbar>
 
 <ion-content>
-  <!-- <div class="row">    
-    <div class="col-12">      
-        <ion-item style="padding: 0px;" *ngFor="let item of data; let i = index">
-          <ion-label>{{item.QuestionName}}</ion-label>
-          <div class="md-radio-inline">
-            <div class="md-radio">
-              <input type="radio" id="rdo{{i+1}}{{item.QuestionID}}" name="{{item.QuestionID}}"
-              [value]="5" class="md-radiobtn" (click)="test()">
-              <label for="rdo{{i+1}}{{item.QuestionID}}">
-                <span class="inc"></span>
-                <span class="check"></span>
-              <span class="box"></span> ดีมาก </label>
-            </div>
-            <div class="md-radio">
-              <input type="radio" id="rdo{{i+2}}{{item.QuestionID}}" name="{{item.QuestionID}}" [value]="4"
-                class="md-radiobtn">
-              <label for="rdo{{i+2}}{{item.QuestionID}}">
-                <span class="inc"></span>
-                <span class="check"></span>
-                <span class="box"></span> ดี </label>
-            </div>
-            <div class="md-radio">
-              <input type="radio" id="rdo{{i+3}}{{item.QuestionID}}" name="{{item.QuestionID}}" [value]="3"
-                class="md-radiobtn">
-              <label for="rdo{{i+3}}{{item.QuestionID}}">
-                <span class="inc"></span>
-                <span class="check"></span>
-                <span class="box"></span> พอใช้ </label>
-            </div>
-            <div class="md-radio">
-              <input type="radio" id="rdo{{i+4}}{{item.QuestionID}}" name="{{item.QuestionID}}" [value]="2"
-                class="md-radiobtn" >
-              <label for="rdo{{i+4}}{{item.QuestionID}}">
-                <span class="inc"></span>
-                <span class="check"></span>
-                <span class="box"></span> ปรับปรุง </label>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>1. การตรงต่อเวลาในการส่งมอบบริการและนัดหมาย</ion-card-title>
+    </ion-card-header>  
+    <ion-card-content>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option1" id="rdo14" value="4" (change)="onChange('type1', 4)">
+              <label class="form-check-label" for="rdo14">ดีมาก</label>
             </div>
           </div>
-        </ion-item> 
-      </div>  
-      <div class="text-center" style="margin-top: 10px;">
-        <ion-button shape="round" class="text-center" (click)="getvalue(data)">บันทึก</ion-button>
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option1" id="rdo13" value="3" (change)="onChange('type1', 3)">
+              <label class="form-check-label" for="rdo13">ดี</label>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option1" id="rdo12" value="2" (change)="onChange('type1', 2)">
+              <label class="form-check-label" for="rdo12">พอใช้</label>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option1" id="rdo11" value="1" (change)="onChange('type1', 1)">
+              <label class="form-check-label" for="rdo11">ปรับปรุง</label>
+            </div>
+          </div>
+        </div>
       </div>
-    
-  </div> -->
-  <iframe [src]="url" style="width:100%;height:100%"></iframe>
+    </ion-card-content>
+
+    <ion-card-header>
+      <ion-card-title>2. คุณภาพของการให้บริการ</ion-card-title>
+    </ion-card-header>  
+    <ion-card-content>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option2" id="rdo24" value="4" (change)="onChange('type2', 4)">
+              <label class="form-check-label" for="rdo24">ดีมาก</label>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option2" id="rdo23" value="3" (change)="onChange('type2', 3)">
+              <label class="form-check-label" for="rdo23">ดี</label>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option2" id="rdo22" value="2" (change)="onChange('type2', 2)">
+              <label class="form-check-label" for="rdo22">พอใช้</label>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option2" id="rdo21" value="1" (change)="onChange('type2', 1)">
+              <label class="form-check-label" for="rdo21">ปรับปรุง</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-card-content>
+
+    <ion-card-header>
+      <ion-card-title>3. การให้ความร่วมมือในการแก้ไขปัญหา</ion-card-title>
+    </ion-card-header>  
+    <ion-card-content>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option3" id="rdo34" value="4" (change)="onChange('type3', 4)">
+              <label class="form-check-label" for="rdo34">ดีมาก</label>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option3" id="rdo33" value="3" (change)="onChange('type3', 3)">
+              <label class="form-check-label" for="rdo33">ดี</label>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option3" id="rdo32" value="2" (change)="onChange('type3', 2)">
+              <label class="form-check-label" for="rdo32">พอใช้</label>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option3" id="rdo31" value="1" (change)="onChange('type3', 1)">
+              <label class="form-check-label" for="rdo31">ปรับปรุง</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-card-content>
+
+    <ion-card-header>
+      <ion-card-title>4. การแต่งกายบุคลิกภาพและมนุษย์สัมพันธ์ของเจ้าหน้าที่</ion-card-title>
+    </ion-card-header>  
+    <ion-card-content>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option4" id="rdo44" value="4" (change)="onChange('type4', 4)">
+              <label class="form-check-label" for="rdo44">ดีมาก</label>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option4" id="rdo43" value="3" (change)="onChange('type4', 3)">
+              <label class="form-check-label" for="rdo43">ดี</label>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option4" id="rdo42" value="2" (change)="onChange('type4', 2)">
+              <label class="form-check-label" for="rdo42">พอใช้</label>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option4" id="rdo41" value="1" (change)="onChange('type4', 1)">
+              <label class="form-check-label" for="rdo41">ปรับปรุง</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-card-content>
+
+    <ion-card-header>
+      <ion-card-title>5. ผลงานที่ปรากฏหลังดำเนิการ</ion-card-title>
+    </ion-card-header>  
+    <ion-card-content>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option5" id="rdo54" value="4" (change)="onChange('type5', 4)">
+              <label class="form-check-label" for="rdo54">ดีมาก</label>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option5" id="rdo53" value="3" (change)="onChange('type5', 3)">
+              <label class="form-check-label" for="rdo53">ดี</label>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option5" id="rdo52" value="2" (change)="onChange('type5', 2)">
+              <label class="form-check-label" for="rdo52">พอใช้</label>
+            </div>
+          </div>
+          <div class="col-sm-3 col-md-3">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="option5" id="rdo51" value="1" (change)="onChange('type5', 1)">
+              <label class="form-check-label" for="rdo51">ปรับปรุง</label>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ion-card-content>
+    <hr />
+    <ion-card-content>
+      <div class="container">
+        <div class="row">
+          <div class="col-12 text-center">
+            <ion-button color="primary" (click)="Save()">บันทึก</ion-button>
+          </div>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- <iframe [src]="url" style="width:100%;height:100%"></iframe> -->
 </ion-content>

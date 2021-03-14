@@ -1,5 +1,5 @@
 import { Component, ViewChild, OnInit, Input } from '@angular/core';
-import { NavController, ModalController } from '@ionic/angular';
+import { NavController, ModalController, AlertController } from '@ionic/angular';
 import { NavParams } from '@ionic/angular';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 import { Storage } from '@ionic/storage';
@@ -50,12 +50,13 @@ export class SignaturePage implements OnInit {
     public navCtrl: NavController,
     private postDataService: PostDataService,
     private storageService: StorageService,
-    public modalController: ModalController) {
+    public modalController: ModalController,
+    private alertCtrl: AlertController) {
     this.sig = (navParams.get('sign'))
     // console.log(navParams.get('lastName'));
     // console.log(navParams.get('middleInitial'));
     // this.firstName = navParams.get('firstName')
-    console.log(this.sig);
+    console.log('navParams', navParams);
 
   }
 
@@ -71,9 +72,7 @@ export class SignaturePage implements OnInit {
 
   savePad() {
     const base64 = this.signaturePad.toDataURL('image/png', 0.5);
-    // console.log(base64);
     const blob = this.signature(base64)
-    // console.log(blob);
     this.image = base64;
     this.drawStart();
 
@@ -89,6 +88,45 @@ export class SignaturePage implements OnInit {
     }
     const ia = new Uint8Array(byteNumbers);
     return new Blob([ia], { type: mimeString });
+  }
+
+  async confirmSave(){
+    const alert = await this.alertCtrl.create({
+      header: 'ยืนยันการบันทึกลายเซ็น',
+      message: 'เมื่อยืนยันแล้ว จะไม่สามารถแก้ไขได้อีก',
+      buttons: [
+        {
+          text: 'ยืนยัน',
+          handler: () => {
+            try {
+              this.savePad();
+            } catch (error) {
+              this.alertSaveFail();
+            }
+          }
+        },
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
+
+  async alertSaveFail(){
+    const alert = await this.alertCtrl.create({
+      header: 'แจ้งเตือน',
+      message: 'ไม่สามารถบักทึกได้ กรุณาลองใหม่อีกครั้ง',
+      buttons: ['ตกลง']
+    });
+  
+    await alert.present();
   }
 
   clearPad() {

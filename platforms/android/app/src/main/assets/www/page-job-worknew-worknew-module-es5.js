@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button></ion-back-button>\r\n      <ion-title>รายการงานใหม่ ของ {{name}}</ion-title>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n\r\n<ion-content>\r\n  <div class=\"container-fluid\">\r\n      <div class=\"row\" style=\"padding: 5px;\">\r\n          <div class=\"centered\">\r\n              <ion-spinner name=\"lines\" *ngIf=\"listpm == null || load == true\"></ion-spinner>\r\n          </div>\r\n          <div class=\"col-12\" #lblData *ngIf=\"listpm != false; else lblData\" style=\"padding-top: 10px; padding: 0px;\">\r\n              <div class=\"portlet box blue\">\r\n                  <div class=\"portlet-title\">\r\n                      <div class=\"caption\">\r\n                          <i class=\"fa fa-circle\"></i>\r\n                      </div>\r\n                  </div>\r\n                  <div class=\"portlet-body\" style=\"padding: 5px;\">\r\n                      <ul class=\"list-group\">\r\n                          <li *ngFor=\"let item of listpm\" (click)=\"click(item)\"\r\n                              class=\"list-group-item\">\r\n                              <div class=\"row\">\r\n                                  <div class=\"col-8\">\r\n                                      <!-- <i class=\"fa fa-square-o\" #lblSuccess\r\n                                      *ngIf=\"item.value.WorkAll != item.value.WorkFinish; else lblSuccess\">\r\n                                  </i>\r\n                                  <i class=\"fa fa-check-square-o\" #lblInstall\r\n                                      *ngIf=\"item.value.WorkAll == item.value.WorkFinish; else lblInstall\">\r\n                                  </i> -->\r\n                                  {{ item.Customer }} {{item.CustomerEng}}\r\n                                  </div>\r\n                                  <div class=\"col-4\">\r\n                                      <div class=\"pull-right\">\r\n                                          <div class=\"badge badge-default bg-blue\" style=\"margin:5px;\"\r\n                                              style=\"font-size: 0.9em;\">จำนวน : {{ item.WorkAll }} งาน\r\n                                          </div>\r\n                                      </div>\r\n                                  </div>\r\n                              </div>   \r\n                          </li>\r\n                      </ul>\r\n                  </div>\r\n              </div>\r\n          </div>\r\n          <div class=\"col-12\" style=\"text-align: center; margin-top: 20px;\"  *ngIf=\"listpm == false && load == false\">\r\n              <label>ไม่พบข้อมูล</label>\r\n          </div>\r\n      </div>\r\n  </div>\r\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\r\n      <ion-fab-button>\r\n          <ion-icon name=\"alert\"></ion-icon>\r\n      </ion-fab-button>\r\n  </ion-fab>\r\n</ion-content>"
+module.exports = "<ion-header>\r\n    <ion-toolbar color=\"primary\">\r\n        <ion-buttons slot=\"start\">\r\n            <ion-back-button></ion-back-button>\r\n            <ion-title>รายการงานใหม่ ของ {{name}}</ion-title>\r\n        </ion-buttons>\r\n    </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n    <div class=\"container-fluid\">\r\n        <div class=\"row\" style=\"padding: 5px;\">\r\n            <div class=\"col-12\" style=\"padding-top: 10px; padding: 0px;\">\r\n                <div class=\"btn-group btn-group btn-group-justified btn-lg\" style=\"padding: 0px; width: 100%;\">\r\n                    <button href=\"javascript:;\" class=\"btn default btn-lg\" style=\"padding: 5px;\"\r\n                        (click)=\"ChangeMonth()\"> ปัจจุบัน </button>\r\n                    <button href=\"javascript:;\" class=\"btn blue btn-lg\" style=\"width: 50%; padding: 5px;\"> รายการซ่อม\r\n                        (CM)\r\n                        เดือน{{textShow}} </button>\r\n                    <button href=\"javascript:;\" class=\"btn default btn-lg\" style=\"padding: 5px;\"\r\n                        (click)=\"changeMonthBack(listpm)\"> ก่อนหน้า </button>\r\n                    <button href=\"javascript:;\" class=\"btn default btn-lg\" style=\"padding: 5px;\"\r\n                        (click)=\"changeMonthNext(listpm)\"> ถัดไป </button>\r\n                </div>\r\n            </div>\r\n            <div class=\"centered\">\r\n                <ion-spinner name=\"lines\" *ngIf=\"listpm == null || load == true\"></ion-spinner>\r\n            </div>\r\n            <!-- <div class=\"col-12\" #lblData *ngIf=\"listpm != false; else lblData\" style=\"padding-top: 10px; padding: 0px;\">\r\n                <div class=\"portlet box blue\">\r\n                    <div class=\"portlet-title\">\r\n                        <div class=\"caption\">\r\n                            <i class=\"fa fa-circle\"></i>\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"portlet-body\" style=\"padding: 5px;\">\r\n                        <ul class=\"list-group\">\r\n                            <li *ngFor=\"let item of listpm\" (click)=\"click(item)\" class=\"list-group-item\">\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-8\">\r\n                                        {{ item.Customer }} {{item.CustomerEng}}\r\n                                    </div>\r\n                                    <div class=\"col-4\">\r\n                                        <div class=\"pull-right\">\r\n                                            <div class=\"badge badge-default bg-blue\" style=\"margin:5px;\"\r\n                                                style=\"font-size: 0.9em;\">จำนวน : {{ item.WorkAll }} งาน\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-12\" style=\"text-align: center; margin-top: 20px;\" *ngIf=\"listpm == false && load == false\">\r\n                <label>ไม่พบข้อมูล</label>\r\n            </div> -->\r\n            <div class=\"col-12\" #lblData *ngIf=\"listpm != false; else lblData\" style=\"padding-top: 10px; padding: 0px;\">\r\n                <div class=\"portlet box blue\" *ngFor=\"let data of listpm\">\r\n                    <div class=\"portlet-title\">\r\n                        <div class=\"caption\">\r\n                            <i class=\"fa fa-circle\"></i>{{data.planDateTH}}\r\n                        </div>\r\n                    </div>\r\n                    <div class=\"portlet-body\" style=\"padding: 5px;\">\r\n                        <ul class=\"list-group\">\r\n                            <li *ngFor=\"let item of data.customerdata | keyvalue\" (click)=\"click(item, data)\"\r\n                                class=\"list-group-item\">\r\n                                <div class=\"row\">\r\n                                    <div class=\"col-8\">\r\n                                        <i class=\"fa fa-square-o\" #lblSuccess\r\n                                            *ngIf=\"item.value.WorkAll != item.value.WorkFinish; else lblSuccess\">\r\n                                        </i>\r\n                                        <i class=\"fa fa-check-square-o\" #lblInstall\r\n                                            *ngIf=\"item.value.WorkAll == item.value.WorkFinish; else lblInstall\">\r\n                                        </i>\r\n                                        {{ item.value.Customer }} {{item.value.CustomerEng}}\r\n                                    </div>\r\n                                    <div class=\"col-4\">\r\n                                        <div class=\"pull-right\">\r\n                                            <div class=\"badge badge-default bg-blue\" style=\"margin:5px;\"style=\"font-size: 0.9em;\">\r\n                                                จำนวน : {{ item.value.WorkAll }}\r\n                                            </div>\r\n                                        </div>\r\n                                    </div>\r\n                                </div>\r\n                            </li>\r\n                        </ul>\r\n                    </div>\r\n                </div>\r\n            </div>\r\n            <div class=\"col-12\" style=\"text-align: center; margin-top: 20px;\" *ngIf=\"listpm == false && load == false\">\r\n                <label>ไม่พบข้อมูล</label>\r\n            </div>\r\n        </div>\r\n    </div>\r\n    <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\">\r\n        <ion-fab-button>\r\n            <ion-icon name=\"alert\"></ion-icon>\r\n        </ion-fab-button>\r\n    </ion-fab>\r\n</ion-content>"
 
 /***/ }),
 
@@ -69,7 +69,7 @@ var WorknewPageModule = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = ".centered {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  /* bring your own prefixes */\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZS9qb2Ivd29ya25ldy9FOlxcQXBwX01vYmlsZVxcZVNlcnZpY2VBcHAvc3JjXFxhcHBcXHBhZ2VcXGpvYlxcd29ya25ld1xcd29ya25ldy5wYWdlLnNjc3MiLCJzcmMvYXBwL3BhZ2Uvam9iL3dvcmtuZXcvd29ya25ldy5wYWdlLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDSSxrQkFBQTtFQUNBLFFBQUE7RUFDQSxTQUFBO0VBQ0EsNEJBQUE7RUFDQSx3Q0FBQTtVQUFBLGdDQUFBO0FDQ0oiLCJmaWxlIjoic3JjL2FwcC9wYWdlL2pvYi93b3JrbmV3L3dvcmtuZXcucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLmNlbnRlcmVkIHtcclxuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcclxuICAgIHRvcDogNTAlO1xyXG4gICAgbGVmdDogNTAlO1xyXG4gICAgLyogYnJpbmcgeW91ciBvd24gcHJlZml4ZXMgKi9cclxuICAgIHRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsIC01MCUpO1xyXG4gIH0iLCIuY2VudGVyZWQge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIHRvcDogNTAlO1xuICBsZWZ0OiA1MCU7XG4gIC8qIGJyaW5nIHlvdXIgb3duIHByZWZpeGVzICovXG4gIHRyYW5zZm9ybTogdHJhbnNsYXRlKC01MCUsIC01MCUpO1xufSJdfQ== */"
+module.exports = ".centered {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  /* bring your own prefixes */\n  -webkit-transform: translate(-50%, -50%);\n          transform: translate(-50%, -50%);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZS9qb2Ivd29ya25ldy9FOlxcR2l0SHViXFxlU2VydmljZUFwcC9zcmNcXGFwcFxccGFnZVxcam9iXFx3b3JrbmV3XFx3b3JrbmV3LnBhZ2Uuc2NzcyIsInNyYy9hcHAvcGFnZS9qb2Ivd29ya25ldy93b3JrbmV3LnBhZ2Uuc2NzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtFQUNJLGtCQUFBO0VBQ0EsUUFBQTtFQUNBLFNBQUE7RUFDQSw0QkFBQTtFQUNBLHdDQUFBO1VBQUEsZ0NBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL3BhZ2Uvam9iL3dvcmtuZXcvd29ya25ldy5wYWdlLnNjc3MiLCJzb3VyY2VzQ29udGVudCI6WyIuY2VudGVyZWQge1xyXG4gICAgcG9zaXRpb246IGFic29sdXRlO1xyXG4gICAgdG9wOiA1MCU7XHJcbiAgICBsZWZ0OiA1MCU7XHJcbiAgICAvKiBicmluZyB5b3VyIG93biBwcmVmaXhlcyAqL1xyXG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XHJcbiAgfSIsIi5jZW50ZXJlZCB7XG4gIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgdG9wOiA1MCU7XG4gIGxlZnQ6IDUwJTtcbiAgLyogYnJpbmcgeW91ciBvd24gcHJlZml4ZXMgKi9cbiAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG59Il19 */"
 
 /***/ }),
 
@@ -99,7 +99,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var WorknewPage = /** @class */ (function () {
     //#endregion
-    function WorknewPage(DataService, route, alertController, navCtrl, storageService, postDataService) {
+    function WorknewPage(DataService, route, alertController, navCtrl, storageService, postDataService, modalCtrl) {
         var _this = this;
         this.DataService = DataService;
         this.route = route;
@@ -107,15 +107,16 @@ var WorknewPage = /** @class */ (function () {
         this.navCtrl = navCtrl;
         this.storageService = storageService;
         this.postDataService = postDataService;
+        this.modalCtrl = modalCtrl;
         this.type = "New";
         this.load = false;
         this.json;
         this.listpmdetail = [];
         this.job = [];
-        this.route.queryParams.subscribe(function (params) {
-            _this.listpm = null;
-            _this.ngOnInit();
-        });
+        // this.route.queryParams.subscribe(params => {
+        //   this.listpm = null;
+        //   this.ngOnInit();      
+        // });
         this.storageService.getUser().then(function (items) {
             _this.items = items;
             // console.log(items);      
@@ -125,9 +126,9 @@ var WorknewPage = /** @class */ (function () {
                 console.log(_this.myempID);
             }
         });
-        setTimeout(function () {
-            _this.ngOnInit();
-        }, 500);
+        // setTimeout(() => {
+        //   this.ngOnInit();
+        // }, 500);
         this.ChangeMonth();
     }
     //#endregion
@@ -145,9 +146,9 @@ var WorknewPage = /** @class */ (function () {
     };
     //#endregion
     //#region click
-    WorknewPage.prototype.click = function (data) {
+    WorknewPage.prototype.click = function (item, data) {
         var params = {
-            item: data,
+            item: item.value,
             type: this.type,
             date: data.planDate,
         };
@@ -156,9 +157,7 @@ var WorknewPage = /** @class */ (function () {
                 data: JSON.stringify(params)
             }
         };
-        console.log(navigationExtras);
         this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
-        console.log(data);
     };
     //#endregion
     //#region alert status
@@ -265,11 +264,10 @@ var WorknewPage = /** @class */ (function () {
             console.log(_this.job);
             _this.postDataService.postJobList(_this.job).then(function (work) {
                 _this.listpm = work;
-                console.log(_this.listpm);
+                console.log('listpm', _this.listpm);
                 for (var i = 0; i < _this.listpm.length; i++) {
                     _this.listpm[i].customerdata = JSON.parse(_this.listpm[i].customerdata);
                 }
-                console.log('listpm', _this.listpm);
             });
         });
     };
@@ -509,14 +507,14 @@ var WorknewPage = /** @class */ (function () {
     //#region start
     WorknewPage.prototype.ngOnInit = function () {
         var _this = this;
-        this.storageService.getUser().then(function (items) {
-            _this.items = items;
-            // console.log(items);      
-            for (var i = 0; i < _this.items.length; i++) {
-                _this.empid = _this.items[i].empID;
-                _this.name = _this.items[i].name;
-            }
-        });
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   // console.log(items);      
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.empid = this.items[i].empID
+        //     this.name = this.items[i].name;
+        //   }
+        // });
         this.storageService.getUser().then(function (items) {
             _this.items = items;
             // console.log(items);      
@@ -529,11 +527,11 @@ var WorknewPage = /** @class */ (function () {
             _this.job.year = _this.intYear;
             _this.job.jobtype = _this.type;
             console.log(_this.job);
-            _this.postDataService.postJobList(_this.job).then(function (work) {
-                _this.listpm = work;
-                console.log(_this.listpm);
-                console.log('listpm', _this.listpm);
-            });
+            // this.postDataService.postJobList(this.job).then(work => {
+            //   this.listpm = work;
+            //   console.log(this.listpm);
+            //   console.log('listpm', this.listpm);
+            // });
         });
     };
     //#endregion
@@ -550,7 +548,8 @@ var WorknewPage = /** @class */ (function () {
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"] },
         { type: _storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"] },
-        { type: _post_data_service__WEBPACK_IMPORTED_MODULE_6__["PostDataService"] }
+        { type: _post_data_service__WEBPACK_IMPORTED_MODULE_6__["PostDataService"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] }
     ]; };
     WorknewPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -563,7 +562,8 @@ var WorknewPage = /** @class */ (function () {
             _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"],
             _storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"],
-            _post_data_service__WEBPACK_IMPORTED_MODULE_6__["PostDataService"]])
+            _post_data_service__WEBPACK_IMPORTED_MODULE_6__["PostDataService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"]])
     ], WorknewPage);
     return WorknewPage;
 }());

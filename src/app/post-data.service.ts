@@ -9,16 +9,16 @@ export class PostDataService {
   data;
 
   // test local
-  // apiServer_url = 'http://localhost:41669/';
-  // apiStock = 'https://localhost:41669/';  
+  apiServer_url = 'http://localhost:41669/';
+  apiStock = 'https://localhost:41669/';  
 
   // จาก Server จริง
   // apiServer_url = 'https://erpsuperior.com/';
   // apiStock = 'https://wms.erpsuperior.com/';
 
   //จาก Server เทส
-  apiServer_url = 'https://test.erpsuperior.com/';
-  apiStock = 'https://wmstest.erpsuperior.com/';
+  // apiServer_url = 'https://test.erpsuperior.com/';
+  // apiStock = 'https://wmstest.erpsuperior.com/';
   
 
   // apiServer_url = 'https://cors-anywhere.herokuapp.com/http://superior2.wingplusweb.com/';
@@ -342,6 +342,58 @@ export class PostDataService {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
       this.http.get(this.apiServer_url + '/API/WebService.asmx/CheckJobResponse?planID=' + planID, option).subscribe(data => {
+        resovle(data);
+      }, error => {
+        reject(error)
+      });
+    });
+  }
+
+  SaveEvaluation(empID, planID, insID, type1, type2, type3, type4, type5) {    
+    return new Promise((resovle, reject) => {
+      let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+      this.http.get(this.apiServer_url + '/API/WebService.asmx/SaveEvaluation?empID=' + empID + '&planID=' + planID
+                                        + '&insID=' + insID + '&type1=' + type1 + '&type2=' + type2 + '&type3=' + type3 
+                                        + '&type4=' + type4 + '&type5=' + type5, option).subscribe(data => {
+        resovle(data);
+      }, error => {
+        reject(error)
+      });
+    });
+  }
+
+  ChangeSparepart(planID, empID, spare1, qty1, spare2, qty2, spare3, qty3, spare4, qty4, spare5, qty5,) {    
+    return new Promise((resovle, reject) => {
+      let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+      this.http.get(this.apiServer_url + '/API/WebService.asmx/ChangeSparepart?planID=' + planID + '&empID=' + empID + '&spare1=' + spare1 + '&qty1=' + qty1
+                                       + '&spare2=' + spare2 + '&qty2=' + qty2 + '&spare3=' + spare3 + '&qty3=' + qty3
+                                       + '&spare4=' + spare4 + '&qty4=' + qty4 + '&spare5=' + spare5 + '&qty5=' + qty5, option).subscribe(data => {
+        resovle(data);
+      }, error => {
+        reject(error)
+      });
+    });
+  }
+
+  SelectSparepart(planID) {    
+    return new Promise((resovle, reject) => {
+      let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+      this.http.get(this.apiServer_url + '/API/WebService.asmx/SelectSparepart?planID=' + planID, option).subscribe(data => {
+        resovle(data);
+      }, error => {
+        reject(error)
+      });
+    });
+  }
+
+  DeleteSparepart(planID) {    
+    return new Promise((resovle, reject) => {
+      let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+      this.http.get(this.apiServer_url + '/API/WebService.asmx/DeleteSparepart?planID=' + planID, option).subscribe(data => {
         resovle(data);
       }, error => {
         reject(error)

@@ -1,14 +1,18 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { NavController, ModalController, NavParams, AlertController } from '@ionic/angular';
 import { PostDataService } from '../../../../post-data.service';
+import { Sig } from '../../../../storage.service';
 import { ActivatedRoute } from '@angular/router';
 import { NavigationExtras } from '@angular/router';
+import { SignaturePad } from 'angular2-signaturepad/signature-pad';
+import { Platform } from '@ionic/angular';
 
 @Component({
   selector: 'app-customerevaluation',
   templateUrl: './customerevaluation.page.html',
   styleUrls: ['./customerevaluation.page.scss'],
 })
+
 export class CustomerevaluationPage implements OnInit {
   resolution;
   resolutiondetail = "";
@@ -27,13 +31,32 @@ export class CustomerevaluationPage implements OnInit {
   problemby;
   problembydata;
 
+  firstname: any;
+  isShow = false;
+  image: any;
+  isSave = true;
+  isSign = true;
+  newSig: Sig = <Sig>{};
+  sig;
+  test;
+  base64;
+
+  @ViewChild(SignaturePad, { static: false }) signaturePad;
+
+  public signaturePadOptions: Object = {
+    'minWidth': 2,
+    canvasWidth: 1000,
+    canvasHeight: 300,
+    backgroundColor: 'white',
+    penColor: 'black'
+  };
+
   constructor(private postDataService: PostDataService,
     public modalController: ModalController,
-    public alertController: AlertController,
+    public alertCtrl: AlertController,
     public navCtrl: NavController,
     private navParams: NavParams,
     private route: ActivatedRoute,) {
-
     this.route.queryParams.subscribe(params => {
       this.myId = JSON.parse(params["data"]);
       this.item = this.myId.item
@@ -48,21 +71,23 @@ export class CustomerevaluationPage implements OnInit {
     this.header = this.navParams.data.header
     this.empID = this.navParams.data.empID
     this.workclose = this.navParams.data.workclose
+    this.problemby = this.navParams.data.problemby
 
-    if (this.jobtype == "CM" && this.workclose != 'workclose' || this.jobtype == "CM" && this.workclose == 'workclose') {
+    if ((this.jobtype == "CM" && this.workclose != 'workclose') || (this.jobtype == "CM" && this.workclose == 'workclose')) {
       let problembydata = {
         installID: this.installID,
         jobtype: "problembydata"
       }
-      
+
       this.postDataService.SaveCaseAll(problembydata).then(data => {
         this.problembydata = data
       });
+
       let params = {
         installID: this.installID,
         jobtype: "getresolution"
       }
-      
+
       this.postDataService.SaveCaseAll(params).then(data => {
         this.data = data
       });
@@ -75,9 +100,9 @@ export class CustomerevaluationPage implements OnInit {
     }
 
     this.postDataService.SaveCaseAll(params).then(detail => {
-      this.detail = detail      
+      this.detail = detail
       this.TecComment = this.detail.TecComment
-
+      console.log('this.detail', this.detail);
       if (this.jobtype == "CM") {
         this.resolution = this.detail.ResolutionID
         this.resolutiondetail = this.detail.Resolutiondetail
@@ -86,11 +111,92 @@ export class CustomerevaluationPage implements OnInit {
         this.resolutiondetail = "resolutiondetail"
       }
     });
-
+  }
+  
+  ngAfterViewInit() {
+    let width = (window.innerWidth - 85);
+    
+    // this.signaturePad is now available
+    this.signaturePad.set('minWidth', 2); // set szimek/signature_pad options at runtime
+    this.signaturePad.set('canvasWidth', width);
+    this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
   }
 
-  ngOnInit() {
+  drawStart() {
+    this.isShow = true;
+    this.isSave = false;
+    this.isSign = false;
+  }
 
+  savePad() {
+    const base64 = this.signaturePad.toDataURL('image/png', 0.5);
+    const blob = this.signature(base64)
+    this.image = base64;
+    this.drawStart();
+
+    this.modalController.dismiss(this.image);
+  }
+
+  signature(base64) {
+    const byteString = atob(base64.split(',')[1]);
+    const mimeString = base64.split(',')[0].split(':')[1].split(':')[0];
+    const byteNumbers = new Array(byteString.length);
+    for (let i = 0; i < byteString.length; i++) {
+      byteNumbers[i] = byteString.charAt(i);
+    }
+    const ia = new Uint8Array(byteNumbers);
+    return new Blob([ia], { type: mimeString });
+  }
+
+  async confirmSave(){
+    const alert = await this.alertCtrl.create({
+      header: 'ยืนยันการบันทึกลายเซ็น',
+      message: 'เมื่อยืนยันแล้ว จะไม่สามารถแก้ไขได้อีก',
+      buttons: [
+        {
+          text: 'ยืนยัน',
+          handler: () => {
+            try {
+              this.savePad();
+            } catch (error) {
+              this.alertSaveFail();
+            }
+          }
+        },
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
+
+  async alertSaveFail(){
+    const alert = await this.alertCtrl.create({
+      header: 'แจ้งเตือน',
+      message: 'ไม่สามารถบักทึกได้ กรุณาลองใหม่อีกครั้ง',
+      buttons: ['ตกลง']
+    });
+  
+    await alert.present();
+  }
+
+  clearPad() {
+    this.isShow = false;
+    this.isSave = true;
+    this.isSign = true;
+    
+    this.ngAfterViewInit();
+  }
+
+  ngOnInit() {    
+    
   }
 
   close() {
@@ -104,16 +210,50 @@ export class CustomerevaluationPage implements OnInit {
   }
 
   async submit() {
+    console.log('this.jobtype', this.jobtype);
+    console.log('this.workclose', this.workclose);
+    console.log('this.problemby', this.problemby);
+    console.log("this.resolutiondetail", this.resolutiondetail);
+    console.log('this.TecComment', this.TecComment);
+
     if (this.jobtype == "CM" && this.workclose != 'workclose') {
       if (this.resolutiondetail == null || this.resolutiondetail == "") {
-        const alert = await this.alertController.create({
+        const alert = await this.alertCtrl.create({
           header: 'แจ้งเตือน',
-          message: 'กรุณากรอกวิธีการแก้ปัญหา',
+          message: 'กรุณากรอก <strong>วิธีการแก้ปัญหา</strong>',
           buttons: ['OK']
         });
 
         await alert.present();
-      } else {
+      }
+      else if (this.resolutiondetail.length < 4) {
+        const alert = await this.alertCtrl.create({
+          header: 'แจ้งเตือน',
+          message: 'กรุณากรอก <strong>วิธีการแก้ปัญหา</strong> มากกว่า 4 ตัวอักษร',
+          buttons: ['OK']
+        });
+
+        await alert.present();
+      }
+      else if (this.TecComment == null || this.TecComment == '') {
+        const alert = await this.alertCtrl.create({
+          header: 'แจ้งเตือน',
+          message: 'กรุณากรอก <strong>ความคิดเห็นเพิ่มเติมของช่าง</strong> มากกว่า 4 ตัวอักษร',
+          buttons: ['OK']
+        });
+
+        await alert.present();
+      }
+      else if (this.TecComment.length < 4) {
+        const alert = await this.alertCtrl.create({
+          header: 'แจ้งเตือน',
+          message: 'กรุณากรอก <strong>ความคิดเห็นเพิ่มเติมของช่าง</strong> มากกว่า 4 ตัวอักษร',
+          buttons: ['OK']
+        });
+
+        await alert.present();
+      }
+      else {
         let params = {
           installID: this.installID,
           planID: this.planID,
@@ -124,7 +264,7 @@ export class CustomerevaluationPage implements OnInit {
           resolutiondetail: this.resolutiondetail,
           problemby: this.problemby,
         }
-        
+
         this.postDataService.SaveCaseAll(params).then(data => {
           if (data == true) {
             this.alertSuccess();
@@ -139,33 +279,63 @@ export class CustomerevaluationPage implements OnInit {
                 data: JSON.stringify(params)
               }
             };
-            console.log(navigationExtras);
+
             this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
-            //this.navCtrl.navigateForward(['/menu/overview']);
             this.modalController.dismiss();
           }
+
           if (data == false) {
             this.alertFail();
           }
         });
       }
-    } else if (this.jobtype == "CM" && this.workclose == 'workclose') {
+    }
+    else if (this.jobtype == "CM" && this.workclose == 'workclose') {
       if (this.problemby == null || this.problemby == "") {
-        const alert = await this.alertController.create({
+        const alert = await this.alertCtrl.create({
           header: 'แจ้งเตือน',
-          message: 'กรุณากรอกหัวข้อปัญหาเกิดจากอะไร',
+          message: 'กรุณากรอกหัวข้อ <strong>ปัญหาเกิดจาก</strong>',
           buttons: ['OK']
         });
         await alert.present();
       }
       else if (this.resolutiondetail == null || this.resolutiondetail == "") {
-        const alert = await this.alertController.create({
+        const alert = await this.alertCtrl.create({
           header: 'แจ้งเตือน',
-          message: 'กรุณากรอกวิธีการแก้ปัญหา',
+          message: 'กรุณากรอก <strong>วิธีการแก้ปัญหา</strong>',
           buttons: ['OK']
         });
+
         await alert.present();
-      } else {
+      }
+      else if (this.resolutiondetail.length < 4) {
+        const alert = await this.alertCtrl.create({
+          header: 'แจ้งเตือน',
+          message: 'กรุณากรอก <strong>วิธีการแก้ปัญหา</strong> มากกว่า 4 ตัวอักษร',
+          buttons: ['OK']
+        });
+
+        await alert.present();
+      }
+      else if (this.TecComment == null || this.TecComment == '') {
+        const alert = await this.alertCtrl.create({
+          header: 'แจ้งเตือน',
+          message: 'กรุณากรอก <strong>ความคิดเห็นเพิ่มเติมของช่าง</strong>',
+          buttons: ['OK']
+        });
+
+        await alert.present();
+      }
+      else if (this.TecComment.length < 4) {
+        const alert = await this.alertCtrl.create({
+          header: 'แจ้งเตือน',
+          message: 'กรุณากรอก <strong>ความคิดเห็นเพิ่มเติมของช่าง</strong> มากกว่า 4 ตัวอักษร',
+          buttons: ['OK']
+        });
+
+        await alert.present();
+      }
+      else {
         let params = {
           installID: this.installID,
           planID: this.planID,
@@ -175,8 +345,9 @@ export class CustomerevaluationPage implements OnInit {
           resolution: this.resolution,
           resolutiondetail: this.resolutiondetail,
           problemby: this.problemby,
-        }    
-        console.log(params);
+          TecComment: this.TecComment
+        }
+        console.log('params', params);
         this.postDataService.SaveCaseAll(params).then(data => {
           if (data == true) {
             this.modalController.dismiss(params);
@@ -184,26 +355,36 @@ export class CustomerevaluationPage implements OnInit {
           if (data == false) {
             this.alertFail();
           }
-        });        
+        });
       }
     }
     else {
       if (this.TecComment == null || this.TecComment == "") {
-        const alert = await this.alertController.create({
+        const alert = await this.alertCtrl.create({
           header: 'แจ้งเตือน',
           message: 'กรุณากรอกความคิดเห็น',
           buttons: ['OK']
         });
 
         await alert.present();
-      } else {
+      }
+      else if (this.TecComment.length < 4) {
+        const alert = await this.alertCtrl.create({
+          header: 'แจ้งเตือน',
+          message: 'กรุณากรอก <strong>ความคิดเห็นเพิ่มเติมของช่าง</strong> มากกว่า 4 ตัวอักษร',
+          buttons: ['OK']
+        });
+
+        await alert.present();
+      }
+      else {
         let params = {
           resolution: this.resolution,
           resolutiondetail: this.resolutiondetail,
           TecComment: this.TecComment,
-          ProblemBy:this.problemby
+          ProblemBy: this.problemby
         }
-        
+
         this.modalController.dismiss(params);
       }
     }
@@ -211,7 +392,7 @@ export class CustomerevaluationPage implements OnInit {
 
   //#region alert success
   async alertSuccess() {
-    const alert = await this.alertController.create({
+    const alert = await this.alertCtrl.create({
       header: 'แจ้งเตือน',
       message: 'บันทึกสำเร็จ',
       buttons: ['OK']
@@ -223,7 +404,7 @@ export class CustomerevaluationPage implements OnInit {
 
   //#region alert success
   async alertFail() {
-    const alert = await this.alertController.create({
+    const alert = await this.alertCtrl.create({
       header: 'แจ้งเตือน',
       message: 'บันทึกไม่สำเร็จ',
       buttons: ['OK']

@@ -21,6 +21,11 @@ export class CheckevaluationPage implements OnInit {
   data;
   name;
   eva = [];
+  type1 = 0;
+  type2 = 0;
+  type3 = 0;
+  type4 = 0;
+  type5 = 0;
   //#endregion
 
   //#region constructor
@@ -28,7 +33,7 @@ export class CheckevaluationPage implements OnInit {
     private postDataService: PostDataService,
     private navParams: NavParams,
     public alertController: AlertController,
-    sanitizer: DomSanitizer, ) {
+    sanitizer: DomSanitizer,) {
     this.empID = this.navParams.data.empID;
     this.planID = this.navParams.data.planID;
     this.installID = this.navParams.data.install,
@@ -37,14 +42,87 @@ export class CheckevaluationPage implements OnInit {
     // this.getEva();
 
 
-    this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/CK_Evaluation.aspx' + '?empID=' + this.empID + '&serviceplanid=' + this.planID + '&installplanid=' + this.installID);
+    //this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/CK_Evaluation.aspx' + '?empID=' + this.empID + '&serviceplanid=' + this.planID + '&installplanid=' + this.installID);
     // this.url = sanitizer.bypassSecurityTrustResourceUrl('http://localhost:41669/Web/CK_Evaluation.aspx' + '?empID=' + this.empID + '&serviceplanid=' + this.planID + '&installplanid=' + this.installID);
   }
   //#endregion
 
-  onChange(value) {
-    console.log(value.detail.value);
+  async Save() {
+    if (this.type1 == 0 || this.type2 == 0 || this.type3 == 0 || this.type4 == 0 || this.type5 == 0) {
+      const alert = await this.alertController.create({
+        header: 'แจ้งเตือน',
+        message: 'กรุณาเลือกคะแนนประเมินให้ครบถ้วน',
+        buttons: ['OK']
+      });
 
+      await alert.present();
+    }
+    else {
+      this.confirmSave();
+    } 
+  }
+
+async confirmSave(){
+  const alert = await this.alertController.create({
+    header: 'ยืนยันบันทึกการประเมิน',
+    message: 'เมื่อยืนยันการประเมินแล้ว จะไม่สามารถแก้ไขได้อีก',
+    buttons: [
+      {
+        text: 'ยืนยัน',
+        handler: () => {
+          try {
+            this.postDataService.SaveEvaluation(this.empID, this.planID, this.installID, this.type1, this.type2, this.type3, this.type4, this.type5).then(res => {
+              this.modalController.dismiss(0);
+            });
+          } catch (error) {
+            this.alertSaveFail();
+          }
+        }
+      },
+      {
+        text: 'ยกเลิก',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: (blah) => {
+          console.log('Confirm Cancel: blah');
+        }
+      }
+    ]
+  });
+
+  await alert.present();
+}
+
+async alertSaveFail(){
+  const alert = await this.alertController.create({
+    header: 'แจ้งเตือน',
+    message: 'ไม่สามารถบักทึกได้ กรุณาลองใหม่อีกครั้ง',
+    buttons: ['ตกลง']
+  });
+
+  await alert.present();
+}
+
+  onChange(type, value) {
+    if (type == 'type1') {
+      this.type1 = value;
+    }
+
+    if (type == 'type2') {
+      this.type2 = value;
+    }
+
+    if (type == 'type3') {
+      this.type3 = value;
+    }
+
+    if (type == 'type4') {
+      this.type4 = value;
+    }
+
+    if (type == 'type5') {
+      this.type5 = value;
+    }
   }
 
   setQuantity(value) {
@@ -87,6 +165,7 @@ export class CheckevaluationPage implements OnInit {
       installID: this.installID,
       planID: this.planID
     }
+
     console.log(params);
     this.postDataService.SaveCaseAll(params).then(data => {
       console.log(data);

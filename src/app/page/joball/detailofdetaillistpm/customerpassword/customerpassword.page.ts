@@ -16,6 +16,8 @@ export class CustomerpasswordPage implements OnInit {
   data;
   type;
   Ischkpassword;
+  commentType = 0;
+  showComment = false;
 
   constructor(private modalController: ModalController,
     public alertController: AlertController,
@@ -28,11 +30,19 @@ export class CustomerpasswordPage implements OnInit {
     this.installID = this.navParams.data.installID;
     this.type = this.navParams.data.type
 
+    if (this.type == 'PM') {
+      this.Ischkpassword = true;
+    }
+    else {
+      this.Ischkpassword = false;
+    }
+
     let params1 = {
       installID: this.installID,
       planID: this.planID,
       typedevice: "chkpassword"
-    }     
+    }
+
     this.postDataService.postdevice(params1).then(chkpassword => {
       this.getpassword = chkpassword;      
     })
@@ -42,7 +52,7 @@ export class CustomerpasswordPage implements OnInit {
       planID: this.planID,
       jobtype: "detailtran"
     }
-    console.log(params);
+    
     this.postDataService.SaveCaseAll(params).then(data => {
       this.data = data
       this.Cuscomment = this.data.CusComment
@@ -52,18 +62,67 @@ export class CustomerpasswordPage implements OnInit {
 
   ngOnInit() {
 
+  }
 
+  onChange(type) {
+    this.commentType = type;
+
+    if (type == 1) {
+      this.showComment = false;
+    }
+    else {
+      this.showComment = true;
+    }
   }
 
   async closeModal() {
     await this.modalController.dismiss(0);    
   }
 
+  async confirmSubmit(){
+    const alert = await this.alertController.create({
+      header: 'ยืนยันบันทึกการประเมิน',
+      message: 'เมื่อยืนยันการประเมินแล้ว จะไม่สามารถแก้ไขได้อีก',
+      buttons: [
+        {
+          text: 'ยืนยัน',
+          handler: () => {
+            try {
+              this.submit();
+            } catch (error) {
+              this.alertSaveFail();
+            }
+          }
+        },
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+            console.log('Confirm Cancel: blah');
+          }
+        }
+      ]
+    });
+  
+    await alert.present();
+  }
+
+  async alertSaveFail(){
+    const alert = await this.alertController.create({
+      header: 'แจ้งเตือน',
+      message: 'ไม่สามารถบักทึกได้ กรุณาลองใหม่อีกครั้ง',
+      buttons: ['ตกลง']
+    });
+  
+    await alert.present();
+  }
+
   async submit() {   
     console.log(this.code);
-    console.log(this.getpassword); 
-    if (this.type == 'PM') {       
-
+    console.log(this.getpassword);
+    
+    if (this.type == 'PM') {
       if (this.Cuscomment == "" || this.Cuscomment == null || this.code != this.getpassword) {
         if (this.Cuscomment == "" || this.Cuscomment == null) {
           const alert = await this.alertController.create({
@@ -92,10 +151,61 @@ export class CustomerpasswordPage implements OnInit {
         }
         await this.modalController.dismiss(params);
       }
-    } else {
+    }
+    else if (this.type == 'CM') {
+      console.log('this.type', this.type);
+      console.log('this.commentType', this.commentType);
+      
+      if (this.commentType == 0) {
+        const alert = await this.alertController.create({
+          header: 'แจ้งเตือน',
+          message: 'กรุณาเลือกความเห็น',
+          buttons: ['OK']
+        });
+
+        await alert.present();
+      }
+      else if (this.commentType == 2) {
+        if (this.Cuscomment == "" || this.Cuscomment == null) {
+          const alert = await this.alertController.create({
+            header: 'แจ้งเตือน',
+            message: 'กรุณากรอกความคิดเห็น',
+            buttons: ['OK']
+          });
+  
+          await alert.present();
+        }
+        else if (this.Cuscomment.length < 4) {
+          const alert = await this.alertController.create({
+            header: 'แจ้งเตือน',
+            message: 'กรุณากรอกความคิดเห็น มากกว่า 4 ตัวอักษร',
+            buttons: ['OK']
+          });
+  
+          await alert.present();
+        }
+        else {
+          let params = {
+            code: this.code,
+            Cuscomment: this.Cuscomment
+          }
+  
+          await this.modalController.dismiss(params);
+        }
+      } else {
+        let params = {
+          code: this.code,
+          Cuscomment: 'ไม่มีความคิดเห็น'
+        }
+
+        await this.modalController.dismiss(params);
+      }
+    }
+    else {
       let params = {
         Cuscomment: this.Cuscomment
       }
+
       this.modalController.dismiss(params);
     }
   }
