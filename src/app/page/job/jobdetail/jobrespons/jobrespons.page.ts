@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ModalController, AlertController, NavParams } from '@ionic/angular';
-import { ActivatedRoute, NavigationExtras } from '@angular/router';
+import { NavController, ModalController, AlertController } from '@ionic/angular';
+import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { PostDataService } from '../../../../post-data.service';
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 
@@ -10,6 +10,7 @@ import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
   styleUrls: ['./jobrespons.page.scss'],
 })
 export class JobresponsPage implements OnInit {
+  //#region variable
   insID;
   empID;
   planID;
@@ -38,6 +39,8 @@ export class JobresponsPage implements OnInit {
   DetailJobList;
   No;
   url: SafeResourceUrl;
+  jobResponse;
+  //#endregion
 
   constructor(public modalController: ModalController,
     private postDataService: PostDataService,
@@ -45,19 +48,31 @@ export class JobresponsPage implements OnInit {
     private alertController: AlertController,
     public navCtrl: NavController,
     sanitizer: DomSanitizer,
-    private navParams: NavParams) {
+    private router: Router) {
     this.buttonColor = 'medium';
-
-    console.log('this.navParams', this.navParams);
-    if (this.navParams.data != undefined) {
-      this.empID = this.navParams.data.empID;
-      this.planID = this.navParams.data.planID;
+    this.route.queryParams.subscribe(params => {
+      this.data = JSON.parse(params["data"]);
+      this.insID = this.data.insID;
+      this.empID = this.data.empID;
+      this.planID = this.data.planID;
+      this.item = this.data.item;
+      this.type = this.data.type;
+      this.date = this.data.date;
+      this.ItemsName = this.data.ItemsName;
+      this.cusID = this.item.cusID;
+      this.Type = this.data.Type;
       this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/TabletRespone.aspx' + '?planID=' + this.planID + "&empId=" + this.empID);
-    }
+    });
   }
 
-  close() {
-    this.modalController.dismiss(this.planID);
+  goBack() {
+    this.postDataService.CheckJobResponse(this.planID).then(res => {
+      this.jobResponse = res;
+      
+      if (this.jobResponse.StatusID == 'Response') {
+        this.router.navigateByUrl('/menu/overview'); 
+      }
+    });
   }
 
   ngOnInit() {

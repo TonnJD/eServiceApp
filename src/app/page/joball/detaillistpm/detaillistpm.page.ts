@@ -9,7 +9,7 @@ import { ShowimginstallPage } from '../../job/showimginstall/showimginstall.page
 import { CustomerevaluationPage } from '../detailofdetaillistpm/customerevaluation/customerevaluation.page';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { LogPage } from '../../detaillistpm/log/log.page';
-import { JobresponsPage } from '../../job/jobdetail/jobrespons/jobrespons.page'
+//import { JobresponsPage } from '../../job/jobdetail/jobrespons/jobrespons.page'
 
 @Component({
   selector: 'app-detaillistpm',
@@ -54,6 +54,7 @@ export class DetaillistpmPage implements OnInit {
   datacm;
   detailPM;
   jobResponse;
+  sentCM;
   //#endregion
 
   //#region constructor
@@ -358,20 +359,19 @@ export class DetaillistpmPage implements OnInit {
   }
 
   scan(data, item) {
-    console.log("data" + data);
-    console.log("item" + item);
     if (this.type == "PM" || this.type == "CM") {
       let params = {
         installID: item.installId,
         typedevice: "checkserial"
       }
-      console.log(params);
+
       this.postDataService.postdevice(params).then(statusserial => {
         this.statusserial = statusserial;
-        console.log(this.statusserial);
+
         if (this.statusserial == false) {
           this.click(data, item)
-        } else {
+        }
+        else {
           let tran = {
             AssetID: item.AssetID,
             Serial: item.Serial,
@@ -380,7 +380,6 @@ export class DetaillistpmPage implements OnInit {
             insID: item.installId,
             type: this.type
           }
-          console.log(tran);
 
           this.postDataService.postTranService(tran).then(TranService => {
             let params = {
@@ -389,18 +388,19 @@ export class DetaillistpmPage implements OnInit {
               item: item,
               type: this.type,
             }
-            console.log(params);
 
             const navigationExtras: NavigationExtras = {
               queryParams: {
                 data: JSON.stringify(params)
               }
             };
+
             this.navCtrl.navigateForward(['/picserial'], navigationExtras);
           });
         }
       });
-    } else {
+    }
+    else {
       this.click(data, item)
     }
   }
@@ -408,6 +408,7 @@ export class DetaillistpmPage implements OnInit {
   async click(data, item) {
     console.log('Data', data);
     console.log('item', item);
+
     if (item.Workfinish == 0 || item.Workfinish == 2) {
       if (item.status == "Pending") {
         const alert = await this.alertController.create({
@@ -415,8 +416,10 @@ export class DetaillistpmPage implements OnInit {
           buttons: ['OK']
         });
         await alert.present();
-      } else if (this.type == "CM") {
+      }
+      else if (this.type == "CM") {
         if (item.WorkCloseID != null) {
+          console.log('item.WorkCloseID', item.WorkCloseID);
           let tran = {
             AssetID: item.AssetID,
             Serial: item.Serial,
@@ -425,11 +428,11 @@ export class DetaillistpmPage implements OnInit {
             insID: item.installId,
             type: this.type
           }
-          console.log(tran);
 
           this.postDataService.postTranService(tran).then(TranService => {
             // console.log(TranService);
           });
+
           let params = {
             planID: item.planID,
             install: item,
@@ -441,23 +444,24 @@ export class DetaillistpmPage implements OnInit {
             date: this.date,
             month: this.month,
             year: this.year,
+            sentCM: this.detailPM
           }
-          console.log(params);
 
           const navigationExtras: NavigationExtras = {
             queryParams: {
               data: JSON.stringify(params)
             }
           };
+
           this.navCtrl.navigateForward(['joball/listpm/detailofdetaillistpm'], navigationExtras);
           console.log("sent", navigationExtras);
-        } else {
-          let alert = await this.alertController.create({
+        }
+        else {          
+          let alertChoose = await this.alertController.create({
             cssClass: 'custom-alert',
             message: 'กรุณาเลือกการปิดงาน',
             inputs: [
               {
-
                 type: 'radio',
                 label: this.getworkclose2,
                 value: this.getworkclosevalue2
@@ -472,8 +476,7 @@ export class DetaillistpmPage implements OnInit {
               [{
                 text: this.text,
                 handler: value => {
-                  console.log(value);
-                  if (value == this.getworkclosevalue1) {
+                  if (value == this.getworkclosevalue1) {                    
                     let params = {
                       planID: item.planID,
                       installID: item.installId,
@@ -481,22 +484,21 @@ export class DetaillistpmPage implements OnInit {
                       jobtype: "saveclose",
                       workclose: value
                     }
-                    console.log(params);
+                    
                     this.postDataService.SaveCaseAll(params).then(result => {
-                      console.log(result);
                       if (result == true) {
                         this.imgbf = true
-                        this.detaillistpm.PlanID = item.planID,
-                          this.detaillistpm.jobtype = "SuccessCM"
-                        console.log(this.detaillistpm);
+                        this.detaillistpm.PlanID = item.planID
+                        this.detaillistpm.jobtype = "SuccessCM"
                         this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
                           this.data = work;
-                          console.log(this.data);
+                          
                           for (let i = 0; i < this.data.length; i++) {
                             this.Customername = this.data[i].CustomerName;
                             this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
                           }
                         });
+
                         this.alertSuccess();
                         //this.navCtrl.navigateForward(['/menu/overview']);
                       }
@@ -516,11 +518,11 @@ export class DetaillistpmPage implements OnInit {
                       type: this.type,
                       workclose: value
                     }
-                    console.log(tran);
 
                     this.postDataService.postTranService(tran).then(TranService => {
                       // console.log(TranService);
                     });
+
                     let params = {
                       planID: item.planID,
                       install: item,
@@ -533,13 +535,13 @@ export class DetaillistpmPage implements OnInit {
                       month: this.month,
                       year: this.year,
                     }
-                    console.log(params);
 
                     const navigationExtras: NavigationExtras = {
                       queryParams: {
                         data: JSON.stringify(params)
                       }
                     };
+
                     this.navCtrl.navigateForward(['joball/listpm/detailofdetaillistpm'], navigationExtras);
                     console.log("sent", navigationExtras);
                   }
@@ -549,9 +551,11 @@ export class DetaillistpmPage implements OnInit {
                 }
               }]
           });
-          await alert.present();
+
+          await alertChoose.present();
         }
       }
+
       if (item.tranID != null && this.type != "CM") {
         let tran = {
           AssetID: item.AssetID,
@@ -862,48 +866,50 @@ export class DetaillistpmPage implements OnInit {
   }
 
   async assign(value) {
-    // let params = {
-    //   empID: this.empID,
-    //   insID: value.installId,
-    //   planID: value.planID,
-    //   item: this.item,
-    //   type: this.type,
-    //   date: this.date,
-    //   ItemsName: value.ItemsName,
-    //   Type: "jobrespons"
-    // }
-    console.log('this.empID',this.empID);
+    let params = {
+      empID: this.empID,
+      insID: value.installId,
+      planID: value.planID,
+      item: this.item,
+      type: this.type,
+      date: this.date,
+      ItemsName: value.ItemsName,
+      Type: "jobrespons"
+    }
 
-    const modal = await this.modalController.create({
-      component: JobresponsPage,
-      cssClass: 'my-custom-modal-css',
-      componentProps: {
-        empID: this.empID,
-        planID: value.planID,
-        Type: "jobrespons"
-      }      
-    });
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        data: JSON.stringify(params)
+      }
+    };
 
-    modal.onDidDismiss().then(res => {
-      this.planID = res.data;
-      
-      this.postDataService.CheckJobResponse(this.planID).then(res => {
-        this.jobResponse = res;
-        console.log('this.jobResponse', this.jobResponse.StatusID);
-        if (this.jobResponse.StatusID == 'Response') {
-          this.navCtrl.navigateRoot('/menu/overview');
-        }
-      });
-    })
+    this.navCtrl.navigateForward(['/jobrespons'], navigationExtras);
 
-    return await modal.present();
+    // console.log('this.empID',this.empID);
 
-    // const navigationExtras: NavigationExtras = {
-    //   queryParams: {
-    //     data: JSON.stringify(params)
-    //   }
-    // };
-    // this.navCtrl.navigateForward(['/jobrespons'], navigationExtras);
+    // const modal = await this.modalController.create({
+    //   component: JobresponsPage,
+    //   cssClass: 'my-custom-modal-css',
+    //   componentProps: {
+    //     empID: this.empID,
+    //     planID: value.planID,
+    //     Type: "jobrespons"
+    //   }      
+    // });
+
+    // modal.onDidDismiss().then(res => {
+    //   this.planID = res.data;
+
+    //   this.postDataService.CheckJobResponse(this.planID).then(res => {
+    //     this.jobResponse = res;
+    //     console.log('this.jobResponse', this.jobResponse.StatusID);
+    //     if (this.jobResponse.StatusID == 'Response') {
+    //       this.navCtrl.navigateRoot('/menu/overview');
+    //     }
+    //   });
+    // })
+
+    // return await modal.present();
 
     // console.log(navigationExtras);
     // let alert = this.alertController.create({

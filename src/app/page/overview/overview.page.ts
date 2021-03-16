@@ -77,7 +77,6 @@ export class OverviewPage implements OnInit {
   //#endregion
 
   //#region constructor
-
   constructor(public DataService: AuthServiceService,
     public http: HttpClient,
     public postDataService: PostDataService,
@@ -457,6 +456,11 @@ export class OverviewPage implements OnInit {
   //#endregion
 
   //#region start
+
+  ionViewWillEnter() {
+    console.log('ionViewWillEnter ');
+    
+  }
 
   ngOnInit() {
     this.storageService.getUser().then(items => {

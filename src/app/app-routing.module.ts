@@ -42,7 +42,8 @@ const routes: Routes = [
   { path: 'log', loadChildren: './page/detaillistpm/log/log.module#LogPageModule' },
   { path: 'job/worknew', loadChildren: './page/job/worknew/worknew.module#WorknewPageModule' },
   { path: 'jobrespons', loadChildren: './page/job/jobdetail/jobrespons/jobrespons.module#JobresponsPageModule' },
-  { path: 'request-sparepart', loadChildren: './page/sparepart/request-sparepart/request-sparepart.module#RequestSparepartPageModule' },
+  { path: 'request-sparepart', loadChildren: './page/sparepart/request-sparepart/request-sparepart.module#RequestSparepartPageModule' },  { path: 'requestsparepart', loadChildren: './page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.module#RequestsparepartPageModule' },
+
 
 ];
 

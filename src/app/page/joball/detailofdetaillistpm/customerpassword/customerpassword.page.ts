@@ -18,6 +18,7 @@ export class CustomerpasswordPage implements OnInit {
   Ischkpassword;
   commentType = 0;
   showComment = false;
+  cusName;
 
   constructor(private modalController: ModalController,
     public alertController: AlertController,
@@ -25,6 +26,7 @@ export class CustomerpasswordPage implements OnInit {
     private navParams: NavParams) {
 
     console.table(this.navParams);
+    this.cusName = this.navParams.data.cusName;
     this.getpassword = this.navParams.data.password;
     this.planID = this.navParams.data.planID;
     this.installID = this.navParams.data.installID;
@@ -69,9 +71,11 @@ export class CustomerpasswordPage implements OnInit {
 
     if (type == 1) {
       this.showComment = false;
+      this.Cuscomment = 'ไม่มีความคิดเห็น';
     }
     else {
       this.showComment = true;
+      this.Cuscomment = '';
     }
   }
 
@@ -119,18 +123,38 @@ export class CustomerpasswordPage implements OnInit {
   }
 
   async submit() {   
-    console.log(this.code);
-    console.log(this.getpassword);
+    console.log('this.code', this.code);
+    console.log('this.getpassword', this.getpassword);
+    console.log('this.Cuscomment', this.Cuscomment);
+    console.log('this.commentType', this.commentType);    
     
     if (this.type == 'PM') {
       if (this.Cuscomment == "" || this.Cuscomment == null || this.code != this.getpassword) {
-        if (this.Cuscomment == "" || this.Cuscomment == null) {
+        if (this.commentType == 0) {
+          const alert = await this.alertController.create({
+            header: 'แจ้งเตือน',
+            message: 'กรุณาเลือกความคิดเห็น',
+            buttons: ['OK']
+          });
+
+          await alert.present();
+        }
+        else if (this.Cuscomment == "" || this.Cuscomment == null) {
           const alert = await this.alertController.create({
             header: 'แจ้งเตือน',
             message: 'กรุณากรอกความคิดเห็น',
             buttons: ['OK']
           });
 
+          await alert.present();
+        }
+        else if (this.Cuscomment.length < 4) {
+          const alert = await this.alertController.create({
+            header: 'แจ้งเตือน',
+            message: 'กรุณากรอกความคิดเห็น มากกว่า 4 ตัวอักษร',
+            buttons: ['OK']
+          });
+  
           await alert.present();
         }
         else if (this.code != this.getpassword) {
@@ -192,7 +216,8 @@ export class CustomerpasswordPage implements OnInit {
   
           await this.modalController.dismiss(params);
         }
-      } else {
+      }
+      else {
         let params = {
           code: this.code,
           Cuscomment: 'ไม่มีความคิดเห็น'

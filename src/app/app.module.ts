@@ -38,7 +38,8 @@ import { BrowserTab } from '@ionic-native/browser-tab/ngx';
 import { AuthGuardGuard } from '../app/auth/auth-guard.guard';
 import { PartsWaitingListPageModule } from '../app/page/sparepart/parts-waiting-list/parts-waiting-list.module';
 import { LogPageModule } from '../app/page/detaillistpm/log/log.module';
-import { JobresponsPageModule} from '../app/page/job/jobdetail/jobrespons/jobrespons.module'
+import { RequestsparepartPageModule } from '../app/page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.module';
+//import { JobresponsPageModule} from '../app/page/job/jobdetail/jobrespons/jobrespons.module'
 
 @NgModule({
   declarations: [AppComponent],
@@ -67,7 +68,7 @@ import { JobresponsPageModule} from '../app/page/job/jobdetail/jobrespons/jobres
     LogPageModule,
     HttpClientModule,
     NgbModule,
-    JobresponsPageModule
+    RequestsparepartPageModule
   ],
   providers: [
     AuthGuardGuard,

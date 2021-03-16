@@ -40,13 +40,14 @@ export class CustomerevaluationPage implements OnInit {
   sig;
   test;
   base64;
+  urlImg;
 
   @ViewChild(SignaturePad, { static: false }) signaturePad;
 
   public signaturePadOptions: Object = {
     'minWidth': 2,
-    canvasWidth: 1000,
-    canvasHeight: 300,
+    canvasWidth: 683,
+    canvasHeight: 280,
     backgroundColor: 'white',
     penColor: 'black'
   };
@@ -56,7 +57,7 @@ export class CustomerevaluationPage implements OnInit {
     public alertCtrl: AlertController,
     public navCtrl: NavController,
     private navParams: NavParams,
-    private route: ActivatedRoute,) {
+    private route: ActivatedRoute) {
     this.route.queryParams.subscribe(params => {
       this.myId = JSON.parse(params["data"]);
       this.item = this.myId.item
@@ -72,6 +73,16 @@ export class CustomerevaluationPage implements OnInit {
     this.empID = this.navParams.data.empID
     this.workclose = this.navParams.data.workclose
     this.problemby = this.navParams.data.problemby
+    this.TecComment = this.navParams.data.TecComment
+
+    this.postDataService.SelectSignatureTech(this.planID, this.installID).then(res => {
+      if (res != null) {
+        this.isShow = true;
+        this.isSign = false;
+        this.sig = this.postDataService.apiServer_url + res;
+      }
+      console.log('sig ', this.sig); 
+    });
 
     if ((this.jobtype == "CM" && this.workclose != 'workclose') || (this.jobtype == "CM" && this.workclose == 'workclose')) {
       let problembydata = {
@@ -102,7 +113,7 @@ export class CustomerevaluationPage implements OnInit {
     this.postDataService.SaveCaseAll(params).then(detail => {
       this.detail = detail
       this.TecComment = this.detail.TecComment
-      console.log('this.detail', this.detail);
+
       if (this.jobtype == "CM") {
         this.resolution = this.detail.ResolutionID
         this.resolutiondetail = this.detail.Resolutiondetail
@@ -110,13 +121,17 @@ export class CustomerevaluationPage implements OnInit {
       } else {
         this.resolutiondetail = "resolutiondetail"
       }
+
+      console.log('this.detail', this.detail);
     });
+    
   }
-  
+
   ngAfterViewInit() {
     let width = (window.innerWidth - 85);
+
+    console.log(width);
     
-    // this.signaturePad is now available
     this.signaturePad.set('minWidth', 2); // set szimek/signature_pad options at runtime
     this.signaturePad.set('canvasWidth', width);
     this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
@@ -129,12 +144,28 @@ export class CustomerevaluationPage implements OnInit {
   }
 
   savePad() {
+    console.log('trainID: ', this.detail.id);
+
     const base64 = this.signaturePad.toDataURL('image/png', 0.5);
     const blob = this.signature(base64)
     this.image = base64;
     this.drawStart();
 
-    this.modalController.dismiss(this.image);
+    if (this.image == false) {
+
+    }
+    else {
+      let params = {
+        insID: this.installID,
+        planID: this.planID,
+        base64: this.image
+      }
+
+      this.postDataService.SignatureTech(params).then(res => {
+        this.sig = this.postDataService.apiServer_url + res;
+      });
+
+    }
   }
 
   signature(base64) {
@@ -148,7 +179,7 @@ export class CustomerevaluationPage implements OnInit {
     return new Blob([ia], { type: mimeString });
   }
 
-  async confirmSave(){
+  async confirmSave() {
     const alert = await this.alertCtrl.create({
       header: 'ยืนยันการบันทึกลายเซ็น',
       message: 'เมื่อยืนยันแล้ว จะไม่สามารถแก้ไขได้อีก',
@@ -173,17 +204,17 @@ export class CustomerevaluationPage implements OnInit {
         }
       ]
     });
-  
+
     await alert.present();
   }
 
-  async alertSaveFail(){
+  async alertSaveFail() {
     const alert = await this.alertCtrl.create({
       header: 'แจ้งเตือน',
       message: 'ไม่สามารถบักทึกได้ กรุณาลองใหม่อีกครั้ง',
       buttons: ['ตกลง']
     });
-  
+
     await alert.present();
   }
 
@@ -191,11 +222,11 @@ export class CustomerevaluationPage implements OnInit {
     this.isShow = false;
     this.isSave = true;
     this.isSign = true;
-    
+
     this.ngAfterViewInit();
   }
 
-  ngOnInit() {    
+  ngOnInit() {
     
   }
 
@@ -230,24 +261,6 @@ export class CustomerevaluationPage implements OnInit {
         const alert = await this.alertCtrl.create({
           header: 'แจ้งเตือน',
           message: 'กรุณากรอก <strong>วิธีการแก้ปัญหา</strong> มากกว่า 4 ตัวอักษร',
-          buttons: ['OK']
-        });
-
-        await alert.present();
-      }
-      else if (this.TecComment == null || this.TecComment == '') {
-        const alert = await this.alertCtrl.create({
-          header: 'แจ้งเตือน',
-          message: 'กรุณากรอก <strong>ความคิดเห็นเพิ่มเติมของช่าง</strong> มากกว่า 4 ตัวอักษร',
-          buttons: ['OK']
-        });
-
-        await alert.present();
-      }
-      else if (this.TecComment.length < 4) {
-        const alert = await this.alertCtrl.create({
-          header: 'แจ้งเตือน',
-          message: 'กรุณากรอก <strong>ความคิดเห็นเพิ่มเติมของช่าง</strong> มากกว่า 4 ตัวอักษร',
           buttons: ['OK']
         });
 
@@ -330,6 +343,15 @@ export class CustomerevaluationPage implements OnInit {
         const alert = await this.alertCtrl.create({
           header: 'แจ้งเตือน',
           message: 'กรุณากรอก <strong>ความคิดเห็นเพิ่มเติมของช่าง</strong> มากกว่า 4 ตัวอักษร',
+          buttons: ['OK']
+        });
+
+        await alert.present();
+      }
+      else if (this.sig == null || this.sig == '') {
+        const alert = await this.alertCtrl.create({
+          header: 'แจ้งเตือน',
+          message: 'กรุณา <strong>เซ็นชื่อหรือลงลายมือชื่อ</strong> ของช่าง',
           buttons: ['OK']
         });
 

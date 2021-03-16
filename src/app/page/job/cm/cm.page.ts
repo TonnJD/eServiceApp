@@ -47,6 +47,7 @@ export class CmPage implements OnInit {
       this.ngOnInit();
       
     });
+    
     this.storageService.getUser().then(items => {
       this.items = items;
       // console.log(items);      

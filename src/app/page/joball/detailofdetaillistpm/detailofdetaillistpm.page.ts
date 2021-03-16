@@ -12,6 +12,7 @@ import { from } from 'rxjs';
 import { NavController, ToastController  } from '@ionic/angular';
 import { ChecklistPage } from '../detailofdetaillistpm/checklist/checklist.page';
 import { ChecklistcmPage } from '../detailofdetaillistpm/checklistcm/checklistcm.page';
+import { RequestsparepartPage } from '../detailofdetaillistpm/requestsparepart/requestsparepart.page';
 import { CheckevaluationPage } from '../detailofdetaillistpm/checkevaluation/checkevaluation.page';
 import * as watermark from 'watermarkjs';
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
@@ -244,6 +245,7 @@ export class DetailofdetaillistpmPage implements OnInit {
   IscheckPass;
   IsWaitsave = false;
   ishiddensig = false;
+  sentCM;
   //#endregion
 
   //#region constructor
@@ -299,7 +301,17 @@ export class DetailofdetaillistpmPage implements OnInit {
       this.planDate = this.install.planDate;
       this.jobtype = this.install.JobType;
       this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/TabletCountTime.aspx' + '?planID=' + this.planID + "&installID=" + this.installID);
-      console.log('type', this.type);
+      console.log('this.myId', this.myId);
+
+      if (this.type == 'CM') {
+        this.postDataService.UpdateInprogress(this.planID).then(res => {
+          
+        });
+
+        this.sentCM = this.myId.sentCM;
+        console.log('this.sentCM', this.sentCM);
+        
+      }
 
       this.postDataService.checkBI(this.planID, this.installID).then(data => {
         console.log('checkBI count', data[0].count);
@@ -314,8 +326,42 @@ export class DetailofdetaillistpmPage implements OnInit {
   }
   //#endregion
 
-  requestSparepart() {
-    
+  async requestSparepart() {
+    const modal = await this.modalController.create({
+      component: RequestsparepartPage,
+      cssClass: 'my-custom-modal-css',
+      componentProps: {
+        empID: this.empID,
+        planID: this.planID,
+        install: this.installID,
+        InstallPlanName: this.InstallPlanName,
+        ItemsName: this.ItemsName,
+        ItemCode: this.ItemCode,
+        SerialNo: this.SerialNo,
+        Cat: this.Category,
+        type: this.jobtype,
+        sentCM: this.sentCM
+      }
+    });
+
+    modal.onDidDismiss().then(data => {
+      this.onBackToPageMain();
+      // let params = {
+      //   date: this.sentCM.date,
+      //   item: this.sentCM.item,
+      //   type: this.sentCM.type
+      // }
+
+      // const navigationExtras: NavigationExtras = {
+      //   queryParams: {
+      //     data: JSON.stringify(params)
+      //   }
+      // };
+
+      // this.navCtrl.navigateRoot('joball/listpm/detaillistpm', navigationExtras);
+    })
+
+    return await modal.present();
   }
 
   //#region start
@@ -3597,6 +3643,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       component: CustomerpasswordPage,
       cssClass: 'my-custom-modal-css',
       componentProps: {
+        cusName: this.CustomerName,
         password: this.password,
         planID: this.planID,
         installID: this.installID,

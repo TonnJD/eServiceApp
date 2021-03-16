@@ -1,6 +1,6 @@
 <ion-toolbar color="primary">
-  <ion-title #hide *ngIf="jobtype != 'CM'; else hide">ความคิดเห็นของช่าง</ion-title>
-  <ion-title #show *ngIf="jobtype == 'CM'; else show">แบบประเมินปัญหา</ion-title>
+  <ion-title *ngIf="jobtype != 'CM'">ความคิดเห็นของช่าง</ion-title>
+  <ion-title *ngIf="jobtype == 'CM'">แบบประเมินปัญหา</ion-title>
   <ion-buttons slot="primary">
     <ion-icon slot="end" name="close" (click)="close()"></ion-icon>
   </ion-buttons>
@@ -8,11 +8,11 @@
 
 <ion-content>
   <ion-card>
-    <ion-card-header>
+    <ion-card-header *ngIf="(jobtype == 'CM' && this.workclose == 'workclose')">
       <ion-card-title>ปัญหาเกิดจาก</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-      <div class="col-12" #show *ngIf="(jobtype == 'CM' && this.workclose == 'workclose'); else show">
+    <ion-card-content #show *ngIf="(jobtype == 'CM' && this.workclose == 'workclose')">
+      <div class="col-12">
         <ion-radio-group (ionChange)="onChange($event,'resolution')" [(ngModel)]="problemby">
           <ion-item *ngFor="let title of problembydata">
             <ion-label>{{title.SystemDataName}}</ion-label>
@@ -22,47 +22,46 @@
       </div>
     </ion-card-content>
 
-    <ion-card-header>
+    <ion-card-header #show *ngIf="(jobtype == 'CM' && this.workclose != 'workclose') || (jobtype == 'CM' && this.workclose == 'workclose')">
       <ion-card-title>วิธีการแก้ปัญหา</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-      <div class="col-12" #show
-        *ngIf="(jobtype == 'CM' && this.workclose != 'workclose') || (jobtype == 'CM' && this.workclose == 'workclose'); else show">
+    <ion-card-content #show *ngIf="(jobtype == 'CM' && this.workclose != 'workclose') || (jobtype == 'CM' && this.workclose == 'workclose')">
+      <div class="col-12">
         <textarea class="form-control" rows="3" [(ngModel)]="resolutiondetail"></textarea>
       </div>
     </ion-card-content>
 
-    <ion-card-header>
+    <ion-card-header #hide *ngIf="this.workclose == 'workclose'">
       <ion-card-title>ความคิดเห็นเพิ่มเติมของช่าง</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-      <div class="col-12" #hide *ngIf="this.workclose == 'workclose'; else hide">
+    <ion-card-content #hide *ngIf="this.workclose == 'workclose'">
+      <div class="col-12">
         <textarea class="form-control" rows="3" [(ngModel)]="TecComment"></textarea>
       </div>
     </ion-card-content>
 
-    <ion-card-header>
+    <ion-card-header #hide *ngIf="jobtype == 'CM' && this.workclose == 'workclose'">
       <ion-card-title>ลายเซ็นช่าง</ion-card-title>
     </ion-card-header>
-    <ion-card-content>
-      <div class="col-12" #hide *ngIf="this.workclose == 'workclose'; else hide">
+    <ion-card-content #hide *ngIf="jobtype == 'CM' && this.workclose == 'workclose'">
+      <div class="col-12">
         <div id="sig" class="sig">
-          <div *ngIf="isShow">
+          <div *ngIf="isShow" style="border: 1px solid black;">
             <img [src]="sig" />
           </div>
           <div style="border: 1px solid black;" *ngIf="isSign">
             <signature-pad [options]="signaturePadOptions"></signature-pad>
           </div>
-          <div class="text-center">
-            <ion-button (click)="confirmSave()" *ngIf="isSave">บันทึก</ion-button>
-            <ion-button color="dark" (click)="clearPad()">รีเซ็ต</ion-button>
+          <div class="text-center" *ngIf="sig == undefined">
+            <ion-button (click)="confirmSave()">ยืนยันลายเซ็น</ion-button>
+            <ion-button color="dark" (click)="clearPad()">แก้ไขลายเซ็น</ion-button>
           </div>
         </div>
       </div>
     </ion-card-content>
-
+    <hr />
     <ion-card-content>
-      <div class="col-md-12 text-center" style="margin-top: 10px;">
+      <div class="col-md-12 text-center">
         <ion-button (click)="submit()">บันทึก</ion-button>
       </div>
     </ion-card-content>

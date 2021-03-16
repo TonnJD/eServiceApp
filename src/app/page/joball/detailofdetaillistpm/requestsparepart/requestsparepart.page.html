@@ -1,0 +1,36 @@
+<ion-toolbar color="primary">
+  <ion-title>ขอเบิกอะไหล่: {{itemName}}</ion-title>
+  <ion-buttons slot="primary">
+    <ion-icon slot="end" name="close" (click)="close()"></ion-icon>
+  </ion-buttons>
+</ion-toolbar>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>รายละเอียดขอเบิกอะไหล่</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="col-12">
+        <textarea class="form-control" rows="5" [(ngModel)]="request">{{request}}</textarea>
+      </div>
+    </ion-card-content>
+
+    <ion-card-content>
+      <div class="col-12">
+        <ion-item>
+          <ion-label>กรุณาเลือก กรณีเครื่องเบรก</ion-label>
+          <ion-checkbox slot="start" [(ngModel)]="isBreak" (ionChange)="machineBreak($event)"></ion-checkbox>
+        </ion-item>
+      </div>
+    </ion-card-content>
+
+    <ion-card-content>
+      <div class="col-md-12 text-center">
+        <ion-button (click)="confirmSubmit()">ยืนยันขอเบิกอะไหล่</ion-button>
+      </div>
+    </ion-card-content>
+
+    <ion-card-content></ion-card-content>
+  </ion-card>
+</ion-content>
