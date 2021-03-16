@@ -9,6 +9,7 @@ import { ShowimginstallPage } from '../../job/showimginstall/showimginstall.page
 import { CustomerevaluationPage } from '../detailofdetaillistpm/customerevaluation/customerevaluation.page';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { LogPage } from '../../detaillistpm/log/log.page';
+import { RequestsparepartPage } from '../detailofdetaillistpm/requestsparepart/requestsparepart.page';
 //import { JobresponsPage } from '../../job/jobdetail/jobrespons/jobrespons.page'
 
 @Component({
@@ -140,8 +141,8 @@ export class DetaillistpmPage implements OnInit {
         }
         else if (this.type == "getCM") {
           this.imgbf = true
-          this.detaillistpm.PlanID = this.planID,
-            this.detaillistpm.jobtype = "SuccessCM"
+          this.detaillistpm.PlanID = this.planID
+          this.detaillistpm.jobtype = "SuccessCM"
 
           this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
             this.data = work;
@@ -151,6 +152,7 @@ export class DetaillistpmPage implements OnInit {
               this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
             }
           });
+
           let workclose = {
             jobtype: "getworkclose"
           }
@@ -175,15 +177,16 @@ export class DetaillistpmPage implements OnInit {
               }
             }
           });
+
           this.type = "CM";
         }
         else if (this.type == "getUN") {
-          this.detaillistpm.PlanID = this.planID,
-            this.detaillistpm.jobtype = "SuccessUN"
-          console.log(this.detaillistpm);
+          this.detaillistpm.PlanID = this.planID
+          this.detaillistpm.jobtype = "SuccessUN"
+
           this.postDataService.postGetList(this.detaillistpm).then(work => {
             this.data = work;
-            console.log(this.data);
+
             for (let i = 0; i < this.data.length; i++) {
               this.Customername = this.data[i].CustomerName;
               this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
@@ -196,7 +199,8 @@ export class DetaillistpmPage implements OnInit {
         }
 
         this.ngOnInit();
-      } else {
+      }
+      else {
         alert("ไม่พบข้อมูล");
       }
     });
@@ -456,7 +460,7 @@ export class DetaillistpmPage implements OnInit {
           this.navCtrl.navigateForward(['joball/listpm/detailofdetaillistpm'], navigationExtras);
           console.log("sent", navigationExtras);
         }
-        else {          
+        else {
           let alertChoose = await this.alertController.create({
             cssClass: 'custom-alert',
             message: 'กรุณาเลือกการปิดงาน',
@@ -476,7 +480,7 @@ export class DetaillistpmPage implements OnInit {
               [{
                 text: this.text,
                 handler: value => {
-                  if (value == this.getworkclosevalue1) {                    
+                  if (value == this.getworkclosevalue1) {
                     let params = {
                       planID: item.planID,
                       installID: item.installId,
@@ -484,7 +488,7 @@ export class DetaillistpmPage implements OnInit {
                       jobtype: "saveclose",
                       workclose: value
                     }
-                    
+
                     this.postDataService.SaveCaseAll(params).then(result => {
                       if (result == true) {
                         this.imgbf = true
@@ -492,7 +496,7 @@ export class DetaillistpmPage implements OnInit {
                         this.detaillistpm.jobtype = "SuccessCM"
                         this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
                           this.data = work;
-                          
+
                           for (let i = 0; i < this.data.length; i++) {
                             this.Customername = this.data[i].CustomerName;
                             this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
@@ -728,55 +732,81 @@ export class DetaillistpmPage implements OnInit {
   //#endregion
 
   //#region
-  showSpareHistory(value) {
-    console.log(value);
-    let params = {
-      empID: this.empID,
-      insID: value.installId,
-      planID: value.planID,
-      item: this.item,
-      type: this.type,
-      date: this.date,
-      ItemsName: value.ItemsName,
-      Type: "history"
-    }
-    console.log(params);
-
-    const navigationExtras: NavigationExtras = {
-      queryParams: {
-        data: JSON.stringify(params)
+  async showSpareHistory(value) {
+    const modal = await this.modalController.create({
+      component: RequestsparepartPage,
+      cssClass: 'my-custom-modal-css-pm',
+      componentProps: {
+        empID: this.empID,
+        insID: value.installId,
+        planID: value.planID,
+        ItemsName: value.ItemsName,
+        type: "history"
       }
-    };
-    this.navCtrl.navigateForward(['/sparepart'], navigationExtras);
+    });
 
-    console.log(navigationExtras);
+    return await modal.present();
+
+    // console.log(value);
+    // let params = {
+    //   empID: this.empID,
+    //   insID: value.installId,
+    //   planID: value.planID,
+    //   item: this.item,
+    //   type: this.type,
+    //   date: this.date,
+    //   ItemsName: value.ItemsName,
+    //   Type: "history"
+    // }
+
+    // const navigationExtras: NavigationExtras = {
+    //   queryParams: {
+    //     data: JSON.stringify(params)
+    //   }
+    // };
+
+    // this.navCtrl.navigateForward(['/sparepart'], navigationExtras);
   }
   //#endregion
 
   //#region
-  showSpare(value) {
-    let params = {
-      empID: this.empID,
-      insID: value.installId,
-      planID: value.planID,
-      item: this.item,
-      type: this.type,
-      date: this.date,
-      ItemsName: value.ItemsName,
-      Type: "Sparepart",
-      data: this.detailPM
-    }
-
-    console.log('detail params', params);
-
-    const navigationExtras: NavigationExtras = {
-      queryParams: {
-        data: JSON.stringify(params)
+  async showSpare(value) {
+    const modal = await this.modalController.create({
+      component: RequestsparepartPage,
+      cssClass: 'my-custom-modal-css-pm',
+      componentProps: {
+        empID: this.empID,
+        insID: value.installId,
+        planID: value.planID,
+        ItemsName: value.ItemsName,
+        type: "request"
       }
-    };
-    this.navCtrl.navigateForward(['/sparepart'], navigationExtras);
+    });
 
-    console.log(navigationExtras);
+    return await modal.present();
+
+    // let params = {
+    //   empID: this.empID,
+    //   insID: value.installId,
+    //   planID: value.planID,
+    //   item: this.item,
+    //   type: this.type,
+    //   date: this.date,
+    //   ItemsName: value.ItemsName,
+    //   Type: "Sparepart",
+    //   data: this.detailPM
+    // }
+
+    // console.log('detail params', params);
+
+    // const navigationExtras: NavigationExtras = {
+    //   queryParams: {
+    //     data: JSON.stringify(params)
+    //   }
+    // };
+    // this.navCtrl.navigateForward(['/sparepart'], navigationExtras);
+
+    // console.log(navigationExtras);
   }  //#endregion
 
   //#region alert success

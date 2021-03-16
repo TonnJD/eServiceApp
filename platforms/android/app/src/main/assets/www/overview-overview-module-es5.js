@@ -505,6 +505,9 @@ var OverviewPage = /** @class */ (function () {
     };
     //#endregion
     //#region start
+    OverviewPage.prototype.ionViewWillEnter = function () {
+        console.log('ionViewWillEnter ');
+    };
     OverviewPage.prototype.ngOnInit = function () {
         var _this = this;
         this.storageService.getUser().then(function (items) {

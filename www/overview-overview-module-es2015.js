@@ -480,6 +480,9 @@ let OverviewPage = class OverviewPage {
     }
     //#endregion
     //#region start
+    ionViewWillEnter() {
+        console.log('ionViewWillEnter ');
+    }
     ngOnInit() {
         this.storageService.getUser().then(items => {
             this.items = items;

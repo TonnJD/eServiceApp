@@ -147,10 +147,10 @@ ext {
 }
 
 // PLUGIN GRADLE EXTENSIONS START
-apply from: "../cordova-plugin-badge/superioreService_Test-badge.gradle"
-apply from: "../cordova-plugin-browsertab/superioreService_Test-BrowserTab.gradle"
-apply from: "../cordova-plugin-local-notification/superioreService_Test-localnotification.gradle"
-apply from: "../phonegap-plugin-barcodescanner/superioreService_Test-barcodescanner.gradle"
+apply from: "../cordova-plugin-badge/superioreService-badge.gradle"
+apply from: "../cordova-plugin-browsertab/superioreService-BrowserTab.gradle"
+apply from: "../cordova-plugin-local-notification/superioreService-localnotification.gradle"
+apply from: "../phonegap-plugin-barcodescanner/superioreService-barcodescanner.gradle"
 // PLUGIN GRADLE EXTENSIONS END
 
 def hasBuildExtras1 = file('build-extras.gradle').exists()

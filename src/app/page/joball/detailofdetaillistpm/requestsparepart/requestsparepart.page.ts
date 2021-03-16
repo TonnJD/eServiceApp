@@ -17,6 +17,8 @@ export class RequestsparepartPage implements OnInit {
   empID;
   followLog;
   sentCM;
+  type;
+  notSpare;
 
   constructor(
     private postDataService: PostDataService,
@@ -30,8 +32,22 @@ export class RequestsparepartPage implements OnInit {
     this.planID = this.navParams.data.planID;
     this.empID = this.navParams.data.empID;
     this.sentCM = this.navParams.data.sentCM;
-    console.log('sentCM', this.sentCM);
-    
+    this.type = this.navParams.data.type;
+
+    this.selectRequestSparepart();
+  }
+
+  selectRequestSparepart() {
+    this.postDataService.SelectRequestSparepart(this.planID).then(res => {
+      console.log('res', res);
+      this.followLog = res;
+      if (this.followLog.length == 0) {
+        this.notSpare = true;
+      }
+      else {
+        this.notSpare = false;
+      }
+    });
   }
 
   machineBreak(event) {
@@ -43,9 +59,17 @@ export class RequestsparepartPage implements OnInit {
     console.log('this.isBreak', this.isBreak);
         
     this.postDataService.RequestSparepart(this.planID, this.empID, this.isBreak, this.request).then(res => {
+      this.request = '';
       this.followLog = res;
-      this.modalCtrl.dismiss();
       this.presentToastWithOptions();
+
+      if (this.type != 'history') {
+        let param = {
+          type: 'submit'
+        }
+
+        this.modalCtrl.dismiss(param);
+      }
     });
   }
 
@@ -119,7 +143,11 @@ export class RequestsparepartPage implements OnInit {
   }
 
   close() {
-    this.modalCtrl.dismiss();
+    let param = {
+      type: 'close'
+    }
+
+    this.modalCtrl.dismiss(param);
   }
 
   ngOnInit() {

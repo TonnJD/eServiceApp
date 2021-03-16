@@ -77,7 +77,8 @@ var map = {
 		"page-job-jobdetail-jobdetail-module"
 	],
 	"./page/job/jobdetail/jobrespons/jobrespons.module": [
-		"./src/app/page/job/jobdetail/jobrespons/jobrespons.module.ts"
+		"./src/app/page/job/jobdetail/jobrespons/jobrespons.module.ts",
+		"page-job-jobdetail-jobrespons-jobrespons-module"
 	],
 	"./page/job/reportcheckpm/reportcheckpm.module": [
 		"./src/app/page/job/reportcheckpm/reportcheckpm.module.ts",
@@ -119,6 +120,9 @@ var map = {
 	"./page/joball/detailofdetaillistpm/detailofdetaillistpm.module": [
 		"./src/app/page/joball/detailofdetaillistpm/detailofdetaillistpm.module.ts",
 		"page-joball-detailofdetaillistpm-detailofdetaillistpm-module"
+	],
+	"./page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.module": [
+		"./src/app/page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.module.ts"
 	],
 	"./page/joball/detailofdetaillistpm/signature/signature.module": [
 		"./src/app/page/joball/detailofdetaillistpm/signature/signature.module.ts"
@@ -627,18 +631,7 @@ module.exports = "<ion-app>\r\n  <ion-router-outlet>\r\n  </ion-router-outlet>\r
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-toolbar>\r\n  <ion-title>ประวัติการติดตามงาน</ion-title>\r\n  <ion-buttons slot=\"primary\">\r\n    <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n\r\n<ion-content>\r\n  <iframe [src]=\"url\" style=\"width:100%;height:100%\"></iframe>\r\n</ion-content>"
-
-/***/ }),
-
-/***/ "./node_modules/raw-loader/index.js!./src/app/page/job/jobdetail/jobrespons/jobrespons.page.html":
-/*!**********************************************************************************************!*\
-  !*** ./node_modules/raw-loader!./src/app/page/job/jobdetail/jobrespons/jobrespons.page.html ***!
-  \**********************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-title>รายละเอียดงานและการตอบรับงาน</ion-title>\r\n    <ion-buttons slot=\"primary\">\r\n      <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon> \r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <iframe [src]=\"url\" style=\"width:100%;height:100%\" frameBorder=\"0\"></iframe>\r\n</ion-content>"
+module.exports = "<ion-toolbar>\r\n  <ion-title>ประวัติการติดตามงาน</ion-title>\r\n  <ion-buttons slot=\"primary\">\r\n    <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n\r\n<ion-content>\r\n  <iframe [src]=\"url\" style=\"width:100%;height:100%\" frameBorder=\"0\"></iframe>\r\n</ion-content>"
 
 /***/ }),
 
@@ -671,7 +664,7 @@ module.exports = "<ion-toolbar>\r\n  <ion-title *ngIf=\"jobtype == 'PM' else pm\
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-toolbar>\r\n  <ion-title>รายการประเมิน</ion-title>\r\n  <ion-buttons slot=\"primary\">\r\n    <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n\r\n<ion-content>\r\n  <!-- <div class=\"row\">    \r\n    <div class=\"col-12\">      \r\n        <ion-item style=\"padding: 0px;\" *ngFor=\"let item of data; let i = index\">\r\n          <ion-label>{{item.QuestionName}}</ion-label>\r\n          <div class=\"md-radio-inline\">\r\n            <div class=\"md-radio\">\r\n              <input type=\"radio\" id=\"rdo{{i+1}}{{item.QuestionID}}\" name=\"{{item.QuestionID}}\"\r\n              [value]=\"5\" class=\"md-radiobtn\" (click)=\"test()\">\r\n              <label for=\"rdo{{i+1}}{{item.QuestionID}}\">\r\n                <span class=\"inc\"></span>\r\n                <span class=\"check\"></span>\r\n              <span class=\"box\"></span> ดีมาก </label>\r\n            </div>\r\n            <div class=\"md-radio\">\r\n              <input type=\"radio\" id=\"rdo{{i+2}}{{item.QuestionID}}\" name=\"{{item.QuestionID}}\" [value]=\"4\"\r\n                class=\"md-radiobtn\">\r\n              <label for=\"rdo{{i+2}}{{item.QuestionID}}\">\r\n                <span class=\"inc\"></span>\r\n                <span class=\"check\"></span>\r\n                <span class=\"box\"></span> ดี </label>\r\n            </div>\r\n            <div class=\"md-radio\">\r\n              <input type=\"radio\" id=\"rdo{{i+3}}{{item.QuestionID}}\" name=\"{{item.QuestionID}}\" [value]=\"3\"\r\n                class=\"md-radiobtn\">\r\n              <label for=\"rdo{{i+3}}{{item.QuestionID}}\">\r\n                <span class=\"inc\"></span>\r\n                <span class=\"check\"></span>\r\n                <span class=\"box\"></span> พอใช้ </label>\r\n            </div>\r\n            <div class=\"md-radio\">\r\n              <input type=\"radio\" id=\"rdo{{i+4}}{{item.QuestionID}}\" name=\"{{item.QuestionID}}\" [value]=\"2\"\r\n                class=\"md-radiobtn\" >\r\n              <label for=\"rdo{{i+4}}{{item.QuestionID}}\">\r\n                <span class=\"inc\"></span>\r\n                <span class=\"check\"></span>\r\n                <span class=\"box\"></span> ปรับปรุง </label>\r\n            </div>\r\n          </div>\r\n        </ion-item> \r\n      </div>  \r\n      <div class=\"text-center\" style=\"margin-top: 10px;\">\r\n        <ion-button shape=\"round\" class=\"text-center\" (click)=\"getvalue(data)\">บันทึก</ion-button>\r\n      </div>\r\n    \r\n  </div> -->\r\n  <iframe [src]=\"url\" style=\"width:100%;height:100%\"></iframe>\r\n</ion-content>"
+module.exports = "<ion-toolbar>\r\n  <ion-title>รายการประเมิน</ion-title>\r\n  <ion-buttons slot=\"primary\">\r\n    <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n\r\n<ion-content>\r\n  <ion-card>\r\n    <ion-card-header>\r\n      <ion-card-title>1. การตรงต่อเวลาในการส่งมอบบริการและนัดหมาย</ion-card-title>\r\n    </ion-card-header>  \r\n    <ion-card-content>\r\n      <div class=\"container\">\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option1\" id=\"rdo14\" value=\"4\" (change)=\"onChange('type1', 4)\">\r\n              <label class=\"form-check-label\" for=\"rdo14\">ดีมาก</label>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option1\" id=\"rdo13\" value=\"3\" (change)=\"onChange('type1', 3)\">\r\n              <label class=\"form-check-label\" for=\"rdo13\">ดี</label>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option1\" id=\"rdo12\" value=\"2\" (change)=\"onChange('type1', 2)\">\r\n              <label class=\"form-check-label\" for=\"rdo12\">พอใช้</label>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option1\" id=\"rdo11\" value=\"1\" (change)=\"onChange('type1', 1)\">\r\n              <label class=\"form-check-label\" for=\"rdo11\">ปรับปรุง</label>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-header>\r\n      <ion-card-title>2. คุณภาพของการให้บริการ</ion-card-title>\r\n    </ion-card-header>  \r\n    <ion-card-content>\r\n      <div class=\"container\">\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option2\" id=\"rdo24\" value=\"4\" (change)=\"onChange('type2', 4)\">\r\n              <label class=\"form-check-label\" for=\"rdo24\">ดีมาก</label>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option2\" id=\"rdo23\" value=\"3\" (change)=\"onChange('type2', 3)\">\r\n              <label class=\"form-check-label\" for=\"rdo23\">ดี</label>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option2\" id=\"rdo22\" value=\"2\" (change)=\"onChange('type2', 2)\">\r\n              <label class=\"form-check-label\" for=\"rdo22\">พอใช้</label>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option2\" id=\"rdo21\" value=\"1\" (change)=\"onChange('type2', 1)\">\r\n              <label class=\"form-check-label\" for=\"rdo21\">ปรับปรุง</label>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-header>\r\n      <ion-card-title>3. การให้ความร่วมมือในการแก้ไขปัญหา</ion-card-title>\r\n    </ion-card-header>  \r\n    <ion-card-content>\r\n      <div class=\"container\">\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option3\" id=\"rdo34\" value=\"4\" (change)=\"onChange('type3', 4)\">\r\n              <label class=\"form-check-label\" for=\"rdo34\">ดีมาก</label>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option3\" id=\"rdo33\" value=\"3\" (change)=\"onChange('type3', 3)\">\r\n              <label class=\"form-check-label\" for=\"rdo33\">ดี</label>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option3\" id=\"rdo32\" value=\"2\" (change)=\"onChange('type3', 2)\">\r\n              <label class=\"form-check-label\" for=\"rdo32\">พอใช้</label>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option3\" id=\"rdo31\" value=\"1\" (change)=\"onChange('type3', 1)\">\r\n              <label class=\"form-check-label\" for=\"rdo31\">ปรับปรุง</label>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-header>\r\n      <ion-card-title>4. การแต่งกายบุคลิกภาพและมนุษย์สัมพันธ์ของเจ้าหน้าที่</ion-card-title>\r\n    </ion-card-header>  \r\n    <ion-card-content>\r\n      <div class=\"container\">\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option4\" id=\"rdo44\" value=\"4\" (change)=\"onChange('type4', 4)\">\r\n              <label class=\"form-check-label\" for=\"rdo44\">ดีมาก</label>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option4\" id=\"rdo43\" value=\"3\" (change)=\"onChange('type4', 3)\">\r\n              <label class=\"form-check-label\" for=\"rdo43\">ดี</label>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option4\" id=\"rdo42\" value=\"2\" (change)=\"onChange('type4', 2)\">\r\n              <label class=\"form-check-label\" for=\"rdo42\">พอใช้</label>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option4\" id=\"rdo41\" value=\"1\" (change)=\"onChange('type4', 1)\">\r\n              <label class=\"form-check-label\" for=\"rdo41\">ปรับปรุง</label>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-header>\r\n      <ion-card-title>5. ผลงานที่ปรากฏหลังดำเนินการ</ion-card-title>\r\n    </ion-card-header>  \r\n    <ion-card-content>\r\n      <div class=\"container\">\r\n        <div class=\"row\">\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option5\" id=\"rdo54\" value=\"4\" (change)=\"onChange('type5', 4)\">\r\n              <label class=\"form-check-label\" for=\"rdo54\">ดีมาก</label>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option5\" id=\"rdo53\" value=\"3\" (change)=\"onChange('type5', 3)\">\r\n              <label class=\"form-check-label\" for=\"rdo53\">ดี</label>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option5\" id=\"rdo52\" value=\"2\" (change)=\"onChange('type5', 2)\">\r\n              <label class=\"form-check-label\" for=\"rdo52\">พอใช้</label>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-sm-3 col-md-3\">\r\n            <div class=\"form-check form-check-inline\">\r\n              <input class=\"form-check-input\" type=\"radio\" name=\"option5\" id=\"rdo51\" value=\"1\" (change)=\"onChange('type5', 1)\">\r\n              <label class=\"form-check-label\" for=\"rdo51\">ปรับปรุง</label>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n    <hr />\r\n    <ion-card-content>\r\n      <div class=\"container\">\r\n        <div class=\"row\">\r\n          <div class=\"col-12 text-center\">\r\n            <ion-button color=\"primary\" (click)=\"Save()\">บันทึก</ion-button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n  </ion-card>\r\n\r\n  <!-- <iframe [src]=\"url\" style=\"width:100%;height:100%\"></iframe> -->\r\n</ion-content>"
 
 /***/ }),
 
@@ -693,7 +686,7 @@ module.exports = "<ion-toolbar>\r\n  <ion-title>รายการตรวจ�
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-toolbar>\r\n  <ion-title *ngIf=\"type != 'PM'\">รายการตรวจซ่อม</ion-title>\r\n  <ion-title *ngIf=\"type == 'PM'\">รายการเปลี่ยนอะไหล่</ion-title>\r\n  <ion-buttons slot=\"primary\">\r\n    <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n\r\n<ion-content>\r\n  <!-- <iframe [src]=\"url\" style=\"width:100%;height:100%\"></iframe> -->\r\n  <div class=\"col-12\">\r\n    <div class=\"row\">\r\n      <div class=\"col-4 hidden\" style=\"padding-right: 0px;\">\r\n        <ion-card>\r\n          <ion-card-content>\r\n            <ion-item>\r\n              <ion-label>สินค้าที่ติดตั้ง : {{InstallPlanName}}</ion-label>\r\n            </ion-item>\r\n            <ion-item>\r\n              <ion-label>รหัสสินค้า : {{ItemCode}}</ion-label>\r\n            </ion-item>\r\n            <ion-item>\r\n              <ion-label>ชื่อสินค้า : {{ItemsName}}</ion-label>\r\n            </ion-item>\r\n            <ion-item>\r\n              <ion-label>Serial No : {{SerialNo}}</ion-label>\r\n            </ion-item>\r\n          </ion-card-content>\r\n        </ion-card>\r\n      </div>\r\n      <div class=\"col-12\" style=\"padding-left: 0px;\">\r\n        <ion-card *ngIf=\"isShowType\">\r\n          <ion-card-content>\r\n            <ion-button expand=\"block\" (click)=\"chang('device')\" class=\"hidden\" *ngIf=\"isdevice\">เปลี่ยนเครื่อง\r\n            </ion-button>\r\n            <ion-button expand=\"block\" (click)=\"chang('sparepart')\" *ngIf=\"isspare\">เปลี่ยนอะไหล่</ion-button>\r\n            <ion-button expand=\"block\" (click)=\"chang('non')\" *ngIf=\"isnon\">ไม่เปลี่ยนอะไหล่</ion-button>\r\n          </ion-card-content>\r\n        </ion-card>\r\n        <ion-card *ngIf=\"isShowDevice == true && status == false; device\" #device>\r\n          <ion-card-content>\r\n            <ion-card-title>เปลี่ยนเครื่อง</ion-card-title>\r\n            <ion-item>\r\n              <ion-icon name=\"search\" slot=\"end\" (click)=\"search()\">Search</ion-icon>\r\n              <ion-input type=\"text\" placeholder=\"Serial No.\" [(ngModel)]=\"serial\" name=\"serial\"></ion-input>\r\n              <ion-icon name=\"barcode\" slot=\"end\" (click)=\"scan()\"></ion-icon>\r\n            </ion-item>\r\n            <div class=\"tab-content\" *ngIf=\"isShowDeviceDetail == false ;hide\" #hide>\r\n              <div class=\"tab-pane active\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-12\">\r\n                    <div class=\"table-scrollable\">\r\n                      <table class=\"table table-hover\">\r\n                        <thead>\r\n                          <tr>\r\n                            <th> ชื่อเครื่อง </th>\r\n                            <th> Serial No. </th>\r\n                            <th> ประเภทเครื่อง </th>\r\n                          </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                          <tr *ngFor=\"let item of data; let i = index\">\r\n                            <td style=\"padding-top:15px;\"> {{item.AssetNo}} </td>\r\n                            <td style=\"padding-top:15px;\"> {{item.SerialNo}}</td>\r\n                            <td style=\"padding-top:15px;\">{{item.type}}</td>\r\n                            <td>\r\n                              <ion-button shape=\"round\" color=\"warning\" class=\"text-center\"\r\n                                (click)=\"AddCM('Devices',item)\"> เลือก</ion-button>\r\n                            </td>\r\n                          </tr>\r\n                        </tbody>\r\n                      </table>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </ion-card-content>\r\n        </ion-card>\r\n        <div *ngIf=\"isShowDevice == true && isShowDeviceDetail == false; show\">\r\n          <ion-card #show *ngFor=\"let item of status;\">\r\n            <ion-card-content>\r\n              <ion-item>\r\n                <ion-label>เครื่องที่เปลี่ยน : {{item.InstallPlanName}}</ion-label>\r\n              </ion-item>\r\n              <ion-item>\r\n                <ion-label>รหัสสินค้า : {{item.ItemCode}}</ion-label>\r\n              </ion-item>\r\n              <ion-item>\r\n                <ion-label>ชื่อสินค้า : {{item.ItemsName}}</ion-label>\r\n              </ion-item>\r\n              <ion-item>\r\n                <ion-label>Serial No : {{item.SerialNo}}</ion-label>\r\n              </ion-item>\r\n            </ion-card-content>\r\n          </ion-card>\r\n          <div class=\"text-center\">\r\n            <ion-button shape=\"round\" color=\"primary\" class=\"text-center\" (click)=\"EditDevice(item)\">เปลี่ยนเครื่อง\r\n            </ion-button>\r\n          </div>\r\n        </div>\r\n        <ion-card *ngIf=\"isEditDevice == true; edit\" #edit>\r\n          <ion-card-content>\r\n            <ion-card-title>เปลี่ยนเครื่อง</ion-card-title>\r\n            <ion-item>\r\n              <ion-icon name=\"search\" slot=\"end\" (click)=\"search()\">Search</ion-icon>\r\n              <ion-input type=\"text\" placeholder=\"Serial No.\" [(ngModel)]=\"serial\" name=\"serial\"></ion-input>\r\n              <ion-icon name=\"barcode\" slot=\"end\" (click)=\"scan('device')\"></ion-icon>\r\n            </ion-item>\r\n            <div class=\"tab-content\">\r\n              <div class=\"tab-pane active\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-12\">\r\n                    <div class=\"table-scrollable\">\r\n                      <table class=\"table table-hover\">\r\n                        <thead>\r\n                          <tr>\r\n                            <th> ชื่อเครื่อง </th>\r\n                            <th> Serial No. </th>\r\n                            <th> ประเภทเครื่อง </th>\r\n                          </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                          <tr *ngFor=\"let item of data; let i = index\">\r\n                            <td style=\"padding-top:15px;\"> {{item.AssetNo}} </td>\r\n                            <td style=\"padding-top:15px;\"> {{item.SerialNo}}</td>\r\n                            <td style=\"padding-top:15px;\">{{item.type}}</td>\r\n                            <td>\r\n                              <ion-button shape=\"round\" color=\"warning\" class=\"text-center\"\r\n                                (click)=\"AddCM('Devices',item)\"> เลือก</ion-button>\r\n                            </td>\r\n                          </tr>\r\n                        </tbody>\r\n                      </table>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </ion-card-content>\r\n        </ion-card>\r\n\r\n        <ion-card *ngIf=\"isShowSpare\">\r\n          <ion-card-content>\r\n            <ion-card-title>เปลี่ยนอะไหล่</ion-card-title>\r\n            <ion-item>\r\n              <ion-icon name=\"search\" (click)=\"Add()\"></ion-icon>\r\n              <ion-input type=\"text\" placeholder=\"Part No.\" [(ngModel)]=\"sparepart\" name=\"serial\"></ion-input>\r\n              <ion-icon name=\"barcode\" (click)=\"scan('spare')\"></ion-icon>\r\n            </ion-item>\r\n            <div class=\"tab-content\">\r\n              <div class=\"tab-pane active\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-12\">\r\n                    <div class=\"table-scrollable\">\r\n                      <table class=\"table table-hover\">\r\n                        <thead>\r\n                          <tr>\r\n                            <th style=\"color:blue\"> ลำดับที่ </th>\r\n                            <th style=\"color:blue\"> ชื่ออะไหล่ </th>\r\n                            <th style=\"color:blue\"> Part No. </th>\r\n                            <th style=\"color:blue\"> จำนวน </th>\r\n                            <th style=\"color:blue\"></th>\r\n                          </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                          <tr *ngFor=\"let item of listreal; let i = index\">\r\n                            <td>\r\n                              <label>{{i+1}}</label>\r\n                            </td>\r\n                            <td><label>{{item.Name}}</label></td>\r\n                            <td><label>{{item.SKUCode}}</label></td>\r\n                            <td><label>{{item.Balance}}</label></td>\r\n                            <td>\r\n                              <ion-button shape=\"round\" color=\"warning\" class=\"text-center\" (click)=\"select(i,item)\">\r\n                                เลือก</ion-button>\r\n                            </td>\r\n                          </tr>\r\n                        </tbody>\r\n                      </table>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </ion-card-content>\r\n        </ion-card>\r\n        <div *ngIf=\"isEditSpare\">\r\n          <ion-card>\r\n            <ion-card-content>\r\n              <ion-card-title>อะไหล่ที่เปลี่ยน</ion-card-title>\r\n              <div class=\"tab-content\">\r\n                <div class=\"tab-pane active\">\r\n                  <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                      <div class=\"table-scrollable\">\r\n                        <table class=\"table table-hover\">\r\n                          <thead>\r\n                            <tr>\r\n                              <th style=\"color:green\"> ลำดับที่ </th>\r\n                              <th style=\"color:green\"> ชื่ออะไหล่ </th>\r\n                              <th style=\"color:green\"> ชื่ออะไหล่เดิม </th>\r\n                              <th style=\"color:green\"> Part No. </th>\r\n                              <th style=\"color:green\"> Part No. ตัวเดิม</th>\r\n                              <th style=\"color:green\"> จำนวน </th>\r\n                              <th style=\"color:green\" *ngIf=\"type != 'PM'\"> ส่งคืน</th>\r\n                              <th></th>\r\n                            </tr>\r\n                          </thead>\r\n                          <tbody>\r\n                            <tr *ngFor=\"let item of spareList; let i = index\">\r\n                              <td>\r\n                                <label>{{i+1}}</label>\r\n                              </td>\r\n                              <td>\r\n                                <label>{{item.Name}}</label>\r\n                              </td>\r\n                              <td>\r\n                                <input type=\"text\" [(ngModel)]=\"item.NameOld\" style=\"width: 150px\"\r\n                                  class=\"form-control\" />\r\n                              </td>\r\n                              <td>\r\n                                <label>{{item.SKUCode}}</label>\r\n                              </td>\r\n                              <td>\r\n                                <input type=\"text\" [(ngModel)]=\"item.PartOld\" style=\"width: 120px\"\r\n                                  class=\"form-control\" />\r\n                              </td>\r\n                              <td>\r\n                                <label>{{item.Balance}}</label>\r\n                              </td>\r\n                              <td *ngIf=\"type != 'PM'\">\r\n                                <ion-checkbox style=\"margin-top: 8px;\" slot=\"end\" [(ngModel)]=\"item.isChecked\"></ion-checkbox>\r\n                              </td>\r\n                              <td>\r\n                                <ion-button shape=\"round\" color=\"danger\" class=\"text-center\" (click)=\"remove(i,item)\">\r\n                                  ลบ\r\n                                </ion-button>\r\n                              </td>\r\n                            </tr>\r\n                          </tbody>\r\n                        </table>\r\n                        <div class=\"text-center\">\r\n                          <ion-button shape=\"round\" color=\"success\" class=\"text-center\"\r\n                            (click)=\"AddCM('Spareparts',spareList)\"> ยืนยันการเปลี่ยนอะไหล่</ion-button>\r\n                        </div>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </ion-card-content>\r\n          </ion-card>\r\n        </div>\r\n\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>"
+module.exports = "<ion-toolbar color=\"primary\">\r\n  <ion-title *ngIf=\"type != 'PM'\">รายการตรวจซ่อม</ion-title>\r\n  <ion-title *ngIf=\"type == 'PM'\">รายการเปลี่ยนอะไหล่</ion-title>\r\n  <ion-buttons slot=\"primary\">\r\n    <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n\r\n<ion-content>\r\n  <!-- <iframe [src]=\"url\" style=\"width:100%;height:100%\"></iframe> -->\r\n  <div class=\"col-12\">\r\n    <div class=\"row\">\r\n      <div class=\"col-4 hidden\" style=\"padding-right: 0px;\">\r\n        <ion-card>\r\n          <ion-card-content>\r\n            <ion-item>\r\n              <ion-label>สินค้าที่ติดตั้ง : {{InstallPlanName}}</ion-label>\r\n            </ion-item>\r\n            <ion-item>\r\n              <ion-label>รหัสสินค้า : {{ItemCode}}</ion-label>\r\n            </ion-item>\r\n            <ion-item>\r\n              <ion-label>ชื่อสินค้า : {{ItemsName}}</ion-label>\r\n            </ion-item>\r\n            <ion-item>\r\n              <ion-label>Serial No : {{SerialNo}}</ion-label>\r\n            </ion-item>\r\n          </ion-card-content>\r\n        </ion-card>\r\n      </div>\r\n      <div class=\"col-12\" style=\"padding-left: 0px;\">\r\n        <ion-card *ngIf=\"isShowType\">\r\n          <ion-card-content>\r\n            <ion-button expand=\"block\" (click)=\"chang('device')\" class=\"hidden\" *ngIf=\"isdevice\">เปลี่ยนเครื่อง\r\n            </ion-button>\r\n            <ion-button expand=\"block\" (click)=\"chang('sparepart')\" *ngIf=\"isspare\">เปลี่ยนอะไหล่</ion-button>\r\n            <ion-button expand=\"block\" (click)=\"confirmNonSpare()\" *ngIf=\"isnon\">ไม่เปลี่ยนอะไหล่</ion-button>\r\n          </ion-card-content>\r\n        </ion-card>\r\n        <ion-card *ngIf=\"isShowDevice == true && status == false; device\" #device>\r\n          <ion-card-content>\r\n            <ion-card-title>เปลี่ยนเครื่อง</ion-card-title>\r\n            <ion-item>\r\n              <ion-icon name=\"search\" slot=\"end\" (click)=\"search()\">Search</ion-icon>\r\n              <ion-input type=\"text\" placeholder=\"Serial No.\" [(ngModel)]=\"serial\" name=\"serial\"></ion-input>\r\n              <ion-icon name=\"barcode\" slot=\"end\" (click)=\"scan()\"></ion-icon>\r\n            </ion-item>\r\n            <div class=\"tab-content\" *ngIf=\"isShowDeviceDetail == false ;hide\" #hide>\r\n              <div class=\"tab-pane active\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-12\">\r\n                    <div class=\"table-scrollable\">\r\n                      <table class=\"table table-hover\">\r\n                        <thead>\r\n                          <tr>\r\n                            <th> ชื่อเครื่อง </th>\r\n                            <th> Serial No. </th>\r\n                            <th> ประเภทเครื่อง </th>\r\n                          </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                          <tr *ngFor=\"let item of data; let i = index\">\r\n                            <td style=\"padding-top:15px;\"> {{item.AssetNo}} </td>\r\n                            <td style=\"padding-top:15px;\"> {{item.SerialNo}}</td>\r\n                            <td style=\"padding-top:15px;\">{{item.type}}</td>\r\n                            <td>\r\n                              <ion-button shape=\"round\" color=\"warning\" class=\"text-center\"\r\n                                (click)=\"AddCM('Devices',item)\"> เลือก</ion-button>\r\n                            </td>\r\n                          </tr>\r\n                        </tbody>\r\n                      </table>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </ion-card-content>\r\n        </ion-card>\r\n        <div *ngIf=\"isShowDevice == true && isShowDeviceDetail == false; show\">\r\n          <ion-card #show *ngFor=\"let item of status;\">\r\n            <ion-card-content>\r\n              <ion-item>\r\n                <ion-label>เครื่องที่เปลี่ยน : {{item.InstallPlanName}}</ion-label>\r\n              </ion-item>\r\n              <ion-item>\r\n                <ion-label>รหัสสินค้า : {{item.ItemCode}}</ion-label>\r\n              </ion-item>\r\n              <ion-item>\r\n                <ion-label>ชื่อสินค้า : {{item.ItemsName}}</ion-label>\r\n              </ion-item>\r\n              <ion-item>\r\n                <ion-label>Serial No : {{item.SerialNo}}</ion-label>\r\n              </ion-item>\r\n            </ion-card-content>\r\n          </ion-card>\r\n          <div class=\"text-center\">\r\n            <ion-button shape=\"round\" color=\"primary\" class=\"text-center\" (click)=\"EditDevice(item)\">เปลี่ยนเครื่อง\r\n            </ion-button>\r\n          </div>\r\n        </div>\r\n        <ion-card *ngIf=\"isEditDevice == true; edit\" #edit>\r\n          <ion-card-content>\r\n            <ion-card-title>เปลี่ยนเครื่อง</ion-card-title>\r\n            <ion-item>\r\n              <ion-icon name=\"search\" slot=\"end\" (click)=\"search()\">Search</ion-icon>\r\n              <ion-input type=\"text\" placeholder=\"Serial No.\" [(ngModel)]=\"serial\" name=\"serial\"></ion-input>\r\n              <ion-icon name=\"barcode\" slot=\"end\" (click)=\"scan('device')\"></ion-icon>\r\n            </ion-item>\r\n            <div class=\"tab-content\">\r\n              <div class=\"tab-pane active\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-12\">\r\n                    <div class=\"table-scrollable\">\r\n                      <table class=\"table table-hover\">\r\n                        <thead>\r\n                          <tr>\r\n                            <th> ชื่อเครื่อง </th>\r\n                            <th> Serial No. </th>\r\n                            <th> ประเภทเครื่อง </th>\r\n                          </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                          <tr *ngFor=\"let item of data; let i = index\">\r\n                            <td style=\"padding-top:15px;\"> {{item.AssetNo}} </td>\r\n                            <td style=\"padding-top:15px;\"> {{item.SerialNo}}</td>\r\n                            <td style=\"padding-top:15px;\">{{item.type}}</td>\r\n                            <td>\r\n                              <ion-button shape=\"round\" color=\"warning\" class=\"text-center\"\r\n                                (click)=\"AddCM('Devices',item)\"> เลือก</ion-button>\r\n                            </td>\r\n                          </tr>\r\n                        </tbody>\r\n                      </table>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </ion-card-content>\r\n        </ion-card>\r\n\r\n        <ion-card *ngIf=\"isShowSpare\">\r\n          <ion-card-header>\r\n            <ion-card-title>รายการเปลี่ยนอะไหล่</ion-card-title>\r\n          </ion-card-header>\r\n      \r\n          <ion-card-content>\r\n            <div class=\"row mb-1\">\r\n              <label class=\"col-sm-1\">1.</label>\r\n              <div class=\"col-sm-8\">\r\n                <input type=\"text\" class=\"form-control\" placeholder=\"ชื่ออะไหล่ / Part No.\" [(ngModel)]=\"spare1\">\r\n              </div>\r\n              <div class=\"col-sm-3\">\r\n                <input type=\"number\" class=\"form-control\" placeholder=\"จำนวน\" [(ngModel)]=\"qty1\">\r\n              </div>\r\n            </div>\r\n            <div class=\"row mb-1\">\r\n              <label class=\"col-sm-1\">2.</label>\r\n              <div class=\"col-sm-8\">\r\n                <input type=\"text\" class=\"form-control\" placeholder=\"ชื่ออะไหล่ / Part No.\" [(ngModel)]=\"spare2\">\r\n              </div>\r\n              <div class=\"col-sm-3\">\r\n                <input type=\"number\" class=\"form-control\" placeholder=\"จำนวน\" [(ngModel)]=\"qty2\">\r\n              </div>\r\n            </div>\r\n            <div class=\"row mb-1\">\r\n              <label class=\"col-sm-1\">3.</label>\r\n              <div class=\"col-sm-8\">\r\n                <input type=\"text\" class=\"form-control\" placeholder=\"ชื่ออะไหล่ / Part No.\" [(ngModel)]=\"spare3\">\r\n              </div>\r\n              <div class=\"col-sm-3\">\r\n                <input type=\"number\" class=\"form-control\" placeholder=\"จำนวน\" [(ngModel)]=\"qty3\">\r\n              </div>\r\n            </div>\r\n            <div class=\"row mb-1\">\r\n              <label class=\"col-sm-1\">4.</label>\r\n              <div class=\"col-sm-8\">\r\n                <input type=\"text\" class=\"form-control\" placeholder=\"ชื่ออะไหล่ / Part No.\" [(ngModel)]=\"spare4\">\r\n              </div>\r\n              <div class=\"col-sm-3\">\r\n                <input type=\"number\" class=\"form-control\" placeholder=\"จำนวน\" [(ngModel)]=\"qty4\">\r\n              </div>\r\n            </div>\r\n            <div class=\"row mb-1\">\r\n              <label class=\"col-sm-1\">5.</label>\r\n              <div class=\"col-sm-8\">\r\n                <input type=\"text\" class=\"form-control\" placeholder=\"ชื่ออะไหล่ / Part No.\" [(ngModel)]=\"spare5\">\r\n              </div>\r\n              <div class=\"col-sm-3\">\r\n                <input type=\"number\" class=\"form-control\" placeholder=\"จำนวน\" [(ngModel)]=\"qty5\">\r\n              </div>\r\n            </div>\r\n          </ion-card-content>\r\n          <ion-card-content>\r\n            <div class=\"row mb-1\">\r\n              <div class=\"col-sm-12 text-center\">\r\n                <ion-button color=\"primary\" (click)=\"confirmSpare()\">ยืนยันการเปลี่ยนอะไหล่</ion-button>\r\n              </div>\r\n            </div>\r\n          </ion-card-content>\r\n          <!-- <ion-card-content>\r\n            <ion-card-title>เปลี่ยนอะไหล่</ion-card-title>\r\n            <ion-item>\r\n              <ion-icon name=\"search\" (click)=\"Add()\"></ion-icon>\r\n              <ion-input type=\"text\" placeholder=\"Part No.\" [(ngModel)]=\"sparepart\" name=\"serial\"></ion-input>\r\n              <ion-icon name=\"barcode\" (click)=\"scan('spare')\"></ion-icon>\r\n            </ion-item>\r\n            <div class=\"tab-content\">\r\n              <div class=\"tab-pane active\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-12\">\r\n                    <div class=\"table-scrollable\">\r\n                      <table class=\"table table-hover\">\r\n                        <thead>\r\n                          <tr>\r\n                            <th style=\"color:blue\"> ลำดับที่ </th>\r\n                            <th style=\"color:blue\"> ชื่ออะไหล่ </th>\r\n                            <th style=\"color:blue\"> Part No. </th>\r\n                            <th style=\"color:blue\"> จำนวน </th>\r\n                            <th style=\"color:blue\"></th>\r\n                          </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                          <tr *ngFor=\"let item of listreal; let i = index\">\r\n                            <td>\r\n                              <label>{{i+1}}</label>\r\n                            </td>\r\n                            <td><label>{{item.Name}}</label></td>\r\n                            <td><label>{{item.SKUCode}}</label></td>\r\n                            <td><label>{{item.Balance}}</label></td>\r\n                            <td>\r\n                              <ion-button shape=\"round\" color=\"warning\" class=\"text-center\" (click)=\"select(i,item)\">\r\n                                เลือก</ion-button>\r\n                            </td>\r\n                          </tr>\r\n                        </tbody>\r\n                      </table>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </ion-card-content> -->\r\n        </ion-card>\r\n\r\n        <!-- <div *ngIf=\"isEditSpare\">\r\n          <ion-card>\r\n            <ion-card-content>\r\n              <ion-card-title>อะไหล่ที่เปลี่ยน</ion-card-title>\r\n              <div class=\"tab-content\">\r\n                <div class=\"tab-pane active\">\r\n                  <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                      <div class=\"table-scrollable\">\r\n                        <table class=\"table table-hover\">\r\n                          <thead>\r\n                            <tr>\r\n                              <th style=\"color:green\"> ลำดับที่ </th>\r\n                              <th style=\"color:green\"> ชื่ออะไหล่ </th>\r\n                              <th style=\"color:green\"> ชื่ออะไหล่เดิม </th>\r\n                              <th style=\"color:green\"> Part No. </th>\r\n                              <th style=\"color:green\"> Part No. ตัวเดิม</th>\r\n                              <th style=\"color:green\"> จำนวน </th>\r\n                              <th style=\"color:green\" *ngIf=\"type != 'PM'\"> ส่งคืน</th>\r\n                              <th></th>\r\n                            </tr>\r\n                          </thead>\r\n                          <tbody>\r\n                            <tr *ngFor=\"let item of spareList; let i = index\">\r\n                              <td>\r\n                                <label>{{i+1}}</label>\r\n                              </td>\r\n                              <td>\r\n                                <label>{{item.Name}}</label>\r\n                              </td>\r\n                              <td>\r\n                                <input type=\"text\" [(ngModel)]=\"item.NameOld\" style=\"width: 150px\"\r\n                                  class=\"form-control\" />\r\n                              </td>\r\n                              <td>\r\n                                <label>{{item.SKUCode}}</label>\r\n                              </td>\r\n                              <td>\r\n                                <input type=\"text\" [(ngModel)]=\"item.PartOld\" style=\"width: 120px\"\r\n                                  class=\"form-control\" />\r\n                              </td>\r\n                              <td>\r\n                                <label>{{item.Balance}}</label>\r\n                              </td>\r\n                              <td *ngIf=\"type != 'PM'\">\r\n                                <ion-checkbox style=\"margin-top: 8px;\" slot=\"end\" [(ngModel)]=\"item.isChecked\"></ion-checkbox>\r\n                              </td>\r\n                              <td>\r\n                                <ion-button shape=\"round\" color=\"danger\" class=\"text-center\" (click)=\"remove(i,item)\">\r\n                                  ลบ\r\n                                </ion-button>\r\n                              </td>\r\n                            </tr>\r\n                          </tbody>\r\n                        </table>\r\n                        <div class=\"text-center\">\r\n                          <ion-button shape=\"round\" color=\"success\" class=\"text-center\"\r\n                            (click)=\"AddCM('Spareparts',spareList)\"> ยืนยันการเปลี่ยนอะไหล่</ion-button>\r\n                        </div>\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </ion-card-content>\r\n          </ion-card>\r\n        </div> -->\r\n\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <!-- <ion-card>\r\n    <ion-card-header>\r\n      <ion-card-title></ion-card-title>\r\n    </ion-card-header>\r\n\r\n    <ion-card-content>\r\n      <div class=\"mb-3 row\">\r\n        <label for=\"inputPassword\" class=\"col-sm-2 col-form-label\">Password</label>\r\n        <div class=\"col-sm-10\">\r\n          <input type=\"password\" class=\"form-control\" id=\"inputPassword\">\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n  </ion-card> -->\r\n</ion-content>"
 
 /***/ }),
 
@@ -704,7 +697,7 @@ module.exports = "<ion-toolbar>\r\n  <ion-title *ngIf=\"type != 'PM'\">ราย
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-toolbar>\r\n  <ion-title #hide *ngIf=\"jobtype != 'CM'; else hide\">ความคิดเห็นของช่าง</ion-title>\r\n  <ion-title #show *ngIf=\"jobtype == 'CM'; else show\">{{header}}</ion-title>\r\n  <ion-buttons slot=\"primary\">\r\n    <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon> \r\n  </ion-buttons>\r\n</ion-toolbar>\r\n\r\n<ion-content>\r\n  <div class=\"container\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\" #show *ngIf=\"(jobtype == 'CM' && this.workclose == 'workclose'); else show\">\r\n          <ion-item>\r\n            <ion-label>ปัญหาเกิดจาก</ion-label>\r\n            <ion-select interface=\"popover\" (ionChange)=\"onChange($event,'resolution')\" [(ngModel)]=\"problemby\">\r\n              <ion-select-option *ngFor=\"let title of problembydata\" [value]=\"title.SystemID\"\r\n                  [selected]=\"title.SystemDataName\">{{title.SystemDataName}}</ion-select-option>\r\n            </ion-select>\r\n          </ion-item>\r\n        </div>\r\n          <!-- <div class=\"col-12\" style=\"margin-top: 20px;\" #show *ngIf=\"(jobtype == 'CM' && this.workclose == 'workclose'); else show\">\r\n            <ion-item>\r\n              <ion-label>หัวข้อการแก้ปัญหา</ion-label>\r\n              <ion-select interface=\"popover\" (ionChange)=\"onChange($event,'resolution')\" [(ngModel)]=\"resolution\">\r\n                <ion-select-option *ngFor=\"let title of data\" [value]=\"title.SystemID\"\r\n                    [selected]=\"title.SystemDataName\">{{title.SystemDataName}}</ion-select-option>\r\n              </ion-select>\r\n            </ion-item>\r\n          </div> -->\r\n          <div class=\"col-12\" #show *ngIf=\"(jobtype == 'CM' && this.workclose != 'workclose') || (jobtype == 'CM' && this.workclose == 'workclose'); else show\">\r\n            <ion-item>\r\n              <ion-label>วิธีการแก้ปัญหา</ion-label>\r\n            </ion-item>\r\n            <ion-item>    \r\n              <textarea class=\"form-control\" rows=\"3\" [(ngModel)]=\"resolutiondetail\"></textarea>\r\n            </ion-item>\r\n          </div>\r\n          <div class=\"col-12\" #hide *ngIf=\"this.workclose == 'workclose'; else hide\">\r\n            <ion-item>\r\n              <ion-label>ความคิดเห็นเพิ่มเติมของช่าง</ion-label>\r\n            </ion-item>\r\n            <ion-item>    \r\n              <textarea class=\"form-control\" rows=\"3\" [(ngModel)]=\"TecComment\"></textarea>\r\n            </ion-item> \r\n          </div>         \r\n        </div> \r\n        <div class=\"col-md-12 text-center\" style=\"margin-top: 10px;\">\r\n          <ion-button  (click)=\"submit()\">บันทึก</ion-button>\r\n        </div>\r\n  </div> \r\n\r\n</ion-content>"
+module.exports = "<ion-toolbar color=\"primary\">\r\n  <ion-title *ngIf=\"jobtype != 'CM'\">ความคิดเห็นของช่าง</ion-title>\r\n  <ion-title *ngIf=\"jobtype == 'CM'\">แบบประเมินปัญหา</ion-title>\r\n  <ion-buttons slot=\"primary\">\r\n    <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n\r\n<ion-content>\r\n  <ion-card>\r\n    <ion-card-header *ngIf=\"(jobtype == 'CM' && this.workclose == 'workclose')\">\r\n      <ion-card-title>ปัญหาเกิดจาก</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content #show *ngIf=\"(jobtype == 'CM' && this.workclose == 'workclose')\">\r\n      <div class=\"col-12\">\r\n        <ion-radio-group (ionChange)=\"onChange($event,'resolution')\" [(ngModel)]=\"problemby\">\r\n          <ion-item *ngFor=\"let title of problembydata\">\r\n            <ion-label>{{title.SystemDataName}}</ion-label>\r\n            <ion-radio slot=\"start\" [value]=\"title.SystemID\"></ion-radio>\r\n          </ion-item>\r\n        </ion-radio-group>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-header #show *ngIf=\"(jobtype == 'CM' && this.workclose != 'workclose') || (jobtype == 'CM' && this.workclose == 'workclose')\">\r\n      <ion-card-title>วิธีการแก้ปัญหา</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content #show *ngIf=\"(jobtype == 'CM' && this.workclose != 'workclose') || (jobtype == 'CM' && this.workclose == 'workclose')\">\r\n      <div class=\"col-12\">\r\n        <textarea class=\"form-control\" rows=\"3\" [(ngModel)]=\"resolutiondetail\"></textarea>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-header #hide *ngIf=\"this.workclose == 'workclose'\">\r\n      <ion-card-title>ความคิดเห็นเพิ่มเติมของช่าง</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content #hide *ngIf=\"this.workclose == 'workclose'\">\r\n      <div class=\"col-12\">\r\n        <textarea class=\"form-control\" rows=\"3\" [(ngModel)]=\"TecComment\"></textarea>\r\n        <small>* กรุณากรอกมากกว่า 4 ตัวอักษร</small>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-header #hide *ngIf=\"jobtype == 'CM' && this.workclose == 'workclose'\">\r\n      <ion-card-title>ลายเซ็นช่าง</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content #hide *ngIf=\"jobtype == 'CM' && this.workclose == 'workclose'\">\r\n      <div class=\"col-12\">\r\n        <div id=\"sig\" class=\"sig\">\r\n          <div *ngIf=\"isShow\" style=\"border: 1px solid black;\">\r\n            <img [src]=\"sig\" />\r\n          </div>\r\n          <div style=\"border: 1px solid black;\" *ngIf=\"isSign\">\r\n            <signature-pad [options]=\"signaturePadOptions\"></signature-pad>\r\n          </div>\r\n          <div class=\"text-center\" *ngIf=\"sig == undefined\">\r\n            <ion-button (click)=\"confirmSave()\">ยืนยันลายเซ็น</ion-button>\r\n            <ion-button color=\"dark\" (click)=\"clearPad()\">แก้ไขลายเซ็น</ion-button>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n    <hr />\r\n    <ion-card-content>\r\n      <div class=\"col-md-12 text-center\">\r\n        <ion-button (click)=\"submit()\">บันทึก</ion-button>\r\n      </div>\r\n    </ion-card-content>\r\n  </ion-card>\r\n\r\n  <!-- <div class=\"container\">\r\n    <div class=\"row\">\r\n      <div class=\"col-12\" #show *ngIf=\"(jobtype == 'CM' && this.workclose == 'workclose'); else show\">\r\n        <ion-item>\r\n          <ion-label>ปัญหาเกิดจาก</ion-label>\r\n          <ion-select interface=\"popover\" (ionChange)=\"onChange($event,'resolution')\" [(ngModel)]=\"problemby\">\r\n            <ion-select-option *ngFor=\"let title of problembydata\" [value]=\"title.SystemID\"\r\n              [selected]=\"title.SystemDataName\">{{title.SystemDataName}}</ion-select-option>\r\n          </ion-select>\r\n        </ion-item>\r\n      </div>\r\n      <div class=\"col-12\" #show\r\n        *ngIf=\"(jobtype == 'CM' && this.workclose != 'workclose') || (jobtype == 'CM' && this.workclose == 'workclose'); else show\">\r\n        <ion-item>\r\n          <ion-label>วิธีการแก้ปัญหา</ion-label>\r\n        </ion-item>\r\n        <ion-item>\r\n          <textarea class=\"form-control\" rows=\"3\" [(ngModel)]=\"resolutiondetail\"></textarea>\r\n        </ion-item>\r\n      </div>\r\n      <div class=\"col-12\" #hide *ngIf=\"this.workclose == 'workclose'; else hide\">\r\n        <ion-item>\r\n          <ion-label>ความคิดเห็นเพิ่มเติมของช่าง</ion-label>\r\n        </ion-item>\r\n        <ion-item>\r\n          <textarea class=\"form-control\" rows=\"3\" [(ngModel)]=\"TecComment\"></textarea>\r\n        </ion-item>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-md-12 text-center\" style=\"margin-top: 10px;\">\r\n      <ion-button (click)=\"submit()\">บันทึก</ion-button>\r\n    </div>\r\n  </div> -->\r\n\r\n</ion-content>"
 
 /***/ }),
 
@@ -715,7 +708,18 @@ module.exports = "<ion-toolbar>\r\n  <ion-title #hide *ngIf=\"jobtype != 'CM'; e
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "  <ion-toolbar>\r\n    <ion-title>ความคิดเห็นของร้าน</ion-title>\r\n    <ion-buttons slot=\"primary\">\r\n      <ion-icon slot=\"end\" name=\"close\" (click)=\"closeModal()\"></ion-icon>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n\r\n<ion-content>\r\n  <div class=\"row\" style=\"margin-top: 30px;\">\r\n    <div class=\"col-md-12\">\r\n      <div class=\"form-group\">\r\n        <div class=\"col-md-12\">\r\n          <label style=\"font-weight:bold;\">ความคิดเห็นเพิ่มเติมของร้าน</label>\r\n          <textarea class=\"form-control\" rows=\"3\" [(ngModel)]=\"Cuscomment\"></textarea>\r\n        </div>\r\n      </div>\r\n      \r\n    </div>\r\n    <div class=\"col-md-12\">\r\n      <div class=\"form-group\">\r\n        <div class=\"col-md-12\">\r\n          <label style=\"font-weight:bold;\">รหัสยืนยันตัวตนลูกค้า</label>\r\n          <input type=\"text\" class=\"form-control\" placeholder=\"กรอกรหัสยืนยันตัวตนลูกค้า\" [(ngModel)]=\"code\" />\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div class=\"col-md-12\">\r\n      <div class=\"form-group\">\r\n        <div class=\"col-md-4 offset-md-4\">\r\n          <ion-button shape=\"round\" class=\"text-center\" style=\"width: 100%;\" (click)=\"submit()\">ยืนยัน</ion-button>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n\r\n  <!-- <ion-item>\r\n    <ion-label>ความคิดเห็นเพิ่มเติมของร้าน</ion-label>\r\n  </ion-item>\r\n  <ion-item>    \r\n    <textarea class=\"form-control\" rows=\"3\" [(ngModel)]=\"Cuscomment\"></textarea>\r\n  </ion-item>\r\n  <ion-item *ngIf=\"type == 'PM'\">\r\n    <ion-label color=\"primary\" stacked>รหัสยืนยันตัวตนลูกค้า</ion-label>\r\n    <input type=\"text\" class=\"form-control\" placeholder=\"กรอกรหัสยืนยันตัวตนลูกค้า\" [(ngModel)]=\"code\" />\r\n    <ion-label color=\"primary\" stacked>รหัสยืนยันตัวตนลูกค้า</ion-label>\r\n    <ion-input type=\"number\" placeholder=\"กรอกรหัสยืนยันตัวตนลูกค้า\" [(ngModel)]=\"code\"></ion-input>\r\n  </ion-item>\r\n  <div class=\"text-center\" style=\"margin-top: 10px;\"></div> -->\r\n</ion-content>"
+module.exports = "<ion-toolbar>\r\n  <ion-title>ความคิดเห็นของร้าน: {{cusName}}</ion-title>\r\n  <ion-buttons slot=\"primary\">\r\n    <ion-icon slot=\"end\" name=\"close\" (click)=\"closeModal()\"></ion-icon>\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n\r\n<ion-content>\r\n  <ion-card>\r\n    <ion-card-header>\r\n      <ion-card-title>ความคิดเห็นเพิ่มเติมของร้าน</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <ion-radio-group (ionChange)=\"onChange($event.detail.value)\">\r\n        <div class=\"row\">\r\n          <div class=\"col-md-12\">\r\n            <ion-item>\r\n              <ion-label>ไม่มีความคิดเห็น</ion-label>\r\n              <ion-radio slot=\"start\" value=\"1\"></ion-radio>\r\n            </ion-item>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-12\">\r\n            <ion-item>\r\n              <ion-label>ความคิดเห็นเพิ่มเติม</ion-label>\r\n              <ion-radio slot=\"start\" value=\"2\"></ion-radio>\r\n            </ion-item>\r\n          </div>\r\n        </div>\r\n      </ion-radio-group>\r\n    </ion-card-content>\r\n    <ion-card-content *ngIf=\"showComment\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <textarea class=\"form-control\" rows=\"4\" [(ngModel)]=\"Cuscomment\"></textarea>\r\n          <small>* กรุณากรอกมากว่า 4 ตัวอักษร</small>\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-header *ngIf=\"Ischkpassword\">\r\n      <ion-card-title>รหัสยืนยันตัวตนลูกค้า</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content *ngIf=\"Ischkpassword\">\r\n      <input type=\"number\" class=\"form-control\" placeholder=\"กรอกรหัสยืนยันตัวตนลูกค้า\" [(ngModel)]=\"code\" />\r\n    </ion-card-content>\r\n\r\n    <ion-card-content>\r\n      <div class=\"col-12 text-center\">\r\n        <ion-button class=\"text-center\" (click)=\"submit()\">ยืนยัน</ion-button>\r\n      </div>\r\n    </ion-card-content>\r\n  </ion-card>\r\n\r\n  <!-- <ion-item>\r\n    <ion-label>ความคิดเห็นเพิ่มเติมของร้าน</ion-label>\r\n  </ion-item>\r\n  <ion-item>    \r\n    <textarea class=\"form-control\" rows=\"3\" [(ngModel)]=\"Cuscomment\"></textarea>\r\n  </ion-item>\r\n  <ion-item *ngIf=\"type == 'PM'\">\r\n    <ion-label color=\"primary\" stacked>รหัสยืนยันตัวตนลูกค้า</ion-label>\r\n    <input type=\"text\" class=\"form-control\" placeholder=\"กรอกรหัสยืนยันตัวตนลูกค้า\" [(ngModel)]=\"code\" />\r\n    <ion-label color=\"primary\" stacked>รหัสยืนยันตัวตนลูกค้า</ion-label>\r\n    <ion-input type=\"number\" placeholder=\"กรอกรหัสยืนยันตัวตนลูกค้า\" [(ngModel)]=\"code\"></ion-input>\r\n  </ion-item>\r\n  <div class=\"text-center\" style=\"margin-top: 10px;\"></div> -->\r\n</ion-content>"
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/index.js!./src/app/page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.page.html":
+/*!************************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.page.html ***!
+  \************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-toolbar color=\"primary\">\n  <ion-title *ngIf=\"type == 'request' || type == 'CM'\">ขอเบิกอะไหล่: {{itemName}}</ion-title>\n  <ion-title *ngIf=\"type == 'history'\">ประวัติขอเบิกอะไหล่: {{itemName}}</ion-title>\n  <ion-buttons slot=\"primary\">\n    <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\n  </ion-buttons>\n</ion-toolbar>\n\n<ion-content>\n  <ion-card *ngIf=\"type == 'history'\">\n    <ion-card-header>\n      <ion-card-title>ประวัติขอเบิกอะไหล่</ion-card-title>\n    </ion-card-header>\n    <ion-card-content>\n      <div class=\"col-12\">\n        <div class=\"list-group\" *ngIf=\"notSpare\">\n          <div class=\"list-group-item list-group-item-action\" aria-current=\"true\">\n            <div class=\"d-flex w-100 justify-content-between\">\n              <h5 class=\"mb-1\">ไม่มีข้อมูล</h5>\n            </div>\n          </div>\n        </div>\n        <div class=\"list-group\" *ngIf=\"!notSpare\">\n          <div class=\"list-group-item list-group-item-action\" aria-current=\"true\" *ngFor=\"let item of followLog\">\n            <div class=\"d-flex w-100 justify-content-between\">\n              <h5 class=\"mb-1\">รายละเอียด</h5>\n              <small>{{item.CreatedDate | date: 'd/M/yyyy'}} <br/> {{item.CreatedDate | date: 'HH:mm'}}</small>\n            </div>\n            <p class=\"mb-1\">{{item.Description}}</p>\n            <!-- <small>And some small print.</small> -->\n          </div>\n        </div>\n      </div>\n    </ion-card-content>\n\n    <ion-card-content></ion-card-content>\n  </ion-card>\n\n  <ion-card *ngIf=\"type == 'request' || type == 'CM'\">\n    <ion-card-header>\n      <ion-card-title>รายละเอียดขอเบิกอะไหล่</ion-card-title>\n    </ion-card-header>\n    <ion-card-content>\n      <div class=\"col-12\">\n        <textarea class=\"form-control\" rows=\"5\" [(ngModel)]=\"request\">{{request}}</textarea>\n      </div>\n    </ion-card-content>\n\n    <ion-card-content>\n      <div class=\"col-12\">\n        <ion-item>\n          <ion-label>กรุณาเลือก กรณีเครื่องเบรก</ion-label>\n          <ion-checkbox slot=\"start\" [(ngModel)]=\"isBreak\" (ionChange)=\"machineBreak($event)\"></ion-checkbox>\n        </ion-item>\n      </div>\n    </ion-card-content>\n\n    <ion-card-content>\n      <div class=\"col-md-12 text-center\">\n        <ion-button (click)=\"confirmSubmit()\">ยืนยันขอเบิกอะไหล่</ion-button>\n      </div>\n    </ion-card-content>\n\n    <ion-card-content></ion-card-content>\n  </ion-card>\n</ion-content>"
 
 /***/ }),
 
@@ -726,7 +730,7 @@ module.exports = "  <ion-toolbar>\r\n    <ion-title>ความคิดเห�
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-toolbar>\r\n  <ion-title>ลายเซ็นผู้รับผิดชอบ</ion-title>\r\n  <ion-buttons slot=\"primary\">\r\n    <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n\r\n<ion-content>\r\n  <div id=\"sig\" class=\"sig\">\r\n    <div *ngIf=\"isShow\">\r\n      <img [src]=\"sig\"/>\r\n    </div>\r\n    <div class=\"sig-body\" *ngIf=\"isSign\">\r\n      <signature-pad [options]=\"signaturePadOptions\"></signature-pad>\r\n    </div>\r\n    <div class=\"text-center\">\r\n    <ion-button (click)=\"savePad()\" *ngIf=\"isSave\">บันทึก</ion-button>\r\n    <ion-button color=\"dark\" (click)=\"clearPad()\">รีเซ็ต</ion-button>\r\n  </div>\r\n    <!-- <ion-button color=\"danger\" (click)=\"close()\">ปิด</ion-button> -->\r\n  </div>\r\n\r\n</ion-content>\r\n"
+module.exports = "<ion-toolbar>\r\n  <ion-title>ลายเซ็นผู้รับผิดชอบ</ion-title>\r\n  <ion-buttons slot=\"primary\">\r\n    <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n\r\n<ion-content>\r\n  <div id=\"sig\" class=\"sig\">\r\n    <div *ngIf=\"isShow\">\r\n      <img [src]=\"sig\"/>\r\n    </div>\r\n    <div class=\"sig-body\" *ngIf=\"isSign\">\r\n      <signature-pad [options]=\"signaturePadOptions\"></signature-pad>\r\n    </div>\r\n    <div class=\"text-center\">\r\n    <ion-button (click)=\"confirmSave()\" *ngIf=\"isSave\">บันทึก</ion-button>\r\n    <ion-button color=\"dark\" (click)=\"clearPad()\">รีเซ็ต</ion-button>\r\n  </div>\r\n    <!-- <ion-button color=\"danger\" (click)=\"close()\">ปิด</ion-button> -->\r\n  </div>\r\n\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -844,6 +848,7 @@ const routes = [
     { path: 'job/worknew', loadChildren: './page/job/worknew/worknew.module#WorknewPageModule' },
     { path: 'jobrespons', loadChildren: './page/job/jobdetail/jobrespons/jobrespons.module#JobresponsPageModule' },
     { path: 'request-sparepart', loadChildren: './page/sparepart/request-sparepart/request-sparepart.module#RequestSparepartPageModule' },
+    { path: 'requestsparepart', loadChildren: './page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.module#RequestsparepartPageModule' },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -998,7 +1003,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _app_auth_auth_guard_guard__WEBPACK_IMPORTED_MODULE_36__ = __webpack_require__(/*! ../app/auth/auth-guard.guard */ "./src/app/auth/auth-guard.guard.ts");
 /* harmony import */ var _app_page_sparepart_parts_waiting_list_parts_waiting_list_module__WEBPACK_IMPORTED_MODULE_37__ = __webpack_require__(/*! ../app/page/sparepart/parts-waiting-list/parts-waiting-list.module */ "./src/app/page/sparepart/parts-waiting-list/parts-waiting-list.module.ts");
 /* harmony import */ var _app_page_detaillistpm_log_log_module__WEBPACK_IMPORTED_MODULE_38__ = __webpack_require__(/*! ../app/page/detaillistpm/log/log.module */ "./src/app/page/detaillistpm/log/log.module.ts");
-/* harmony import */ var _app_page_job_jobdetail_jobrespons_jobrespons_module__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../app/page/job/jobdetail/jobrespons/jobrespons.module */ "./src/app/page/job/jobdetail/jobrespons/jobrespons.module.ts");
+/* harmony import */ var _app_page_joball_detailofdetaillistpm_requestsparepart_requestsparepart_module__WEBPACK_IMPORTED_MODULE_39__ = __webpack_require__(/*! ../app/page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.module */ "./src/app/page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.module.ts");
 
 
 
@@ -1039,6 +1044,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+//import { JobresponsPageModule} from '../app/page/job/jobdetail/jobrespons/jobrespons.module'
 let AppModule = class AppModule {
 };
 AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1069,7 +1075,7 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _app_page_detaillistpm_log_log_module__WEBPACK_IMPORTED_MODULE_38__["LogPageModule"],
             _angular_common_http__WEBPACK_IMPORTED_MODULE_9__["HttpClientModule"],
             _ng_bootstrap_ng_bootstrap__WEBPACK_IMPORTED_MODULE_29__["NgbModule"],
-            _app_page_job_jobdetail_jobrespons_jobrespons_module__WEBPACK_IMPORTED_MODULE_39__["JobresponsPageModule"]
+            _app_page_joball_detailofdetaillistpm_requestsparepart_requestsparepart_module__WEBPACK_IMPORTED_MODULE_39__["RequestsparepartPageModule"]
         ],
         providers: [
             _app_auth_auth_guard_guard__WEBPACK_IMPORTED_MODULE_36__["AuthGuardGuard"],
@@ -1389,141 +1395,6 @@ LogPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _angular_platform_browser__WEBPACK_IMPORTED_MODULE_3__["DomSanitizer"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]])
 ], LogPage);
-
-
-
-/***/ }),
-
-/***/ "./src/app/page/job/jobdetail/jobrespons/jobrespons.module.ts":
-/*!********************************************************************!*\
-  !*** ./src/app/page/job/jobdetail/jobrespons/jobrespons.module.ts ***!
-  \********************************************************************/
-/*! exports provided: JobresponsPageModule */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "JobresponsPageModule", function() { return JobresponsPageModule; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
-/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _jobrespons_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./jobrespons.page */ "./src/app/page/job/jobdetail/jobrespons/jobrespons.page.ts");
-
-
-
-
-
-
-
-const routes = [
-    {
-        path: '',
-        component: _jobrespons_page__WEBPACK_IMPORTED_MODULE_6__["JobresponsPage"]
-    }
-];
-let JobresponsPageModule = class JobresponsPageModule {
-};
-JobresponsPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
-        imports: [
-            _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
-            _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes)
-        ],
-        declarations: [_jobrespons_page__WEBPACK_IMPORTED_MODULE_6__["JobresponsPage"]]
-    })
-], JobresponsPageModule);
-
-
-
-/***/ }),
-
-/***/ "./src/app/page/job/jobdetail/jobrespons/jobrespons.page.scss":
-/*!********************************************************************!*\
-  !*** ./src/app/page/job/jobdetail/jobrespons/jobrespons.page.scss ***!
-  \********************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2Uvam9iL2pvYmRldGFpbC9qb2JyZXNwb25zL2pvYnJlc3BvbnMucGFnZS5zY3NzIn0= */"
-
-/***/ }),
-
-/***/ "./src/app/page/job/jobdetail/jobrespons/jobrespons.page.ts":
-/*!******************************************************************!*\
-  !*** ./src/app/page/job/jobdetail/jobrespons/jobrespons.page.ts ***!
-  \******************************************************************/
-/*! exports provided: JobresponsPage */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "JobresponsPage", function() { return JobresponsPage; });
-/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _post_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../post-data.service */ "./src/app/post-data.service.ts");
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
-
-
-
-
-
-
-let JobresponsPage = class JobresponsPage {
-    constructor(modalController, postDataService, route, alertController, navCtrl, sanitizer, navParams) {
-        this.modalController = modalController;
-        this.postDataService = postDataService;
-        this.route = route;
-        this.alertController = alertController;
-        this.navCtrl = navCtrl;
-        this.navParams = navParams;
-        this.DataSpare = [];
-        this.ListSpare = [];
-        this.check = false;
-        this.itemname = [];
-        this.buttonColor = 'medium';
-        console.log('this.navParams', this.navParams);
-        if (this.navParams.data != undefined) {
-            this.empID = this.navParams.data.empID;
-            this.planID = this.navParams.data.planID;
-            this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/TabletRespone.aspx' + '?planID=' + this.planID + "&empId=" + this.empID);
-        }
-    }
-    close() {
-        this.modalController.dismiss(this.planID);
-    }
-    ngOnInit() {
-    }
-};
-JobresponsPage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
-    { type: _post_data_service__WEBPACK_IMPORTED_MODULE_4__["PostDataService"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"] },
-    { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__["DomSanitizer"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"] }
-];
-JobresponsPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
-    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
-        selector: 'app-jobrespons',
-        template: __webpack_require__(/*! raw-loader!./jobrespons.page.html */ "./node_modules/raw-loader/index.js!./src/app/page/job/jobdetail/jobrespons/jobrespons.page.html"),
-        styles: [__webpack_require__(/*! ./jobrespons.page.scss */ "./src/app/page/job/jobdetail/jobrespons/jobrespons.page.scss")]
-    }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"],
-        _post_data_service__WEBPACK_IMPORTED_MODULE_4__["PostDataService"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"],
-        _angular_platform_browser__WEBPACK_IMPORTED_MODULE_5__["DomSanitizer"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"]])
-], JobresponsPage);
 
 
 
@@ -2434,7 +2305,7 @@ CheckevaluationPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "ion-label {\n  font-size: 15px !important;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZS9qb2JhbGwvZGV0YWlsb2ZkZXRhaWxsaXN0cG0vY2hlY2tldmFsdWF0aW9uL0U6XFxHaXRIdWJcXGVTZXJ2aWNlQXBwL3NyY1xcYXBwXFxwYWdlXFxqb2JhbGxcXGRldGFpbG9mZGV0YWlsbGlzdHBtXFxjaGVja2V2YWx1YXRpb25cXGNoZWNrZXZhbHVhdGlvbi5wYWdlLnNjc3MiLCJzcmMvYXBwL3BhZ2Uvam9iYWxsL2RldGFpbG9mZGV0YWlsbGlzdHBtL2NoZWNrZXZhbHVhdGlvbi9jaGVja2V2YWx1YXRpb24ucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksMEJBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL3BhZ2Uvam9iYWxsL2RldGFpbG9mZGV0YWlsbGlzdHBtL2NoZWNrZXZhbHVhdGlvbi9jaGVja2V2YWx1YXRpb24ucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLWxhYmVse1xyXG4gICAgZm9udC1zaXplOiAxNXB4ICFpbXBvcnRhbnQ7XHJcbn0iLCJpb24tbGFiZWwge1xuICBmb250LXNpemU6IDE1cHggIWltcG9ydGFudDtcbn0iXX0= */"
+module.exports = "ion-label {\n  font-size: 15px !important;\n}\n\ninput[type=radio] {\n  height: 25px;\n  width: 25px;\n  vertical-align: middle;\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvcGFnZS9qb2JhbGwvZGV0YWlsb2ZkZXRhaWxsaXN0cG0vY2hlY2tldmFsdWF0aW9uL0U6XFxHaXRIdWJcXGVTZXJ2aWNlQXBwL3NyY1xcYXBwXFxwYWdlXFxqb2JhbGxcXGRldGFpbG9mZGV0YWlsbGlzdHBtXFxjaGVja2V2YWx1YXRpb25cXGNoZWNrZXZhbHVhdGlvbi5wYWdlLnNjc3MiLCJzcmMvYXBwL3BhZ2Uvam9iYWxsL2RldGFpbG9mZGV0YWlsbGlzdHBtL2NoZWNrZXZhbHVhdGlvbi9jaGVja2V2YWx1YXRpb24ucGFnZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0ksMEJBQUE7QUNDSjs7QURFQTtFQUNJLFlBQUE7RUFDQSxXQUFBO0VBQ0Esc0JBQUE7QUNDSiIsImZpbGUiOiJzcmMvYXBwL3BhZ2Uvam9iYWxsL2RldGFpbG9mZGV0YWlsbGlzdHBtL2NoZWNrZXZhbHVhdGlvbi9jaGVja2V2YWx1YXRpb24ucGFnZS5zY3NzIiwic291cmNlc0NvbnRlbnQiOlsiaW9uLWxhYmVse1xyXG4gICAgZm9udC1zaXplOiAxNXB4ICFpbXBvcnRhbnQ7XHJcbn1cclxuXHJcbmlucHV0W3R5cGU9J3JhZGlvJ10geyBcclxuICAgIGhlaWdodDoyNXB4O1xyXG4gICAgd2lkdGg6MjVweDtcclxuICAgIHZlcnRpY2FsLWFsaWduOiBtaWRkbGU7XHJcbiB9IiwiaW9uLWxhYmVsIHtcbiAgZm9udC1zaXplOiAxNXB4ICFpbXBvcnRhbnQ7XG59XG5cbmlucHV0W3R5cGU9cmFkaW9dIHtcbiAgaGVpZ2h0OiAyNXB4O1xuICB3aWR0aDogMjVweDtcbiAgdmVydGljYWwtYWxpZ246IG1pZGRsZTtcbn0iXX0= */"
 
 /***/ }),
 
@@ -2468,6 +2339,11 @@ let CheckevaluationPage = class CheckevaluationPage {
         this.navParams = navParams;
         this.alertController = alertController;
         this.eva = [];
+        this.type1 = 0;
+        this.type2 = 0;
+        this.type3 = 0;
+        this.type4 = 0;
+        this.type5 = 0;
         this.empID = this.navParams.data.empID;
         this.planID = this.navParams.data.planID;
         this.installID = this.navParams.data.install,
@@ -2475,12 +2351,83 @@ let CheckevaluationPage = class CheckevaluationPage {
         this.tran = [];
         ;
         // this.getEva();
-        this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/CK_Evaluation.aspx' + '?empID=' + this.empID + '&serviceplanid=' + this.planID + '&installplanid=' + this.installID);
+        //this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/CK_Evaluation.aspx' + '?empID=' + this.empID + '&serviceplanid=' + this.planID + '&installplanid=' + this.installID);
         // this.url = sanitizer.bypassSecurityTrustResourceUrl('http://localhost:41669/Web/CK_Evaluation.aspx' + '?empID=' + this.empID + '&serviceplanid=' + this.planID + '&installplanid=' + this.installID);
     }
     //#endregion
-    onChange(value) {
-        console.log(value.detail.value);
+    Save() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            if (this.type1 == 0 || this.type2 == 0 || this.type3 == 0 || this.type4 == 0 || this.type5 == 0) {
+                const alert = yield this.alertController.create({
+                    header: 'แจ้งเตือน',
+                    message: 'กรุณาเลือกคะแนนประเมินให้ครบถ้วน',
+                    buttons: ['OK']
+                });
+                yield alert.present();
+            }
+            else {
+                this.confirmSave();
+            }
+        });
+    }
+    confirmSave() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: 'ยืนยันบันทึกการประเมิน',
+                message: 'เมื่อยืนยันการประเมินแล้ว จะไม่สามารถแก้ไขได้อีก',
+                buttons: [
+                    {
+                        text: 'ยืนยัน',
+                        handler: () => {
+                            try {
+                                this.postDataService.SaveEvaluation(this.empID, this.planID, this.installID, this.type1, this.type2, this.type3, this.type4, this.type5).then(res => {
+                                    this.modalController.dismiss(0);
+                                });
+                            }
+                            catch (error) {
+                                this.alertSaveFail();
+                            }
+                        }
+                    },
+                    {
+                        text: 'ยกเลิก',
+                        role: 'cancel',
+                        cssClass: 'secondary',
+                        handler: (blah) => {
+                            console.log('Confirm Cancel: blah');
+                        }
+                    }
+                ]
+            });
+            yield alert.present();
+        });
+    }
+    alertSaveFail() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: 'แจ้งเตือน',
+                message: 'ไม่สามารถบักทึกได้ กรุณาลองใหม่อีกครั้ง',
+                buttons: ['ตกลง']
+            });
+            yield alert.present();
+        });
+    }
+    onChange(type, value) {
+        if (type == 'type1') {
+            this.type1 = value;
+        }
+        if (type == 'type2') {
+            this.type2 = value;
+        }
+        if (type == 'type3') {
+            this.type3 = value;
+        }
+        if (type == 'type4') {
+            this.type4 = value;
+        }
+        if (type == 'type5') {
+            this.type5 = value;
+        }
     }
     setQuantity(value) {
         console.log(value);
@@ -2886,6 +2833,11 @@ let ChecklistcmPage = class ChecklistcmPage {
         this.isdevice = true;
         this.isspare = true;
         this.isnon = true;
+        this.spare1 = '';
+        this.spare2 = '';
+        this.spare3 = '';
+        this.spare4 = '';
+        this.spare5 = '';
         this.empID = this.navParams.data.empID;
         this.planID = this.navParams.data.planID;
         this.installID = this.navParams.data.install;
@@ -2895,7 +2847,7 @@ let ChecklistcmPage = class ChecklistcmPage {
         this.SerialNo = this.navParams.data.SerialNo;
         this.cat = this.navParams.data.Cat;
         this.jobtype = this.navParams.data.jobtype;
-        console.log(this.navParams.data.jobtype);
+        console.log('this.navParams.data', this.navParams.data);
         this.stock = [];
         let param = {
             installID: this.installID,
@@ -2928,6 +2880,32 @@ let ChecklistcmPage = class ChecklistcmPage {
                 this.isEditSpare = true;
                 this.GetSpareTran();
                 this.GetSpareCM();
+            }
+        });
+        this.postDataService.SelectSparepart(this.planID).then(res => {
+            this.jobInSpare = res;
+            console.log('this.jobInSpare', this.jobInSpare);
+            for (let i = 0; i < this.jobInSpare.length; i++) {
+                if (this.jobInSpare[i].ListNo == 1) {
+                    this.spare1 = this.jobInSpare[i].SparepartName;
+                    this.qty1 = this.jobInSpare[i].Qty;
+                }
+                else if (this.jobInSpare[i].ListNo == 2) {
+                    this.spare2 = this.jobInSpare[i].SparepartName;
+                    this.qty2 = this.jobInSpare[i].Qty;
+                }
+                else if (this.jobInSpare[i].ListNo == 3) {
+                    this.spare3 = this.jobInSpare[i].SparepartName;
+                    this.qty3 = this.jobInSpare[i].Qty;
+                }
+                else if (this.jobInSpare[i].ListNo == 4) {
+                    this.spare4 = this.jobInSpare[i].SparepartName;
+                    this.qty4 = this.jobInSpare[i].Qty;
+                }
+                else if (this.jobInSpare[i].ListNo == 5) {
+                    this.spare5 = this.jobInSpare[i].SparepartName;
+                    this.qty5 = this.jobInSpare[i].Qty;
+                }
             }
         });
     }
@@ -3004,11 +2982,10 @@ let ChecklistcmPage = class ChecklistcmPage {
             this.isShowDevice = false;
             this.isShowDeviceDetail = false;
             this.isEditSpare = true;
-            this.GetSpareTran();
-            this.GetSpareCM();
-            // }      
+            // this.GetSpareTran();
+            // this.GetSpareCM();
         }
-        if (type == "device") {
+        else if (type == "device") {
             this.isShowType = false;
             this.isShowDevice = true;
             this.isShowSpare = false;
@@ -3036,7 +3013,7 @@ let ChecklistcmPage = class ChecklistcmPage {
                 }
             });
         }
-        if (type == "non") {
+        else if (type == "non") {
             let devicetran = {
                 planID: this.planID,
                 installID: this.installID,
@@ -3373,6 +3350,60 @@ let ChecklistcmPage = class ChecklistcmPage {
             yield alert.present();
         });
     }
+    confirmSpare() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            console.log('this.spare1', this.spare1);
+            console.log('this.qty1', this.qty1);
+            if (this.spare1 != '' && this.qty1 > 0) {
+                this.postDataService.ChangeSparepart(this.planID, this.empID, this.spare1, this.qty1, this.spare2, this.qty2, this.spare3, this.qty3, this.spare4, this.qty4, this.spare5, this.qty5).then(res => {
+                    console.log('res', res);
+                    this.modalController.dismiss();
+                });
+            }
+            else {
+                const alert = yield this.alertController.create({
+                    header: 'แจ้งเตือน',
+                    message: 'กรุณากรอกชื่ออะไหล่และจำนวนให้ถูกต้อง',
+                    buttons: ['OK']
+                });
+                yield alert.present();
+            }
+        });
+    }
+    confirmNonSpare() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            if (this.jobInSpare.length > 0) {
+                const alert = yield this.alertController.create({
+                    cssClass: 'my-custom-class',
+                    header: 'แจ้งเตือน!',
+                    message: 'ยืนยันไม่เปลี่ยนอะไหล่ รายการเปลี่ยนอะไหล่ที่ดำเนินการอยู่จะถูกลบ',
+                    buttons: [
+                        {
+                            text: 'ยืนยัน',
+                            handler: () => {
+                                console.log('Confirm Okay');
+                                this.postDataService.DeleteSparepart(this.planID).then(res => {
+                                    this.chang('non');
+                                });
+                            }
+                        },
+                        {
+                            text: 'ยกเลิก',
+                            role: 'cancel',
+                            cssClass: 'secondary',
+                            handler: (blah) => {
+                                console.log('Confirm Cancel: blah');
+                            }
+                        }
+                    ]
+                });
+                yield alert.present();
+            }
+            else {
+                this.chang('non');
+            }
+        });
+    }
 };
 ChecklistcmPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
@@ -3418,7 +3449,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _customerevaluation_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./customerevaluation.page */ "./src/app/page/joball/detailofdetaillistpm/customerevaluation/customerevaluation.page.ts");
+/* harmony import */ var angular2_signaturepad__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! angular2-signaturepad */ "./node_modules/angular2-signaturepad/index.js");
+/* harmony import */ var angular2_signaturepad__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(angular2_signaturepad__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _customerevaluation_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./customerevaluation.page */ "./src/app/page/joball/detailofdetaillistpm/customerevaluation/customerevaluation.page.ts");
+
 
 
 
@@ -3429,7 +3463,7 @@ __webpack_require__.r(__webpack_exports__);
 const routes = [
     {
         path: '',
-        component: _customerevaluation_page__WEBPACK_IMPORTED_MODULE_6__["CustomerevaluationPage"]
+        component: _customerevaluation_page__WEBPACK_IMPORTED_MODULE_7__["CustomerevaluationPage"]
     }
 ];
 let CustomerevaluationPageModule = class CustomerevaluationPageModule {
@@ -3440,9 +3474,10 @@ CustomerevaluationPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"](
             _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
             _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
+            angular2_signaturepad__WEBPACK_IMPORTED_MODULE_6__["SignaturePadModule"],
             _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes)
         ],
-        declarations: [_customerevaluation_page__WEBPACK_IMPORTED_MODULE_6__["CustomerevaluationPage"]]
+        declarations: [_customerevaluation_page__WEBPACK_IMPORTED_MODULE_7__["CustomerevaluationPage"]]
     })
 ], CustomerevaluationPageModule);
 
@@ -3476,21 +3511,35 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
 /* harmony import */ var _post_data_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../post-data.service */ "./src/app/post-data.service.ts");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var angular2_signaturepad_signature_pad__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! angular2-signaturepad/signature-pad */ "./node_modules/angular2-signaturepad/signature-pad.js");
+/* harmony import */ var angular2_signaturepad_signature_pad__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(angular2_signaturepad_signature_pad__WEBPACK_IMPORTED_MODULE_5__);
+
 
 
 
 
 
 let CustomerevaluationPage = class CustomerevaluationPage {
-    constructor(postDataService, modalController, alertController, navCtrl, navParams, route) {
+    constructor(postDataService, modalController, alertCtrl, navCtrl, navParams, route) {
         this.postDataService = postDataService;
         this.modalController = modalController;
-        this.alertController = alertController;
+        this.alertCtrl = alertCtrl;
         this.navCtrl = navCtrl;
         this.navParams = navParams;
         this.route = route;
         this.resolutiondetail = "";
         this.TecComment = "";
+        this.isShow = false;
+        this.isSave = true;
+        this.isSign = true;
+        this.newSig = {};
+        this.signaturePadOptions = {
+            'minWidth': 2,
+            canvasWidth: 683,
+            canvasHeight: 280,
+            backgroundColor: 'white',
+            penColor: 'black'
+        };
         this.route.queryParams.subscribe(params => {
             this.myId = JSON.parse(params["data"]);
             this.item = this.myId.item;
@@ -3504,7 +3553,17 @@ let CustomerevaluationPage = class CustomerevaluationPage {
         this.header = this.navParams.data.header;
         this.empID = this.navParams.data.empID;
         this.workclose = this.navParams.data.workclose;
-        if (this.jobtype == "CM" && this.workclose != 'workclose' || this.jobtype == "CM" && this.workclose == 'workclose') {
+        this.problemby = this.navParams.data.problemby;
+        this.TecComment = this.navParams.data.TecComment;
+        this.postDataService.SelectSignatureTech(this.planID, this.installID).then(res => {
+            if (res != null) {
+                this.isShow = true;
+                this.isSign = false;
+                this.sig = this.postDataService.apiServer_url + res;
+            }
+            console.log('sig ', this.sig);
+        });
+        if ((this.jobtype == "CM" && this.workclose != 'workclose') || (this.jobtype == "CM" && this.workclose == 'workclose')) {
             let problembydata = {
                 installID: this.installID,
                 jobtype: "problembydata"
@@ -3536,7 +3595,95 @@ let CustomerevaluationPage = class CustomerevaluationPage {
             else {
                 this.resolutiondetail = "resolutiondetail";
             }
+            console.log('this.detail', this.detail);
         });
+    }
+    ngAfterViewInit() {
+        let width = (window.innerWidth - 85);
+        console.log(width);
+        this.signaturePad.set('minWidth', 2); // set szimek/signature_pad options at runtime
+        this.signaturePad.set('canvasWidth', width);
+        this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
+    }
+    drawStart() {
+        this.isShow = true;
+        this.isSave = false;
+        this.isSign = false;
+    }
+    savePad() {
+        console.log('trainID: ', this.detail.id);
+        const base64 = this.signaturePad.toDataURL('image/png', 0.5);
+        const blob = this.signature(base64);
+        this.image = base64;
+        this.drawStart();
+        if (this.image == false) {
+        }
+        else {
+            let params = {
+                insID: this.installID,
+                planID: this.planID,
+                base64: this.image
+            };
+            this.postDataService.SignatureTech(params).then(res => {
+                this.sig = this.postDataService.apiServer_url + res;
+            });
+        }
+    }
+    signature(base64) {
+        const byteString = atob(base64.split(',')[1]);
+        const mimeString = base64.split(',')[0].split(':')[1].split(':')[0];
+        const byteNumbers = new Array(byteString.length);
+        for (let i = 0; i < byteString.length; i++) {
+            byteNumbers[i] = byteString.charAt(i);
+        }
+        const ia = new Uint8Array(byteNumbers);
+        return new Blob([ia], { type: mimeString });
+    }
+    confirmSave() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const alert = yield this.alertCtrl.create({
+                header: 'ยืนยันการบันทึกลายเซ็น',
+                message: 'เมื่อยืนยันแล้ว จะไม่สามารถแก้ไขได้อีก',
+                buttons: [
+                    {
+                        text: 'ยืนยัน',
+                        handler: () => {
+                            try {
+                                this.savePad();
+                            }
+                            catch (error) {
+                                this.alertSaveFail();
+                            }
+                        }
+                    },
+                    {
+                        text: 'ยกเลิก',
+                        role: 'cancel',
+                        cssClass: 'secondary',
+                        handler: (blah) => {
+                            console.log('Confirm Cancel: blah');
+                        }
+                    }
+                ]
+            });
+            yield alert.present();
+        });
+    }
+    alertSaveFail() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const alert = yield this.alertCtrl.create({
+                header: 'แจ้งเตือน',
+                message: 'ไม่สามารถบักทึกได้ กรุณาลองใหม่อีกครั้ง',
+                buttons: ['ตกลง']
+            });
+            yield alert.present();
+        });
+    }
+    clearPad() {
+        this.isShow = false;
+        this.isSave = true;
+        this.isSign = true;
+        this.ngAfterViewInit();
     }
     ngOnInit() {
     }
@@ -3550,11 +3697,24 @@ let CustomerevaluationPage = class CustomerevaluationPage {
     }
     submit() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            console.log('this.jobtype', this.jobtype);
+            console.log('this.workclose', this.workclose);
+            console.log('this.problemby', this.problemby);
+            console.log("this.resolutiondetail", this.resolutiondetail);
+            console.log('this.TecComment', this.TecComment);
             if (this.jobtype == "CM" && this.workclose != 'workclose') {
                 if (this.resolutiondetail == null || this.resolutiondetail == "") {
-                    const alert = yield this.alertController.create({
+                    const alert = yield this.alertCtrl.create({
                         header: 'แจ้งเตือน',
-                        message: 'กรุณากรอกวิธีการแก้ปัญหา',
+                        message: 'กรุณากรอก <strong>วิธีการแก้ปัญหา</strong>',
+                        buttons: ['OK']
+                    });
+                    yield alert.present();
+                }
+                else if (this.resolutiondetail.length < 4) {
+                    const alert = yield this.alertCtrl.create({
+                        header: 'แจ้งเตือน',
+                        message: 'กรุณากรอก <strong>วิธีการแก้ปัญหา</strong> มากกว่า 4 ตัวอักษร',
                         buttons: ['OK']
                     });
                     yield alert.present();
@@ -3584,9 +3744,7 @@ let CustomerevaluationPage = class CustomerevaluationPage {
                                     data: JSON.stringify(params)
                                 }
                             };
-                            console.log(navigationExtras);
                             this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
-                            //this.navCtrl.navigateForward(['/menu/overview']);
                             this.modalController.dismiss();
                         }
                         if (data == false) {
@@ -3597,17 +3755,49 @@ let CustomerevaluationPage = class CustomerevaluationPage {
             }
             else if (this.jobtype == "CM" && this.workclose == 'workclose') {
                 if (this.problemby == null || this.problemby == "") {
-                    const alert = yield this.alertController.create({
+                    const alert = yield this.alertCtrl.create({
                         header: 'แจ้งเตือน',
-                        message: 'กรุณากรอกหัวข้อปัญหาเกิดจากอะไร',
+                        message: 'กรุณากรอกหัวข้อ <strong>ปัญหาเกิดจาก</strong>',
                         buttons: ['OK']
                     });
                     yield alert.present();
                 }
                 else if (this.resolutiondetail == null || this.resolutiondetail == "") {
-                    const alert = yield this.alertController.create({
+                    const alert = yield this.alertCtrl.create({
                         header: 'แจ้งเตือน',
-                        message: 'กรุณากรอกวิธีการแก้ปัญหา',
+                        message: 'กรุณากรอก <strong>วิธีการแก้ปัญหา</strong>',
+                        buttons: ['OK']
+                    });
+                    yield alert.present();
+                }
+                else if (this.resolutiondetail.length < 4) {
+                    const alert = yield this.alertCtrl.create({
+                        header: 'แจ้งเตือน',
+                        message: 'กรุณากรอก <strong>วิธีการแก้ปัญหา</strong> มากกว่า 4 ตัวอักษร',
+                        buttons: ['OK']
+                    });
+                    yield alert.present();
+                }
+                else if (this.TecComment == null || this.TecComment == '') {
+                    const alert = yield this.alertCtrl.create({
+                        header: 'แจ้งเตือน',
+                        message: 'กรุณากรอก <strong>ความคิดเห็นเพิ่มเติมของช่าง</strong>',
+                        buttons: ['OK']
+                    });
+                    yield alert.present();
+                }
+                else if (this.TecComment.length < 4) {
+                    const alert = yield this.alertCtrl.create({
+                        header: 'แจ้งเตือน',
+                        message: 'กรุณากรอก <strong>ความคิดเห็นเพิ่มเติมของช่าง</strong> มากกว่า 4 ตัวอักษร',
+                        buttons: ['OK']
+                    });
+                    yield alert.present();
+                }
+                else if (this.sig == null || this.sig == '') {
+                    const alert = yield this.alertCtrl.create({
+                        header: 'แจ้งเตือน',
+                        message: 'กรุณา <strong>เซ็นชื่อหรือลงลายมือชื่อ</strong> ของช่าง',
                         buttons: ['OK']
                     });
                     yield alert.present();
@@ -3622,8 +3812,9 @@ let CustomerevaluationPage = class CustomerevaluationPage {
                         resolution: this.resolution,
                         resolutiondetail: this.resolutiondetail,
                         problemby: this.problemby,
+                        TecComment: this.TecComment
                     };
-                    console.log(params);
+                    console.log('params', params);
                     this.postDataService.SaveCaseAll(params).then(data => {
                         if (data == true) {
                             this.modalController.dismiss(params);
@@ -3636,9 +3827,17 @@ let CustomerevaluationPage = class CustomerevaluationPage {
             }
             else {
                 if (this.TecComment == null || this.TecComment == "") {
-                    const alert = yield this.alertController.create({
+                    const alert = yield this.alertCtrl.create({
                         header: 'แจ้งเตือน',
                         message: 'กรุณากรอกความคิดเห็น',
+                        buttons: ['OK']
+                    });
+                    yield alert.present();
+                }
+                else if (this.TecComment.length < 4) {
+                    const alert = yield this.alertCtrl.create({
+                        header: 'แจ้งเตือน',
+                        message: 'กรุณากรอก <strong>ความคิดเห็นเพิ่มเติมของช่าง</strong> มากกว่า 4 ตัวอักษร',
                         buttons: ['OK']
                     });
                     yield alert.present();
@@ -3658,7 +3857,7 @@ let CustomerevaluationPage = class CustomerevaluationPage {
     //#region alert success
     alertSuccess() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            const alert = yield this.alertController.create({
+            const alert = yield this.alertCtrl.create({
                 header: 'แจ้งเตือน',
                 message: 'บันทึกสำเร็จ',
                 buttons: ['OK']
@@ -3670,7 +3869,7 @@ let CustomerevaluationPage = class CustomerevaluationPage {
     //#region alert success
     alertFail() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            const alert = yield this.alertController.create({
+            const alert = yield this.alertCtrl.create({
                 header: 'แจ้งเตือน',
                 message: 'บันทึกไม่สำเร็จ',
                 buttons: ['OK']
@@ -3687,6 +3886,10 @@ CustomerevaluationPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] }
 ];
+tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])(angular2_signaturepad_signature_pad__WEBPACK_IMPORTED_MODULE_5__["SignaturePad"], { static: false }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", Object)
+], CustomerevaluationPage.prototype, "signaturePad", void 0);
 CustomerevaluationPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-customerevaluation',
@@ -3790,11 +3993,20 @@ let CustomerpasswordPage = class CustomerpasswordPage {
         this.navParams = navParams;
         this.Cuscomment = "";
         this.code = "";
+        this.commentType = 0;
+        this.showComment = false;
         console.table(this.navParams);
+        this.cusName = this.navParams.data.cusName;
         this.getpassword = this.navParams.data.password;
         this.planID = this.navParams.data.planID;
         this.installID = this.navParams.data.installID;
         this.type = this.navParams.data.type;
+        if (this.type == 'PM') {
+            this.Ischkpassword = true;
+        }
+        else {
+            this.Ischkpassword = false;
+        }
         let params1 = {
             installID: this.installID,
             planID: this.planID,
@@ -3808,7 +4020,6 @@ let CustomerpasswordPage = class CustomerpasswordPage {
             planID: this.planID,
             jobtype: "detailtran"
         };
-        console.log(params);
         this.postDataService.SaveCaseAll(params).then(data => {
             this.data = data;
             this.Cuscomment = this.data.CusComment;
@@ -3817,21 +4028,90 @@ let CustomerpasswordPage = class CustomerpasswordPage {
     }
     ngOnInit() {
     }
+    onChange(type) {
+        this.commentType = type;
+        if (type == 1) {
+            this.showComment = false;
+            this.Cuscomment = 'ไม่มีความคิดเห็น';
+        }
+        else {
+            this.showComment = true;
+            this.Cuscomment = '';
+        }
+    }
     closeModal() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             yield this.modalController.dismiss(0);
         });
     }
+    confirmSubmit() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: 'ยืนยันบันทึกการประเมิน',
+                message: 'เมื่อยืนยันการประเมินแล้ว จะไม่สามารถแก้ไขได้อีก',
+                buttons: [
+                    {
+                        text: 'ยืนยัน',
+                        handler: () => {
+                            try {
+                                this.submit();
+                            }
+                            catch (error) {
+                                this.alertSaveFail();
+                            }
+                        }
+                    },
+                    {
+                        text: 'ยกเลิก',
+                        role: 'cancel',
+                        cssClass: 'secondary',
+                        handler: (blah) => {
+                            console.log('Confirm Cancel: blah');
+                        }
+                    }
+                ]
+            });
+            yield alert.present();
+        });
+    }
+    alertSaveFail() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                header: 'แจ้งเตือน',
+                message: 'ไม่สามารถบักทึกได้ กรุณาลองใหม่อีกครั้ง',
+                buttons: ['ตกลง']
+            });
+            yield alert.present();
+        });
+    }
     submit() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            console.log(this.code);
-            console.log(this.getpassword);
+            console.log('this.code', this.code);
+            console.log('this.getpassword', this.getpassword);
+            console.log('this.Cuscomment', this.Cuscomment);
+            console.log('this.commentType', this.commentType);
             if (this.type == 'PM') {
                 if (this.Cuscomment == "" || this.Cuscomment == null || this.code != this.getpassword) {
-                    if (this.Cuscomment == "" || this.Cuscomment == null) {
+                    if (this.commentType == 0) {
+                        const alert = yield this.alertController.create({
+                            header: 'แจ้งเตือน',
+                            message: 'กรุณาเลือกความคิดเห็น',
+                            buttons: ['OK']
+                        });
+                        yield alert.present();
+                    }
+                    else if (this.Cuscomment == "" || this.Cuscomment == null) {
                         const alert = yield this.alertController.create({
                             header: 'แจ้งเตือน',
                             message: 'กรุณากรอกความคิดเห็น',
+                            buttons: ['OK']
+                        });
+                        yield alert.present();
+                    }
+                    else if (this.Cuscomment.length < 4) {
+                        const alert = yield this.alertController.create({
+                            header: 'แจ้งเตือน',
+                            message: 'กรุณากรอกความคิดเห็น มากกว่า 4 ตัวอักษร',
                             buttons: ['OK']
                         });
                         yield alert.present();
@@ -3849,6 +4129,50 @@ let CustomerpasswordPage = class CustomerpasswordPage {
                     let params = {
                         code: this.code,
                         Cuscomment: this.Cuscomment
+                    };
+                    yield this.modalController.dismiss(params);
+                }
+            }
+            else if (this.type == 'CM') {
+                console.log('this.type', this.type);
+                console.log('this.commentType', this.commentType);
+                if (this.commentType == 0) {
+                    const alert = yield this.alertController.create({
+                        header: 'แจ้งเตือน',
+                        message: 'กรุณาเลือกความเห็น',
+                        buttons: ['OK']
+                    });
+                    yield alert.present();
+                }
+                else if (this.commentType == 2) {
+                    if (this.Cuscomment == "" || this.Cuscomment == null) {
+                        const alert = yield this.alertController.create({
+                            header: 'แจ้งเตือน',
+                            message: 'กรุณากรอกความคิดเห็น',
+                            buttons: ['OK']
+                        });
+                        yield alert.present();
+                    }
+                    else if (this.Cuscomment.length < 4) {
+                        const alert = yield this.alertController.create({
+                            header: 'แจ้งเตือน',
+                            message: 'กรุณากรอกความคิดเห็น มากกว่า 4 ตัวอักษร',
+                            buttons: ['OK']
+                        });
+                        yield alert.present();
+                    }
+                    else {
+                        let params = {
+                            code: this.code,
+                            Cuscomment: this.Cuscomment
+                        };
+                        yield this.modalController.dismiss(params);
+                    }
+                }
+                else {
+                    let params = {
+                        code: this.code,
+                        Cuscomment: 'ไม่มีความคิดเห็น'
                     };
                     yield this.modalController.dismiss(params);
                 }
@@ -3879,6 +4203,233 @@ CustomerpasswordPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _post_data_service__WEBPACK_IMPORTED_MODULE_3__["PostDataService"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"]])
 ], CustomerpasswordPage);
+
+
+
+/***/ }),
+
+/***/ "./src/app/page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.module.ts":
+/*!**********************************************************************************************!*\
+  !*** ./src/app/page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.module.ts ***!
+  \**********************************************************************************************/
+/*! exports provided: RequestsparepartPageModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RequestsparepartPageModule", function() { return RequestsparepartPageModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _requestsparepart_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./requestsparepart.page */ "./src/app/page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.page.ts");
+
+
+
+
+
+
+
+const routes = [
+    {
+        path: '',
+        component: _requestsparepart_page__WEBPACK_IMPORTED_MODULE_6__["RequestsparepartPage"]
+    }
+];
+let RequestsparepartPageModule = class RequestsparepartPageModule {
+};
+RequestsparepartPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        imports: [
+            _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes)
+        ],
+        declarations: [_requestsparepart_page__WEBPACK_IMPORTED_MODULE_6__["RequestsparepartPage"]]
+    })
+], RequestsparepartPageModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.page.scss":
+/*!**********************************************************************************************!*\
+  !*** ./src/app/page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.page.scss ***!
+  \**********************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2Uvam9iYWxsL2RldGFpbG9mZGV0YWlsbGlzdHBtL3JlcXVlc3RzcGFyZXBhcnQvcmVxdWVzdHNwYXJlcGFydC5wYWdlLnNjc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.page.ts":
+/*!********************************************************************************************!*\
+  !*** ./src/app/page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.page.ts ***!
+  \********************************************************************************************/
+/*! exports provided: RequestsparepartPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RequestsparepartPage", function() { return RequestsparepartPage; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _post_data_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../post-data.service */ "./src/app/post-data.service.ts");
+
+
+
+
+let RequestsparepartPage = class RequestsparepartPage {
+    constructor(postDataService, navParams, modalCtrl, alertCtrl, navCtrl, toastCtrl) {
+        this.postDataService = postDataService;
+        this.navParams = navParams;
+        this.modalCtrl = modalCtrl;
+        this.alertCtrl = alertCtrl;
+        this.navCtrl = navCtrl;
+        this.toastCtrl = toastCtrl;
+        console.log('this.navParams.data', this.navParams.data);
+        this.itemName = this.navParams.data.ItemsName;
+        this.planID = this.navParams.data.planID;
+        this.empID = this.navParams.data.empID;
+        this.sentCM = this.navParams.data.sentCM;
+        this.type = this.navParams.data.type;
+        this.selectRequestSparepart();
+    }
+    selectRequestSparepart() {
+        this.postDataService.SelectRequestSparepart(this.planID).then(res => {
+            console.log('res', res);
+            this.followLog = res;
+            if (this.followLog.length == 0) {
+                this.notSpare = true;
+            }
+            else {
+                this.notSpare = false;
+            }
+        });
+    }
+    machineBreak(event) {
+        this.isBreak = event.detail.checked;
+    }
+    submitRequest() {
+        console.log('this.request', this.request);
+        console.log('this.isBreak', this.isBreak);
+        this.postDataService.RequestSparepart(this.planID, this.empID, this.isBreak, this.request).then(res => {
+            this.request = '';
+            this.followLog = res;
+            this.presentToastWithOptions();
+            if (this.type != 'history') {
+                let param = {
+                    type: 'submit'
+                };
+                this.modalCtrl.dismiss(param);
+            }
+        });
+    }
+    confirmSubmit() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            if (this.request == null) {
+                const alert = yield this.alertCtrl.create({
+                    header: 'แจ้งเตือน',
+                    message: 'กรุณากรอก <strong>รายละเอียดขอเบิกอะไหล่</strong>',
+                    buttons: ['OK']
+                });
+                yield alert.present();
+            }
+            else {
+                const alert = yield this.alertCtrl.create({
+                    header: 'ยืนยันการเบิกอะไหล่',
+                    message: 'ต้องการยืนยันการเบิกอะไหล่ หรือไม่?',
+                    buttons: [
+                        {
+                            text: 'ยืนยัน',
+                            handler: () => {
+                                try {
+                                    this.submitRequest();
+                                }
+                                catch (error) {
+                                    console.log('error', error);
+                                    this.alertSubmitFail();
+                                }
+                            }
+                        },
+                        {
+                            text: 'ยกเลิก',
+                            role: 'cancel',
+                            cssClass: 'secondary',
+                            handler: (blah) => {
+                                console.log('Confirm Cancel: blah');
+                            }
+                        }
+                    ]
+                });
+                yield alert.present();
+            }
+        });
+    }
+    alertSubmitFail() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const alert = yield this.alertCtrl.create({
+                header: 'แจ้งเตือน',
+                message: 'ไม่สามารถบักทึกได้ กรุณาลองใหม่อีกครั้ง',
+                buttons: ['ตกลง']
+            });
+            yield alert.present();
+        });
+    }
+    presentToastWithOptions() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const toast = yield this.toastCtrl.create({
+                header: 'เรียบร้อย',
+                message: 'ระบบส่งรายละเอียดการเบิกอะไหล่เรียบร้อยแล้ว',
+                duration: 20000,
+                buttons: [
+                    {
+                        text: 'OK',
+                        handler: () => {
+                            console.log('OK');
+                        }
+                    }
+                ]
+            });
+            toast.present();
+        });
+    }
+    close() {
+        let param = {
+            type: 'close'
+        };
+        this.modalCtrl.dismiss(param);
+    }
+    ngOnInit() {
+    }
+};
+RequestsparepartPage.ctorParameters = () => [
+    { type: _post_data_service__WEBPACK_IMPORTED_MODULE_3__["PostDataService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"] }
+];
+RequestsparepartPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-requestsparepart',
+        template: __webpack_require__(/*! raw-loader!./requestsparepart.page.html */ "./node_modules/raw-loader/index.js!./src/app/page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.page.html"),
+        styles: [__webpack_require__(/*! ./requestsparepart.page.scss */ "./src/app/page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.page.scss")]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_post_data_service__WEBPACK_IMPORTED_MODULE_3__["PostDataService"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"]])
+], RequestsparepartPage);
 
 
 
@@ -3974,7 +4525,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let SignaturePage = class SignaturePage {
-    constructor(nav, modalCtrl, navParams, storage, navCtrl, postDataService, storageService, modalController) {
+    constructor(nav, modalCtrl, navParams, storage, navCtrl, postDataService, storageService, modalController, alertCtrl) {
         this.nav = nav;
         this.modalCtrl = modalCtrl;
         this.storage = storage;
@@ -3982,6 +4533,7 @@ let SignaturePage = class SignaturePage {
         this.postDataService = postDataService;
         this.storageService = storageService;
         this.modalController = modalController;
+        this.alertCtrl = alertCtrl;
         this.isShow = false;
         this.isSave = true;
         this.isSign = true;
@@ -3997,7 +4549,7 @@ let SignaturePage = class SignaturePage {
         // console.log(navParams.get('lastName'));
         // console.log(navParams.get('middleInitial'));
         // this.firstName = navParams.get('firstName')
-        console.log(this.sig);
+        console.log('navParams', navParams);
     }
     //#endregion
     //#region click
@@ -4008,9 +4560,7 @@ let SignaturePage = class SignaturePage {
     }
     savePad() {
         const base64 = this.signaturePad.toDataURL('image/png', 0.5);
-        // console.log(base64);
         const blob = this.signature(base64);
-        // console.log(blob);
         this.image = base64;
         this.drawStart();
         this.modalController.dismiss(this.image);
@@ -4024,6 +4574,46 @@ let SignaturePage = class SignaturePage {
         }
         const ia = new Uint8Array(byteNumbers);
         return new Blob([ia], { type: mimeString });
+    }
+    confirmSave() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const alert = yield this.alertCtrl.create({
+                header: 'ยืนยันการบันทึกลายเซ็น',
+                message: 'เมื่อยืนยันแล้ว จะไม่สามารถแก้ไขได้อีก',
+                buttons: [
+                    {
+                        text: 'ยืนยัน',
+                        handler: () => {
+                            try {
+                                this.savePad();
+                            }
+                            catch (error) {
+                                this.alertSaveFail();
+                            }
+                        }
+                    },
+                    {
+                        text: 'ยกเลิก',
+                        role: 'cancel',
+                        cssClass: 'secondary',
+                        handler: (blah) => {
+                            console.log('Confirm Cancel: blah');
+                        }
+                    }
+                ]
+            });
+            yield alert.present();
+        });
+    }
+    alertSaveFail() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const alert = yield this.alertCtrl.create({
+                header: 'แจ้งเตือน',
+                message: 'ไม่สามารถบักทึกได้ กรุณาลองใหม่อีกครั้ง',
+                buttons: ['ตกลง']
+            });
+            yield alert.present();
+        });
     }
     clearPad() {
         this.isShow = false;
@@ -4048,7 +4638,8 @@ SignaturePage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"] },
     { type: _post_data_service__WEBPACK_IMPORTED_MODULE_5__["PostDataService"] },
     { type: _storage_service__WEBPACK_IMPORTED_MODULE_6__["StorageService"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Input"])(),
@@ -4079,7 +4670,8 @@ SignaturePage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"],
         _post_data_service__WEBPACK_IMPORTED_MODULE_5__["PostDataService"],
         _storage_service__WEBPACK_IMPORTED_MODULE_6__["StorageService"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"]])
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"]])
 ], SignaturePage);
 
 
@@ -4990,11 +5582,11 @@ let PostDataService = class PostDataService {
         // apiServer_url = 'http://localhost:41669/';
         // apiStock = 'https://localhost:41669/';  
         // จาก Server จริง
-        // apiServer_url = 'https://erpsuperior.com/';
-        // apiStock = 'https://wms.erpsuperior.com/';
+        this.apiServer_url = 'https://erpsuperior.com/';
+        this.apiStock = 'https://wms.erpsuperior.com/';
         //จาก Server เทส
-        this.apiServer_url = 'https://test.erpsuperior.com/';
-        this.apiStock = 'https://wmstest.erpsuperior.com/';
+        // apiServer_url = 'https://test.erpsuperior.com/';
+        // apiStock = 'https://wmstest.erpsuperior.com/';
         // apiServer_url = 'https://cors-anywhere.herokuapp.com/http://superior2.wingplusweb.com/';
         // apiServer_url = 'https://cors-anywhere.herokuapp.com/https://superior2.wingplusweb.com/';
         this.httpOptions = {
@@ -5253,6 +5845,100 @@ let PostDataService = class PostDataService {
         return new Promise((resovle, reject) => {
             let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
             this.http.get(this.apiServer_url + '/API/WebService.asmx/CheckJobResponse?planID=' + planID, option).subscribe(data => {
+                resovle(data);
+            }, error => {
+                reject(error);
+            });
+        });
+    }
+    SaveEvaluation(empID, planID, insID, type1, type2, type3, type4, type5) {
+        return new Promise((resovle, reject) => {
+            let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
+            this.http.get(this.apiServer_url + '/API/WebService.asmx/SaveEvaluation?empID=' + empID + '&planID=' + planID
+                + '&insID=' + insID + '&type1=' + type1 + '&type2=' + type2 + '&type3=' + type3
+                + '&type4=' + type4 + '&type5=' + type5, option).subscribe(data => {
+                resovle(data);
+            }, error => {
+                reject(error);
+            });
+        });
+    }
+    ChangeSparepart(planID, empID, spare1, qty1, spare2, qty2, spare3, qty3, spare4, qty4, spare5, qty5) {
+        return new Promise((resovle, reject) => {
+            let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
+            this.http.get(this.apiServer_url + '/API/WebService.asmx/ChangeSparepart?planID=' + planID + '&empID=' + empID + '&spare1=' + spare1 + '&qty1=' + qty1
+                + '&spare2=' + spare2 + '&qty2=' + qty2 + '&spare3=' + spare3 + '&qty3=' + qty3
+                + '&spare4=' + spare4 + '&qty4=' + qty4 + '&spare5=' + spare5 + '&qty5=' + qty5, option).subscribe(data => {
+                resovle(data);
+            }, error => {
+                reject(error);
+            });
+        });
+    }
+    SelectSparepart(planID) {
+        return new Promise((resovle, reject) => {
+            let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
+            this.http.get(this.apiServer_url + '/API/WebService.asmx/SelectSparepart?planID=' + planID, option).subscribe(data => {
+                resovle(data);
+            }, error => {
+                reject(error);
+            });
+        });
+    }
+    DeleteSparepart(planID) {
+        return new Promise((resovle, reject) => {
+            let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
+            this.http.get(this.apiServer_url + '/API/WebService.asmx/DeleteSparepart?planID=' + planID, option).subscribe(data => {
+                resovle(data);
+            }, error => {
+                reject(error);
+            });
+        });
+    }
+    SignatureTech(form) {
+        return new Promise((resovle, reject) => {
+            let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
+            this.http.post(this.apiServer_url + '/API/WebService.asmx/SignatureTech', JSON.stringify(form), option).subscribe(data => {
+                resovle(data);
+            }, error => {
+                reject(error);
+            });
+        });
+    }
+    SelectSignatureTech(planID, insID) {
+        return new Promise((resovle, reject) => {
+            let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
+            this.http.get(this.apiServer_url + '/API/WebService.asmx/SelectSignatureTech?planID=' + planID + '&insID=' + insID, option).subscribe(data => {
+                resovle(data);
+            }, error => {
+                reject(error);
+            });
+        });
+    }
+    UpdateInprogress(planID) {
+        return new Promise((resovle, reject) => {
+            let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
+            this.http.get(this.apiServer_url + '/API/WebService.asmx/UpdateInprogress?planID=' + planID, option).subscribe(data => {
+                resovle(data);
+            }, error => {
+                reject(error);
+            });
+        });
+    }
+    RequestSparepart(planID, empID, isBreak, request) {
+        return new Promise((resovle, reject) => {
+            let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
+            this.http.get(this.apiServer_url + '/API/WebService.asmx/RequestSparepart?planID=' + planID + '&empID=' + empID + '&isBreak=' + isBreak + '&request=' + request, option).subscribe(data => {
+                resovle(data);
+            }, error => {
+                reject(error);
+            });
+        });
+    }
+    SelectRequestSparepart(planID) {
+        return new Promise((resovle, reject) => {
+            let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
+            this.http.get(this.apiServer_url + '/API/WebService.asmx/SelectRequestSparepart?planID=' + planID, option).subscribe(data => {
                 resovle(data);
             }, error => {
                 reject(error);

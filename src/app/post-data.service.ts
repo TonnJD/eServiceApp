@@ -9,16 +9,16 @@ export class PostDataService {
   data;
 
   // test local
-  apiServer_url = 'http://localhost:41669/';
-  apiStock = 'https://localhost:41669/';  
+  // apiServer_url = 'http://localhost:41669/';
+  // apiStock = 'https://localhost:41669/';  
 
   // จาก Server จริง
   // apiServer_url = 'https://erpsuperior.com/';
   // apiStock = 'https://wms.erpsuperior.com/';
 
   //จาก Server เทส
-  // apiServer_url = 'https://test.erpsuperior.com/';
-  // apiStock = 'https://wmstest.erpsuperior.com/';
+  apiServer_url = 'https://test.erpsuperior.com/';
+  apiStock = 'https://wmstest.erpsuperior.com/';
   
 
   // apiServer_url = 'https://cors-anywhere.herokuapp.com/http://superior2.wingplusweb.com/';
@@ -442,6 +442,18 @@ export class PostDataService {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
       this.http.get(this.apiServer_url + '/API/WebService.asmx/RequestSparepart?planID=' + planID + '&empID=' + empID + '&isBreak=' + isBreak + '&request=' + request, option).subscribe(data => {
+        resovle(data);
+      }, error => {
+        reject(error)
+      });
+    });
+  }
+
+  SelectRequestSparepart(planID) {    
+    return new Promise((resovle, reject) => {
+      let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+      this.http.get(this.apiServer_url + '/API/WebService.asmx/SelectRequestSparepart?planID=' + planID, option).subscribe(data => {
         resovle(data);
       }, error => {
         reject(error)

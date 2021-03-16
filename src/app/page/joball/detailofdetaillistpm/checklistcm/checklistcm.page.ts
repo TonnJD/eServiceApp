@@ -13,7 +13,6 @@ import { AlertController } from '@ionic/angular';
 export class ChecklistcmPage implements OnInit {
 
   //#region data
-
   empID;
   planID;
   installID;
@@ -76,7 +75,6 @@ export class ChecklistcmPage implements OnInit {
   //#endregion
 
   //#region constructor
-
   constructor(public modalController: ModalController,
     private barcodeScanner: BarcodeScanner,
     private navParams: NavParams,

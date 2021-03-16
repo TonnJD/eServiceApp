@@ -1,12 +1,42 @@
 <ion-toolbar color="primary">
-  <ion-title>ขอเบิกอะไหล่: {{itemName}}</ion-title>
+  <ion-title *ngIf="type == 'request' || type == 'CM'">ขอเบิกอะไหล่: {{itemName}}</ion-title>
+  <ion-title *ngIf="type == 'history'">ประวัติขอเบิกอะไหล่: {{itemName}}</ion-title>
   <ion-buttons slot="primary">
     <ion-icon slot="end" name="close" (click)="close()"></ion-icon>
   </ion-buttons>
 </ion-toolbar>
 
 <ion-content>
-  <ion-card>
+  <ion-card *ngIf="type == 'history'">
+    <ion-card-header>
+      <ion-card-title>ประวัติขอเบิกอะไหล่</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="col-12">
+        <div class="list-group" *ngIf="notSpare">
+          <div class="list-group-item list-group-item-action" aria-current="true">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">ไม่มีข้อมูล</h5>
+            </div>
+          </div>
+        </div>
+        <div class="list-group" *ngIf="!notSpare">
+          <div class="list-group-item list-group-item-action" aria-current="true" *ngFor="let item of followLog">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">รายละเอียด</h5>
+              <small>{{item.CreatedDate | date: 'd/M/yyyy'}} <br/> {{item.CreatedDate | date: 'HH:mm'}}</small>
+            </div>
+            <p class="mb-1">{{item.Description}}</p>
+            <!-- <small>And some small print.</small> -->
+          </div>
+        </div>
+      </div>
+    </ion-card-content>
+
+    <ion-card-content></ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="type == 'request' || type == 'CM'">
     <ion-card-header>
       <ion-card-title>รายละเอียดขอเบิกอะไหล่</ion-card-title>
     </ion-card-header>

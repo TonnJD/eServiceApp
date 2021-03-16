@@ -206,18 +206,18 @@
                 *ngIf="data.value.JobType == 'CM' && data.value.Workfinish == 0 && data.value.status != 'Assign'" #wait>
                 เริ่มงาน</ion-button>
 
-              <ion-button expand="block" size="small" (click)="showSpare(data.value)"
+              <!-- <ion-button expand="block" size="small" (click)="showSpare(data.value)"
                 *ngIf="data.value.JobType == 'PM' && data.value.Workfinish == 0">เบิกอะไหล่</ion-button>
 
               <ion-button expand="block" size="small" (click)="showSpareHistory(data.value)"
                 *ngIf="data.value.JobType == 'PM'">
-                ประวัติการเบิกอะไหล่</ion-button>
+                ประวัติการเบิกอะไหล่</ion-button> -->
 
               <ion-button expand="block" size="small" (click)="showSpare(data.value)"
-                *ngIf="data.value.JobType == 'CM' && data.value.Workfinish == 0">เบิกอะไหล่</ion-button>
+                *ngIf="data.value.JobType == 'CM' && data.value.Workfinish == 0 && type != 'New'">เบิกอะไหล่</ion-button>
 
               <ion-button expand="block" size="small" (click)="showSpareHistory(data.value)"
-                *ngIf="data.value.JobType == 'CM'">
+                *ngIf="data.value.JobType == 'CM' && type != 'New'">
                 ประวัติการเบิกอะไหล่</ion-button>
 
               <ion-button expand="block" color="warning" size="small" (click)="imgice(data.value)"
