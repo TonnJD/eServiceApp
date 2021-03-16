@@ -9,7 +9,7 @@ import { PostDataService } from '../../../post-data.service';
 import { CustomerpasswordPage } from '../detailofdetaillistpm/customerpassword/customerpassword.page';
 import { ChangsparepartPage } from '../detailofdetaillistpm/changsparepart/changsparepart.page';
 import { from } from 'rxjs';
-import { NavController } from '@ionic/angular';
+import { NavController, ToastController  } from '@ionic/angular';
 import { ChecklistPage } from '../detailofdetaillistpm/checklist/checklist.page';
 import { ChecklistcmPage } from '../detailofdetaillistpm/checklistcm/checklistcm.page';
 import { CheckevaluationPage } from '../detailofdetaillistpm/checkevaluation/checkevaluation.page';
@@ -255,7 +255,8 @@ export class DetailofdetaillistpmPage implements OnInit {
     private storageService: StorageService,
     public alertController: AlertController,
     private auth: AuthenticationService,
-    private postDataService: PostDataService,) {
+    private postDataService: PostDataService,
+    private toastCtrl: ToastController) {
     this.DateStart = new Date().toString();
     this.tran = [];
     this.img = [];
@@ -298,6 +299,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       this.planDate = this.install.planDate;
       this.jobtype = this.install.JobType;
       this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/TabletCountTime.aspx' + '?planID=' + this.planID + "&installID=" + this.installID);
+      console.log('type', this.type);
 
       this.postDataService.checkBI(this.planID, this.installID).then(data => {
         console.log('checkBI count', data[0].count);
@@ -310,11 +312,13 @@ export class DetailofdetaillistpmPage implements OnInit {
       });
     });
   }
-
   //#endregion
 
-  //#region start
+  requestSparepart() {
+    
+  }
 
+  //#region start
   ngOnInit() {
 
     this.route.queryParams.subscribe(params => {
@@ -486,7 +490,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       this.isenabledTakeback = true;
       this.isenabledcheck = false;
       this.isenabledcuseva = false;
-      this.isenabledrequest = false;
+      this.isenabledrequest = true;
       this.checkcm();
 
     } else if (this.jobtype == "INSTALL") {
@@ -3021,6 +3025,7 @@ export class DetailofdetaillistpmPage implements OnInit {
         // });
       });
     }
+
     this.checklist();
     this.checktakeback();
   }
@@ -3029,19 +3034,28 @@ export class DetailofdetaillistpmPage implements OnInit {
   //#region Check Take Before
   checktakeback() {
     if (this.jobtype == "INSTALL") {
+      console.log('INSTALL');
       if (this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
         this.isenabledadddevice = true;
       }
-    } else if (this.jobtype == "CM") {
+    }
+    else if (this.jobtype == "CM") {
+      console.log('CM');
+      console.log('this.status6', this.status6);
       if (this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
         this.isenabledcheck = true;
         this.isenabledrequest = true;
+        console.log('this.isenabledcheck', this.isenabledcheck);
       }
-    } else if (this.jobtype == "UNINSTALL") {
+    }
+    else if (this.jobtype == "UNINSTALL") {
+      console.log('UNINSTALL');
       if (this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
         this.isenabledcuseva = true;
       }
-    } else if (this.jobtype == "PM") {
+    }
+    else if (this.jobtype == "PM") {
+      console.log('PM');
       if (this.status6 == "1" && this.status7 == "1" && this.status8 == "1" && this.status9 == "1" && this.status10 == "1" &&
         this.status1 == "1" && this.status2 == "1" && this.status3 == "1" && this.status4 == "1" && this.status5 == "1") {
         if (this.sparetype != "") {
@@ -3343,7 +3357,8 @@ export class DetailofdetaillistpmPage implements OnInit {
       this.status = servicephoto
       if (this.status == true) {
         this.IsWaitsave = false;
-        alert('ระบบบันทึกข้อมูลเรียบร้อยแล้วค่ะ');
+        //alert('ระบบบันทึกข้อมูลเรียบร้อยแล้วค่ะ');
+        this.presentToast();
         console.log(this.jobtype);
         if (this.jobtype == 'PM') {
           let params = {
@@ -3414,6 +3429,15 @@ export class DetailofdetaillistpmPage implements OnInit {
     });
   }
   //#endregion
+
+  async presentToast() {
+    const toast = await this.toastCtrl.create({
+      header: 'เรียบร้อย',
+      message: 'ระบบบันทึกข้อมูลเรียบร้อยแล้ว',
+      duration: 3000
+    });
+    toast.present();
+  }
 
   async GenReport() {
     console.log(this.tranid);
@@ -3584,7 +3608,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       this.cuscom = data
       this.code = this.cuscom.data.code;
       this.Cuscomment = this.cuscom.data.Cuscomment;
-      
+
       if (this.jobtype != 'PM') {
         let params = {
           planID: this.planID,
@@ -3593,7 +3617,7 @@ export class DetailofdetaillistpmPage implements OnInit {
           empID: this.empID,
           Cuscomment: this.Cuscomment,
         }
-        
+
         this.postDataService.SaveCaseAll(params).then(comment => {
           this.onPassCustomer();
         });
