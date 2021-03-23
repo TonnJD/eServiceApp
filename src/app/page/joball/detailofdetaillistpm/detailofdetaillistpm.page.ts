@@ -345,9 +345,9 @@ export class DetailofdetaillistpmPage implements OnInit {
     });
 
     modal.onDidDismiss().then(data => {
-      if (data.data.type == 'submit') {
-        this.onBackToPageMain();
-      }
+      // if (data.data.type == 'submit') {
+      //   this.onBackToPageMain();
+      // }
       //this.onBackToPageMain();
       // let params = {
       //   date: this.sentCM.date,

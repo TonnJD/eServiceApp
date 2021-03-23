@@ -1,8 +1,9 @@
 <ion-toolbar color="primary">
-  <ion-title *ngIf="type == 'request' || type == 'CM'">ขอเบิกอะไหล่: {{itemName}}</ion-title>
+  <ion-title *ngIf="type == 'request' || type == 'CM'">ขอเสนอราคา / ขอเบิกอะไหล่: {{itemName}}</ion-title>
   <ion-title *ngIf="type == 'history'">ประวัติขอเบิกอะไหล่: {{itemName}}</ion-title>
   <ion-buttons slot="primary">
     <ion-icon slot="end" name="close" (click)="close()"></ion-icon>
+
   </ion-buttons>
 </ion-toolbar>
 
@@ -37,16 +38,27 @@
   </ion-card>
 
   <ion-card *ngIf="type == 'request' || type == 'CM'">
-    <ion-card-header>
-      <ion-card-title>รายละเอียดขอเบิกอะไหล่</ion-card-title>
-    </ion-card-header>
     <ion-card-content>
       <div class="col-12">
-        <textarea class="form-control" rows="5" [(ngModel)]="request">{{request}}</textarea>
+        <ion-item>
+          <ion-label>ขอเสนอราคา</ion-label>
+          <ion-checkbox slot="start" [(ngModel)]="isQuotation" (ionChange)="eventQuotation($event)"></ion-checkbox>
+        </ion-item>
+        <ion-item>
+          <ion-label>ขอเบิกอะไหล่</ion-label>
+          <ion-checkbox slot="start" [(ngModel)]="isRequest" (ionChange)="eventRequest($event)"></ion-checkbox>
+        </ion-item>
       </div>
     </ion-card-content>
 
+    
     <ion-card-content>
+      <ion-card-header>
+        <ion-card-title>รายละเอียดขอเสนอราคา / ขอเบิกอะไหล่</ion-card-title>
+      </ion-card-header>
+      <div class="col-12">
+        <textarea class="form-control" rows="5" [(ngModel)]="request">{{request}}</textarea>
+      </div>
       <div class="col-12">
         <ion-item>
           <ion-label>กรุณาเลือก กรณีเครื่องเบรก</ion-label>

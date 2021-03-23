@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\n  <ion-toolbar color=\"primary\">\n    <ion-buttons slot=\"start\">\n      <ion-back-button (click)=\"goBack()\"></ion-back-button>\n      <ion-title>รายละเอียดงานและการตอบรับงาน</ion-title>\n    </ion-buttons>\n  </ion-toolbar>\n</ion-header>\n<ion-content>\n  <iframe [src]=\"url\" style=\"width:100%;height:100%\" frameBorder=\"0\"></iframe>\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button (click)=\"goBack()\"></ion-back-button>\r\n      <ion-title>รายละเอียดงานและการตอบรับงาน</ion-title>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n<ion-content>\r\n  <iframe [src]=\"url\" style=\"width:100%;height:100%\" frameBorder=\"0\"></iframe>\r\n</ion-content>"
 
 /***/ }),
 

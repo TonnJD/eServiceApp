@@ -19,6 +19,8 @@ export class RequestsparepartPage implements OnInit {
   sentCM;
   type;
   notSpare;
+  isQuotation;
+  isRequest;
 
   constructor(
     private postDataService: PostDataService,
@@ -50,6 +52,14 @@ export class RequestsparepartPage implements OnInit {
     });
   }
 
+  eventQuotation(event) {
+    this.isQuotation = event.detail.checked;
+  }
+
+  eventRequest(event) {
+    this.isRequest = event.detail.checked;
+  }
+
   machineBreak(event) {
     this.isBreak = event.detail.checked;
   }
@@ -64,11 +74,11 @@ export class RequestsparepartPage implements OnInit {
       this.presentToastWithOptions();
 
       if (this.type != 'history') {
-        let param = {
-          type: 'submit'
-        }
+        // let param = {
+        //   type: 'submit'
+        // }
 
-        this.modalCtrl.dismiss(param);
+        this.modalCtrl.dismiss(0);
       }
     });
   }
@@ -92,7 +102,7 @@ export class RequestsparepartPage implements OnInit {
             text: 'ยืนยัน',
             handler: () => {
               try {
-                this.submitRequest();
+                //this.submitRequest();
               } catch (error) {
                 console.log('error',error);
                 
