@@ -1,7 +1,7 @@
 <ion-toolbar color="primary">
   <ion-title *ngIf="type == 'request' || type == 'CM'">ขอเสนอราคา / ขอเบิกอะไหล่: {{itemName}}</ion-title>
   <ion-title *ngIf="type == 'history'">ประวัติขอเบิกอะไหล่: {{itemName}}</ion-title>
-  <ion-buttons slot="primary">
+  <ion-buttons slot="primary" *ngIf="type == 'history'">
     <ion-icon slot="end" name="close" (click)="close()"></ion-icon>
 
   </ion-buttons>
@@ -27,7 +27,7 @@
               <h5 class="mb-1">รายละเอียด</h5>
               <small>{{item.CreatedDate | date: 'd/M/yyyy'}} <br/> {{item.CreatedDate | date: 'HH:mm'}}</small>
             </div>
-            <p class="mb-1">{{item.Description}}</p>
+            <p class="mb-1" [innerHTML]="item.Description"></p>
             <!-- <small>And some small print.</small> -->
           </div>
         </div>
@@ -39,6 +39,9 @@
 
   <ion-card *ngIf="type == 'request' || type == 'CM'">
     <ion-card-content>
+      <ion-card-header>
+        <ion-card-title>เลือกรายการ</ion-card-title>
+      </ion-card-header>
       <div class="col-12">
         <ion-item>
           <ion-label>ขอเสนอราคา</ion-label>
@@ -70,6 +73,7 @@
     <ion-card-content>
       <div class="col-md-12 text-center">
         <ion-button (click)="confirmSubmit()">ยืนยันขอเบิกอะไหล่</ion-button>
+        <ion-button color='dark' (click)="close()">ยกเลิก</ion-button>
       </div>
     </ion-card-content>
 

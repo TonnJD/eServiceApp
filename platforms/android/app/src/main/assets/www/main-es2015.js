@@ -719,7 +719,7 @@ module.exports = "<ion-toolbar>\r\n  <ion-title>ความคิดเห็�
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-toolbar color=\"primary\">\r\n  <ion-title *ngIf=\"type == 'request' || type == 'CM'\">ขอเบิกอะไหล่: {{itemName}}</ion-title>\r\n  <ion-title *ngIf=\"type == 'history'\">ประวัติขอเบิกอะไหล่: {{itemName}}</ion-title>\r\n  <ion-buttons slot=\"primary\">\r\n    <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n\r\n<ion-content>\r\n  <ion-card *ngIf=\"type == 'history'\">\r\n    <ion-card-header>\r\n      <ion-card-title>ประวัติขอเบิกอะไหล่</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <div class=\"col-12\">\r\n        <div class=\"list-group\" *ngIf=\"notSpare\">\r\n          <div class=\"list-group-item list-group-item-action\" aria-current=\"true\">\r\n            <div class=\"d-flex w-100 justify-content-between\">\r\n              <h5 class=\"mb-1\">ไม่มีข้อมูล</h5>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"list-group\" *ngIf=\"!notSpare\">\r\n          <div class=\"list-group-item list-group-item-action\" aria-current=\"true\" *ngFor=\"let item of followLog\">\r\n            <div class=\"d-flex w-100 justify-content-between\">\r\n              <h5 class=\"mb-1\">รายละเอียด</h5>\r\n              <small>{{item.CreatedDate | date: 'd/M/yyyy'}} <br/> {{item.CreatedDate | date: 'HH:mm'}}</small>\r\n            </div>\r\n            <p class=\"mb-1\">{{item.Description}}</p>\r\n            <!-- <small>And some small print.</small> -->\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-content></ion-card-content>\r\n  </ion-card>\r\n\r\n  <ion-card *ngIf=\"type == 'request' || type == 'CM'\">\r\n    <ion-card-header>\r\n      <ion-card-title>รายละเอียดขอเบิกอะไหล่</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <div class=\"col-12\">\r\n        <textarea class=\"form-control\" rows=\"5\" [(ngModel)]=\"request\">{{request}}</textarea>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-content>\r\n      <div class=\"col-12\">\r\n        <ion-item>\r\n          <ion-label>กรุณาเลือก กรณีเครื่องเบรก</ion-label>\r\n          <ion-checkbox slot=\"start\" [(ngModel)]=\"isBreak\" (ionChange)=\"machineBreak($event)\"></ion-checkbox>\r\n        </ion-item>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-content>\r\n      <div class=\"col-md-12 text-center\">\r\n        <ion-button (click)=\"confirmSubmit()\">ยืนยันขอเบิกอะไหล่</ion-button>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-content></ion-card-content>\r\n  </ion-card>\r\n</ion-content>"
+module.exports = "<ion-toolbar color=\"primary\">\r\n  <ion-title *ngIf=\"type == 'request' || type == 'CM'\">ขอเสนอราคา / ขอเบิกอะไหล่: {{itemName}}</ion-title>\r\n  <ion-title *ngIf=\"type == 'history'\">ประวัติขอเบิกอะไหล่: {{itemName}}</ion-title>\r\n  <ion-buttons slot=\"primary\" *ngIf=\"type == 'history'\">\r\n    <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n\r\n<ion-content>\r\n  <ion-card *ngIf=\"type == 'history'\">\r\n    <ion-card-header>\r\n      <ion-card-title>ประวัติขอเบิกอะไหล่</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <div class=\"col-12\">\r\n        <div class=\"list-group\" *ngIf=\"notSpare\">\r\n          <div class=\"list-group-item list-group-item-action\" aria-current=\"true\">\r\n            <div class=\"d-flex w-100 justify-content-between\">\r\n              <h5 class=\"mb-1\">ไม่มีข้อมูล</h5>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"list-group\" *ngIf=\"!notSpare\">\r\n          <div class=\"list-group-item list-group-item-action\" aria-current=\"true\" *ngFor=\"let item of followLog\">\r\n            <div class=\"d-flex w-100 justify-content-between\">\r\n              <h5 class=\"mb-1\">รายละเอียด</h5>\r\n              <small>{{item.CreatedDate | date: 'd/M/yyyy'}} <br/> {{item.CreatedDate | date: 'HH:mm'}}</small>\r\n            </div>\r\n            <p class=\"mb-1\" [innerHTML]=\"item.Description\"></p>\r\n            <!-- <small>And some small print.</small> -->\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-content></ion-card-content>\r\n  </ion-card>\r\n\r\n  <ion-card *ngIf=\"type == 'request' || type == 'CM'\">\r\n    <ion-card-content>\r\n      <ion-card-header>\r\n        <ion-card-title>เลือกรายการ</ion-card-title>\r\n      </ion-card-header>\r\n      <div class=\"col-12\">\r\n        <ion-item>\r\n          <ion-label>ขอเสนอราคา</ion-label>\r\n          <ion-checkbox slot=\"start\" [(ngModel)]=\"isQuotation\" (ionChange)=\"eventQuotation($event)\"></ion-checkbox>\r\n        </ion-item>\r\n        <ion-item>\r\n          <ion-label>ขอเบิกอะไหล่</ion-label>\r\n          <ion-checkbox slot=\"start\" [(ngModel)]=\"isRequest\" (ionChange)=\"eventRequest($event)\"></ion-checkbox>\r\n        </ion-item>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    \r\n    <ion-card-content>\r\n      <ion-card-header>\r\n        <ion-card-title>รายละเอียดขอเสนอราคา / ขอเบิกอะไหล่</ion-card-title>\r\n      </ion-card-header>\r\n      <div class=\"col-12\">\r\n        <textarea class=\"form-control\" rows=\"5\" [(ngModel)]=\"request\">{{request}}</textarea>\r\n      </div>\r\n      <div class=\"col-12\">\r\n        <ion-item>\r\n          <ion-label>กรุณาเลือก กรณีเครื่องเบรก</ion-label>\r\n          <ion-checkbox slot=\"start\" [(ngModel)]=\"isBreak\" (ionChange)=\"machineBreak($event)\"></ion-checkbox>\r\n        </ion-item>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-content>\r\n      <div class=\"col-md-12 text-center\">\r\n        <ion-button (click)=\"confirmSubmit()\">ยืนยันขอเบิกอะไหล่</ion-button>\r\n        <ion-button color='dark' (click)=\"close()\">ยกเลิก</ion-button>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-content></ion-card-content>\r\n  </ion-card>\r\n</ion-content>"
 
 /***/ }),
 
@@ -3356,8 +3356,10 @@ let ChecklistcmPage = class ChecklistcmPage {
             console.log('this.qty1', this.qty1);
             if (this.spare1 != '' && this.qty1 > 0) {
                 this.postDataService.ChangeSparepart(this.planID, this.empID, this.spare1, this.qty1, this.spare2, this.qty2, this.spare3, this.qty3, this.spare4, this.qty4, this.spare5, this.qty5).then(res => {
-                    console.log('res', res);
-                    this.modalController.dismiss();
+                    let param = {
+                        typedevice: "sparepart"
+                    };
+                    this.modalController.dismiss(param);
                 });
             }
             else {
@@ -4293,6 +4295,8 @@ let RequestsparepartPage = class RequestsparepartPage {
         this.alertCtrl = alertCtrl;
         this.navCtrl = navCtrl;
         this.toastCtrl = toastCtrl;
+        this.isQuotation = false;
+        this.isRequest = false;
         console.log('this.navParams.data', this.navParams.data);
         this.itemName = this.navParams.data.ItemsName;
         this.planID = this.navParams.data.planID;
@@ -4313,38 +4317,63 @@ let RequestsparepartPage = class RequestsparepartPage {
             }
         });
     }
+    eventQuotation(event) {
+        this.isQuotation = event.detail.checked;
+    }
+    eventRequest(event) {
+        this.isRequest = event.detail.checked;
+    }
     machineBreak(event) {
         this.isBreak = event.detail.checked;
     }
     submitRequest() {
         console.log('this.request', this.request);
         console.log('this.isBreak', this.isBreak);
-        this.postDataService.RequestSparepart(this.planID, this.empID, this.isBreak, this.request).then(res => {
-            this.request = '';
-            this.followLog = res;
-            this.presentToastWithOptions();
-            if (this.type != 'history') {
-                let param = {
-                    type: 'submit'
-                };
-                this.modalCtrl.dismiss(param);
-            }
-        });
+        // this.postDataService.RequestSparepart(this.planID, this.empID, this.isBreak, this.request).then(res => {
+        //   this.request = '';
+        //   this.followLog = res;
+        //   this.presentToastWithOptions();
+        //   if (this.type != 'history') {
+        //     // let param = {
+        //     //   type: 'submit'
+        //     // }
+        //     this.modalCtrl.dismiss(0);
+        //   }
+        // });
+        if (this.type != 'history') {
+            let param = {
+                isQuotation: this.isQuotation,
+                isRequest: this.isRequest,
+                request: this.request,
+                isBreak: this.isBreak
+            };
+            this.modalCtrl.dismiss(param);
+        }
     }
     confirmSubmit() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            if (this.request == null) {
+            console.log('this.isQuotation', this.isQuotation);
+            console.log('this.isRequest', this.isRequest);
+            if (!this.isQuotation && !this.isRequest) {
                 const alert = yield this.alertCtrl.create({
                     header: 'แจ้งเตือน',
-                    message: 'กรุณากรอก <strong>รายละเอียดขอเบิกอะไหล่</strong>',
+                    message: 'กรุณาเลือกรายการ',
+                    buttons: ['OK']
+                });
+                yield alert.present();
+            }
+            else if (this.request == null) {
+                const alert = yield this.alertCtrl.create({
+                    header: 'แจ้งเตือน',
+                    message: 'กรุณากรอก <strong>รายละเอียดขอเสนอราคา / ขอเบิกอะไหล่</strong>',
                     buttons: ['OK']
                 });
                 yield alert.present();
             }
             else {
                 const alert = yield this.alertCtrl.create({
-                    header: 'ยืนยันการเบิกอะไหล่',
-                    message: 'ต้องการยืนยันการเบิกอะไหล่ หรือไม่?',
+                    header: 'ยืนยัน',
+                    message: 'ต้องการยืนยันขอเสนอราคา / ขอเบิกอะไหล่ หรือไม่?',
                     buttons: [
                         {
                             text: 'ยืนยัน',
@@ -4401,10 +4430,18 @@ let RequestsparepartPage = class RequestsparepartPage {
         });
     }
     close() {
-        let param = {
-            type: 'close'
-        };
-        this.modalCtrl.dismiss(param);
+        if (this.type != 'history') {
+            let param = {
+                isQuotation: this.isQuotation,
+                isRequest: this.isRequest,
+                request: this.request,
+                trype: 'close'
+            };
+            this.modalCtrl.dismiss(param);
+        }
+        else {
+            this.modalCtrl.dismiss('close');
+        }
     }
     ngOnInit() {
     }
@@ -5582,11 +5619,11 @@ let PostDataService = class PostDataService {
         // apiServer_url = 'http://localhost:41669/';
         // apiStock = 'https://localhost:41669/';  
         // จาก Server จริง
-        // apiServer_url = 'https://erpsuperior.com/';
-        // apiStock = 'https://wms.erpsuperior.com/';
+        this.apiServer_url = 'https://erpsuperior.com/';
+        this.apiStock = 'https://wms.erpsuperior.com/';
         //จาก Server เทส
-        this.apiServer_url = 'https://test.erpsuperior.com/';
-        this.apiStock = 'https://wmstest.erpsuperior.com/';
+        // apiServer_url = 'https://test.erpsuperior.com/';
+        // apiStock = 'https://wmstest.erpsuperior.com/';
         // apiServer_url = 'https://cors-anywhere.herokuapp.com/http://superior2.wingplusweb.com/';
         // apiServer_url = 'https://cors-anywhere.herokuapp.com/https://superior2.wingplusweb.com/';
         this.httpOptions = {
@@ -5925,10 +5962,11 @@ let PostDataService = class PostDataService {
             });
         });
     }
-    RequestSparepart(planID, empID, isBreak, request) {
+    RequestSparepart(planID, empID, isBreak, request, isQuotation, isRequest) {
         return new Promise((resovle, reject) => {
             let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
-            this.http.get(this.apiServer_url + '/API/WebService.asmx/RequestSparepart?planID=' + planID + '&empID=' + empID + '&isBreak=' + isBreak + '&request=' + request, option).subscribe(data => {
+            this.http.get(this.apiServer_url + '/API/WebService.asmx/RequestSparepart?planID=' + planID + '&empID=' + empID + '&isBreak=' + isBreak + '&request=' + request
+                + '&isQuotation=' + isQuotation + '&isRequest=' + isRequest, option).subscribe(data => {
                 resovle(data);
             }, error => {
                 reject(error);

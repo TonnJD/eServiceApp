@@ -131,7 +131,7 @@ export class ChecklistcmPage implements OnInit {
     this.postDataService.SelectSparepart(this.planID).then(res => {
       this.jobInSpare = res;
       console.log('this.jobInSpare', this.jobInSpare);
-      
+
       for (let i = 0; i < this.jobInSpare.length; i++) {
         if (this.jobInSpare[i].ListNo == 1) {
           this.spare1 = this.jobInSpare[i].SparepartName;
@@ -637,8 +637,11 @@ export class ChecklistcmPage implements OnInit {
     if (this.spare1 != '' && this.qty1 > 0) {
       this.postDataService.ChangeSparepart(this.planID, this.empID, this.spare1, this.qty1, this.spare2, this.qty2,
         this.spare3, this.qty3, this.spare4, this.qty4, this.spare5, this.qty5).then(res => {
-          console.log('res', res);
-          this.modalController.dismiss();
+          let param = {
+            typedevice: "sparepart"
+          }
+
+          this.modalController.dismiss(param);
         });
     }
     else {
@@ -679,7 +682,7 @@ export class ChecklistcmPage implements OnInit {
           }
         ]
       });
-  
+
       await alert.present();
     }
     else {

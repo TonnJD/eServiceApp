@@ -725,7 +725,7 @@ module.exports = "<ion-toolbar>\r\n  <ion-title>ความคิดเห็�
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-toolbar color=\"primary\">\r\n  <ion-title *ngIf=\"type == 'request' || type == 'CM'\">ขอเบิกอะไหล่: {{itemName}}</ion-title>\r\n  <ion-title *ngIf=\"type == 'history'\">ประวัติขอเบิกอะไหล่: {{itemName}}</ion-title>\r\n  <ion-buttons slot=\"primary\">\r\n    <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n\r\n<ion-content>\r\n  <ion-card *ngIf=\"type == 'history'\">\r\n    <ion-card-header>\r\n      <ion-card-title>ประวัติขอเบิกอะไหล่</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <div class=\"col-12\">\r\n        <div class=\"list-group\" *ngIf=\"notSpare\">\r\n          <div class=\"list-group-item list-group-item-action\" aria-current=\"true\">\r\n            <div class=\"d-flex w-100 justify-content-between\">\r\n              <h5 class=\"mb-1\">ไม่มีข้อมูล</h5>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"list-group\" *ngIf=\"!notSpare\">\r\n          <div class=\"list-group-item list-group-item-action\" aria-current=\"true\" *ngFor=\"let item of followLog\">\r\n            <div class=\"d-flex w-100 justify-content-between\">\r\n              <h5 class=\"mb-1\">รายละเอียด</h5>\r\n              <small>{{item.CreatedDate | date: 'd/M/yyyy'}} <br/> {{item.CreatedDate | date: 'HH:mm'}}</small>\r\n            </div>\r\n            <p class=\"mb-1\">{{item.Description}}</p>\r\n            <!-- <small>And some small print.</small> -->\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-content></ion-card-content>\r\n  </ion-card>\r\n\r\n  <ion-card *ngIf=\"type == 'request' || type == 'CM'\">\r\n    <ion-card-header>\r\n      <ion-card-title>รายละเอียดขอเบิกอะไหล่</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <div class=\"col-12\">\r\n        <textarea class=\"form-control\" rows=\"5\" [(ngModel)]=\"request\">{{request}}</textarea>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-content>\r\n      <div class=\"col-12\">\r\n        <ion-item>\r\n          <ion-label>กรุณาเลือก กรณีเครื่องเบรก</ion-label>\r\n          <ion-checkbox slot=\"start\" [(ngModel)]=\"isBreak\" (ionChange)=\"machineBreak($event)\"></ion-checkbox>\r\n        </ion-item>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-content>\r\n      <div class=\"col-md-12 text-center\">\r\n        <ion-button (click)=\"confirmSubmit()\">ยืนยันขอเบิกอะไหล่</ion-button>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-content></ion-card-content>\r\n  </ion-card>\r\n</ion-content>"
+module.exports = "<ion-toolbar color=\"primary\">\r\n  <ion-title *ngIf=\"type == 'request' || type == 'CM'\">ขอเสนอราคา / ขอเบิกอะไหล่: {{itemName}}</ion-title>\r\n  <ion-title *ngIf=\"type == 'history'\">ประวัติขอเบิกอะไหล่: {{itemName}}</ion-title>\r\n  <ion-buttons slot=\"primary\" *ngIf=\"type == 'history'\">\r\n    <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n\r\n<ion-content>\r\n  <ion-card *ngIf=\"type == 'history'\">\r\n    <ion-card-header>\r\n      <ion-card-title>ประวัติขอเบิกอะไหล่</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <div class=\"col-12\">\r\n        <div class=\"list-group\" *ngIf=\"notSpare\">\r\n          <div class=\"list-group-item list-group-item-action\" aria-current=\"true\">\r\n            <div class=\"d-flex w-100 justify-content-between\">\r\n              <h5 class=\"mb-1\">ไม่มีข้อมูล</h5>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"list-group\" *ngIf=\"!notSpare\">\r\n          <div class=\"list-group-item list-group-item-action\" aria-current=\"true\" *ngFor=\"let item of followLog\">\r\n            <div class=\"d-flex w-100 justify-content-between\">\r\n              <h5 class=\"mb-1\">รายละเอียด</h5>\r\n              <small>{{item.CreatedDate | date: 'd/M/yyyy'}} <br/> {{item.CreatedDate | date: 'HH:mm'}}</small>\r\n            </div>\r\n            <p class=\"mb-1\" [innerHTML]=\"item.Description\"></p>\r\n            <!-- <small>And some small print.</small> -->\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-content></ion-card-content>\r\n  </ion-card>\r\n\r\n  <ion-card *ngIf=\"type == 'request' || type == 'CM'\">\r\n    <ion-card-content>\r\n      <ion-card-header>\r\n        <ion-card-title>เลือกรายการ</ion-card-title>\r\n      </ion-card-header>\r\n      <div class=\"col-12\">\r\n        <ion-item>\r\n          <ion-label>ขอเสนอราคา</ion-label>\r\n          <ion-checkbox slot=\"start\" [(ngModel)]=\"isQuotation\" (ionChange)=\"eventQuotation($event)\"></ion-checkbox>\r\n        </ion-item>\r\n        <ion-item>\r\n          <ion-label>ขอเบิกอะไหล่</ion-label>\r\n          <ion-checkbox slot=\"start\" [(ngModel)]=\"isRequest\" (ionChange)=\"eventRequest($event)\"></ion-checkbox>\r\n        </ion-item>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    \r\n    <ion-card-content>\r\n      <ion-card-header>\r\n        <ion-card-title>รายละเอียดขอเสนอราคา / ขอเบิกอะไหล่</ion-card-title>\r\n      </ion-card-header>\r\n      <div class=\"col-12\">\r\n        <textarea class=\"form-control\" rows=\"5\" [(ngModel)]=\"request\">{{request}}</textarea>\r\n      </div>\r\n      <div class=\"col-12\">\r\n        <ion-item>\r\n          <ion-label>กรุณาเลือก กรณีเครื่องเบรก</ion-label>\r\n          <ion-checkbox slot=\"start\" [(ngModel)]=\"isBreak\" (ionChange)=\"machineBreak($event)\"></ion-checkbox>\r\n        </ion-item>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-content>\r\n      <div class=\"col-md-12 text-center\">\r\n        <ion-button (click)=\"confirmSubmit()\">ยืนยันขอเบิกอะไหล่</ion-button>\r\n        <ion-button color='dark' (click)=\"close()\">ยกเลิก</ion-button>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-content></ion-card-content>\r\n  </ion-card>\r\n</ion-content>"
 
 /***/ }),
 
@@ -3626,8 +3626,10 @@ var ChecklistcmPage = /** @class */ (function () {
                         console.log('this.qty1', this.qty1);
                         if (!(this.spare1 != '' && this.qty1 > 0)) return [3 /*break*/, 1];
                         this.postDataService.ChangeSparepart(this.planID, this.empID, this.spare1, this.qty1, this.spare2, this.qty2, this.spare3, this.qty3, this.spare4, this.qty4, this.spare5, this.qty5).then(function (res) {
-                            console.log('res', res);
-                            _this.modalController.dismiss();
+                            var param = {
+                                typedevice: "sparepart"
+                            };
+                            _this.modalController.dismiss(param);
                         });
                         return [3 /*break*/, 4];
                     case 1: return [4 /*yield*/, this.alertController.create({
@@ -4767,6 +4769,8 @@ var RequestsparepartPage = /** @class */ (function () {
         this.alertCtrl = alertCtrl;
         this.navCtrl = navCtrl;
         this.toastCtrl = toastCtrl;
+        this.isQuotation = false;
+        this.isRequest = false;
         console.log('this.navParams.data', this.navParams.data);
         this.itemName = this.navParams.data.ItemsName;
         this.planID = this.navParams.data.planID;
@@ -4788,36 +4792,52 @@ var RequestsparepartPage = /** @class */ (function () {
             }
         });
     };
+    RequestsparepartPage.prototype.eventQuotation = function (event) {
+        this.isQuotation = event.detail.checked;
+    };
+    RequestsparepartPage.prototype.eventRequest = function (event) {
+        this.isRequest = event.detail.checked;
+    };
     RequestsparepartPage.prototype.machineBreak = function (event) {
         this.isBreak = event.detail.checked;
     };
     RequestsparepartPage.prototype.submitRequest = function () {
-        var _this = this;
         console.log('this.request', this.request);
         console.log('this.isBreak', this.isBreak);
-        this.postDataService.RequestSparepart(this.planID, this.empID, this.isBreak, this.request).then(function (res) {
-            _this.request = '';
-            _this.followLog = res;
-            _this.presentToastWithOptions();
-            if (_this.type != 'history') {
-                var param = {
-                    type: 'submit'
-                };
-                _this.modalCtrl.dismiss(param);
-            }
-        });
+        // this.postDataService.RequestSparepart(this.planID, this.empID, this.isBreak, this.request).then(res => {
+        //   this.request = '';
+        //   this.followLog = res;
+        //   this.presentToastWithOptions();
+        //   if (this.type != 'history') {
+        //     // let param = {
+        //     //   type: 'submit'
+        //     // }
+        //     this.modalCtrl.dismiss(0);
+        //   }
+        // });
+        if (this.type != 'history') {
+            var param = {
+                isQuotation: this.isQuotation,
+                isRequest: this.isRequest,
+                request: this.request,
+                isBreak: this.isBreak
+            };
+            this.modalCtrl.dismiss(param);
+        }
     };
     RequestsparepartPage.prototype.confirmSubmit = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var alert_1, alert_2;
+            var alert_1, alert_2, alert_3;
             var _this = this;
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0:
-                        if (!(this.request == null)) return [3 /*break*/, 3];
+                        console.log('this.isQuotation', this.isQuotation);
+                        console.log('this.isRequest', this.isRequest);
+                        if (!(!this.isQuotation && !this.isRequest)) return [3 /*break*/, 3];
                         return [4 /*yield*/, this.alertCtrl.create({
                                 header: 'แจ้งเตือน',
-                                message: 'กรุณากรอก <strong>รายละเอียดขอเบิกอะไหล่</strong>',
+                                message: 'กรุณาเลือกรายการ',
                                 buttons: ['OK']
                             })];
                     case 1:
@@ -4825,10 +4845,23 @@ var RequestsparepartPage = /** @class */ (function () {
                         return [4 /*yield*/, alert_1.present()];
                     case 2:
                         _a.sent();
-                        return [3 /*break*/, 6];
-                    case 3: return [4 /*yield*/, this.alertCtrl.create({
-                            header: 'ยืนยันการเบิกอะไหล่',
-                            message: 'ต้องการยืนยันการเบิกอะไหล่ หรือไม่?',
+                        return [3 /*break*/, 9];
+                    case 3:
+                        if (!(this.request == null)) return [3 /*break*/, 6];
+                        return [4 /*yield*/, this.alertCtrl.create({
+                                header: 'แจ้งเตือน',
+                                message: 'กรุณากรอก <strong>รายละเอียดขอเสนอราคา / ขอเบิกอะไหล่</strong>',
+                                buttons: ['OK']
+                            })];
+                    case 4:
+                        alert_2 = _a.sent();
+                        return [4 /*yield*/, alert_2.present()];
+                    case 5:
+                        _a.sent();
+                        return [3 /*break*/, 9];
+                    case 6: return [4 /*yield*/, this.alertCtrl.create({
+                            header: 'ยืนยัน',
+                            message: 'ต้องการยืนยันขอเสนอราคา / ขอเบิกอะไหล่ หรือไม่?',
                             buttons: [
                                 {
                                     text: 'ยืนยัน',
@@ -4852,13 +4885,13 @@ var RequestsparepartPage = /** @class */ (function () {
                                 }
                             ]
                         })];
-                    case 4:
-                        alert_2 = _a.sent();
-                        return [4 /*yield*/, alert_2.present()];
-                    case 5:
+                    case 7:
+                        alert_3 = _a.sent();
+                        return [4 /*yield*/, alert_3.present()];
+                    case 8:
                         _a.sent();
-                        _a.label = 6;
-                    case 6: return [2 /*return*/];
+                        _a.label = 9;
+                    case 9: return [2 /*return*/];
                 }
             });
         });
@@ -4910,10 +4943,18 @@ var RequestsparepartPage = /** @class */ (function () {
         });
     };
     RequestsparepartPage.prototype.close = function () {
-        var param = {
-            type: 'close'
-        };
-        this.modalCtrl.dismiss(param);
+        if (this.type != 'history') {
+            var param = {
+                isQuotation: this.isQuotation,
+                isRequest: this.isRequest,
+                request: this.request,
+                trype: 'close'
+            };
+            this.modalCtrl.dismiss(param);
+        }
+        else {
+            this.modalCtrl.dismiss('close');
+        }
     };
     RequestsparepartPage.prototype.ngOnInit = function () {
     };
@@ -6196,11 +6237,11 @@ var PostDataService = /** @class */ (function () {
         // apiServer_url = 'http://localhost:41669/';
         // apiStock = 'https://localhost:41669/';  
         // จาก Server จริง
-        // apiServer_url = 'https://erpsuperior.com/';
-        // apiStock = 'https://wms.erpsuperior.com/';
+        this.apiServer_url = 'https://erpsuperior.com/';
+        this.apiStock = 'https://wms.erpsuperior.com/';
         //จาก Server เทส
-        this.apiServer_url = 'https://test.erpsuperior.com/';
-        this.apiStock = 'https://wmstest.erpsuperior.com/';
+        // apiServer_url = 'https://test.erpsuperior.com/';
+        // apiStock = 'https://wmstest.erpsuperior.com/';
         // apiServer_url = 'https://cors-anywhere.herokuapp.com/http://superior2.wingplusweb.com/';
         // apiServer_url = 'https://cors-anywhere.herokuapp.com/https://superior2.wingplusweb.com/';
         this.httpOptions = {
@@ -6571,11 +6612,12 @@ var PostDataService = /** @class */ (function () {
             });
         });
     };
-    PostDataService.prototype.RequestSparepart = function (planID, empID, isBreak, request) {
+    PostDataService.prototype.RequestSparepart = function (planID, empID, isBreak, request, isQuotation, isRequest) {
         var _this = this;
         return new Promise(function (resovle, reject) {
             var option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
-            _this.http.get(_this.apiServer_url + '/API/WebService.asmx/RequestSparepart?planID=' + planID + '&empID=' + empID + '&isBreak=' + isBreak + '&request=' + request, option).subscribe(function (data) {
+            _this.http.get(_this.apiServer_url + '/API/WebService.asmx/RequestSparepart?planID=' + planID + '&empID=' + empID + '&isBreak=' + isBreak + '&request=' + request
+                + '&isQuotation=' + isQuotation + '&isRequest=' + isRequest, option).subscribe(function (data) {
                 resovle(data);
             }, function (error) {
                 reject(error);
