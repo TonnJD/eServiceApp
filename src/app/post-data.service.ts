@@ -10,7 +10,7 @@ export class PostDataService {
 
   // test local
   apiServer_url = 'http://localhost:41669/';
-  apiStock = 'https://localhost:41669/';  
+  apiStock = 'https://localhost:41669/';
 
   // จาก Server จริง
   // apiServer_url = 'https://erpsuperior.com/';
@@ -19,7 +19,7 @@ export class PostDataService {
   //จาก Server เทส
   // apiServer_url = 'https://test.erpsuperior.com/';
   // apiStock = 'https://wmstest.erpsuperior.com/';
-  
+
 
   // apiServer_url = 'https://cors-anywhere.herokuapp.com/http://superior2.wingplusweb.com/';
   // apiServer_url = 'https://cors-anywhere.herokuapp.com/https://superior2.wingplusweb.com/';
@@ -80,10 +80,10 @@ export class PostDataService {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
       this.http.get(this.apiServer_url + '/API/Job.ashx' + '?empID=' + job.empID + '&month=' + job.month + '&year=' + job.year, option).subscribe(data => {
-          resovle(data);
-        }, error => {
-          reject(error)
-        });
+        resovle(data);
+      }, error => {
+        reject(error)
+      });
     });
   }
   postjobDetail(jobdetail) {
@@ -251,6 +251,7 @@ export class PostDataService {
       });
     });
   }
+  
   SaveCaseAll(form) {
     return new Promise((resovle, reject) => {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -262,7 +263,7 @@ export class PostDataService {
       });
     });
   }
-  
+
   PostCus(form) {
     return new Promise((resovle, reject) => {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -325,7 +326,7 @@ export class PostDataService {
     });
   }
 
-  checkBI(planID, insID) {    
+  checkBI(planID, insID) {
     return new Promise((resovle, reject) => {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -337,7 +338,7 @@ export class PostDataService {
     });
   }
 
-  CheckJobResponse(planID) {    
+  CheckJobResponse(planID) {
     return new Promise((resovle, reject) => {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -349,35 +350,35 @@ export class PostDataService {
     });
   }
 
-  SaveEvaluation(empID, planID, insID, type1, type2, type3, type4, type5) {    
+  SaveEvaluation(empID, planID, insID, type1, type2, type3, type4, type5) {
     return new Promise((resovle, reject) => {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
       this.http.get(this.apiServer_url + '/API/WebService.asmx/SaveEvaluation?empID=' + empID + '&planID=' + planID
-                                        + '&insID=' + insID + '&type1=' + type1 + '&type2=' + type2 + '&type3=' + type3 
-                                        + '&type4=' + type4 + '&type5=' + type5, option).subscribe(data => {
-        resovle(data);
-      }, error => {
-        reject(error)
-      });
+        + '&insID=' + insID + '&type1=' + type1 + '&type2=' + type2 + '&type3=' + type3
+        + '&type4=' + type4 + '&type5=' + type5, option).subscribe(data => {
+          resovle(data);
+        }, error => {
+          reject(error)
+        });
     });
   }
 
-  ChangeSparepart(planID, empID, spare1, qty1, spare2, qty2, spare3, qty3, spare4, qty4, spare5, qty5,) {    
+  ChangeSparepart(planID, empID, spare1, qty1, spare2, qty2, spare3, qty3, spare4, qty4, spare5, qty5,) {
     return new Promise((resovle, reject) => {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
       this.http.get(this.apiServer_url + '/API/WebService.asmx/ChangeSparepart?planID=' + planID + '&empID=' + empID + '&spare1=' + spare1 + '&qty1=' + qty1
-                                       + '&spare2=' + spare2 + '&qty2=' + qty2 + '&spare3=' + spare3 + '&qty3=' + qty3
-                                       + '&spare4=' + spare4 + '&qty4=' + qty4 + '&spare5=' + spare5 + '&qty5=' + qty5, option).subscribe(data => {
-        resovle(data);
-      }, error => {
-        reject(error)
-      });
+        + '&spare2=' + spare2 + '&qty2=' + qty2 + '&spare3=' + spare3 + '&qty3=' + qty3
+        + '&spare4=' + spare4 + '&qty4=' + qty4 + '&spare5=' + spare5 + '&qty5=' + qty5, option).subscribe(data => {
+          resovle(data);
+        }, error => {
+          reject(error)
+        });
     });
   }
 
-  SelectSparepart(planID) {    
+  SelectSparepart(planID) {
     return new Promise((resovle, reject) => {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -389,7 +390,7 @@ export class PostDataService {
     });
   }
 
-  DeleteSparepart(planID) {    
+  DeleteSparepart(planID) {
     return new Promise((resovle, reject) => {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -401,7 +402,7 @@ export class PostDataService {
     });
   }
 
-  SignatureTech(form) {    
+  SignatureTech(form) {
     return new Promise((resovle, reject) => {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -413,7 +414,7 @@ export class PostDataService {
     });
   }
 
-  SelectSignatureTech(planID, insID) {    
+  SelectSignatureTech(planID, insID) {
     return new Promise((resovle, reject) => {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -425,11 +426,11 @@ export class PostDataService {
     });
   }
 
-  UpdateInprogress(planID) {    
+  UpdateInprogress(planID) {
     return new Promise((resovle, reject) => {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-      this.http.get(this.apiServer_url + '/API/WebService.asmx/UpdateInprogress?planID=' + planID , option).subscribe(data => {
+      this.http.get(this.apiServer_url + '/API/WebService.asmx/UpdateInprogress?planID=' + planID, option).subscribe(data => {
         resovle(data);
       }, error => {
         reject(error)
@@ -437,20 +438,20 @@ export class PostDataService {
     });
   }
 
-  RequestSparepart(planID, empID, isBreak, request, isQuotation, isRequest) {    
+  RequestSparepart(planID, empID, isBreak, request, isQuotation, isRequest) {
     return new Promise((resovle, reject) => {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
       this.http.get(this.apiServer_url + '/API/WebService.asmx/RequestSparepart?planID=' + planID + '&empID=' + empID + '&isBreak=' + isBreak + '&request=' + request
-                                       + '&isQuotation='+ isQuotation + '&isRequest=' + isRequest, option).subscribe(data => {
-        resovle(data);
-      }, error => {
-        reject(error)
-      });
+        + '&isQuotation=' + isQuotation + '&isRequest=' + isRequest, option).subscribe(data => {
+          resovle(data);
+        }, error => {
+          reject(error)
+        });
     });
   }
 
-  SelectRequestSparepart(planID) {    
+  SelectRequestSparepart(planID) {
     return new Promise((resovle, reject) => {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
