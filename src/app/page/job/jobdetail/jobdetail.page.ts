@@ -160,82 +160,86 @@ export class JobdetailPage implements OnInit {
 
     this.postDataService.postjobDetail(this.jobdetail).then(jobdetail => {
       this.result = jobdetail;
-      console.log(this.result)
-      for (let i = 0; i < this.result.length; i++) {
-        this.image = JSON.parse(this.result[i].image);
-      }
-      console.log(this.image);
+      console.log('this.result', this.result)
 
-      for (let v = 0; v < this.image.length; v++) {
-        if (this.image[v].type == "step1_pic1") {
-          this.img.src1 = this.postDataService.apiServer_url + this.image[v].file_path
-          this.booimg1 = true;
-          console.log("1", this.img.src1);
+      if (this.result.length > 0) {
+        for (let i = 0; i < this.result.length; i++) {
+          this.image = JSON.parse(this.result[i].image);
         }
-        if (this.image[v].type == "step1_pic2") {
-          this.img.src2 = this.postDataService.apiServer_url + this.image[v].file_path
-          this.booimg2 = true;
-          console.log("2", this.img.src2);
+        console.log(this.image);
+  
+        for (let v = 0; v < this.image.length; v++) {
+          if (this.image[v].type == "step1_pic1") {
+            this.img.src1 = this.postDataService.apiServer_url + this.image[v].file_path
+            this.booimg1 = true;
+            console.log("1", this.img.src1);
+          }
+          if (this.image[v].type == "step1_pic2") {
+            this.img.src2 = this.postDataService.apiServer_url + this.image[v].file_path
+            this.booimg2 = true;
+            console.log("2", this.img.src2);
+          }
+          if (this.image[v].type == "step1_pic3") {
+            this.img.src3 = this.postDataService.apiServer_url + this.image[v].file_path
+            this.booimg3 = true;
+            console.log("3", this.img.src3);
+          }
+          if (this.image[v].type == "step1_pic4") {
+            this.img.src4 = this.postDataService.apiServer_url + this.image[v].file_path
+            this.booimg4 = true;
+            console.log("4", this.img.src4);
+          }
+          if (this.image[v].type == "step1_pic5") {
+            this.img.src5 = this.postDataService.apiServer_url + this.image[v].file_path
+            this.booimg5 = true;
+            console.log("5", this.img.src5);
+          }
+          if (this.image[v].type == "step1_pic6") {
+            this.img.src6 = this.postDataService.apiServer_url + this.image[v].file_path
+            this.booimg6 = true;
+            console.log("6", this.img.src6);
+          }
+          if (this.image[v].type == "step1_pic7") {
+            this.img.src7 = this.postDataService.apiServer_url + this.image[v].file_path
+            this.booimg7 = true;
+            console.log("7", this.img.src7);
+          }
+          if (this.image[v].type == "step1_pic8") {
+            this.img.src8 = this.postDataService.apiServer_url + this.image[v].file_path
+            this.booimg8 = true;
+            console.log("8", this.img.src8);
+          }
+          if (this.image[v].type == "step3_pic1") {
+            this.img.src9 = this.postDataService.apiServer_url + this.image[v].file_path
+            this.booimg9 = true;
+            console.log("9", this.img.src9);
+          }
+          if (this.image[v].type == "step3_pic2") {
+            this.img.src10 = this.postDataService.apiServer_url + this.image[v].file_path
+            this.booimg10 = true;
+            console.log("10", this.img.src10);
+          }
+          if (this.image[v].type == "step3_pic3") {
+            this.img.src11 = this.postDataService.apiServer_url + this.image[v].file_path
+            this.booimg11 = true;
+            console.log("11", this.img.src11);
+          }
+          if (this.image[v].type == "step3_pic4") {
+            this.img.src12 = this.postDataService.apiServer_url + this.image[v].file_path
+            this.booimg12 = true;
+            console.log("12", this.img.src12);
+          }
+          if (this.image[v].type == "step3_pic5") {
+            this.img.src13 = this.postDataService.apiServer_url + this.image[v].file_path
+            this.booimg13 = true;
+            console.log("13", this.img.src13);
+          }
+          console.log(this.booimg12);
+  
+          console.log(this.booimg13)
         }
-        if (this.image[v].type == "step1_pic3") {
-          this.img.src3 = this.postDataService.apiServer_url + this.image[v].file_path
-          this.booimg3 = true;
-          console.log("3", this.img.src3);
-        }
-        if (this.image[v].type == "step1_pic4") {
-          this.img.src4 = this.postDataService.apiServer_url + this.image[v].file_path
-          this.booimg4 = true;
-          console.log("4", this.img.src4);
-        }
-        if (this.image[v].type == "step1_pic5") {
-          this.img.src5 = this.postDataService.apiServer_url + this.image[v].file_path
-          this.booimg5 = true;
-          console.log("5", this.img.src5);
-        }
-        if (this.image[v].type == "step1_pic6") {
-          this.img.src6 = this.postDataService.apiServer_url + this.image[v].file_path
-          this.booimg6 = true;
-          console.log("6", this.img.src6);
-        }
-        if (this.image[v].type == "step1_pic7") {
-          this.img.src7 = this.postDataService.apiServer_url + this.image[v].file_path
-          this.booimg7 = true;
-          console.log("7", this.img.src7);
-        }
-        if (this.image[v].type == "step1_pic8") {
-          this.img.src8 = this.postDataService.apiServer_url + this.image[v].file_path
-          this.booimg8 = true;
-          console.log("8", this.img.src8);
-        }
-        if (this.image[v].type == "step3_pic1") {
-          this.img.src9 = this.postDataService.apiServer_url + this.image[v].file_path
-          this.booimg9 = true;
-          console.log("9", this.img.src9);
-        }
-        if (this.image[v].type == "step3_pic2") {
-          this.img.src10 = this.postDataService.apiServer_url + this.image[v].file_path
-          this.booimg10 = true;
-          console.log("10", this.img.src10);
-        }
-        if (this.image[v].type == "step3_pic3") {
-          this.img.src11 = this.postDataService.apiServer_url + this.image[v].file_path
-          this.booimg11 = true;
-          console.log("11", this.img.src11);
-        }
-        if (this.image[v].type == "step3_pic4") {
-          this.img.src12 = this.postDataService.apiServer_url + this.image[v].file_path
-          this.booimg12 = true;
-          console.log("12", this.img.src12);
-        }
-        if (this.image[v].type == "step3_pic5") {
-          this.img.src13 = this.postDataService.apiServer_url + this.image[v].file_path
-          this.booimg13 = true;
-          console.log("13", this.img.src13);
-        }
-        console.log(this.booimg12);
-
-        console.log(this.booimg13)
       }
+      
       this.isShowImage1 = this.booimg1;
       this.isShowImage2 = this.booimg2;
       this.isShowImage3 = this.booimg3;

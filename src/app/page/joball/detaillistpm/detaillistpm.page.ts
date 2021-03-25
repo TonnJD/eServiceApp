@@ -99,6 +99,8 @@ export class DetaillistpmPage implements OnInit {
             this.year = this.myId.year
           }
         }
+        console.log('this.item', this.item);
+        
 
         if (this.type == "PM") {
           this.imgbefore = false
@@ -234,6 +236,8 @@ export class DetaillistpmPage implements OnInit {
             this.Customername = this.data[i].CustomerName;
             this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
           }
+          console.log('this.data', this.data);
+          
         });
       });
 
@@ -422,7 +426,7 @@ export class DetaillistpmPage implements OnInit {
         await alert.present();
       }
       else if (this.type == "CM") {
-        if (item.WorkCloseID != null) {
+        if (item.tranID != null) {
           console.log('item.WorkCloseID', item.WorkCloseID);
           let tran = {
             AssetID: item.AssetID,
@@ -523,8 +527,10 @@ export class DetaillistpmPage implements OnInit {
                       workclose: value
                     }
 
+                    console.log('tran', tran);                    
+
                     this.postDataService.postTranService(tran).then(TranService => {
-                      // console.log(TranService);
+                      
                     });
 
                     let params = {

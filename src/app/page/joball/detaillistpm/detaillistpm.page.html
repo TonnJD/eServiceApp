@@ -90,37 +90,37 @@
           <div style="padding: 5px;" *ngFor="let data of item.productInstall | keyvalue">
             <!-- <div (click)="click(item, data.value)"> -->
             <div class="row col-12">
-              <div class="col-4 text">สถานะ:</div>
-              <div class="col-8 subtext" #lblWait style="color: #E78D8D;font-size: 14px;font-weight: bold;"
+              <div class="col-5 text">สถานะ:</div>
+              <div class="col-7 subtext" #lblWait style="color: #E78D8D;font-size: 14px;font-weight: bold;"
                 *ngIf="data.value.Workfinish == 0; else lblWait">รอการตรวจสอบ</div>
-              <div class="col-8 subtext" #lblSuccess style="color: green;font-size: 14px;font-weight: bold;"
+              <div class="col-7 subtext" #lblSuccess style="color: green;font-size: 14px;font-weight: bold;"
                 *ngIf="data.value.Workfinish == 1; else lblSuccess">งานเสร็จแล้ว</div>
-              <div class="col-8 subtext" #lblwaiting style="color: rgb(35, 7, 248);font-size: 14px;font-weight: bold;"
+              <div class="col-7 subtext" #lblwaiting style="color: rgb(35, 7, 248);font-size: 14px;font-weight: bold;"
                 *ngIf="data.value.Workfinish == 2; else lblwaiting">รอลูกค้าประเมิน</div>
             </div>
             <div class="row col-12">
-              <div class="col-4 text">สินค้าที่ติดตั้ง:</div>
-              <div class="col-8 subtext">{{data.value.InstallPlanName}}</div>
+              <div class="col-5 text">สินค้าที่ติดตั้ง:</div>
+              <div class="col-7 subtext">{{data.value.InstallPlanName}}</div>
             </div>
             <div class="row col-12">
-              <label class="col-4 text">รหัสสินค้า:</label>
-              <label class="col-8 subtext">{{data.value.ItemCode}}</label>
+              <label class="col-5 text">รหัสสินค้า:</label>
+              <label class="col-7 subtext">{{data.value.ItemCode}}</label>
             </div>
             <div class="row col-12" *ngIf="data.value.JobType == 'INSTALL' && data.value.OldAssetName != null">
-              <label class="col-4 text">เครื่องที่รื้อถอน:</label>
-              <label class="col-8 subtext">{{data.value.OldAssetName}}</label>
+              <label class="col-5 text">เครื่องที่รื้อถอน:</label>
+              <label class="col-7 subtext">{{data.value.OldAssetName}}</label>
             </div>
             <div class="row col-12" *ngIf="data.value.JobType == 'INSTALL'">
-              <label class="col-4 text">เครื่องที่ติดตั้ง:</label>
-              <label class="col-8 subtext">{{data.value.ItemsName}}</label>
+              <label class="col-5 text">เครื่องที่ติดตั้ง:</label>
+              <label class="col-7 subtext">{{data.value.ItemsName}}</label>
             </div>
             <div class="row col-12" *ngIf="data.value.JobType != 'INSTALL'">
-              <label class="col-4 text">ชื่อสินค้า:</label>
-              <label class="col-8 subtext">{{data.value.ItemsName}}</label>
+              <label class="col-5 text">ชื่อสินค้า:</label>
+              <label class="col-7 subtext">{{data.value.ItemsName}}</label>
             </div>
             <div class="row col-12">
-              <label class="col-4 text">Serial No:</label>
-              <label class="col-8 subtext">{{data.value.SerialNo}}</label>
+              <label class="col-5 text">Serial No:</label>
+              <label class="col-7 subtext">{{data.value.SerialNo}}</label>
               <!-- <ion-input class="col-6" *ngIf="data.value.JobType == 'PM'" type="text" style="padding: 0px!important;padding-left: 5px!important;" name="SerialNo" [(ngModel)]="data.value.SerialNo"> -->
               <!-- </ion-input> -->
               <!-- <div class="col-1" *ngIf="data.value.JobType == 'PM'">
@@ -140,8 +140,8 @@
                 </div> -->
             </div>
             <div class="row col-12">
-              <label class="col-4 text">Asset No:</label>
-              <div class="col-8" *ngIf="data.value.JobType == 'PM'">
+              <label class="col-5 text">Asset No:</label>
+              <div class="col-7" *ngIf="data.value.JobType == 'PM'">
                 <label>{{data.value.AssetplateSFS}}</label>&nbsp;
                 <ion-button size="small" (click)="SaveSerialBarcode(data.value)" style="margin-top: 0px;"
                   title="สแกน Barcode">
@@ -150,38 +150,42 @@
               </div>
             </div>
             <div class="row col-12">
-              <label class="col-4 text" *ngIf="new">New Serial No:</label>
-              <label class="col-8 subtext" *ngIf="new">{{data.value.SerialNoNew}}</label>
+              <label class="col-5 text" *ngIf="new">New Serial No:</label>
+              <label class="col-7 subtext" *ngIf="new">{{data.value.SerialNoNew}}</label>
             </div>
             <div class="row col-12" *ngIf="data.value.JobType != 'PM' && data.value.JobType != 'CM' else pmnot">
-              <label class="col-4 text" #pmnot>ประเภทงาน :</label>
-              <label class="col-8 subtext" #pmnot>{{data.value.JobType}}</label>
+              <label class="col-5 text" #pmnot>ประเภทงาน :</label>
+              <label class="col-7 subtext" #pmnot>{{data.value.JobType}}</label>
             </div>
             <div class="row col-12" *ngIf="data.value.JobType == 'CM' else cm">
-              <label class="col-4 text" #cm>ประเภทงาน :</label>
-              <label class="col-8 subtext" #pmnot>CM</label>
+              <label class="col-5 text" #cm>ประเภทงาน :</label>
+              <label class="col-7 subtext" #pmnot>CM</label>
             </div>
             <div class="row col-12" *ngIf="data.value.JobType == 'PM' else pm">
-              <label class="col-4 text" #pm>ประเภทงาน :</label>
-              <label class="col-8 subtext" #pm>{{data.value.typePm}}</label>
+              <label class="col-5 text" #pm>ประเภทงาน :</label>
+              <label class="col-7 subtext" #pm>{{data.value.typePm}}</label>
+            </div>
+            <div class="row col-12" *ngIf="data.value.JobType == 'CM'">
+              <label class="col-5 text">ปัญหาที่รับแจ้ง :</label>
+              <label class="col-7 subtext">{{data.value.Description}}</label>
             </div>
             <div class="row col-12" *ngIf="data.value.JobType == 'CM' && data.value.Workfinish == 1 else cm">
-              <div class="col-4 text" #cm>การปิดงาน :</div>
-              <div class="col-8 subtext" #cm>{{data.value.WorkClose}}</div>
+              <div class="col-5 text" #cm>การปิดงาน :</div>
+              <div class="col-7 subtext" #cm>{{data.value.WorkClose}}</div>
             </div>
             <div class="row col-12"
               *ngIf="data.value.JobType == 'CM' && data.value.Workfinish == 1 && data.value.WorkCloseID == 'WorkClose004' && data.value.newinstallID != null else cm">
-              <div class="col-4 text" #cm>การเปลี่ยนอุปกรณ์ :</div>
-              <div class="col-8 subtext" #cm>{{data.value.TypeChang}}</div>
+              <div class="col-5 text" #cm>การเปลี่ยนอุปกรณ์ :</div>
+              <div class="col-7 subtext" #cm>{{data.value.TypeChang}}</div>
             </div>
             <div class="row col-12"
               *ngIf="data.value.JobType == 'CM' && data.value.Workfinish == 1 && data.value.WorkCloseID == 'WorkClose004' else cm">
-              <div class="col-4 text" #cm>ปัญหาเกิดจาก :</div>
-              <div class="col-8 subtext" #cm>{{data.value.ProblemBy}}</div>
+              <div class="col-5 text" #cm>ปัญหาเกิดจาก :</div>
+              <div class="col-7 subtext" #cm>{{data.value.ProblemBy}}</div>
             </div>
             <div class="row col-12" *ngIf="data.value.sparepart != '' && data.value.JobType == 'PM' else spare">
-              <div class="col-4 text" #spare>อะไหล่ที่ต้องเปลี่ยน :</div>
-              <div class="col-8 subtext" #spare>
+              <div class="col-5 text" #spare>อะไหล่ที่ต้องเปลี่ยน :</div>
+              <div class="col-7 subtext" #spare>
                 <div [innerHTML]="data.value.sparepart"></div>
               </div>
             </div>
@@ -213,8 +217,9 @@
                 *ngIf="data.value.JobType == 'PM'">
                 ประวัติการเบิกอะไหล่</ion-button> -->
 
-              <ion-button expand="block" size="small" (click)="showSpare(data.value)"
-                *ngIf="data.value.JobType == 'CM' && data.value.Workfinish == 0 && type != 'New'">เบิกอะไหล่</ion-button>
+              <!-- <ion-button expand="block" size="small" (click)="showSpare(data.value)"
+                *ngIf="data.value.JobType == 'CM' && data.value.Workfinish == 0 && type != 'New'">เบิกอะไหล่
+              </ion-button> -->
 
               <ion-button expand="block" size="small" (click)="showSpareHistory(data.value)"
                 *ngIf="data.value.JobType == 'CM' && type != 'New'">

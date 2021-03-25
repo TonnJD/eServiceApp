@@ -301,6 +301,7 @@
               </div>
               <div class="row">
                 <div class="col-1 text-center">
+                  
                 </div>
                 <div class="col-2 text-center" *ngIf="isnotPM">
                   <div #take6 *ngIf="isShow6 == false ; else take6">
@@ -375,11 +376,12 @@
                   <button (click)="check()" [disabled]="!isenabledcheck" class="btn default">
                     คลิกเพื่อตรวจเช็ครายการ</button>
                 </div>
-                <div class="col-md-6 text-center" style="padding-left: 10px;margin-top: 5px;margin-bottom: 10px;"
+                <!-- <div class="col-md-6 text-center" style="padding-left: 10px;margin-top: 5px;margin-bottom: 10px;"
                   *ngIf="jobtype == 'PM'">
                   <button (click)="changsparepm()" [disabled]="!isenabledcheck" class="btn default">
-                    เปลี่ยนอะไหล่ </button>
-                </div>
+                    เปลี่ยนอะไหล่
+                  </button>
+                </div> -->
                 <div #device class="col-md-6 text-center"
                   style="padding-left: 10px;margin-top: 5px;margin-bottom: 10px;"
                   *ngIf="SerialNoInstall == '-' && jobtype == 'INSTALL' else device">
@@ -404,7 +406,8 @@
 
                     <!-- <button (click)="showSpare()" class="btn default" #CM [disabled]="!isenabledrequest"> ขอเบิกอะไหล่
                     </button> -->
-                    <button (click)="requestSparepart()" class="btn default" [disabled]="!isenabledrequest"> ขอเสนอราคา / ขอเบิกอะไหล่
+                    <button (click)="requestSparepart()" class="btn default" [disabled]="!isenabledrequest"> ขอเสนอราคา
+                      / ขอเบิกอะไหล่
                     </button>
                     <div *ngIf="jobtype != 'PM'" style="margin-top: 5px;margin-bottom: 5px;">
                       <button class="btn default" (click)="response()"

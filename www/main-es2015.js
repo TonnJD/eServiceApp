@@ -5619,11 +5619,11 @@ let PostDataService = class PostDataService {
         // apiServer_url = 'http://localhost:41669/';
         // apiStock = 'https://localhost:41669/';  
         // จาก Server จริง
-        this.apiServer_url = 'https://erpsuperior.com/';
-        this.apiStock = 'https://wms.erpsuperior.com/';
+        // apiServer_url = 'https://erpsuperior.com/';
+        // apiStock = 'https://wms.erpsuperior.com/';
         //จาก Server เทส
-        // apiServer_url = 'https://test.erpsuperior.com/';
-        // apiStock = 'https://wmstest.erpsuperior.com/';
+        this.apiServer_url = 'https://test.erpsuperior.com/';
+        this.apiStock = 'https://wmstest.erpsuperior.com/';
         // apiServer_url = 'https://cors-anywhere.herokuapp.com/http://superior2.wingplusweb.com/';
         // apiServer_url = 'https://cors-anywhere.herokuapp.com/https://superior2.wingplusweb.com/';
         this.httpOptions = {
