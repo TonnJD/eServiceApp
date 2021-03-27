@@ -152,7 +152,6 @@ var DetaillistpmPage = /** @class */ (function () {
                         _this.year = _this.myId.year;
                     }
                 }
-                console.log('this.item', _this.item);
                 if (_this.type == "PM") {
                     _this.imgbefore = false;
                 }

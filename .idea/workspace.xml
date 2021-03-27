@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="50610c14-8260-48eb-a366-e76ea1b548f8" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/CordovaLib/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/CordovaLib/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/release/app-118.aab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/release/app-118.apk" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/release/output-metadata.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/main-es2015.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/main-es2015.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/main-es2015.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/main-es2015.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/main-es5.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/main-es5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/main-es5.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/main-es5.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/page-joball-detaillistpm-detaillistpm-module-es2015.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/page-joball-detaillistpm-detaillistpm-module-es2015.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/page-joball-detaillistpm-detaillistpm-module-es2015.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/page-joball-detaillistpm-detaillistpm-module-es2015.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/page-joball-detaillistpm-detaillistpm-module-es5.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/page-joball-detaillistpm-detaillistpm-module-es5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/page-joball-detaillistpm-detaillistpm-module-es5.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/page-joball-detaillistpm-detaillistpm-module-es5.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/page-joball-detailofdetaillistpm-detailofdetaillistpm-module-es2015.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/page-joball-detailofdetaillistpm-detailofdetaillistpm-module-es2015.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/page-joball-detailofdetaillistpm-detailofdetaillistpm-module-es2015.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/page-joball-detailofdetaillistpm-detailofdetaillistpm-module-es2015.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/page-joball-detailofdetaillistpm-detailofdetaillistpm-module-es5.js" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/page-joball-detailofdetaillistpm-detailofdetaillistpm-module-es5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/page-joball-detailofdetaillistpm-detailofdetaillistpm-module-es5.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/app/src/main/assets/www/page-joball-detailofdetaillistpm-detailofdetaillistpm-module-es5.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/platforms/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/platforms/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page/joball/detaillistpm/detaillistpm.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page/joball/detaillistpm/detaillistpm.page.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page/joball/detailofdetaillistpm/detailofdetaillistpm.page.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page/joball/detailofdetaillistpm/detailofdetaillistpm.page.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/post-data.service.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/post-data.service.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/main-es2015.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/main-es2015.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/main-es2015.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/www/main-es2015.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/main-es5.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/main-es5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/main-es5.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/www/main-es5.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/page-joball-detaillistpm-detaillistpm-module-es2015.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/page-joball-detaillistpm-detaillistpm-module-es2015.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/page-joball-detaillistpm-detaillistpm-module-es2015.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/www/page-joball-detaillistpm-detaillistpm-module-es2015.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/page-joball-detaillistpm-detaillistpm-module-es5.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/page-joball-detaillistpm-detaillistpm-module-es5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/page-joball-detaillistpm-detaillistpm-module-es5.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/www/page-joball-detaillistpm-detaillistpm-module-es5.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/page-joball-detailofdetaillistpm-detailofdetaillistpm-module-es2015.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/page-joball-detailofdetaillistpm-detailofdetaillistpm-module-es2015.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/page-joball-detailofdetaillistpm-detailofdetaillistpm-module-es2015.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/www/page-joball-detailofdetaillistpm-detailofdetaillistpm-module-es2015.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/page-joball-detailofdetaillistpm-detailofdetaillistpm-module-es5.js" beforeDir="false" afterPath="$PROJECT_DIR$/www/page-joball-detailofdetaillistpm-detailofdetaillistpm-module-es5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/www/page-joball-detailofdetaillistpm-detailofdetaillistpm-module-es5.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/www/page-joball-detailofdetaillistpm-detailofdetaillistpm-module-es5.js.map" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1qLF6ysW219G5VntzMHuaNvT09W" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="AndroidJUnit" factoryName="Android JUnit">
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="50610c14-8260-48eb-a366-e76ea1b548f8" name="Default Changelist" comment="" />
+      <created>1616850791451</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1616850791451</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="442" y="173" width="669" height="508" key="#Notifications" timestamp="1616857656601">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="442" y="173" width="669" height="508" key="#Notifications/0.0.1536.824@0.0.1536.824" timestamp="1616857656601" />
+    <state x="168" y="120" width="1200" height="584" key="AVDManager" timestamp="1616851693861">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="168" y="120" width="1200" height="584" key="AVDManager/0.0.1536.824@0.0.1536.824" timestamp="1616851693861" />
+    <state x="277" y="57" key="SettingsEditor" timestamp="1616851693519">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="277" y="57" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1616851693519" />
+  </component>
+</project>

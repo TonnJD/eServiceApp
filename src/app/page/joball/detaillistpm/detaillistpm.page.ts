@@ -99,8 +99,6 @@ export class DetaillistpmPage implements OnInit {
             this.year = this.myId.year
           }
         }
-        console.log('this.item', this.item);
-        
 
         if (this.type == "PM") {
           this.imgbefore = false
@@ -302,6 +300,7 @@ export class DetaillistpmPage implements OnInit {
         for (let i = 0; i < this.items.length; i++) {
           this.empID = this.items[i].empID;
         }
+        
         this.detaillistpm.cusID = this.cusID;
         this.detaillistpm.planID = this.planID;
         this.detaillistpm.month = this.month;

@@ -148,7 +148,6 @@ let DetaillistpmPage = class DetaillistpmPage {
                         this.year = this.myId.year;
                     }
                 }
-                console.log('this.item', this.item);
                 if (this.type == "PM") {
                     this.imgbefore = false;
                 }

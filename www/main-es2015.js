@@ -5616,11 +5616,11 @@ let PostDataService = class PostDataService {
     constructor(http) {
         this.http = http;
         // test local
-        // apiServer_url = 'http://localhost:41669/';
-        // apiStock = 'https://localhost:41669/';
+        this.apiServer_url = 'http://localhost:41669/';
+        this.apiStock = 'https://localhost:41669/';
         // จาก Server จริง
-        this.apiServer_url = 'https://erpsuperior.com/';
-        this.apiStock = 'https://wms.erpsuperior.com/';
+        // apiServer_url = 'https://erpsuperior.com/';
+        // apiStock = 'https://wms.erpsuperior.com/';
         //จาก Server เทส
         // apiServer_url = 'https://test.erpsuperior.com/';
         // apiStock = 'https://wmstest.erpsuperior.com/';
