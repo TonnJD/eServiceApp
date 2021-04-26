@@ -644,6 +644,7 @@ let DetaillistpmPage = class DetaillistpmPage {
                     yield alert.present();
                 }
             }
+            //รายละเอียด
             if (item.Workfinish == 1) {
                 if (this.type == "CM") {
                     if (item.WorkCloseID == "WorkClose001" || item.WorkCloseID == "WorkClose003") {

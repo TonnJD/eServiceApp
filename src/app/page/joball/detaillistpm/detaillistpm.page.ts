@@ -315,6 +315,7 @@ export class DetaillistpmPage implements OnInit {
           for (let i = 0; i < this.data.length; i++) {
             this.Customername = this.data[i].CustomerName;
             this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+            
             for (let j = 0; j < this.data[i].productInstall.length; j++) {
 
             }
@@ -657,6 +658,7 @@ export class DetaillistpmPage implements OnInit {
       }
     }
 
+    //รายละเอียด
     if (item.Workfinish == 1) {
       if (this.type == "CM") {
         if (item.WorkCloseID == "WorkClose001" || item.WorkCloseID == "WorkClose003") {

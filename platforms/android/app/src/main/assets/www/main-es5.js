@@ -2770,7 +2770,10 @@ var ChecklistPage = /** @class */ (function () {
         this.date = this.navParams.data.date;
         this.item = this.navParams.data.item;
         this.types = this.navParams.data.types;
-        console.log(this.empID, this.planID, this.installID, this.type, this.tranid);
+        console.log('this.empID', this.empID);
+        console.log('this.planID', this.planID);
+        console.log('this.installID', this.installID);
+        console.log('this.tranid', this.tranid);
         this.tran = [];
         ;
         if (this.type == "new") {
@@ -6234,11 +6237,11 @@ var PostDataService = /** @class */ (function () {
     function PostDataService(http) {
         this.http = http;
         // test local
-        this.apiServer_url = 'http://localhost:41669/';
-        this.apiStock = 'https://localhost:41669/';
+        // apiServer_url = 'http://localhost:41669/';
+        // apiStock = 'https://localhost:41669/';
         // จาก Server จริง
-        // apiServer_url = 'https://erpsuperior.com/';
-        // apiStock = 'https://wms.erpsuperior.com/';
+        this.apiServer_url = 'https://erpsuperior.com/';
+        this.apiStock = 'https://wms.erpsuperior.com/';
         //จาก Server เทส
         // apiServer_url = 'https://test.erpsuperior.com/';
         // apiStock = 'https://wmstest.erpsuperior.com/';

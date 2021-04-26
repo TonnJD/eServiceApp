@@ -677,6 +677,7 @@ var DetaillistpmPage = /** @class */ (function () {
                         _a.sent();
                         _a.label = 11;
                     case 11:
+                        //รายละเอียด
                         if (item.Workfinish == 1) {
                             if (this.type == "CM") {
                                 if (item.WorkCloseID == "WorkClose001" || item.WorkCloseID == "WorkClose003") {
