@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ModalController, AlertController } from '@ionic/angular';
+import { NavController, ModalController, AlertController, NavParams } from '@ionic/angular';
 import { PostDataService } from '../../post-data.service';
 import { ActivatedRoute, NavigationExtras } from '@angular/router';
+import { AddSparepartPage } from '../sparepart/add-sparepart/add-sparepart.page';
 
 @Component({
   selector: 'app-sparepart',
@@ -33,40 +34,44 @@ export class SparepartPage implements OnInit {
   JobID;
   MainSKUID;
   Type;
-  ListJob ;
+  ListJob;
   DetailJobList;
   No;
   detailPM;
+  mainData;
 
   constructor(public modalController: ModalController,
     private postDataService: PostDataService,
     private route: ActivatedRoute,
-    private alertController: AlertController,
-    public navCtrl: NavController) {
+    public navCtrl: NavController,
+    private alertCtrl: AlertController,
+    private modalCtrl: ModalController,
+    private navParams: NavParams) {
 
-      this.route.queryParams.subscribe(params => {
-        this.detailPM = JSON.parse(params["data"]);
-  
-        console.log('spare params', this.detailPM.data);
-      });
+    // this.route.queryParams.subscribe(params => {
+    //   console.log('params', params);
+    //   this.detailPM = JSON.parse(params["data"]);
+    //   this.mainData = this.detailPM.mainData;
+    //   this.ListSpare = JSON.parse(params["sparelist"]);
+    //   console.log('this.ListSpare', this.ListSpare);
+    // });
 
-  }
+    this.detailPM = this.navParams.data;
+    this.mainData = this.detailPM.mainData;
+    this.ListSpare = this.detailPM.sparelist;
+    console.log('this.ListSpare', this.ListSpare);
 
-  ngOnInit() {
     this.buttonColor = 'medium';
-    this.route.queryParams.subscribe(params => {
-      this.data = JSON.parse(params["data"]);
-      this.insID = this.data.insID;
-      this.empID = this.data.empID;
-      this.planID = this.data.planID;
-      this.item = this.data.item;
-      this.type = this.data.type;
-      this.date = this.data.date;
-      this.ItemsName = this.data.ItemsName;
-      this.cusID = this.item.cusID;
-      this.Type = this.data.Type;
-    }); 
-    
+    this.insID = this.detailPM.insID;
+    this.empID = this.detailPM.empID;
+    this.planID = this.detailPM.planID;
+    this.item = this.detailPM.item;
+    this.type = this.detailPM.type;
+    this.date = this.detailPM.date;
+    this.ItemsName = this.detailPM.ItemsName;
+    this.cusID = this.item.cusID;
+    this.Type = this.detailPM.Type;
+
     console.log(this.insID);
     console.log(this.empID);
     console.log(this.planID);
@@ -75,8 +80,35 @@ export class SparepartPage implements OnInit {
     console.log("Type", this.Type);
     if (this.Type == 'history') {
       this.GetListJob()
-    }else{}
+    } else { }
     this.getSpare();
+  }
+
+  ngOnInit() {
+    // this.buttonColor = 'medium';
+    // this.route.queryParams.subscribe(params => {
+    //   this.detailPM = JSON.parse(params["data"]);
+    //   this.insID = this.detailPM.insID;
+    //   this.empID = this.detailPM.empID;
+    //   this.planID = this.detailPM.planID;
+    //   this.item = this.detailPM.item;
+    //   this.type = this.detailPM.type;
+    //   this.date = this.detailPM.date;
+    //   this.ItemsName = this.detailPM.ItemsName;
+    //   this.cusID = this.item.cusID;
+    //   this.Type = this.detailPM.Type;
+    // });
+
+    // console.log(this.insID);
+    // console.log(this.empID);
+    // console.log(this.planID);
+    // console.log("item", this.item);
+    // console.log("type", this.type);
+    // console.log("Type", this.Type);
+    // if (this.Type == 'history') {
+    //   this.GetListJob()
+    // } else { }
+    // this.getSpare();
   }
 
   getSpare() {
@@ -87,7 +119,7 @@ export class SparepartPage implements OnInit {
     console.log(params);
     this.postDataService.PostCus(params).then(SpareList => {
       this.SpareList = SpareList;
-      console.log(this.SpareList);
+      console.log('this.SpareList',this.SpareList);
       for (let a = 0; a < this.SpareList.length; a++) {
         this.itemname.push(
           {
@@ -96,12 +128,13 @@ export class SparepartPage implements OnInit {
             MainSKUID: this.SpareList[a].MainSKUID,
             color: 'medium'
           });
-          this.MainSKUID = this.SpareList[a].MainSKUID;
-      }       
+        this.MainSKUID = this.SpareList[a].MainSKUID;
+      }
       //this.Test();
-      console.log(this.itemname);
+      console.log('this.itemname', this.itemname);
+      console.log('DataSpare', this.DataSpare);
       console.log(this.MainSKUID);
-      
+
     });
   }
 
@@ -115,23 +148,23 @@ export class SparepartPage implements OnInit {
     this.postDataService.PostCus(params).then(ListJob => {
       this.ListJob = ListJob;
       console.log(this.ListJob);
-      
+
     });
   }
 
-  GetJob(item,Docno) {
+  GetJob(item, Docno) {
     this.No = Docno;
     let params = {
       planID: this.planID,
       insID: this.insID,
       Type: "GetJob",
-      JobID:item
+      JobID: item
     }
     console.log(params);
     this.postDataService.PostCus(params).then(DetailJobList => {
       this.DetailJobList = DetailJobList;
       console.log(this.DetailJobList);
-            
+
     });
   }
 
@@ -143,12 +176,13 @@ export class SparepartPage implements OnInit {
     }
     console.log(params);
     this.postDataService.PostCus(params).then(ListJob => {
-      console.log(ListJob);  
-      this.GetJob(ListJob,this.No);   
+      console.log(ListJob);
+      this.GetJob(ListJob, this.No);
       this.GetListJob();
     });
   }
-  DeleteJob(JobID){
+
+  DeleteJob(JobID) {
     let params = {
       JobID: JobID,
       Type: "DeleteJob",
@@ -156,12 +190,13 @@ export class SparepartPage implements OnInit {
     }
     console.log(params);
     this.postDataService.PostCus(params).then(ListJob => {
-      console.log(ListJob);  
-      this.GetListJob(); 
-      this.GetJob("","");   
+      console.log(ListJob);
+      this.GetListJob();
+      this.GetJob("", "");
     });
   }
-  getImage(i,SparepartGroupID, MainSKUID) {
+
+  getImage(i, SparepartGroupID, MainSKUID) {
     this.itemname.splice(0);
     for (let a = 0; a < this.SpareList.length; a++) {
       this.itemname.push(
@@ -171,17 +206,18 @@ export class SparepartPage implements OnInit {
           MainSKUID: this.SpareList[a].MainSKUID,
           color: 'medium'
         });
-        this.MainSKUID = this.SpareList[a].MainSKUID;
-    }     
+      this.MainSKUID = this.SpareList[a].MainSKUID;
+    }
+
     this.itemname[i].color = 'primary';
-    console.log(SparepartGroupID, MainSKUID);
+    
     let params = {
       SparepartGroupID: SparepartGroupID,
       empID: this.empID,
       Type: "GetSpareImage",
       MainSKUID: MainSKUID
     }
-    console.log(params);
+    
     this.postDataService.PostCus(params).then(SpareImage => {
       this.SpareImage = this.postDataService.apiStock + SpareImage;
       if (this.SpareImage != null) {
@@ -189,8 +225,6 @@ export class SparepartPage implements OnInit {
         this.GetListSpare(SparepartGroupID, MainSKUID);
       }
     });
-    console.log(this.SpareImage);
-
   }
 
   GetListSpare(SparepartGroupID, MainSKUID) {
@@ -203,10 +237,41 @@ export class SparepartPage implements OnInit {
     console.log(params);
     this.postDataService.PostCus(params).then(SpareData => {
       this.SpareData = SpareData;
+      console.log('this.SpareData', this.SpareData);
+      
       if (this.SpareImage != null) {
         this.AddDataToList();
       }
     });
+  }
+
+  async addSparepart() {
+    const modal = await this.modalController.create({
+      component: AddSparepartPage,
+      //cssClass: 'my-custom-modal-css',
+      componentProps: {
+      }
+    });
+
+    modal.onDidDismiss().then(res => {
+      console.log('res', res);
+      if (res.data != 'close') {
+        this.ListSpare.push(
+          {
+            ID: res.data.ID,
+            PositionNo: res.data.PositionNo,
+            Skuname: res.data.Skuname,
+            SubSKUID: res.data.SubSKUID,
+            Qty: res.data.Qty,
+            Balance: res.data.Balance
+          });
+  
+        console.log('this.ListSpare', this.ListSpare);
+   
+      }
+    });
+
+    return await modal.present();
   }
 
   AddDataToList() {
@@ -216,11 +281,16 @@ export class SparepartPage implements OnInit {
           ID: this.SpareData[i].ID,
           PositionNo: this.SpareData[i].PositionNo,
           Skuname: this.SpareData[i].Skuname,
-          Amount: this.SpareData[i].Amount,
+          Skucode: this.SpareData[i].Skucode,
+          Qty: this.SpareData[i].Qty,
           SubSKUID: this.SpareData[i].SubSKUID,
-          Balance: this.SpareData[i].Balance
+          Balance: this.SpareData[i].Balance,
+          Unit: this.SpareData[i].Unit
         });
     }
+
+    console.log('AddDataToList', this.DataSpare);
+    
   }
 
   AddToList(i, item) {
@@ -236,32 +306,37 @@ export class SparepartPage implements OnInit {
           break;
         }
       }
+
       if (this.check == false) {
         this.ListSpare.push(
           {
             ID: item.ID,
             PositionNo: item.PositionNo,
-            Skuname: item.Skuname,            
+            Skuname: item.Skuname,
+            Skucode: item.Skucode,
             SubSKUID: item.SubSKUID,
-            Amount: item.Amount,
-            Balance: item.Balance
+            Qty: item.Qty,
+            Balance: item.Balance,
+            Unit: item.Unit
           });
-      } else {
+      }
+      else {
         this.alertMeanSpart();
       }
-    } else {
+    }
+    else {
       this.ListSpare.push(
         {
           ID: item.ID,
           PositionNo: item.PositionNo,
           Skuname: item.Skuname,
+          Skucode: item.Skucode,
           SubSKUID: item.SubSKUID,
-          Amount: item.Amount,
+          Qty: item.Qty,
           Balance: item.Balance
         });
     }
   }
-
 
   DeleteFromList(i, item) {
     this.ListSpare.splice(i, 1);
@@ -271,7 +346,7 @@ export class SparepartPage implements OnInit {
     this.check = false;
     for (let k = 0; k < this.ListSpare.length; k++) {
       const amount = 0;
-      if (this.ListSpare[k].Amount == 0) {
+      if (this.ListSpare[k].Qty == 0) {
         this.check = true;
         break;
       }
@@ -279,7 +354,8 @@ export class SparepartPage implements OnInit {
 
     if (this.check == true) {
       this.alertZero();
-    } else {
+    }
+    else {
       let params = {
         insID: this.insID,
         SkuData: this.ListSpare,
@@ -289,7 +365,7 @@ export class SparepartPage implements OnInit {
         planID: this.planID,
         JobID: this.JobID,
       }
-      
+
       this.postDataService.PostCus(params).then(SpareData => {
         let params = {
           item: this.data.item,
@@ -298,21 +374,42 @@ export class SparepartPage implements OnInit {
         }
 
         console.log('sparepart params', params);
-        
+
         let navigationExtras: NavigationExtras = {
           queryParams: {
             data: JSON.stringify(params)
           }
         };
 
-        console.log('sparepart navigationExtras',navigationExtras);
+        console.log('sparepart navigationExtras', navigationExtras);
         this.navCtrl.navigateBack(['/joball/listpm/detaillistpm'], navigationExtras);
       });
     }
   }
 
+  submitSpareList() {
+    let params = {
+      sparelist: this.ListSpare,
+      maindata: this.mainData
+    }
+
+    this.modalCtrl.dismiss(params);
+    // let navigationExtras: NavigationExtras = {
+    //   queryParams: {
+    //     sparelist: JSON.stringify(params.sparelist),
+    //     data: JSON.stringify(params.maindata)
+    //   }
+    // };
+
+    // this.navCtrl.navigateBack(['/joball/listpm/detailofdetaillistpm'], navigationExtras);
+  }
+
+  close() {
+    this.modalCtrl.dismiss('close');
+  }
+
   async alertMeanSpart() {
-    const alert = await this.alertController.create({
+    const alert = await this.alertCtrl.create({
       message: 'รายการอะไหล่ซ้ำ',
       buttons: ['OK']
     });
@@ -320,7 +417,7 @@ export class SparepartPage implements OnInit {
   }
 
   async alertZero() {
-    const alert = await this.alertController.create({
+    const alert = await this.alertCtrl.create({
       message: 'กรุณากรอกจำนวนที่ต้องการเบิกให้ถูกต้อง',
       buttons: ['OK']
     });

@@ -1,4 +1,4 @@
-<ion-toolbar>
+<ion-toolbar color="primary">
   <ion-title *ngIf="jobtype == 'PM' else pm" #pm>เปลี่ยนอะไหล่</ion-title>
   <ion-title *ngIf="jobtype == 'INSTALL' && type!= 'device' else install" #install>เพิ่มอุปกรณ์เสริม</ion-title>
   <ion-title *ngIf="type == 'device' else device" #device>เพิ่มเครื่อง</ion-title>
@@ -110,6 +110,7 @@
                       <th> รหัสสินค้า </th>
                       <th> จำนวน </th>
                       <th> หน่วย </th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -149,6 +150,7 @@
                       <th> รหัสสินค้า </th>
                       <th> จำนวน </th>
                       <th> หน่วย </th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -196,6 +198,7 @@
                       <th> ชื่อเครื่อง </th>
                       <th> Serial No. </th>
                       <th> ประเภทเครื่อง </th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -234,6 +237,7 @@
                       <th> ชื่อเครื่อง </th>
                       <th> Serial No. </th>
                       <th> ประเภทเครื่อง </th>
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -248,7 +252,7 @@
                   </tbody>
                 </table>
                 <div class="text-center">
-                  <ion-button shape="round" color="success" class="text-center" (click)="saveDevice(Device)">บันทึก</ion-button>
+                  <ion-button color="success" class="text-center" (click)="saveDevice(Device)">บันทึก</ion-button>
                 </div>
               </div>
             </div>

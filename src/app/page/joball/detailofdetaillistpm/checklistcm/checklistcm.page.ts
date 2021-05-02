@@ -110,7 +110,7 @@ export class ChecklistcmPage implements OnInit {
       } else if (this.show == "spare") {
         this.isdevice = false;
         this.isspare = true;
-        this.isnon = false;
+        //this.isnon = false;
       } else {
         this.isdevice = true;
         this.isspare = true;
@@ -182,7 +182,7 @@ export class ChecklistcmPage implements OnInit {
     }
     this.postDataService.postdevice(param).then(data => {
       this.dataspare = data
-      console.log(this.dataspare);
+      console.log('this.dataspare', this.dataspare);
       for (let p = 0; p < this.dataspare.length; p++) {
         this.spareList.push(
           {
@@ -192,16 +192,19 @@ export class ChecklistcmPage implements OnInit {
             Name: this.dataspare[p].Name,
             NameOld: this.dataspare[p].NameOld,
             No: this.dataspare[p].No,
+            Qty: this.dataspare[p].Qty,
             Unit: this.dataspare[p].Unit,
             Serial: this.dataspare[p].Serial,
             PartOld: this.dataspare[p].PartOld,
             Balance: this.dataspare[p].Balance,
             isChecked: this.dataspare[p].isChecked
           });
-        console.log(this.spareList);
+
+        console.log('this.spareList', this.spareList);
       }
     });
   }
+
   GetSpareCM() {
     let params = {
       planID: this.planID,
@@ -210,11 +213,12 @@ export class ChecklistcmPage implements OnInit {
       empID: this.empID,
       type: this.jobtype
     }
+
     console.log(params);
 
-    this.postDataService.postdevice(params).then(data => {
-      this.data = data
-      console.log(this.data)
+    this.postDataService.postdevice(params).then(res => {
+      this.data = res;
+      console.log('this.data',this.data);
       this.listreal.splice(0);
       for (let j = 0; j < this.data.length; j++) {
         this.listreal.push(
@@ -230,8 +234,9 @@ export class ChecklistcmPage implements OnInit {
             PartOld: this.data[j].PartOld,
           });
       }
-      console.log(this.listreal);
     });
+
+    console.log('this.listreal',this.listreal);
   }
 
   chang(type) {
@@ -241,8 +246,8 @@ export class ChecklistcmPage implements OnInit {
       this.isShowDevice = false;
       this.isShowDeviceDetail = false;
       this.isEditSpare = true;
-      // this.GetSpareTran();
-      // this.GetSpareCM();
+      this.GetSpareTran();
+      this.GetSpareCM();
     }
     else if (type == "device") {
       this.isShowType = false;
@@ -537,6 +542,8 @@ export class ChecklistcmPage implements OnInit {
       this.modalController.dismiss(param);
     }
     else if (type == "Spareparts") {
+      console.log('this.spareList', this.spareList,);
+      
       let params = {
         planID: this.planID,
         installID: this.installID,
@@ -656,11 +663,14 @@ export class ChecklistcmPage implements OnInit {
   }
 
   async confirmNonSpare() {
+    console.log('this.jobInSpare', this.jobInSpare);
+    
+
     if (this.jobInSpare.length > 0) {
       const alert = await this.alertController.create({
         cssClass: 'my-custom-class',
         header: 'แจ้งเตือน!',
-        message: 'ยืนยันไม่เปลี่ยนอะไหล่ รายการเปลี่ยนอะไหล่ที่ดำเนินการอยู่จะถูกลบ',
+        message: 'ยืนยันไม่เปลี่ยนอะไหล่',
         buttons: [
           {
             text: 'ยืนยัน',

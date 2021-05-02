@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button></ion-back-button>\r\n      <ion-title>{{worktype}}: {{ItemsName}}</ion-title>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row\" style=\"padding: 5px;\">\r\n      <div class=\"col-lg-3\" style=\"padding: 0px;\">\r\n        <div class=\"row\" style=\"padding-left:15px;\">\r\n          <div class=\"col-12 hidden\" style=\"padding: 0px;\">\r\n            <div class=\"portlet box blue\">\r\n              <div class=\"portlet-title\">\r\n                <div class=\"caption\">\r\n                  <i class=\"fa fa-bar-chart\"></i>สถานะ\r\n                </div>\r\n              </div>\r\n              <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n                <div class=\"portlet light \">\r\n                  <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                      <p class=\"profile-desc-text\" style=\"text-align: center; padding: 5px;\">รอการตรวจสอบ</p>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-12\" style=\"padding: 0px; padding-right:2px;\">\r\n            <div class=\"portlet box blue\">\r\n              <div class=\"portlet-title\">\r\n                <div class=\"caption\">\r\n                  <i class=\"fa fa-clock-o\"></i>สถานะและเวลาทำงาน\r\n                </div>\r\n              </div>\r\n              <div class=\"portlet-body\">\r\n                <iframe [src]=\"url\" style=\"width:100%;border:0px;background-color: white;\"></iframe>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-12 hidden\" style=\"padding: 0px;\">\r\n          <div class=\"portlet box blue\">\r\n            <div class=\"portlet-title\">\r\n              <div class=\"caption\">\r\n                <i class=\"fa fa-bar-chart\"></i>สถานะ\r\n              </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n              <div class=\"portlet light \">\r\n                <div class=\"row\">\r\n                  <div class=\"col-12\">\r\n                    <p class=\"profile-desc-text\" style=\"text-align: center; padding: 5px;\">รอการตรวจสอบ</p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-12\" style=\"padding: 0px;\">\r\n          <div class=\"portlet box blue\">\r\n            <div class=\"portlet-title\">\r\n              <div class=\"caption\">\r\n                <i class=\"fa fa-cube\"></i>สินค้า\r\n              </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n              <div class=\"portlet light \">\r\n                <div class=\"row\">\r\n                  <div class=\"col-4\">\r\n                    <p class=\"profile-desc-text\">สินค้าที่ติดตั้ง:</p>\r\n                    <p class=\"profile-desc-text\">รหัสสินค้า:</p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype != 'INSTALL'\">ชื่อสินค้า:</p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype == 'INSTALL' && OldItemsName != null\">เครื่องที่รื้อถอน:\r\n                    </p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype == 'INSTALL'\">เครื่องที่ติดตั้ง:</p>\r\n                    <p class=\"profile-desc-text\">Serial No:</p>\r\n                  </div>\r\n                  <div class=\"col-8\">\r\n                    <p class=\"profile-desc-text\">{{InstallPlanName}}</p>\r\n                    <p class=\"profile-desc-text\">{{ItemCode}}</p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype != 'INSTALL'\">{{ItemsName}}</p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype == 'INSTALL' && OldItemsName != null\">{{OldItemsName}}\r\n                    </p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype == 'INSTALL'\">{{ItemsName}}</p>\r\n                    <p class=\"profile-desc-text\">{{SerialNo}}</p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-12\" style=\"padding: 0px;\" *ngIf=\"isdevice && jobtype == 'CM'\">\r\n          <div class=\"portlet box blue\">\r\n            <div class=\"portlet-title\">\r\n              <div class=\"caption\">\r\n                <i class=\"fa fa-cube\"></i>เครื่องที่เปลี่ยน\r\n              </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n              <div class=\"portlet light\" *ngFor=\"let i of devices;\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-4\">\r\n                    <p class=\"profile-desc-text\">สินค้าที่ติดตั้ง:</p>\r\n                    <p class=\"profile-desc-text\">ชื่อสินค้า:</p>\r\n                    <p class=\"profile-desc-text\">รหัสสินค้า:</p>\r\n                    <p class=\"profile-desc-text\">Serial No:</p>\r\n                  </div>\r\n                  <div class=\"col-8\">\r\n                    <p class=\"profile-desc-text\">{{i.InstallPlanName}}</p>\r\n                    <p class=\"profile-desc-text\">{{i.ItemCode}}</p>\r\n                    <p class=\"profile-desc-text\">{{i.ItemsName}}</p>\r\n                    <p class=\"profile-desc-text\">{{i.SerialNo}}</p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-12\" style=\"padding: 0px;\" *ngIf=\"isspare && jobtype == 'CM'\">\r\n          <div class=\"portlet box blue\">\r\n            <div class=\"portlet-title\">\r\n              <div class=\"caption\">\r\n                <i class=\"fa fa-cube\"></i>อะไหล่ที่เปลี่ยน\r\n              </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n              <div class=\"portlet light\" *ngFor=\"let i of spares;\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-4\">\r\n                    <p class=\"profile-desc-text\">ชื่ออุปกรณ์เสริม :</p>\r\n                    <p class=\"profile-desc-text\">Part No. :</p>\r\n                  </div>\r\n                  <div class=\"col-8\">\r\n                    <p class=\"profile-desc-text\">{{i.Name}}</p>\r\n                    <p class=\"profile-desc-text\">{{i.Serial}}</p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"col-lg-9\" style=\"padding: 0px;\">\r\n        <div class=\"portlet box blue\">\r\n          <div class=\"portlet-title\">\r\n            <div class=\"caption\">\r\n              <i class=\"fa fa-sticky-note-o\"></i>รายการตรวจเช็ค\r\n              <ion-label>ร้าน {{CustomerName}} {{planDate}} </ion-label>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle1\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span style=\"font-size: 1.1em!important;\" class=\"caption-subject font-blue-sharp bold uppercase\">\r\n                      {{title1}} </span>\r\n                  </div>\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src1\" *ngIf=\"isShowImage1\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src2\" *ngIf=\"isShowImage2\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src3\" *ngIf=\"isShowImage3\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src4\" *ngIf=\"isShowImage4\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src5\" *ngIf=\"isShowImage5\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src6\" *ngIf=\"isShowImage6\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src7\" *ngIf=\"isShowImage7\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src8\" *ngIf=\"isShowImage8\" />\r\n                </div>\r\n\r\n                <div class=\"col-1 text-center\">\r\n                </div>\r\n\r\n                <div class=\" col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take1 *ngIf=\"isShow1 == false ; else take1\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(1)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo1\" *ngIf=\"isShow1\" (click)=\"Take(1)\">\r\n                </div>\r\n\r\n                <div class=\"col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take2 *ngIf=\"isShow2 == false ; else take2\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(2)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo2\" *ngIf=\"isShow2\" (click)=\"Take(2)\" />\r\n                </div>\r\n\r\n                <div class=\"col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take3 *ngIf=\"isShow3 == false ; else take3\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(3)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo3\" *ngIf=\"isShow3\" (click)=\"Take(3)\">\r\n                </div>\r\n\r\n                <div class=\"col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take4 *ngIf=\"isShow4 == false ; else take4\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(4)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo4\" *ngIf=\"isShow4\" (click)=\"Take(4)\">\r\n                </div>\r\n\r\n                <div class=\"col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take5 *ngIf=\"isShow5 == false ; else take5\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(5)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo5\" *ngIf=\"isShow5\" (click)=\"Take(5)\">\r\n                </div>\r\n\r\n                <div class=\"col-12\" *ngIf=\"isPM\">\r\n                  <div class=\"row\" style=\"margin-bottom: 10px;\">\r\n                    <div class=\"col-3 text-center\" style=\"margin-bottom: 80px;\" *ngFor=\"let p of productphoto\">\r\n                      <div>{{p.Name}}</div>\r\n                      <div #take *ngIf=\"p.show == false ; else take\">\r\n                        <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                          <ion-fab-button (click)=\"TakePM(p)\">\r\n                            <ion-icon name=\"camera\"></ion-icon>\r\n                          </ion-fab-button>\r\n                        </ion-fab>\r\n                      </div>\r\n                      <img [src]=\"apiServer_url + p.img\" *ngIf=\"p.show\" (click)=\"TakePM(p)\">\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-6\">\r\n                    <div class=\"text-center\" style=\"padding-left: 10px;\">\r\n                      <button (click)=\"showimgremark()\" class=\"btn default\" style=\"width: 100%;\">\r\n                        รูปภาพเพิ่มเติม </button>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-12\" *ngIf=\"isimgRemark\" style=\"margin-top: 10px;margin-bottom: 10px;;\">\r\n                    <div class=\"row\">\r\n                      <div class=\"col-1 text-center\">\r\n                      </div>\r\n\r\n                      <div class=\" col-2 text-center\" *ngFor=\"let p of photoremark\">\r\n                        <div #takere *ngIf=\"p.show == false ; else takere\">\r\n                          <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                            <ion-fab-button (click)=\"TakePMRe(p)\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"apiServer_url + p.img\" *ngIf=\"p.show\" (click)=\"TakePMRe(p)\">\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle2\">\r\n            <div class=\"portlet box light\">\r\n              <div class=\"portlet-title\">\r\n                <div class=\"caption\">\r\n                  <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                  <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                    {{title2}}</span>\r\n                </div>\r\n              </div>\r\n              <div class=\"portlet-body form\">\r\n                <div class=\"horizontal-form\">\r\n                  <div class=\"form-body\">\r\n                    <div class=\"row\">\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 1</div>\r\n                        <div *ngIf=\"isShow1 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(1)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo1\" *ngIf=\"isShow1\" (click)=\"Take(1)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 2</div>\r\n                        <div *ngIf=\"isShow2 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(2)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo2\" *ngIf=\"isShow2\" (click)=\"Take(2)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 3</div>\r\n                        <div *ngIf=\"isShow3 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(3)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo3\" *ngIf=\"isShow3\" (click)=\"Take(3)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 4</div>\r\n                        <div *ngIf=\"isShow4 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(4)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo4\" *ngIf=\"isShow4\" (click)=\"Take(4)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 5</div>\r\n                        <div *ngIf=\"isShow5 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(5)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo5\" *ngIf=\"isShow5\" (click)=\"Take(5)\">\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"row\">\r\n                      <div class=\"col-md-2 text-center\">\r\n                        <div>รูปภาพที่ 6</div>\r\n                        <div *ngIf=\"isShow6 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(6)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo6\" *ngIf=\"isShow6\" (click)=\"Take(6)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\">\r\n                        <div>รูปภาพที่ 7</div>\r\n                        <div *ngIf=\"isShow7 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(7)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo7\" *ngIf=\"isShow7\" (click)=\"Take(7)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\">\r\n                        <div>รูปภาพที่ 8</div>\r\n                        <div *ngIf=\"isShow8 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(8)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo8\" *ngIf=\"isShow8\" (click)=\"Take(8)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\">\r\n                        <div>รูปภาพที่ 9</div>\r\n                        <div *ngIf=\"isShow9 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(9)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo9\" *ngIf=\"isShow9\" (click)=\"Take(9)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\">\r\n                        <div>รูปภาพที่ 10</div>\r\n                        <div *ngIf=\"isShow10 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(10)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo10\" *ngIf=\"isShow10\" (click)=\"Take(10)\">\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle3\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 20px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title3}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div #nospare class=\"col-md-6 text-center\"\r\n                  style=\"padding-left: 10px;margin-top: 5px;margin-bottom: 10px;\"\r\n                  *ngIf=\"jobtype != 'INSTALL' else nospare\">\r\n                  <button (click)=\"check()\" [disabled]=\"!isenabledcheck\" class=\"btn default\">\r\n                    คลิกเพื่อตรวจเช็ครายการ</button>\r\n                </div>\r\n                <!-- <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;margin-top: 5px;margin-bottom: 10px;\"\r\n                  *ngIf=\"jobtype == 'PM'\">\r\n                  <button (click)=\"changsparepm()\" [disabled]=\"!isenabledcheck\" class=\"btn default\">\r\n                    เปลี่ยนอะไหล่\r\n                  </button>\r\n                </div> -->\r\n                <div #device class=\"col-md-6 text-center\"\r\n                  style=\"padding-left: 10px;margin-top: 5px;margin-bottom: 10px;\"\r\n                  *ngIf=\"SerialNoInstall == '-' && jobtype == 'INSTALL' else device\">\r\n                  <button (click)=\"changspare('device')\" [disabled]=\"!isenabledadddevice\" class=\"btn default\">\r\n                    เพิ่มเครื่อง </button>\r\n                </div>\r\n                <div #spare class=\"col-md-6 text-center\" style=\"padding-left: 10px;margin-top: 5px;margin-bottom: 10px;\"\r\n                  *ngIf=\"jobtype == 'INSTALL' else spare\">\r\n                  <button (click)=\"changspare()\" [disabled]=\"!isenabledadddevice\" class=\"btn default\">\r\n                    เพิ่มอุปกรณ์เสริม </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;margin-bottom: 10px;\">\r\n                  <!-- <div *ngIf=\"sparetype != '' && jobtype == 'PM'; else sparepart\">\r\n                    <button (click)=\"changspare()\" [disabled]=\"!isenabledspare\" class=\"btn default\" #sparepart>\r\n                      รายการเปลี่ยนอะไหล่ </button>\r\n                  </div> -->\r\n                  <div *ngIf=\"jobtype == 'CM' && request == null; else CM\" style=\"margin-top: 5px;margin-bottom: 10px;\">\r\n                    <!-- <button (click)=\"takerequest()\" class=\"btn default\" #CM [disabled]=\"!isenabledrequest\">\r\n                      ใบเบิกอะไหล่ </button> -->\r\n                    <!-- <img *ngIf=\"jobtype == 'CM' && request != null ; else imgrequest\" [src]=\"request\"\r\n                  (click)=\"takerequest()\" #imgrequest> -->\r\n\r\n                    <!-- <button (click)=\"showSpare()\" class=\"btn default\" #CM [disabled]=\"!isenabledrequest\"> ขอเบิกอะไหล่\r\n                    </button> -->\r\n                    <button (click)=\"requestSparepart()\" class=\"btn default\" [disabled]=\"!isenabledrequest\"> ขอเสนอราคา\r\n                      / ขอเบิกอะไหล่\r\n                    </button>\r\n                    <div *ngIf=\"jobtype != 'PM'\" style=\"margin-top: 5px;margin-bottom: 5px;\">\r\n                      <button class=\"btn default\" (click)=\"response()\"\r\n                        style=\"background-color: rgb(245, 197, 76);color: white;\">\r\n                        แจ้งปัญหากรณีไม่สามารถปิดงานได้</button>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle7\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 20px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title7}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;margin-bottom: 10px;\">\r\n                  <button class=\"btn default\" (click)=\"openModalcustomereva()\" [disabled]=\"!isenabledcuseva\">\r\n                    คลิกเพื่อกรอกข้อมูล </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                  <button class=\"btn default\" (click)=\"onBackToPageMain()\" [disabled]=\"!isenabledeva\"\r\n                    style=\"background-color: #3880FF;color: white;\">\r\n                    ย้อนกลับหน้าหลัก (รอลูกค้าปิดงาน) </button>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle5\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 15px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title5}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                  <button class=\"btn default\" [disabled]=\"!isenabledeva\" (click)=\"clickeva()\">\r\n                    คลิกเพื่อกรอกข้อมูล </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle4\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 15px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title4}}</span>\r\n                    <div *ngIf=\"showSig\">\r\n                      <img class=\"sig\" [src]=\"sign\" style=\"width: 50% !important; border: 1px solid black;\" />\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                  <button #btnhiddensig class=\"btn default\" (click)=\"Modal()\" [disabled]=\"!isenabledsig\"\r\n                    *ngIf=\"showSig == false; else btnhiddensig\"> ลายเซ็นต์ผู้รับผิดชอบ\r\n                  </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle6\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 15px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title6}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                  <button class=\"btn default\" *ngIf=\"jobtype != 'PM' else spare\" #spare (click)=\"openModalcustomerpw()\"\r\n                    [disabled]=\"!isenabledcuspass\">\r\n                    ความคิดเห็นจากลูกค้า </button>\r\n                  <button class=\"btn default\" *ngIf=\"jobtype == 'PM' else all\" #all (click)=\"openModalcustomerpw()\"\r\n                    [disabled]=\"!isenabledcuspass\">\r\n                    รหัสยืนยันตัวตนลูกค้า </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle8\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title8}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" #btnSuccess style=\"padding-left: 10px;\"\r\n                  *ngIf=\"IsWaitsave == false; else btnSuccess\">\r\n                  <button class=\"btn default\" [disabled]=\"!isenabledsave\" (click)=\"saveData()\">\r\n                    ยืนยันการปิดงาน </button>\r\n                </div>\r\n                <div class=\"col-6 subtext text-center\" #lblSuccess\r\n                  style=\"color: green;font-size: 14px;font-weight: bold;\" *ngIf=\"IsWaitsave == true; else lblSuccess\">\r\n                  ระบบกำลังบันทึกข้อมูล กรุณารอสักครู่.....</div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" (click)=\"log()\">\r\n    <ion-fab-button>\r\n      <ion-icon name=\"alert\"></ion-icon>\r\n    </ion-fab-button>\r\n  </ion-fab>\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button></ion-back-button>\r\n      <ion-title>{{worktype}}: {{ItemsName}}</ion-title>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row\" style=\"padding: 5px;\">\r\n      <div class=\"col-lg-3\" style=\"padding: 0px;\">\r\n        <div class=\"row\" style=\"padding-left:15px;\">\r\n          <div class=\"col-12 hidden\" style=\"padding: 0px;\">\r\n            <div class=\"portlet box blue\">\r\n              <div class=\"portlet-title\">\r\n                <div class=\"caption\">\r\n                  <i class=\"fa fa-bar-chart\"></i>สถานะ\r\n                </div>\r\n              </div>\r\n              <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n                <div class=\"portlet light \">\r\n                  <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                      <p class=\"profile-desc-text\" style=\"text-align: center; padding: 5px;\">รอการตรวจสอบ</p>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-12\" style=\"padding: 0px; padding-right:2px;\">\r\n            <div class=\"portlet box blue\">\r\n              <div class=\"portlet-title\">\r\n                <div class=\"caption\">\r\n                  <i class=\"fa fa-clock-o\"></i>สถานะและเวลาทำงาน\r\n                </div>\r\n              </div>\r\n              <div class=\"portlet-body\">\r\n                <iframe [src]=\"url\" style=\"width:100%;border:0px;background-color: white;\"></iframe>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-12 hidden\" style=\"padding: 0px;\">\r\n          <div class=\"portlet box blue\">\r\n            <div class=\"portlet-title\">\r\n              <div class=\"caption\">\r\n                <i class=\"fa fa-bar-chart\"></i>สถานะ\r\n              </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n              <div class=\"portlet light \">\r\n                <div class=\"row\">\r\n                  <div class=\"col-12\">\r\n                    <p class=\"profile-desc-text\" style=\"text-align: center; padding: 5px;\">รอการตรวจสอบ</p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-12\" style=\"padding: 0px;\">\r\n          <div class=\"portlet box blue\">\r\n            <div class=\"portlet-title\">\r\n              <div class=\"caption\">\r\n                <i class=\"fa fa-cube\"></i>สินค้า\r\n              </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n              <div class=\"portlet light \">\r\n                <div class=\"row\">\r\n                  <div class=\"col-4\">\r\n                    <p class=\"profile-desc-text\">สินค้าที่ติดตั้ง:</p>\r\n                    <p class=\"profile-desc-text\">รหัสสินค้า:</p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype != 'INSTALL'\">ชื่อสินค้า:</p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype == 'INSTALL' && OldItemsName != null\">เครื่องที่รื้อถอน:\r\n                    </p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype == 'INSTALL'\">เครื่องที่ติดตั้ง:</p>\r\n                    <p class=\"profile-desc-text\">Serial No:</p>\r\n                  </div>\r\n                  <div class=\"col-8\">\r\n                    <p class=\"profile-desc-text\">{{InstallPlanName}}</p>\r\n                    <p class=\"profile-desc-text\">{{ItemCode}}</p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype != 'INSTALL'\">{{ItemsName}}</p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype == 'INSTALL' && OldItemsName != null\">{{OldItemsName}}\r\n                    </p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype == 'INSTALL'\">{{ItemsName}}</p>\r\n                    <p class=\"profile-desc-text\">{{SerialNo}}</p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-12\" style=\"padding: 0px;\" *ngIf=\"isdevice && jobtype == 'CM'\">\r\n          <div class=\"portlet box blue\">\r\n            <div class=\"portlet-title\">\r\n              <div class=\"caption\">\r\n                <i class=\"fa fa-cube\"></i>เครื่องที่เปลี่ยน\r\n              </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n              <div class=\"portlet light\" *ngFor=\"let i of devices;\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-4\">\r\n                    <p class=\"profile-desc-text\">สินค้าที่ติดตั้ง:</p>\r\n                    <p class=\"profile-desc-text\">ชื่อสินค้า:</p>\r\n                    <p class=\"profile-desc-text\">รหัสสินค้า:</p>\r\n                    <p class=\"profile-desc-text\">Serial No:</p>\r\n                  </div>\r\n                  <div class=\"col-8\">\r\n                    <p class=\"profile-desc-text\">{{i.InstallPlanName}}</p>\r\n                    <p class=\"profile-desc-text\">{{i.ItemCode}}</p>\r\n                    <p class=\"profile-desc-text\">{{i.ItemsName}}</p>\r\n                    <p class=\"profile-desc-text\">{{i.SerialNo}}</p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <!-- <div class=\"col-12\" style=\"padding: 0px;\" *ngIf=\"isspare && jobtype == 'CM'\">\r\n          <div class=\"portlet box blue\">\r\n            <div class=\"portlet-title\">\r\n              <div class=\"caption\">\r\n                <i class=\"fa fa-cube\"></i>อะไหล่ที่เปลี่ยน\r\n              </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n              <div class=\"portlet light\" *ngFor=\"let i of spares;\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-4\">\r\n                    <p class=\"profile-desc-text\">ชื่ออุปกรณ์เสริม :</p>\r\n                    <p class=\"profile-desc-text\">Part No. :</p>\r\n                  </div>\r\n                  <div class=\"col-8\">\r\n                    <p class=\"profile-desc-text\">{{i.Name}}</p>\r\n                    <p class=\"profile-desc-text\">{{i.Serial}}</p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div> -->\r\n      </div>\r\n      <div class=\"col-lg-9\" style=\"padding: 0px;\">\r\n        <div class=\"portlet box blue\">\r\n          <div class=\"portlet-title\">\r\n            <div class=\"caption\">\r\n              <i class=\"fa fa-sticky-note-o\"></i>รายการตรวจเช็ค\r\n              <ion-label>ร้าน {{CustomerName}} {{planDate}} </ion-label>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle1\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span style=\"font-size: 1.1em!important;\" class=\"caption-subject font-blue-sharp bold uppercase\">\r\n                      {{title1}} </span>\r\n                  </div>\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src1\" *ngIf=\"isShowImage1\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src2\" *ngIf=\"isShowImage2\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src3\" *ngIf=\"isShowImage3\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src4\" *ngIf=\"isShowImage4\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src5\" *ngIf=\"isShowImage5\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src6\" *ngIf=\"isShowImage6\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src7\" *ngIf=\"isShowImage7\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src8\" *ngIf=\"isShowImage8\" />\r\n                </div>\r\n\r\n                <div class=\"col-1 text-center\">\r\n                </div>\r\n\r\n                <div class=\" col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take1 *ngIf=\"isShow1 == false ; else take1\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(1)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo1\" *ngIf=\"isShow1\" (click)=\"Take(1)\">\r\n                </div>\r\n\r\n                <div class=\"col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take2 *ngIf=\"isShow2 == false ; else take2\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(2)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo2\" *ngIf=\"isShow2\" (click)=\"Take(2)\" />\r\n                </div>\r\n\r\n                <div class=\"col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take3 *ngIf=\"isShow3 == false ; else take3\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(3)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo3\" *ngIf=\"isShow3\" (click)=\"Take(3)\">\r\n                </div>\r\n\r\n                <div class=\"col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take4 *ngIf=\"isShow4 == false ; else take4\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(4)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo4\" *ngIf=\"isShow4\" (click)=\"Take(4)\">\r\n                </div>\r\n\r\n                <div class=\"col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take5 *ngIf=\"isShow5 == false ; else take5\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(5)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo5\" *ngIf=\"isShow5\" (click)=\"Take(5)\">\r\n                </div>\r\n\r\n                <div class=\"col-12\" *ngIf=\"isPM\">\r\n                  <div class=\"row\" style=\"margin-bottom: 10px;\">\r\n                    <div class=\"col-3 text-center\" style=\"margin-bottom: 80px;\" *ngFor=\"let p of productphoto\">\r\n                      <div>{{p.Name}}</div>\r\n                      <div #take *ngIf=\"p.show == false ; else take\">\r\n                        <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                          <ion-fab-button (click)=\"TakePM(p)\">\r\n                            <ion-icon name=\"camera\"></ion-icon>\r\n                          </ion-fab-button>\r\n                        </ion-fab>\r\n                      </div>\r\n                      <img [src]=\"apiServer_url + p.img\" *ngIf=\"p.show\" (click)=\"TakePM(p)\">\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-6\">\r\n                    <div class=\"text-center\" style=\"padding-left: 10px;\">\r\n                      <button (click)=\"showimgremark()\" class=\"btn default\" style=\"width: 100%;\">\r\n                        รูปภาพเพิ่มเติม </button>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-12\" *ngIf=\"isimgRemark\" style=\"margin-top: 10px;margin-bottom: 10px;;\">\r\n                    <div class=\"row\">\r\n                      <div class=\"col-1 text-center\">\r\n                      </div>\r\n\r\n                      <div class=\" col-2 text-center\" *ngFor=\"let p of photoremark\">\r\n                        <div #takere *ngIf=\"p.show == false ; else takere\">\r\n                          <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                            <ion-fab-button (click)=\"TakePMRe(p)\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"apiServer_url + p.img\" *ngIf=\"p.show\" (click)=\"TakePMRe(p)\">\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle2\">\r\n            <div class=\"portlet box light\">\r\n              <div class=\"portlet-title\">\r\n                <div class=\"caption\">\r\n                  <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                  <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                    {{title2}}</span>\r\n                </div>\r\n              </div>\r\n              <div class=\"portlet-body form\">\r\n                <div class=\"horizontal-form\">\r\n                  <div class=\"form-body\">\r\n                    <div class=\"row\">\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 1</div>\r\n                        <div *ngIf=\"isShow1 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(1)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo1\" *ngIf=\"isShow1\" (click)=\"Take(1)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 2</div>\r\n                        <div *ngIf=\"isShow2 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(2)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo2\" *ngIf=\"isShow2\" (click)=\"Take(2)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 3</div>\r\n                        <div *ngIf=\"isShow3 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(3)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo3\" *ngIf=\"isShow3\" (click)=\"Take(3)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 4</div>\r\n                        <div *ngIf=\"isShow4 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(4)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo4\" *ngIf=\"isShow4\" (click)=\"Take(4)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 5</div>\r\n                        <div *ngIf=\"isShow5 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(5)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo5\" *ngIf=\"isShow5\" (click)=\"Take(5)\">\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"row\">\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 6</div>\r\n                        <div *ngIf=\"isShow6 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(6)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo6\" *ngIf=\"isShow6\" (click)=\"Take(6)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 7</div>\r\n                        <div *ngIf=\"isShow7 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(7)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo7\" *ngIf=\"isShow7\" (click)=\"Take(7)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 8</div>\r\n                        <div *ngIf=\"isShow8 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(8)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo8\" *ngIf=\"isShow8\" (click)=\"Take(8)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 9</div>\r\n                        <div *ngIf=\"isShow9 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(9)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo9\" *ngIf=\"isShow9\" (click)=\"Take(9)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 10</div>\r\n                        <div *ngIf=\"isShow10 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(10)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo10\" *ngIf=\"isShow10\" (click)=\"Take(10)\">\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle3\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 20px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title3}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div #nospare class=\"col-md-6 text-center\"\r\n                  style=\"padding-left: 10px;margin-top: 5px;margin-bottom: 10px;\"\r\n                  *ngIf=\"jobtype != 'INSTALL' else nospare\">\r\n                  <button (click)=\"check()\" [disabled]=\"!isenabledcheck\" class=\"btn default\">\r\n                    คลิกเพื่อตรวจเช็ครายการ</button>\r\n                </div>\r\n                <!-- <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;margin-top: 5px;margin-bottom: 10px;\"\r\n                  *ngIf=\"jobtype == 'PM'\">\r\n                  <button (click)=\"changsparepm()\" [disabled]=\"!isenabledcheck\" class=\"btn default\">\r\n                    เปลี่ยนอะไหล่\r\n                  </button>\r\n                </div> -->\r\n                <div #device class=\"col-md-6 text-center\"\r\n                  style=\"padding-left: 10px;margin-top: 5px;margin-bottom: 10px;\"\r\n                  *ngIf=\"jobtype == 'INSTALL' else device\">\r\n                  <button (click)=\"changspare('device')\" class=\"btn default\">\r\n                    เพิ่มเครื่อง </button>\r\n                </div>\r\n                <div #spare class=\"col-md-6 text-center\" style=\"padding-left: 10px;margin-top: 5px;margin-bottom: 10px;\"\r\n                  *ngIf=\"jobtype == 'INSTALL' else spare\">\r\n                  <button (click)=\"changspare()\" [disabled]=\"!isenabledadddevice\" class=\"btn default\">\r\n                    เพิ่มอุปกรณ์เสริม </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;margin-bottom: 10px;\">\r\n                  <!-- <div *ngIf=\"sparetype != '' && jobtype == 'PM'; else sparepart\">\r\n                    <button (click)=\"changspare()\" [disabled]=\"!isenabledspare\" class=\"btn default\" #sparepart>\r\n                      รายการเปลี่ยนอะไหล่ </button>\r\n                  </div> -->\r\n                  <div *ngIf=\"jobtype == 'CM' && request == null; else CM\" style=\"margin-top: 5px;margin-bottom: 10px;\">\r\n                    <!-- <button (click)=\"takerequest()\" class=\"btn default\" #CM [disabled]=\"!isenabledrequest\">\r\n                      ใบเบิกอะไหล่ </button> -->\r\n                    <!-- <img *ngIf=\"jobtype == 'CM' && request != null ; else imgrequest\" [src]=\"request\"\r\n                  (click)=\"takerequest()\" #imgrequest> -->\r\n                    <div style=\"margin-top: 5px;margin-bottom:5px;\">\r\n                      <button (click)=\"showSpare()\" class=\"btn default\" #CM [disabled]=\"!isenabledrequest\">\r\n                        ขอเบิกอะไหล่<span *ngIf=\"spareList.length > 0\"> ({{spareList.length}} รายการ)</span>\r\n                      </button>\r\n                    </div>\r\n\r\n                    <button (click)=\"requestSparepart()\" class=\"btn default\" [disabled]=\"!isenabledrequest\">\r\n                      ขอเสนอราคา\r\n                    </button>\r\n                    <ion-card-content>\r\n                      <div class=\"col-12\">\r\n                        <ion-item>\r\n                          <ion-label>กรุณาเลือก กรณีเครื่องเบรก</ion-label>\r\n                          <ion-checkbox slot=\"start\" [(ngModel)]=\"isBreak\" (ionChange)=\"machineBreak($event)\"></ion-checkbox>\r\n                        </ion-item>\r\n                      </div>\r\n                    </ion-card-content>\r\n                    <!-- <div *ngIf=\"jobtype != 'PM'\" style=\"margin-top: 5px;margin-bottom: 5px;\">\r\n                      <button class=\"btn default\" (click)=\"response()\"\r\n                        style=\"background-color: rgb(245, 197, 76);color: white;\">\r\n                        แจ้งปัญหากรณีไม่สามารถปิดงานได้</button>\r\n                    </div> -->\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle7\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 20px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title7}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;margin-bottom: 10px;\">\r\n                  <button class=\"btn default\" (click)=\"openModalcustomereva()\" [disabled]=\"!isenabledcuseva\">\r\n                    คลิกเพื่อกรอกข้อมูล </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                  <button class=\"btn default\" (click)=\"onBackToPageMain()\" [disabled]=\"!isenabledeva\"\r\n                    style=\"background-color: #3880FF;color: white;\">\r\n                    ย้อนกลับหน้าหลัก (รอลูกค้าปิดงาน) </button>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle5\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 15px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title5}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                  <button class=\"btn default\" [disabled]=\"!isenabledeva\" (click)=\"clickeva()\">\r\n                    คลิกเพื่อกรอกข้อมูล </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle4\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 15px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title4}}</span>\r\n                    <div *ngIf=\"showSig\">\r\n                      <img class=\"sig\" [src]=\"sign\" style=\"width: 50% !important; border: 1px solid black;\" />\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                  <button #btnhiddensig class=\"btn default\" (click)=\"Modal()\" [disabled]=\"!isenabledsig\"\r\n                    *ngIf=\"showSig == false; else btnhiddensig\"> ลายเซ็นต์ผู้รับผิดชอบ\r\n                  </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle6\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 15px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title6}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                  <button class=\"btn default\" *ngIf=\"jobtype != 'PM' else spare\" #spare (click)=\"openModalcustomerpw()\"\r\n                    [disabled]=\"!isenabledcuspass\">\r\n                    ความคิดเห็นจากลูกค้า </button>\r\n                  <button class=\"btn default\" *ngIf=\"jobtype == 'PM' else all\" #all (click)=\"openModalcustomerpw()\"\r\n                    [disabled]=\"!isenabledcuspass\">\r\n                    รหัสยืนยันตัวตนลูกค้า </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle8\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title8}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" #btnSuccess style=\"padding-left: 10px;\"\r\n                  *ngIf=\"IsWaitsave == false; else btnSuccess\">\r\n                  <button class=\"btn default\" [disabled]=\"!isenabledsave\" (click)=\"saveData()\">\r\n                    ยืนยันการปิดงาน </button>\r\n                </div>\r\n                <div class=\"col-6 subtext text-center\" #lblSuccess\r\n                  style=\"color: green;font-size: 14px;font-weight: bold;\" *ngIf=\"IsWaitsave == true; else lblSuccess\">\r\n                  ระบบกำลังบันทึกข้อมูล กรุณารอสักครู่.....</div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" (click)=\"log()\">\r\n    <ion-fab-button>\r\n      <ion-icon name=\"alert\"></ion-icon>\r\n    </ion-fab-button>\r\n  </ion-fab>\r\n</ion-content>"
 
 /***/ }),
 
@@ -101,6 +101,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _auth_authentication_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../../../auth/authentication.service */ "./src/app/auth/authentication.service.ts");
 /* harmony import */ var _page_detaillistpm_log_log_page__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../../../page/detaillistpm/log/log.page */ "./src/app/page/detaillistpm/log/log.page.ts");
+/* harmony import */ var _page_sparepart_sparepart_page__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../../../page/sparepart/sparepart.page */ "./src/app/page/sparepart/sparepart.page.ts");
+
 
 
 
@@ -121,7 +123,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var DetailofdetaillistpmPage = /** @class */ (function () {
-    //#endregion
     //#region constructor
     function DetailofdetaillistpmPage(camera, modalController, route, navCtrl, sanitizer, storageService, alertController, auth, postDataService, toastCtrl) {
         var _this = this;
@@ -256,6 +257,8 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
         this.isQuotation = false;
         this.isRequest = false;
         this.isBreak = false;
+        //#endregion
+        this.spareList = [];
         this.DateStart = new Date().toString();
         this.tran = [];
         this.img = [];
@@ -273,6 +276,14 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
         this.CheckimgPM();
         this.route.queryParams.subscribe(function (params) {
             _this.myId = JSON.parse(params["data"]);
+            //console.log('JSON.parse(params["sparelist"])', JSON.parse(params["sparelist"]));
+            try {
+                _this.spareList = JSON.parse(params["sparelist"]);
+            }
+            catch (error) {
+            }
+            console.log('this.spareList', _this.spareList);
+            console.log('this.myId', _this.myId);
             _this.item = _this.myId.item;
             _this.type = _this.myId.type;
             _this.date = _this.myId.date;
@@ -297,7 +308,6 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
             _this.planDate = _this.install.planDate;
             _this.jobtype = _this.install.JobType;
             _this.url = sanitizer.bypassSecurityTrustResourceUrl(_this.postDataService.apiServer_url + 'Web/TabletCountTime.aspx' + '?planID=' + _this.planID + "&installID=" + _this.installID);
-            console.log('this.myId', _this.myId);
             if (_this.type == 'CM') {
                 _this.postDataService.UpdateInprogress(_this.planID).then(function (res) {
                 });
@@ -345,13 +355,9 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
                         modal = _a.sent();
                         modal.onDidDismiss().then(function (dis) {
                             _this.isQuotation = dis.data.isQuotation;
-                            _this.isRequest = dis.data.isRequest;
                             _this.requesText = dis.data.request;
-                            _this.isBreak = dis.data.isBreak;
                             console.log('this.isQuotation', _this.isQuotation);
-                            console.log('this.isRequest', _this.isRequest);
                             console.log('this.requesText', _this.requesText);
-                            console.log('this.isBreak', _this.isBreak);
                             // if (data.data.type == 'submit') {
                             //   this.onBackToPageMain();
                             // }
@@ -373,6 +379,10 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
                 }
             });
         });
+    };
+    DetailofdetaillistpmPage.prototype.machineBreak = function (event) {
+        this.isBreak = event.detail.checked;
+        console.log('this.isBreak', this.isBreak);
     };
     //#region start
     DetailofdetaillistpmPage.prototype.ngOnInit = function () {
@@ -417,7 +427,6 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
             empID: this.empID,
             jobtype: "Photo"
         };
-        console.log(params);
         this.postDataService.SaveCaseAll(params).then(function (Photo) {
             _this.Photo = Photo;
             console.log('this.Photo', _this.Photo);
@@ -529,12 +538,15 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
                 _this.isenabledcuspass = true;
                 _this.isenabledsave = false;
             }
-            if (_this.jobtype == "INSTALL" || _this.jobtype == "CM") {
-                if (_this.isShow6 == true || _this.isShow7 == true || _this.isShow8 == true || _this.isShow9 == true || _this.isShow10 == true) {
+            if (_this.jobtype == "INSTALL" || _this.jobtype == "CM" || _this.jobtype == "UNINSTALL") {
+                if (_this.isShow1 == true || _this.isShow2 == true || _this.isShow3 == true || _this.isShow4 == true || _this.isShow5 == true ||
+                    _this.isShow6 == true || _this.isShow7 == true || _this.isShow8 == true || _this.isShow9 == true || _this.isShow10 == true) {
                     _this.isenabledcheck = true;
+                    _this.isenabledcuseva = true;
                 }
                 else {
                     _this.isenabledcheck = false;
+                    _this.isenabledcuseva = false;
                 }
             }
             _this.checktakeback();
@@ -3093,8 +3105,9 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
         }
         else if (this.jobtype == "CM") {
             console.log('CM');
-            console.log('this.status6', this.status6);
-            if (this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
+            console.log('this.status1', this.status1);
+            if (this.status1 == "1" || this.status2 == "1" || this.status3 == "1" || this.status4 == "1" || this.status5 == "1" ||
+                this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
                 this.isenabledcheck = true;
                 this.isenabledrequest = true;
                 console.log('this.isenabledcheck', this.isenabledcheck);
@@ -3102,7 +3115,8 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
         }
         else if (this.jobtype == "UNINSTALL") {
             console.log('UNINSTALL');
-            if (this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
+            if (this.status1 == "1" || this.status2 == "1" || this.status3 == "1" || this.status4 == "1" || this.status5 == "1" ||
+                this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
                 this.isenabledcuseva = true;
             }
         }
@@ -3126,13 +3140,16 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
             }
         }
         else if (this.jobtype == "CM") {
-            if (this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
+            if (this.status1 == "1" || this.status2 == "1" || this.status3 == "1" || this.status4 == "1" || this.status5 == "1" ||
+                this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
                 this.isenabledcheck = true;
                 this.isenabledrequest = true;
             }
         }
         else if (this.jobtype == "UNINSTALL") {
-            if (this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
+            if (this.status1 == "1" || this.status2 == "1" || this.status3 == "1" || this.status4 == "1" || this.status5 == "1" ||
+                this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
+                this.isenabledcheck = true;
                 this.isenabledcuseva = true;
             }
         }
@@ -3198,13 +3215,11 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
                             _this.idold = _this.list.data.idold;
                             _this.sparepart = _this.list.data.sparepart;
                             _this.typedevice = _this.list.data.typedevice;
-                            console.log(_this.list.data);
-                            if (_this.list.data == 0) {
-                                _this.isenabledcuseva = false;
-                            }
-                            else {
-                                _this.isenabledcuseva = true;
-                            }
+                            // if (this.list.data == 0) {
+                            //   this.isenabledcuseva = false;
+                            // } else {
+                            //   this.isenabledcuseva = true;
+                            // }
                             _this.checkcm();
                         });
                         return [4 /*yield*/, modal.present()];
@@ -3423,110 +3438,142 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
         var _this = this;
         this.IsWaitsave = true;
         this.pauseTimer();
-        if (this.jobtype == 'CM' && (this.isQuotation || this.requesText)) {
-            console.log('this.isQuotation', this.isQuotation);
-            console.log('this.isRequest', this.isRequest);
-            console.log('this.requesText', this.requesText);
-            this.postDataService.RequestSparepart(this.planID, this.empID, this.isBreak, this.requesText, this.isQuotation, this.isRequest).then(function (res) {
-                console.log('res', res);
-                var params = {
-                    item: _this.item,
-                    type: "getCM",
-                    date: _this.date,
-                };
-                var navigationExtras = {
-                    queryParams: {
-                        data: JSON.stringify(params)
-                    }
-                };
-                _this.presentToast();
-                _this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
-            });
-        }
-        else {
-            var params = {
-                planID: this.planID,
-                cusID: this.cusID,
-                installID: this.installID,
-                idold: this.idold,
-                idnew: this.idnew,
-                typedevice: this.typedevice,
-                signature: this.sign,
-                empID: this.empID,
-                jobtype: this.jobtype + "3",
-                sparepart: this.sparepart
-            };
-            console.log('params', params);
-            this.postDataService.SaveCaseAll(params).then(function (servicephoto) {
-                _this.status = servicephoto;
-                if (_this.status == true) {
-                    _this.IsWaitsave = false;
-                    if (_this.jobtype == 'PM') {
-                        var params_1 = {
-                            planID: _this.planID,
-                            installID: _this.installID,
-                            jobtype: "GetTran",
-                        };
-                        _this.postDataService.GetTran(params_1).then(function (tranid) {
-                            _this.tranid = tranid;
-                            console.log(_this.tranid);
-                            _this.GenReport();
-                            _this.onBackToPageMain();
-                        });
-                    }
-                    else {
-                        if (_this.jobtype == 'CM') {
+        // if (this.jobtype == 'CM' && (this.isQuotation || this.requesText)) {
+        //   console.log('this.isQuotation', this.isQuotation);
+        //   console.log('this.isRequest', this.isRequest);
+        //   console.log('this.requesText', this.requesText);
+        //   console.log('this.isBreak', this.isBreak);
+        //   this.postDataService.RequestSparepart(this.planID, this.empID, this.isBreak, this.requesText, this.isQuotation, this.isRequest).then(res => {
+        //     console.log('res', res);
+        //     let params = {
+        //       item: this.item,
+        //       type: "getCM",
+        //       date: this.date,
+        //     }
+        //     let navigationExtras: NavigationExtras = {
+        //       queryParams: {
+        //         data: JSON.stringify(params)
+        //       }
+        //     };
+        //     this.presentToast();
+        //     this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
+        //   });
+        // }
+        // else {
+        // }
+        var params = {
+            planID: this.planID,
+            cusID: this.cusID,
+            installID: this.installID,
+            idold: this.idold,
+            idnew: this.idnew,
+            typedevice: this.typedevice,
+            signature: this.sign,
+            empID: this.empID,
+            jobtype: this.jobtype + "3",
+            sparepart: this.sparepart
+        };
+        console.log('params', params);
+        this.postDataService.SaveCaseAll(params).then(function (servicephoto) {
+            _this.status = servicephoto;
+            if (_this.status == true) {
+                _this.IsWaitsave = false;
+                if (_this.jobtype == 'PM') {
+                    var params_1 = {
+                        planID: _this.planID,
+                        installID: _this.installID,
+                        jobtype: "GetTran",
+                    };
+                    _this.postDataService.GetTran(params_1).then(function (tranid) {
+                        _this.tranid = tranid;
+                        console.log(_this.tranid);
+                        _this.GenReport();
+                        _this.onBackToPageMain();
+                    });
+                }
+                else {
+                    if (_this.jobtype == 'CM') {
+                        console.log('', _this.spareList);
+                        if (_this.spareList.length > 0) {
+                            console.log('this.isQuotation', _this.isQuotation);
+                            console.log('this.isRequest', _this.isRequest);
+                            console.log('this.requesText', _this.requesText);
+                            console.log('this.isBreak', _this.isBreak);
                             var params_2 = {
-                                item: _this.item,
-                                type: "getCM",
-                                date: _this.date,
+                                planID: _this.planID,
+                                empID: _this.empID,
+                                cusID: _this.cusID,
+                                isBreak: _this.isBreak,
+                                request: _this.requesText,
+                                isQuotation: _this.isQuotation,
+                                isRequest: _this.isRequest,
+                                spareList: _this.spareList
                             };
-                            var navigationExtras = {
-                                queryParams: {
-                                    data: JSON.stringify(params_2)
-                                }
-                            };
-                            _this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
-                            // this.navCtrl.navigateForward(['/menu/overview']); 
+                            _this.postDataService.RequestSparepart(params_2);
                         }
-                        else if (_this.jobtype == 'INSTALL') {
-                            var params_3 = {
-                                item: _this.item,
-                                type: "getIN",
-                                date: _this.date,
-                            };
-                            var navigationExtras = {
-                                queryParams: {
-                                    data: JSON.stringify(params_3)
-                                }
-                            };
-                            _this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
-                            // this.navCtrl.navigateForward(['/menu/overview']); 
-                        }
-                        else if (_this.jobtype == 'UNINSTALL') {
-                            var params_4 = {
-                                item: _this.item,
-                                type: "getUN",
-                                date: _this.date,
-                            };
-                            var navigationExtras = {
-                                queryParams: {
-                                    data: JSON.stringify(params_4)
-                                }
-                            };
-                            _this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
-                            // this.navCtrl.navigateForward(['/menu/overview']); 
-                        }
+                        var params_3 = {
+                            item: _this.item,
+                            type: "getCM",
+                            date: _this.date,
+                        };
+                        console.log('params', params_3);
+                        var navigationExtras = {
+                            queryParams: {
+                                data: JSON.stringify(params_3)
+                            }
+                        };
+                        _this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
                     }
-                    _this.presentToast();
+                    else if (_this.jobtype == 'INSTALL') {
+                        var params_4 = {
+                            item: _this.item,
+                            type: "getIN",
+                            date: _this.date,
+                        };
+                        var navigationExtras = {
+                            queryParams: {
+                                data: JSON.stringify(params_4)
+                            }
+                        };
+                        _this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
+                        // this.navCtrl.navigateForward(['/menu/overview']); 
+                    }
+                    else if (_this.jobtype == 'UNINSTALL') {
+                        var params_5 = {
+                            item: _this.item,
+                            type: "getUN",
+                            date: _this.date,
+                        };
+                        var navigationExtras = {
+                            queryParams: {
+                                data: JSON.stringify(params_5)
+                            }
+                        };
+                        _this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
+                        // this.navCtrl.navigateForward(['/menu/overview']); 
+                    }
                 }
-                else if (_this.status == false) {
-                    _this.alertFail();
-                }
-            });
-        }
+                _this.presentToast();
+            }
+            else if (_this.status == false) {
+                _this.alertFail();
+            }
+        });
     };
     //#endregion
+    DetailofdetaillistpmPage.prototype.SaveSpare = function () {
+        var params = {
+            insID: this.installID,
+            SkuData: this.spareList,
+            EmpID: this.empID,
+            Type: "SaveSpare",
+            CusID: this.cusID,
+            planID: this.planID,
+            JobID: '',
+        };
+        this.postDataService.PostCus(params).then(function (SpareData) {
+        });
+    };
     DetailofdetaillistpmPage.prototype.presentToast = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             var toast;
@@ -3979,25 +4026,78 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
             console.log(data);
         });
     };
+    // showSpare() {
+    //   let params = {
+    //     mainData: this.myId,
+    //     empID: this.empID,
+    //     insID: this.installID,
+    //     planID: this.planID,
+    //     item: this.item,
+    //     type: this.type,
+    //     date: this.date,
+    //     ItemsName: this.ItemsName,
+    //     Type: "Sparepart",
+    //     sparelist: this.spareList
+    //   }
+    //   console.log('params main', params);
+    //   const navigationExtras: NavigationExtras = {
+    //     queryParams: {
+    //       data: JSON.stringify(params),
+    //       sparelist: JSON.stringify(params.sparelist)
+    //     }
+    //   };
+    //   this.navCtrl.navigateForward(['/sparepart'], navigationExtras);
+    // }
     DetailofdetaillistpmPage.prototype.showSpare = function () {
-        var params = {
-            empID: this.empID,
-            insID: this.installID,
-            planID: this.planID,
-            item: this.item,
-            type: this.type,
-            date: this.date,
-            ItemsName: this.ItemsName,
-            Type: "Sparepart"
-        };
-        console.log(params);
-        var navigationExtras = {
-            queryParams: {
-                data: JSON.stringify(params)
-            }
-        };
-        this.navCtrl.navigateForward(['/sparepart'], navigationExtras);
-        console.log(navigationExtras);
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var modal;
+            var _this = this;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.modalController.create({
+                            component: _page_sparepart_sparepart_page__WEBPACK_IMPORTED_MODULE_18__["SparepartPage"],
+                            cssClass: 'my-custom-modal-css',
+                            componentProps: {
+                                mainData: this.myId,
+                                empID: this.empID,
+                                insID: this.installID,
+                                planID: this.planID,
+                                item: this.item,
+                                type: this.type,
+                                date: this.date,
+                                ItemsName: this.ItemsName,
+                                Type: "Sparepart",
+                                sparelist: this.spareList
+                            }
+                        })];
+                    case 1:
+                        modal = _a.sent();
+                        modal.onDidDismiss().then(function (res) {
+                            if (res.data != 'close') {
+                                _this.spareList = res.data.sparelist;
+                            }
+                            // this.spareList.push(
+                            //   {
+                            //     ID: res.data.ID,
+                            //     PositionNo: res.data.PositionNo,
+                            //     Skuname: res.data.Skuname,
+                            //     SubSKUID: res.data.SubSKUID,
+                            //     Amount: res.data.Amount,
+                            //     Balance: res.data.Balance
+                            //   });
+                            console.log('this.spareList', _this.spareList);
+                            if (_this.spareList.length > 0) {
+                                _this.isRequest = true;
+                            }
+                            else {
+                                _this.isRequest = false;
+                            }
+                        });
+                        return [4 /*yield*/, modal.present()];
+                    case 2: return [2 /*return*/, _a.sent()];
+                }
+            });
+        });
     };
     DetailofdetaillistpmPage.prototype.logs = function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {

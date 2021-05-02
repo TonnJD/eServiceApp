@@ -23,7 +23,8 @@ export class LogPage implements OnInit {
     public alertController: AlertController,) {
     this.empID = this.navParams.data.empID;
     this.planID = this.navParams.data.planID;
-    console.log(this.empID + " " + this.planID);
+    console.log('this.empID', this.empID);
+    console.log('this.planID', this.planID);
     
     this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/TabletsLogs.aspx' + '?empID=' + this.empID + '&planID=' + this.planID);
   }

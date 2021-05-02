@@ -65,9 +65,6 @@ export class RequestsparepartPage implements OnInit {
   }
 
   submitRequest() {
-    console.log('this.request', this.request);
-    console.log('this.isBreak', this.isBreak);
-        
     // this.postDataService.RequestSparepart(this.planID, this.empID, this.isBreak, this.request).then(res => {
     //   this.request = '';
     //   this.followLog = res;
@@ -84,10 +81,8 @@ export class RequestsparepartPage implements OnInit {
 
       if (this.type != 'history') {
         let param = {
-          isQuotation: this.isQuotation,
-          isRequest: this.isRequest,
-          request: this.request,
-          isBreak: this.isBreak
+          isQuotation: true,
+          request: this.request
         }
 
         this.modalCtrl.dismiss(param);
@@ -96,21 +91,11 @@ export class RequestsparepartPage implements OnInit {
 
   async confirmSubmit() {
     console.log('this.isQuotation', this.isQuotation);
-    console.log('this.isRequest', this.isRequest);
     
-    if (!this.isQuotation && !this.isRequest) {
+    if (this.request == null) {
       const alert = await this.alertCtrl.create({
         header: 'แจ้งเตือน',
-        message: 'กรุณาเลือกรายการ',
-        buttons: ['OK']
-      });
-
-      await alert.present();
-    }
-    else if (this.request == null) {
-      const alert = await this.alertCtrl.create({
-        header: 'แจ้งเตือน',
-        message: 'กรุณากรอก <strong>รายละเอียดขอเสนอราคา / ขอเบิกอะไหล่</strong>',
+        message: 'กรุณากรอก <strong>รายละเอียดขอเสนอราคา</strong>',
         buttons: ['OK']
       });
 
@@ -119,7 +104,7 @@ export class RequestsparepartPage implements OnInit {
     else {
       const alert = await this.alertCtrl.create({
         header: 'ยืนยัน',
-        message: 'ต้องการยืนยันขอเสนอราคา / ขอเบิกอะไหล่ หรือไม่?',
+        message: 'ต้องการยืนยันขอเสนอราคา หรือไม่?',
         buttons: [
           {
             text: 'ยืนยัน',

@@ -9,12 +9,12 @@ export class PostDataService {
   data;
 
   // test local
-  apiServer_url = 'http://localhost:41669/';
-  apiStock = 'https://localhost:41669/';
+  // apiServer_url = 'http://localhost:41669/';
+  // apiStock = 'https://localhost:41669/';
 
   // จาก Server จริง
-  // apiServer_url = 'https://erpsuperior.com/';
-  // apiStock = 'https://wms.erpsuperior.com/';
+  apiServer_url = 'https://erpsuperior.com/';
+  apiStock = 'https://wms.erpsuperior.com/';
 
   //จาก Server เทส
   // apiServer_url = 'https://test.erpsuperior.com/';
@@ -438,12 +438,11 @@ export class PostDataService {
     });
   }
 
-  RequestSparepart(planID, empID, isBreak, request, isQuotation, isRequest) {
+  RequestSparepart(form) {
     return new Promise((resovle, reject) => {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-      this.http.get(this.apiServer_url + '/API/WebService.asmx/RequestSparepart?planID=' + planID + '&empID=' + empID + '&isBreak=' + isBreak + '&request=' + request
-        + '&isQuotation=' + isQuotation + '&isRequest=' + isRequest, option).subscribe(data => {
+      this.http.post(this.apiServer_url + '/API/WebService.asmx/RequestSparepart', JSON.stringify(form), option).subscribe(data => {
           resovle(data);
         }, error => {
           reject(error)

@@ -1,0 +1,36 @@
+<ion-toolbar color="primary">
+  <ion-title>เพิ่มรายการอะไหล่</ion-title>
+  <ion-buttons slot="primary">
+    <ion-icon slot="end" name="close" (click)="close()"></ion-icon>
+  </ion-buttons>
+</ion-toolbar>
+
+<ion-content>
+
+  <ion-card>
+    <ion-card-content>
+      <!-- <ion-card-header>
+        <ion-card-title>รายละเอียดขอเสนอราคา / ขอเบิกอะไหล่</ion-card-title>
+      </ion-card-header> -->
+      <div class="form-group row" style="margin-top:20px;">
+        <div class="col-9">
+          <label>ชื่ออะไหล่</label>
+          <input type="text" class="form-control" [(ngModel)]="sparepartName" />
+        </div>
+        <div class="col-3 text-right">
+          <label>จำนวน</label>
+          <input type="number" class="form-control text-right" [(ngModel)]="sparepartAmount" />
+        </div>
+      </div>
+    </ion-card-content>
+
+    <ion-card-content>
+      <div class="col-md-12 text-center">
+        <ion-button (click)="submit()">ยืนยัน</ion-button>
+        <ion-button color='dark' (click)="close()">ยกเลิก</ion-button>
+      </div>
+    </ion-card-content>
+
+    <ion-card-content></ion-card-content>
+  </ion-card>
+</ion-content>

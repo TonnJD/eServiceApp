@@ -141,7 +141,7 @@
         </ion-card>
 
         <ion-card *ngIf="isShowSpare">
-          <ion-card-header>
+          <!-- <ion-card-header>
             <ion-card-title>รายการเปลี่ยนอะไหล่</ion-card-title>
           </ion-card-header>
       
@@ -198,8 +198,8 @@
                 <ion-button color="primary" (click)="confirmSpare()">ยืนยันการเปลี่ยนอะไหล่</ion-button>
               </div>
             </div>
-          </ion-card-content>
-          <!-- <ion-card-content>
+          </ion-card-content> -->
+          <ion-card-content>
             <ion-card-title>เปลี่ยนอะไหล่</ion-card-title>
             <ion-item>
               <ion-icon name="search" (click)="Add()"></ion-icon>
@@ -230,7 +230,7 @@
                             <td><label>{{item.SKUCode}}</label></td>
                             <td><label>{{item.Balance}}</label></td>
                             <td>
-                              <ion-button shape="round" color="warning" class="text-center" (click)="select(i,item)">
+                              <ion-button color="warning" class="text-center" (click)="select(i,item)">
                                 เลือก</ion-button>
                             </td>
                           </tr>
@@ -241,10 +241,10 @@
                 </div>
               </div>
             </div>
-          </ion-card-content> -->
+          </ion-card-content>
         </ion-card>
 
-        <!-- <div *ngIf="isEditSpare">
+        <div *ngIf="isEditSpare">
           <ion-card>
             <ion-card-content>
               <ion-card-title>อะไหล่ที่เปลี่ยน</ion-card-title>
@@ -262,7 +262,7 @@
                               <th style="color:green"> Part No. </th>
                               <th style="color:green"> Part No. ตัวเดิม</th>
                               <th style="color:green"> จำนวน </th>
-                              <th style="color:green" *ngIf="type != 'PM'"> ส่งคืน</th>
+                              <!-- <th style="color:green" *ngIf="type != 'PM'"> ส่งคืน</th> -->
                               <th></th>
                             </tr>
                           </thead>
@@ -288,19 +288,19 @@
                               <td>
                                 <label>{{item.Balance}}</label>
                               </td>
-                              <td *ngIf="type != 'PM'">
+                              <!-- <td *ngIf="type != 'PM'">
                                 <ion-checkbox style="margin-top: 8px;" slot="end" [(ngModel)]="item.isChecked"></ion-checkbox>
-                              </td>
+                              </td> -->
                               <td>
-                                <ion-button shape="round" color="danger" class="text-center" (click)="remove(i,item)">
+                                <ion-button color="danger" class="text-center" (click)="remove(i,item)">
                                   ลบ
                                 </ion-button>
                               </td>
                             </tr>
                           </tbody>
                         </table>
-                        <div class="text-center">
-                          <ion-button shape="round" color="success" class="text-center"
+                        <div class="text-center" style="margin-top:10px;margin-bottom:10px;">
+                          <ion-button color="success" class="text-center"
                             (click)="AddCM('Spareparts',spareList)"> ยืนยันการเปลี่ยนอะไหล่</ion-button>
                         </div>
                       </div>
@@ -310,7 +310,7 @@
               </div>
             </ion-card-content>
           </ion-card>
-        </div> -->
+        </div>
 
       </div>
     </div>

@@ -1,25 +1,28 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-      <ion-title>เบิกอะไหล่ ({{ItemsName}})</ion-title>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<ion-toolbar color="primary">
+  <ion-title>เบิกอะไหล่ ({{ItemsName}})</ion-title>
+  <ion-buttons slot="primary">
+    <ion-icon slot="end" name="close" (click)="close()"></ion-icon>
+  </ion-buttons>
+</ion-toolbar>
 
 <ion-content>
   <div *ngIf="Type != 'history'">
     <ion-item>
       <div class="row">
-        <div class="col-12" style="margin-top: 15px; margin-bottom: 15px;">
+        <!-- <div class="col-12" style="margin-top: 15px; margin-bottom: 15px;">
           <ion-searchbar type="text" (ionChange)="getItems($event)" placeholder="ค้นหา"></ion-searchbar>
-        </div>
-        <div class="col-12">
+        </div> -->
+        <div class="col-12" style="margin-top: 15px; margin-bottom: 15px;">
           <ion-label color="primary">ประเภทอะไหล่</ion-label>
         </div>
-        <div class="col-sm-3" *ngFor="let s of itemname; let i = index">
+
+        <div class="col-sm-12" style="margin-bottom: 15px;" *ngIf="itemname.length == 0">
+          <h4>ไม่พบข้อมูลอะไหล่</h4>
+        </div>
+        <div class="col-sm-3" style="margin-bottom: 15px;" *ngFor="let s of itemname; let i = index">
           <ion-button expand="block" color="{{s.color}}" (click)="getImage(i,s.SparepartGroupID,s.MainSKUID)">
-            {{s.SparepartGroupName}}</ion-button>
+            {{s.SparepartGroupName}}
+          </ion-button>
         </div>
 
         <!-- <div class="col-12">        
@@ -48,7 +51,7 @@
       </ion-slide>
     </ion-slides>
     <div class="row" style="margin: 5px;" *ngIf="DataSpare">
-      <div class="col-md-6" style="padding:2px;">
+      <div class="col-md-12" style="padding:2px;" *ngIf="DataSpare.length != 0">
         <div class="portlet box blue">
           <div class="portlet-title">
             <div class="caption">
@@ -60,20 +63,21 @@
               <div class="tab-pane active">
                 <div class="row">
                   <div class="col-12">
-                    <div class="table-scrollable">
+                    <div style="height: 300px; overflow-y:scroll;">
                       <table class="table table-hover">
                         <thead>
                           <tr>
                             <th class="text-center"> ลำดับที่ </th>
                             <th> ชื่ออะไหล่ </th>
                             <th class="text-center"> ตำแหน่ง </th>
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr *ngFor="let item of DataSpare; let i = index">
-                            <td class="text-center"> {{i + 1}} </td>
-                            <td> {{item.Skuname}} </td>
-                            <td class="text-center"> {{item.PositionNo}} </td>
+                            <td class="text-center" style="padding-top: 22px;"> {{i + 1}} </td>
+                            <td style="padding-top: 22px;"> {{item.Skuname}} </td>
+                            <td class="text-center" style="padding-top: 22px;"> {{item.PositionNo}} </td>
                             <td class="text-center">
                               <ion-button expand="block" color="warning" (click)="AddToList(i,item)" size="small">เพิ่ม
                               </ion-button>
@@ -91,7 +95,8 @@
           </div>
         </div>
       </div>
-      <div class="col-md-6" style="padding:2px;">
+
+      <div class="col-md-12" style="padding:2px;">
         <div class="portlet box blue">
           <div class="portlet-title">
             <div class="caption">
@@ -102,6 +107,11 @@
             <div class="tab-content">
               <div class="tab-pane active">
                 <div class="row">
+                  <div class="col-12 text-right">
+                    <ion-button color="success" class="text-center" (click)="addSparepart()">
+                      เพิ่มรายการ
+                    </ion-button>
+                  </div>
                   <div class="col-12">
                     <div class="table-scrollable">
                       <table class="table table-hover">
@@ -109,17 +119,16 @@
                           <tr>
                             <th class="text-center"> ลำดับ </th>
                             <th> ชื่ออะไหล่ </th>
-                            <th class="text-center"> ตำแหน่ง </th>
                             <th> จำนวนที่ต้องการเบิก </th>
-                            <!-- <th> จำนวนคงเหลือในสต็อก </th> -->
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr *ngFor="let item of ListSpare; let i = index">
-                            <td class="text-center"> {{i + 1}} </td>
-                            <td> {{item.Skuname}} </td>
-                            <td class="text-center"> {{item.PositionNo}} </td>
-                            <td> <input type="number" [(ngModel)]="item.Amount" style="width: 120px" /> </td>
+                            <td class="text-center" style="padding-top: 22px;"> {{i + 1}} </td>
+                            <td style="padding-top: 22px;"> {{item.Skuname}} </td>
+                            <td style="padding-top: 18px;"> <input type="number" [(ngModel)]="item.Qty"
+                                style="width: 120px; text-align: right;" /> </td>
                             <!-- <td> {{item.Balance}} </td> -->
                             <td>
                               <ion-button expand="block" color="danger" (click)="DeleteFromList(i,item)" size="small">ลบ
@@ -130,10 +139,14 @@
                           </tr>
                         </tbody>
                       </table>
-                      <div class="text-center" *ngIf="ListSpare != null">
-                        <ion-button shape="round" color="success" class="text-center" (click)="SaveSpare(ListSpare)">
+                      <div style="margin-top: 10px; margin-bottom: 10px;" class="text-center" *ngIf="ListSpare != null">
+                        <ion-button color="primary" class="text-center" (click)="submitSpareList()">
                           ยืนยันการเบิกอะไหล่</ion-button>
                       </div>
+                      <!-- <div style="margin-top: 10px; margin-bottom: 10px;" class="text-center" *ngIf="ListSpare != null">
+                        <ion-button color="primary" class="text-center" (click)="SaveSpare(ListSpare)">
+                          ยืนยันการเบิกอะไหล่</ion-button>
+                      </div> -->
                     </div>
                   </div>
                 </div>

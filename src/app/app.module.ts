@@ -25,6 +25,7 @@ import { CheckevaluationPageModule } from '../app/page/joball/detailofdetaillist
 import { ChecklistPageModule } from '../app/page/joball/detailofdetaillistpm/checklist/checklist.module';
 import { ModalpopPageModule } from '../app/page/overview/modalpop/modalpop.module';
 import { ChecklistcmPageModule } from '../app/page/joball/detailofdetaillistpm/checklistcm/checklistcm.module';
+import { AddSparepartPageModule } from '../app/page/sparepart/add-sparepart/add-sparepart.module';
 import { ShowimginstallPageModule } from '../app/page/job/showimginstall/showimginstall.module';
 import { ChangpasswordPageModule } from '../app/page/setting/changpassword/changpassword.module';
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
@@ -39,6 +40,7 @@ import { AuthGuardGuard } from '../app/auth/auth-guard.guard';
 import { PartsWaitingListPageModule } from '../app/page/sparepart/parts-waiting-list/parts-waiting-list.module';
 import { LogPageModule } from '../app/page/detaillistpm/log/log.module';
 import { RequestsparepartPageModule } from '../app/page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.module';
+import { SparepartPageModule } from '../app/page/sparepart/sparepart.module';
 //import { JobresponsPageModule} from '../app/page/job/jobdetail/jobrespons/jobrespons.module'
 
 @NgModule({
@@ -63,12 +65,14 @@ import { RequestsparepartPageModule } from '../app/page/joball/detailofdetaillis
     PartsWaitingListPageModule,
     ChangsparepartPageModule,
     ChecklistcmPageModule,
+    AddSparepartPageModule,
     ShowimginstallPageModule,
     ChangpasswordPageModule,
     LogPageModule,
     HttpClientModule,
     NgbModule,
-    RequestsparepartPageModule
+    RequestsparepartPageModule,
+    SparepartPageModule
   ],
   providers: [
     AuthGuardGuard,
