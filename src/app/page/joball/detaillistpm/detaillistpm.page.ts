@@ -274,6 +274,7 @@ export class DetaillistpmPage implements OnInit {
           this.empID = this.items[i].empID;
 
         }
+
         this.detaillistpm.cusID = this.cusID;
         this.detaillistpm.planID = this.planID;
         this.detaillistpm.month = this.month;
@@ -284,6 +285,7 @@ export class DetaillistpmPage implements OnInit {
 
         this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
           this.data = work;
+          console.log('data install', this.data);
 
           for (let i = 0; i < this.data.length; i++) {
             this.Customername = this.data[i].CustomerName;

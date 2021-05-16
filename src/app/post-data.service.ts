@@ -9,12 +9,12 @@ export class PostDataService {
   data;
 
   // test local
-  // apiServer_url = 'http://localhost:41669/';
-  // apiStock = 'https://localhost:41669/';
+  apiServer_url = 'http://localhost:41669/';
+  apiStock = 'https://localhost:41669/';
 
   // จาก Server จริง
-  apiServer_url = 'https://erpsuperior.com/';
-  apiStock = 'https://wms.erpsuperior.com/';
+  // apiServer_url = 'https://erpsuperior.com/';
+  // apiStock = 'https://wms.erpsuperior.com/';
 
   //จาก Server เทส
   // apiServer_url = 'https://test.erpsuperior.com/';
