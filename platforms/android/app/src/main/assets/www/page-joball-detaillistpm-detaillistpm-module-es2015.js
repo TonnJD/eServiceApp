@@ -308,6 +308,7 @@ let DetaillistpmPage = class DetaillistpmPage {
                 this.detaillistpm.empid = this.empID;
                 this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
                     this.data = work;
+                    console.log('data install', this.data);
                     for (let i = 0; i < this.data.length; i++) {
                         this.Customername = this.data[i].CustomerName;
                         this.data[i].productInstall = JSON.parse(this.data[i].productInstall);

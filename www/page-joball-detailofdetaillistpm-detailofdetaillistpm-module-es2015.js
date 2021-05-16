@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button></ion-back-button>\r\n      <ion-title>{{worktype}}: {{ItemsName}}</ion-title>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row\" style=\"padding: 5px;\">\r\n      <div class=\"col-lg-3\" style=\"padding: 0px;\">\r\n        <div class=\"row\" style=\"padding-left:15px;\">\r\n          <div class=\"col-12 hidden\" style=\"padding: 0px;\">\r\n            <div class=\"portlet box blue\">\r\n              <div class=\"portlet-title\">\r\n                <div class=\"caption\">\r\n                  <i class=\"fa fa-bar-chart\"></i>สถานะ\r\n                </div>\r\n              </div>\r\n              <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n                <div class=\"portlet light \">\r\n                  <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                      <p class=\"profile-desc-text\" style=\"text-align: center; padding: 5px;\">รอการตรวจสอบ</p>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-12\" style=\"padding: 0px; padding-right:2px;\">\r\n            <div class=\"portlet box blue\">\r\n              <div class=\"portlet-title\">\r\n                <div class=\"caption\">\r\n                  <i class=\"fa fa-clock-o\"></i>สถานะและเวลาทำงาน\r\n                </div>\r\n              </div>\r\n              <div class=\"portlet-body\">\r\n                <iframe [src]=\"url\" style=\"width:100%;border:0px;background-color: white;\"></iframe>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-12 hidden\" style=\"padding: 0px;\">\r\n          <div class=\"portlet box blue\">\r\n            <div class=\"portlet-title\">\r\n              <div class=\"caption\">\r\n                <i class=\"fa fa-bar-chart\"></i>สถานะ\r\n              </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n              <div class=\"portlet light \">\r\n                <div class=\"row\">\r\n                  <div class=\"col-12\">\r\n                    <p class=\"profile-desc-text\" style=\"text-align: center; padding: 5px;\">รอการตรวจสอบ</p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-12\" style=\"padding: 0px;\">\r\n          <div class=\"portlet box blue\">\r\n            <div class=\"portlet-title\">\r\n              <div class=\"caption\">\r\n                <i class=\"fa fa-cube\"></i>สินค้า\r\n              </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n              <div class=\"portlet light \">\r\n                <div class=\"row\">\r\n                  <div class=\"col-4\">\r\n                    <p class=\"profile-desc-text\">สินค้าที่ติดตั้ง:</p>\r\n                    <p class=\"profile-desc-text\">รหัสสินค้า:</p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype != 'INSTALL'\">ชื่อสินค้า:</p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype == 'INSTALL' && OldItemsName != null\">เครื่องที่รื้อถอน:\r\n                    </p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype == 'INSTALL'\">เครื่องที่ติดตั้ง:</p>\r\n                    <p class=\"profile-desc-text\">Serial No:</p>\r\n                  </div>\r\n                  <div class=\"col-8\">\r\n                    <p class=\"profile-desc-text\">{{InstallPlanName}}</p>\r\n                    <p class=\"profile-desc-text\">{{ItemCode}}</p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype != 'INSTALL'\">{{ItemsName}}</p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype == 'INSTALL' && OldItemsName != null\">{{OldItemsName}}\r\n                    </p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype == 'INSTALL'\">{{ItemsName}}</p>\r\n                    <p class=\"profile-desc-text\">{{SerialNo}}</p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-12\" style=\"padding: 0px;\" *ngIf=\"isdevice && jobtype == 'CM'\">\r\n          <div class=\"portlet box blue\">\r\n            <div class=\"portlet-title\">\r\n              <div class=\"caption\">\r\n                <i class=\"fa fa-cube\"></i>เครื่องที่เปลี่ยน\r\n              </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n              <div class=\"portlet light\" *ngFor=\"let i of devices;\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-4\">\r\n                    <p class=\"profile-desc-text\">สินค้าที่ติดตั้ง:</p>\r\n                    <p class=\"profile-desc-text\">ชื่อสินค้า:</p>\r\n                    <p class=\"profile-desc-text\">รหัสสินค้า:</p>\r\n                    <p class=\"profile-desc-text\">Serial No:</p>\r\n                  </div>\r\n                  <div class=\"col-8\">\r\n                    <p class=\"profile-desc-text\">{{i.InstallPlanName}}</p>\r\n                    <p class=\"profile-desc-text\">{{i.ItemCode}}</p>\r\n                    <p class=\"profile-desc-text\">{{i.ItemsName}}</p>\r\n                    <p class=\"profile-desc-text\">{{i.SerialNo}}</p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <!-- <div class=\"col-12\" style=\"padding: 0px;\" *ngIf=\"isspare && jobtype == 'CM'\">\r\n          <div class=\"portlet box blue\">\r\n            <div class=\"portlet-title\">\r\n              <div class=\"caption\">\r\n                <i class=\"fa fa-cube\"></i>อะไหล่ที่เปลี่ยน\r\n              </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n              <div class=\"portlet light\" *ngFor=\"let i of spares;\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-4\">\r\n                    <p class=\"profile-desc-text\">ชื่ออุปกรณ์เสริม :</p>\r\n                    <p class=\"profile-desc-text\">Part No. :</p>\r\n                  </div>\r\n                  <div class=\"col-8\">\r\n                    <p class=\"profile-desc-text\">{{i.Name}}</p>\r\n                    <p class=\"profile-desc-text\">{{i.Serial}}</p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div> -->\r\n      </div>\r\n      <div class=\"col-lg-9\" style=\"padding: 0px;\">\r\n        <div class=\"portlet box blue\">\r\n          <div class=\"portlet-title\">\r\n            <div class=\"caption\">\r\n              <i class=\"fa fa-sticky-note-o\"></i>รายการตรวจเช็ค\r\n              <ion-label>ร้าน {{CustomerName}} {{planDate}} </ion-label>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle1\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span style=\"font-size: 1.1em!important;\" class=\"caption-subject font-blue-sharp bold uppercase\">\r\n                      {{title1}} </span>\r\n                  </div>\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src1\" *ngIf=\"isShowImage1\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src2\" *ngIf=\"isShowImage2\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src3\" *ngIf=\"isShowImage3\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src4\" *ngIf=\"isShowImage4\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src5\" *ngIf=\"isShowImage5\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src6\" *ngIf=\"isShowImage6\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src7\" *ngIf=\"isShowImage7\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src8\" *ngIf=\"isShowImage8\" />\r\n                </div>\r\n\r\n                <div class=\"col-1 text-center\">\r\n                </div>\r\n\r\n                <div class=\" col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take1 *ngIf=\"isShow1 == false ; else take1\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(1)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo1\" *ngIf=\"isShow1\" (click)=\"Take(1)\">\r\n                </div>\r\n\r\n                <div class=\"col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take2 *ngIf=\"isShow2 == false ; else take2\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(2)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo2\" *ngIf=\"isShow2\" (click)=\"Take(2)\" />\r\n                </div>\r\n\r\n                <div class=\"col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take3 *ngIf=\"isShow3 == false ; else take3\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(3)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo3\" *ngIf=\"isShow3\" (click)=\"Take(3)\">\r\n                </div>\r\n\r\n                <div class=\"col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take4 *ngIf=\"isShow4 == false ; else take4\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(4)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo4\" *ngIf=\"isShow4\" (click)=\"Take(4)\">\r\n                </div>\r\n\r\n                <div class=\"col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take5 *ngIf=\"isShow5 == false ; else take5\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(5)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo5\" *ngIf=\"isShow5\" (click)=\"Take(5)\">\r\n                </div>\r\n\r\n                <div class=\"col-12\" *ngIf=\"isPM\">\r\n                  <div class=\"row\" style=\"margin-bottom: 10px;\">\r\n                    <div class=\"col-3 text-center\" style=\"margin-bottom: 80px;\" *ngFor=\"let p of productphoto\">\r\n                      <div>{{p.Name}}</div>\r\n                      <div #take *ngIf=\"p.show == false ; else take\">\r\n                        <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                          <ion-fab-button (click)=\"TakePM(p)\">\r\n                            <ion-icon name=\"camera\"></ion-icon>\r\n                          </ion-fab-button>\r\n                        </ion-fab>\r\n                      </div>\r\n                      <img [src]=\"apiServer_url + p.img\" *ngIf=\"p.show\" (click)=\"TakePM(p)\">\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-6\">\r\n                    <div class=\"text-center\" style=\"padding-left: 10px;\">\r\n                      <button (click)=\"showimgremark()\" class=\"btn default\" style=\"width: 100%;\">\r\n                        รูปภาพเพิ่มเติม </button>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-12\" *ngIf=\"isimgRemark\" style=\"margin-top: 10px;margin-bottom: 10px;;\">\r\n                    <div class=\"row\">\r\n                      <div class=\"col-1 text-center\">\r\n                      </div>\r\n\r\n                      <div class=\" col-2 text-center\" *ngFor=\"let p of photoremark\">\r\n                        <div #takere *ngIf=\"p.show == false ; else takere\">\r\n                          <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                            <ion-fab-button (click)=\"TakePMRe(p)\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"apiServer_url + p.img\" *ngIf=\"p.show\" (click)=\"TakePMRe(p)\">\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle2\">\r\n            <div class=\"portlet box light\">\r\n              <div class=\"portlet-title\">\r\n                <div class=\"caption\">\r\n                  <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                  <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                    {{title2}}</span>\r\n                </div>\r\n              </div>\r\n              <div class=\"portlet-body form\">\r\n                <div class=\"horizontal-form\">\r\n                  <div class=\"form-body\">\r\n                    <div class=\"row\">\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 1</div>\r\n                        <div *ngIf=\"isShow1 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(1)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo1\" *ngIf=\"isShow1\" (click)=\"Take(1)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 2</div>\r\n                        <div *ngIf=\"isShow2 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(2)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo2\" *ngIf=\"isShow2\" (click)=\"Take(2)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 3</div>\r\n                        <div *ngIf=\"isShow3 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(3)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo3\" *ngIf=\"isShow3\" (click)=\"Take(3)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 4</div>\r\n                        <div *ngIf=\"isShow4 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(4)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo4\" *ngIf=\"isShow4\" (click)=\"Take(4)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 5</div>\r\n                        <div *ngIf=\"isShow5 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(5)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo5\" *ngIf=\"isShow5\" (click)=\"Take(5)\">\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"row\">\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 6</div>\r\n                        <div *ngIf=\"isShow6 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(6)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo6\" *ngIf=\"isShow6\" (click)=\"Take(6)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 7</div>\r\n                        <div *ngIf=\"isShow7 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(7)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo7\" *ngIf=\"isShow7\" (click)=\"Take(7)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 8</div>\r\n                        <div *ngIf=\"isShow8 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(8)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo8\" *ngIf=\"isShow8\" (click)=\"Take(8)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 9</div>\r\n                        <div *ngIf=\"isShow9 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(9)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo9\" *ngIf=\"isShow9\" (click)=\"Take(9)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 10</div>\r\n                        <div *ngIf=\"isShow10 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(10)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo10\" *ngIf=\"isShow10\" (click)=\"Take(10)\">\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle3\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 20px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title3}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div #nospare class=\"col-md-6 text-center\"\r\n                  style=\"padding-left: 10px;margin-top: 5px;margin-bottom: 10px;\"\r\n                  *ngIf=\"jobtype != 'INSTALL' else nospare\">\r\n                  <button (click)=\"check()\" [disabled]=\"!isenabledcheck\" class=\"btn default\">\r\n                    คลิกเพื่อตรวจเช็ครายการ</button>\r\n                </div>\r\n                <!-- <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;margin-top: 5px;margin-bottom: 10px;\"\r\n                  *ngIf=\"jobtype == 'PM'\">\r\n                  <button (click)=\"changsparepm()\" [disabled]=\"!isenabledcheck\" class=\"btn default\">\r\n                    เปลี่ยนอะไหล่\r\n                  </button>\r\n                </div> -->\r\n                <div #device class=\"col-md-6 text-center\"\r\n                  style=\"padding-left: 10px;margin-top: 5px;margin-bottom: 10px;\"\r\n                  *ngIf=\"jobtype == 'INSTALL' else device\">\r\n                  <button (click)=\"changspare('device')\" class=\"btn default\">\r\n                    เพิ่มเครื่อง </button>\r\n                </div>\r\n                <div #spare class=\"col-md-6 text-center\" style=\"padding-left: 10px;margin-top: 5px;margin-bottom: 10px;\"\r\n                  *ngIf=\"jobtype == 'INSTALL' else spare\">\r\n                  <button (click)=\"changspare()\" [disabled]=\"!isenabledadddevice\" class=\"btn default\">\r\n                    เพิ่มอุปกรณ์เสริม </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;margin-bottom: 10px;\">\r\n                  <!-- <div *ngIf=\"sparetype != '' && jobtype == 'PM'; else sparepart\">\r\n                    <button (click)=\"changspare()\" [disabled]=\"!isenabledspare\" class=\"btn default\" #sparepart>\r\n                      รายการเปลี่ยนอะไหล่ </button>\r\n                  </div> -->\r\n                  <div *ngIf=\"jobtype == 'CM' && request == null; else CM\" style=\"margin-top: 5px;margin-bottom: 10px;\">\r\n                    <!-- <button (click)=\"takerequest()\" class=\"btn default\" #CM [disabled]=\"!isenabledrequest\">\r\n                      ใบเบิกอะไหล่ </button> -->\r\n                    <!-- <img *ngIf=\"jobtype == 'CM' && request != null ; else imgrequest\" [src]=\"request\"\r\n                  (click)=\"takerequest()\" #imgrequest> -->\r\n                    <div style=\"margin-top: 5px;margin-bottom:5px;\">\r\n                      <button (click)=\"showSpare()\" class=\"btn default\" #CM [disabled]=\"!isenabledrequest\">\r\n                        ขอเบิกอะไหล่<span *ngIf=\"spareList.length > 0\"> ({{spareList.length}} รายการ)</span>\r\n                      </button>\r\n                    </div>\r\n\r\n                    <button (click)=\"requestSparepart()\" class=\"btn default\" [disabled]=\"!isenabledrequest\">\r\n                      ขอเสนอราคา\r\n                    </button>\r\n                    <ion-card-content>\r\n                      <div class=\"col-12\">\r\n                        <ion-item>\r\n                          <ion-label>กรุณาเลือก กรณีเครื่องเบรก</ion-label>\r\n                          <ion-checkbox slot=\"start\" [(ngModel)]=\"isBreak\" (ionChange)=\"machineBreak($event)\"></ion-checkbox>\r\n                        </ion-item>\r\n                      </div>\r\n                    </ion-card-content>\r\n                    <!-- <div *ngIf=\"jobtype != 'PM'\" style=\"margin-top: 5px;margin-bottom: 5px;\">\r\n                      <button class=\"btn default\" (click)=\"response()\"\r\n                        style=\"background-color: rgb(245, 197, 76);color: white;\">\r\n                        แจ้งปัญหากรณีไม่สามารถปิดงานได้</button>\r\n                    </div> -->\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle7\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 20px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title7}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;margin-bottom: 10px;\">\r\n                  <button class=\"btn default\" (click)=\"openModalcustomereva()\" [disabled]=\"!isenabledcuseva\">\r\n                    คลิกเพื่อกรอกข้อมูล </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                  <button class=\"btn default\" (click)=\"onBackToPageMain()\" [disabled]=\"!isenabledeva\"\r\n                    style=\"background-color: #3880FF;color: white;\">\r\n                    ย้อนกลับหน้าหลัก (รอลูกค้าปิดงาน) </button>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle5\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 15px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title5}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                  <button class=\"btn default\" [disabled]=\"!isenabledeva\" (click)=\"clickeva()\">\r\n                    คลิกเพื่อกรอกข้อมูล </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle4\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 15px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title4}}</span>\r\n                    <div *ngIf=\"showSig\">\r\n                      <img class=\"sig\" [src]=\"sign\" style=\"width: 50% !important; border: 1px solid black;\" />\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                  <button #btnhiddensig class=\"btn default\" (click)=\"Modal()\" [disabled]=\"!isenabledsig\"\r\n                    *ngIf=\"showSig == false; else btnhiddensig\"> ลายเซ็นต์ผู้รับผิดชอบ\r\n                  </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle6\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 15px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title6}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                  <button class=\"btn default\" *ngIf=\"jobtype != 'PM' else spare\" #spare (click)=\"openModalcustomerpw()\"\r\n                    [disabled]=\"!isenabledcuspass\">\r\n                    ความคิดเห็นจากลูกค้า </button>\r\n                  <button class=\"btn default\" *ngIf=\"jobtype == 'PM' else all\" #all (click)=\"openModalcustomerpw()\"\r\n                    [disabled]=\"!isenabledcuspass\">\r\n                    รหัสยืนยันตัวตนลูกค้า </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle8\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title8}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" #btnSuccess style=\"padding-left: 10px;\"\r\n                  *ngIf=\"IsWaitsave == false; else btnSuccess\">\r\n                  <button class=\"btn default\" [disabled]=\"!isenabledsave\" (click)=\"saveData()\">\r\n                    ยืนยันการปิดงาน </button>\r\n                </div>\r\n                <div class=\"col-6 subtext text-center\" #lblSuccess\r\n                  style=\"color: green;font-size: 14px;font-weight: bold;\" *ngIf=\"IsWaitsave == true; else lblSuccess\">\r\n                  ระบบกำลังบันทึกข้อมูล กรุณารอสักครู่.....</div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" (click)=\"log()\">\r\n    <ion-fab-button>\r\n      <ion-icon name=\"alert\"></ion-icon>\r\n    </ion-fab-button>\r\n  </ion-fab>\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button></ion-back-button>\r\n      <ion-title>{{worktype}}: {{ItemsName}}</ion-title>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row\" style=\"padding: 5px;\">\r\n      <div class=\"col-lg-3\" style=\"padding: 0px;\">\r\n        <div class=\"row\" style=\"padding-left:15px;\">\r\n          <div class=\"col-12 hidden\" style=\"padding: 0px;\">\r\n            <div class=\"portlet box blue\">\r\n              <div class=\"portlet-title\">\r\n                <div class=\"caption\">\r\n                  <i class=\"fa fa-bar-chart\"></i>สถานะ\r\n                </div>\r\n              </div>\r\n              <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n                <div class=\"portlet light \">\r\n                  <div class=\"row\">\r\n                    <div class=\"col-12\">\r\n                      <p class=\"profile-desc-text\" style=\"text-align: center; padding: 5px;\">รอการตรวจสอบ</p>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"col-12\" style=\"padding: 0px; padding-right:2px;\">\r\n            <div class=\"portlet box blue\">\r\n              <div class=\"portlet-title\">\r\n                <div class=\"caption\">\r\n                  <i class=\"fa fa-clock-o\"></i>สถานะและเวลาทำงาน\r\n                </div>\r\n              </div>\r\n              <div class=\"portlet-body\">\r\n                <iframe [src]=\"url\" style=\"width:100%;border:0px;background-color: white;\"></iframe>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-12 hidden\" style=\"padding: 0px;\">\r\n          <div class=\"portlet box blue\">\r\n            <div class=\"portlet-title\">\r\n              <div class=\"caption\">\r\n                <i class=\"fa fa-bar-chart\"></i>สถานะ\r\n              </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n              <div class=\"portlet light \">\r\n                <div class=\"row\">\r\n                  <div class=\"col-12\">\r\n                    <p class=\"profile-desc-text\" style=\"text-align: center; padding: 5px;\">รอการตรวจสอบ</p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-12\" style=\"padding: 0px;\">\r\n          <div class=\"portlet box blue\">\r\n            <div class=\"portlet-title\">\r\n              <div class=\"caption\">\r\n                <i class=\"fa fa-cube\"></i>สินค้า\r\n              </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n              <div class=\"portlet light \">\r\n                <div class=\"row\">\r\n                  <div class=\"col-4\">\r\n                    <p class=\"profile-desc-text\">สินค้าที่ติดตั้ง:</p>\r\n                    <p class=\"profile-desc-text\">รหัสสินค้า:</p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype != 'INSTALL'\">ชื่อสินค้า:</p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype == 'INSTALL' && OldItemsName != null\">เครื่องที่รื้อถอน:\r\n                    </p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype == 'INSTALL'\">เครื่องที่ติดตั้ง:</p>\r\n                    <p class=\"profile-desc-text\">Serial No:</p>\r\n                  </div>\r\n                  <div class=\"col-8\">\r\n                    <p class=\"profile-desc-text\">{{InstallPlanName}}</p>\r\n                    <p class=\"profile-desc-text\">{{ItemCode}}</p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype != 'INSTALL'\">{{ItemsName}}</p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype == 'INSTALL' && OldItemsName != null\">{{OldItemsName}}\r\n                    </p>\r\n                    <p class=\"profile-desc-text\" *ngIf=\"jobtype == 'INSTALL'\">{{ItemsName}}</p>\r\n                    <p class=\"profile-desc-text\">{{SerialNo}}</p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"col-12\" style=\"padding: 0px;\" *ngIf=\"isdevice && jobtype == 'CM'\">\r\n          <div class=\"portlet box blue\">\r\n            <div class=\"portlet-title\">\r\n              <div class=\"caption\">\r\n                <i class=\"fa fa-cube\"></i>เครื่องที่เปลี่ยน\r\n              </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n              <div class=\"portlet light\" *ngFor=\"let i of devices;\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-4\">\r\n                    <p class=\"profile-desc-text\">สินค้าที่ติดตั้ง:</p>\r\n                    <p class=\"profile-desc-text\">ชื่อสินค้า:</p>\r\n                    <p class=\"profile-desc-text\">รหัสสินค้า:</p>\r\n                    <p class=\"profile-desc-text\">Serial No:</p>\r\n                  </div>\r\n                  <div class=\"col-8\">\r\n                    <p class=\"profile-desc-text\">{{i.InstallPlanName}}</p>\r\n                    <p class=\"profile-desc-text\">{{i.ItemCode}}</p>\r\n                    <p class=\"profile-desc-text\">{{i.ItemsName}}</p>\r\n                    <p class=\"profile-desc-text\">{{i.SerialNo}}</p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <!-- <div class=\"col-12\" style=\"padding: 0px;\" *ngIf=\"isspare && jobtype == 'CM'\">\r\n          <div class=\"portlet box blue\">\r\n            <div class=\"portlet-title\">\r\n              <div class=\"caption\">\r\n                <i class=\"fa fa-cube\"></i>อะไหล่ที่เปลี่ยน\r\n              </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"margin: 0px;\">\r\n              <div class=\"portlet light\" *ngFor=\"let i of spares;\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-4\">\r\n                    <p class=\"profile-desc-text\">ชื่ออุปกรณ์เสริม :</p>\r\n                    <p class=\"profile-desc-text\">Part No. :</p>\r\n                  </div>\r\n                  <div class=\"col-8\">\r\n                    <p class=\"profile-desc-text\">{{i.Name}}</p>\r\n                    <p class=\"profile-desc-text\">{{i.Serial}}</p>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div> -->\r\n      </div>\r\n      <div class=\"col-lg-9\" style=\"padding: 0px;\">\r\n        <div class=\"portlet box blue\">\r\n          <div class=\"portlet-title\">\r\n            <div class=\"caption\">\r\n              <i class=\"fa fa-sticky-note-o\"></i>รายการตรวจเช็ค\r\n              <ion-label>ร้าน {{CustomerName}} {{planDate}} </ion-label>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle1\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span style=\"font-size: 1.1em!important;\" class=\"caption-subject font-blue-sharp bold uppercase\">\r\n                      {{title1}}</span>\r\n                  </div>\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src1\" *ngIf=\"isShowImage1\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src2\" *ngIf=\"isShowImage2\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src3\" *ngIf=\"isShowImage3\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src4\" *ngIf=\"isShowImage4\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src5\" *ngIf=\"isShowImage5\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src6\" *ngIf=\"isShowImage6\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src7\" *ngIf=\"isShowImage7\" />\r\n                </div>\r\n                <div class=\"col-3 text-center\">\r\n                  <img [src]=\"img.src8\" *ngIf=\"isShowImage8\" />\r\n                </div>\r\n\r\n                <div class=\"col-1 text-center\">\r\n                </div>\r\n\r\n                <div class=\" col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take1 *ngIf=\"isShow1 == false ; else take1\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(1)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo1\" *ngIf=\"isShow1\" (click)=\"Take(1)\">\r\n                </div>\r\n\r\n                <div class=\"col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take2 *ngIf=\"isShow2 == false ; else take2\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(2)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo2\" *ngIf=\"isShow2\" (click)=\"Take(2)\" />\r\n                </div>\r\n\r\n                <div class=\"col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take3 *ngIf=\"isShow3 == false ; else take3\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(3)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo3\" *ngIf=\"isShow3\" (click)=\"Take(3)\">\r\n                </div>\r\n\r\n                <div class=\"col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take4 *ngIf=\"isShow4 == false ; else take4\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(4)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo4\" *ngIf=\"isShow4\" (click)=\"Take(4)\">\r\n                </div>\r\n\r\n                <div class=\"col-2 text-center\" *ngIf=\"isInstall\">\r\n                  <div #take5 *ngIf=\"isShow5 == false ; else take5\">\r\n                    <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                      <ion-fab-button (click)=\"Take(5)\">\r\n                        <ion-icon name=\"camera\"></ion-icon>\r\n                      </ion-fab-button>\r\n                    </ion-fab>\r\n                  </div>\r\n                  <img [src]=\"photo5\" *ngIf=\"isShow5\" (click)=\"Take(5)\">\r\n                </div>\r\n\r\n                <div class=\"col-12\" *ngIf=\"isPM\">\r\n                  <div class=\"row\" style=\"margin-bottom: 10px;\">\r\n                    <div class=\"col-3 text-center\" style=\"margin-bottom: 80px;\" *ngFor=\"let p of productphoto\">\r\n                      <div>{{p.Name}}</div>\r\n                      <div #take *ngIf=\"p.show == false ; else take\">\r\n                        <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                          <ion-fab-button (click)=\"TakePM(p)\">\r\n                            <ion-icon name=\"camera\"></ion-icon>\r\n                          </ion-fab-button>\r\n                        </ion-fab>\r\n                      </div>\r\n                      <img [src]=\"apiServer_url + p.img\" *ngIf=\"p.show\" (click)=\"TakePM(p)\">\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-6\">\r\n                    <div class=\"text-center\" style=\"padding-left: 10px;\">\r\n                      <button (click)=\"showimgremark()\" class=\"btn default\" style=\"width: 100%;\">\r\n                        รูปภาพเพิ่มเติม </button>\r\n                    </div>\r\n                  </div>\r\n                  <div class=\"col-12\" *ngIf=\"isimgRemark\" style=\"margin-top: 10px;margin-bottom: 10px;;\">\r\n                    <div class=\"row\">\r\n                      <div class=\"col-1 text-center\">\r\n                      </div>\r\n\r\n                      <div class=\" col-2 text-center\" *ngFor=\"let p of photoremark\">\r\n                        <div #takere *ngIf=\"p.show == false ; else takere\">\r\n                          <ion-fab vertical=\"bottom\" horizontal=\"center\" class=\"button-native\">\r\n                            <ion-fab-button (click)=\"TakePMRe(p)\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"apiServer_url + p.img\" *ngIf=\"p.show\" (click)=\"TakePMRe(p)\">\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle2\">\r\n            <div class=\"portlet box light\">\r\n              <div class=\"portlet-title\">\r\n                <div class=\"caption\">\r\n                  <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                  <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                    {{title2}}</span>\r\n                </div>\r\n              </div>\r\n              <div class=\"portlet-body form\">\r\n                <div class=\"horizontal-form\">\r\n                  <div class=\"form-body\">\r\n                    <div class=\"row\">\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 1</div>\r\n                        <div *ngIf=\"isShow1 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(1)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo1\" *ngIf=\"isShow1\" (click)=\"Take(1)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 2</div>\r\n                        <div *ngIf=\"isShow2 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(2)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo2\" *ngIf=\"isShow2\" (click)=\"Take(2)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 3</div>\r\n                        <div *ngIf=\"isShow3 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(3)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo3\" *ngIf=\"isShow3\" (click)=\"Take(3)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 4</div>\r\n                        <div *ngIf=\"isShow4 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(4)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo4\" *ngIf=\"isShow4\" (click)=\"Take(4)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 5</div>\r\n                        <div *ngIf=\"isShow5 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(5)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo5\" *ngIf=\"isShow5\" (click)=\"Take(5)\">\r\n                      </div>\r\n                    </div>\r\n                    <div class=\"row\">\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 6</div>\r\n                        <div *ngIf=\"isShow6 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(6)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo6\" *ngIf=\"isShow6\" (click)=\"Take(6)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 7</div>\r\n                        <div *ngIf=\"isShow7 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(7)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo7\" *ngIf=\"isShow7\" (click)=\"Take(7)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 8</div>\r\n                        <div *ngIf=\"isShow8 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(8)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo8\" *ngIf=\"isShow8\" (click)=\"Take(8)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 9</div>\r\n                        <div *ngIf=\"isShow9 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(9)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo9\" *ngIf=\"isShow9\" (click)=\"Take(9)\">\r\n                      </div>\r\n                      <div class=\"col-md-2 text-center\" style=\"margin-bottom: 80px;\">\r\n                        <div>รูปภาพที่ 10</div>\r\n                        <div *ngIf=\"isShow10 == false\">\r\n                          <ion-fab style=\"margin-top: 25px;\" vertical=\"bottom\" horizontal=\"center\"\r\n                            class=\"button-native\">\r\n                            <ion-fab-button (click)=\"Take(10)\" [disabled]=\"!isenabledTakeback\">\r\n                              <ion-icon name=\"camera\"></ion-icon>\r\n                            </ion-fab-button>\r\n                          </ion-fab>\r\n                        </div>\r\n                        <img [src]=\"photo10\" *ngIf=\"isShow10\" (click)=\"Take(10)\">\r\n                      </div>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle3\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 20px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title3}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div #nospare class=\"col-md-6 text-center\"\r\n                  style=\"padding-left: 10px;margin-top: 5px;margin-bottom: 10px;\"\r\n                  *ngIf=\"jobtype != 'INSTALL' else nospare\">\r\n                  <button (click)=\"check()\" [disabled]=\"!isenabledcheck\" class=\"btn default\">\r\n                    คลิกเพื่อตรวจเช็ครายการ</button>\r\n                </div>\r\n                <!-- <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;margin-top: 5px;margin-bottom: 10px;\"\r\n                  *ngIf=\"jobtype == 'PM'\">\r\n                  <button (click)=\"changsparepm()\" [disabled]=\"!isenabledcheck\" class=\"btn default\">\r\n                    เปลี่ยนอะไหล่\r\n                  </button>\r\n                </div> -->\r\n                <div #device class=\"col-md-6 text-center\" style=\"padding-left: 10px;margin-top: 5px;margin-bottom: 10px;\"\r\n                  *ngIf=\"jobtype == 'INSTALL' else device\">\r\n                  <button (click)=\"changspare('device')\" class=\"btn default\" [disabled]=\"!isenabledcheck\">\r\n                    เพิ่มเครื่อง </button>\r\n                </div>\r\n                <div #spare class=\"col-md-6 text-center\" style=\"padding-left: 10px;margin-top: 5px;margin-bottom: 10px;\"\r\n                  *ngIf=\"jobtype == 'INSTALL' else spare\">\r\n                  <button (click)=\"changspare()\" [disabled]=\"!isenabledadddevice\" class=\"btn default\">\r\n                    เพิ่มอุปกรณ์เสริม </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;margin-bottom: 10px;\">\r\n                  <!-- <div *ngIf=\"sparetype != '' && jobtype == 'PM'; else sparepart\">\r\n                    <button (click)=\"changspare()\" [disabled]=\"!isenabledspare\" class=\"btn default\" #sparepart>\r\n                      รายการเปลี่ยนอะไหล่ </button>\r\n                  </div> -->\r\n                  <div *ngIf=\"jobtype == 'CM' && request == null; else CM\" style=\"margin-top: 5px;margin-bottom: 10px;\">\r\n                    <!-- <button (click)=\"takerequest()\" class=\"btn default\" #CM [disabled]=\"!isenabledrequest\">\r\n                      ใบเบิกอะไหล่ </button> -->\r\n                    <!-- <img *ngIf=\"jobtype == 'CM' && request != null ; else imgrequest\" [src]=\"request\"\r\n                  (click)=\"takerequest()\" #imgrequest> -->\r\n                    <div style=\"margin-top: 5px;margin-bottom:5px;\">\r\n                      <button (click)=\"showSpare()\" class=\"btn default\" #CM [disabled]=\"!isenabledrequest\">\r\n                        ขอเบิกอะไหล่<span *ngIf=\"spareList.length > 0\"> ({{spareList.length}} รายการ)</span>\r\n                      </button>\r\n                    </div>\r\n\r\n                    <button (click)=\"requestSparepart()\" class=\"btn default\" [disabled]=\"!isenabledrequest\">\r\n                      ขอเสนอราคา\r\n                    </button>\r\n                    <ion-card-content>\r\n                      <div class=\"col-12\">\r\n                        <ion-item>\r\n                          <ion-label>กรุณาเลือก กรณีเครื่องเบรก</ion-label>\r\n                          <ion-checkbox slot=\"start\" [(ngModel)]=\"isBreak\" (ionChange)=\"machineBreak($event)\"></ion-checkbox>\r\n                        </ion-item>\r\n                      </div>\r\n                    </ion-card-content>\r\n                    <!-- <div *ngIf=\"jobtype != 'PM'\" style=\"margin-top: 5px;margin-bottom: 5px;\">\r\n                      <button class=\"btn default\" (click)=\"response()\"\r\n                        style=\"background-color: rgb(245, 197, 76);color: white;\">\r\n                        แจ้งปัญหากรณีไม่สามารถปิดงานได้</button>\r\n                    </div> -->\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle7\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 20px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title7}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;margin-bottom: 10px;\">\r\n                  <button class=\"btn default\" (click)=\"openModalcustomereva()\" [disabled]=\"!isenabledcuseva\">\r\n                    คลิกเพื่อกรอกข้อมูล </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                  <button class=\"btn default\" (click)=\"onBackToPageMain()\" [disabled]=\"!isenabledeva\"\r\n                    style=\"background-color: #3880FF;color: white;\">\r\n                    ย้อนกลับหน้าหลัก (รอลูกค้าปิดงาน) </button>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle5\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 15px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title5}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                  <button class=\"btn default\" [disabled]=\"!isenabledeva\" (click)=\"clickeva()\">\r\n                    คลิกเพื่อกรอกข้อมูล </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle4\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 15px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title4}}</span>\r\n                    <div *ngIf=\"showSig\">\r\n                      <img class=\"sig\" [src]=\"sign\" style=\"width: 50% !important; border: 1px solid black;\" />\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                  <button #btnhiddensig class=\"btn default\" (click)=\"Modal()\" [disabled]=\"!isenabledsig\"\r\n                    *ngIf=\"showSig == false; else btnhiddensig\"> ลายเซ็นต์ผู้รับผิดชอบ\r\n                  </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle6\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\" style=\"margin-top: 15px;\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title6}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                  <button class=\"btn default\" *ngIf=\"jobtype != 'PM' else spare\" #spare (click)=\"openModalcustomerpw()\"\r\n                    [disabled]=\"!isenabledcuspass\">\r\n                    ความคิดเห็นจากลูกค้า </button>\r\n                  <button class=\"btn default\" *ngIf=\"jobtype == 'PM' else all\" #all (click)=\"openModalcustomerpw()\"\r\n                    [disabled]=\"!isenabledcuspass\">\r\n                    รหัสยืนยันตัวตนลูกค้า </button>\r\n                </div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\" style=\"margin: 0px;\" *ngIf=\"isenabledtitle8\">\r\n            <div class=\"portlet light \">\r\n              <div class=\"row\">\r\n                <div class=\"col-12\">\r\n                  <div class=\"caption\">\r\n                    <i class=\"fa fa-map-pin font-blue-sharp\"></i>\r\n                    <span class=\"caption-subject font-blue-sharp bold uppercase\" style=\"font-size: 1.1em!important;\">\r\n                      {{title8}}</span>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n              <div class=\"row\">\r\n                <div class=\"col-md-6 text-center\" #btnSuccess style=\"padding-left: 10px;\"\r\n                  *ngIf=\"IsWaitsave == false; else btnSuccess\">\r\n                  <button class=\"btn default\" [disabled]=\"!isenabledsave\" (click)=\"saveData()\">\r\n                    ยืนยันการปิดงาน </button>\r\n                </div>\r\n                <div class=\"col-6 subtext text-center\" #lblSuccess\r\n                  style=\"color: green;font-size: 14px;font-weight: bold;\" *ngIf=\"IsWaitsave == true; else lblSuccess\">\r\n                  ระบบกำลังบันทึกข้อมูล กรุณารอสักครู่.....</div>\r\n                <div class=\"col-md-6 text-center\" style=\"padding-left: 10px;\">\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" (click)=\"log()\">\r\n    <ion-fab-button>\r\n      <ion-icon name=\"alert\"></ion-icon>\r\n    </ion-fab-button>\r\n  </ion-fab>\r\n</ion-content>"
 
 /***/ }),
 
@@ -261,7 +261,7 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
         this.imginstall = [];
         this.storageService.getUser().then(items => {
             this.items = items;
-            // console.log(items);      
+            // console.log(items);
             for (let i = 0; i < this.items.length; i++) {
                 this.empID = this.items[i].empID;
                 console.log(this.empID);
@@ -296,6 +296,7 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
             this.SerialNoInstall = this.install.SerialNo;
             this.ItemsName = this.install.ItemsName;
             this.OldItemsName = this.install.OldAssetName;
+            this.OldAssetID = this.install.OldAssetID;
             this.ItemCode = this.install.ItemCode;
             this.ProductCode = this.install.ProductCode;
             this.password = this.install.Password;
@@ -679,7 +680,7 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
             empID: this.empID,
         };
         this.postDataService.SaveCaseAll(paramEva).then(ischeckEva => {
-            //#region gallery  
+            //#region gallery
             this.IscheckEva = ischeckEva;
             if (this.IscheckEva == "true") {
                 this.isenabledeva = false;
@@ -696,7 +697,7 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
             empID: this.empID,
         };
         this.postDataService.SaveCaseAll(paramSign).then(ischeckSign => {
-            //#region gallery  
+            //#region gallery
             this.IsheckSign = ischeckSign;
             if (this.IsheckSign == 1) {
                 this.ishiddensig = true;
@@ -714,7 +715,7 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
             empID: this.empID,
         };
         this.postDataService.SaveCaseAll(paramSign).then(ischeckPass => {
-            //#region gallery  
+            //#region gallery
             this.IscheckPass = ischeckPass;
             if (this.IscheckPass == 1) {
                 this.isenabledcuspass = false;
@@ -725,7 +726,7 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
     TakePM(value) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             console.log(value);
-            //#region gallery  
+            //#region gallery
             // const alert = await this.alertController.create({
             //   buttons: [
             //     {
@@ -753,11 +754,11 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
             //             }
             //             console.log(params);
             //             this.postDataService.SaveCaseAll(params).then(photoID => {
-            //               this.photo1 = this.postDataService.apiServer_url + photoID                    
+            //               this.photo1 = this.postDataService.apiServer_url + photoID
             //               this.isTake1 = false;
-            //               this.isShow1 = true;    
-            //               this.status1 = "1" 
-            //               this.checktakeback();               
+            //               this.isShow1 = true;
+            //               this.status1 = "1"
+            //               this.checktakeback();
             //             });
             //           }
             //         }, (err) => {
@@ -816,11 +817,11 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
             //             }
             //             console.log(params);
             //             this.postDataService.SaveCaseAll(params).then(photoID => {
-            //               this.photo1 = this.postDataService.apiServer_url + photoID                   
+            //               this.photo1 = this.postDataService.apiServer_url + photoID
             //               this.isTake1 = false;
-            //               this.isShow1 = true;     
-            //               this.status1 = "1"    
-            //               this.checktakeback();           
+            //               this.isShow1 = true;
+            //               this.status1 = "1"
+            //               this.checktakeback();
             //             });
             //           }
             //         }, (err) => {
@@ -845,10 +846,10 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
             //           //   this.postDataService.SaveCaseAll(params).then(photoID => {
             //           //     console.log(photoID);
             //           //     this.photo1 = this.postDataService.apiServer_url + photoID
-            //           //     console.log(this.photo1);                    
+            //           //     console.log(this.photo1);
             //           //     this.status1 = "1"
             //           //     this.isTake1 = false;
-            //           //     this.isShow1 = true;  
+            //           //     this.isShow1 = true;
             //           //     this.checktakeback();
             //           //   });
             //         });
@@ -940,7 +941,7 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
     // เพิ่มรูป จาก 10 รูป
     TakePMRe(value) {
         console.log(value);
-        //#region gallery  
+        //#region gallery
         // const alert = await this.alertController.create({
         //   buttons: [
         //     {
@@ -968,11 +969,11 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
         //             }
         //             console.log(params);
         //             this.postDataService.SaveCaseAll(params).then(photoID => {
-        //               this.photo1 = this.postDataService.apiServer_url + photoID                    
+        //               this.photo1 = this.postDataService.apiServer_url + photoID
         //               this.isTake1 = false;
-        //               this.isShow1 = true;    
-        //               this.status1 = "1" 
-        //               this.checktakeback();               
+        //               this.isShow1 = true;
+        //               this.status1 = "1"
+        //               this.checktakeback();
         //             });
         //           }
         //         }, (err) => {
@@ -1031,11 +1032,11 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
         //             }
         //             console.log(params);
         //             this.postDataService.SaveCaseAll(params).then(photoID => {
-        //               this.photo1 = this.postDataService.apiServer_url + photoID                   
+        //               this.photo1 = this.postDataService.apiServer_url + photoID
         //               this.isTake1 = false;
-        //               this.isShow1 = true;     
-        //               this.status1 = "1"    
-        //               this.checktakeback();           
+        //               this.isShow1 = true;
+        //               this.status1 = "1"
+        //               this.checktakeback();
         //             });
         //           }
         //         }, (err) => {
@@ -1060,10 +1061,10 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
         //           //   this.postDataService.SaveCaseAll(params).then(photoID => {
         //           //     console.log(photoID);
         //           //     this.photo1 = this.postDataService.apiServer_url + photoID
-        //           //     console.log(this.photo1);                    
+        //           //     console.log(this.photo1);
         //           //     this.status1 = "1"
         //           //     this.isTake1 = false;
-        //           //     this.isShow1 = true;  
+        //           //     this.isShow1 = true;
         //           //     this.checktakeback();
         //           //   });
         //         });
@@ -1104,7 +1105,7 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
             // }
             // console.log(params);
             //   this.postDataService.SaveCaseAll(params).then(photoID => {
-            //     console.log(photoID);            
+            //     console.log(photoID);
             //     this.Getproductphotoremark();
             //   });
         });
@@ -1144,7 +1145,7 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
     getImgInstall() {
         this.storageService.getUser().then(items => {
             this.items = items;
-            // console.log(items);      
+            // console.log(items);
             for (let i = 0; i < this.items.length; i++) {
                 this.empID = this.items[i].empID;
                 // console.log(this.empID);
@@ -1257,139 +1258,6 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
     Take(id) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             if (id == 1) {
-                //#region gallery  
-                // const alert = await this.alertController.create({
-                //   buttons: [
-                //     {
-                //       text: 'เลือกจากคลังรูปภาพ',
-                //       handler: () => {
-                //         this.camera.getPicture(this.galleryOptions).then((imageData1) => {
-                //           let base64Image1 = 'data:image/jpeg;base64,' + imageData1;
-                //           this.photo1 = base64Image1;
-                //           watermark([this.photo1])
-                //             .image(watermark.text.upperLeft('ร้าน' + this.CustomerName + ' ' + 'ชื่อสินค้า' + this.ItemsName,
-                //               '28px Tahoma bold', '#FBFBF7', 0.8, 48))
-                //             .then(img => {
-                //               this.photo1 = img.src;
-                //             });
-                //           if (this.photo1 == null || "") {
-                //           } else {
-                //             this.resizePhoto();
-                //             let params = {
-                //               planID: this.planID,
-                //               installID: this.installID,
-                //               photo1: this.photo1,
-                //               empID: this.empID,
-                //               photoID: this.id1,
-                //               jobtype: this.jobtype
-                //             }
-                //             console.log(params);
-                //             this.postDataService.SaveCaseAll(params).then(photoID => {
-                //               this.photo1 = this.postDataService.apiServer_url + photoID                    
-                //               this.isTake1 = false;
-                //               this.isShow1 = true;    
-                //               this.status1 = "1" 
-                //               this.checktakeback();               
-                //             });
-                //           }
-                //         }, (err) => {
-                //           //   this.photo1 = "data:image/png;base64,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"
-                //           //   watermark([this.photo1])
-                //           //     .image(watermark.text.upperLeft('ร้าน' + this.CustomerName + ' ' + 'ชื่อสินค้า' + this.ItemsName ,
-                //           //       '28px Tahoma bold', '#FBFBF7', 0.8, 48))
-                //           //     .then(img => {
-                //           //       this.photo1 = img.src
-                //           //       console.log(this.photo1);
-                //           //     });
-                //           //  this.resizePhoto();
-                //           //   let params = {
-                //           //     planID: this.planID,
-                //           //     installID: this.installID,
-                //           //     photo1:this.photo1,
-                //           //     empID: this.empID,
-                //           //     photoID: this.id1,
-                //           //     jobtype: this.jobtype
-                //           //   }
-                //           //   console.log(params);
-                //           //   this.postDataService.SaveCaseAll(params).then(photoID => {
-                //           //     this.photoID = photoID
-                //           //     this.id1 = this.photoID.id
-                //           //     console.log(this.photo1);
-                //           //     this.status1 = "1"
-                //           //     this.checktakeback();
-                //           //     this.isTake1 = false;
-                //           //     this.isShow1 = true;
-                //           //     this.startTimer();
-                //           //   });
-                //         });
-                //       }
-                //     }, {
-                //       text: 'ถ่ายภาพ',
-                //       handler: () => {
-                //         this.camera.getPicture(this.cameraOptions).then((imageData1) => {
-                //           let base64Image1 = 'data:image/jpeg;base64,' + imageData1;
-                //           this.photo1 = base64Image1;
-                //           watermark([this.photo1])
-                //             .image(watermark.text.upperLeft('ร้าน' + this.CustomerName + ' ' + 'ชื่อสินค้า' + this.ItemsName,
-                //               '28px Tahoma bold', '#FBFBF7', 0.8, 48))
-                //             .then(img => {
-                //               this.photo1 = img.src;
-                //             });
-                //           if (this.photo1 == null || "") {
-                //           } else {
-                //             this.resizePhoto();
-                //             let params = {
-                //               planID: this.planID,
-                //               installID: this.installID,
-                //               photo1: this.photo1,
-                //               empID: this.empID,
-                //               photoID: this.id1,
-                //               jobtype: this.jobtype
-                //             }
-                //             console.log(params);
-                //             this.postDataService.SaveCaseAll(params).then(photoID => {
-                //               this.photo1 = this.postDataService.apiServer_url + photoID                   
-                //               this.isTake1 = false;
-                //               this.isShow1 = true;     
-                //               this.status1 = "1"    
-                //               this.checktakeback();           
-                //             });
-                //           }
-                //         }, (err) => {
-                //           //   this.photo1 = "data:image/png;base64,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"
-                //           //   watermark([this.photo1])
-                //           //     .image(watermark.text.upperLeft('ร้าน' + this.CustomerName + ' ' + 'ชื่อสินค้า' + this.ItemsName ,
-                //           //       '28px Tahoma bold', '#FBFBF7', 0.8, 48))
-                //           //     .then(img => {
-                //           //       this.photo1 = img.src
-                //           //       console.log(this.photo1);
-                //           //     });
-                //           //  this.resizePhoto();
-                //           //   let params = {
-                //           //     planID: this.planID,
-                //           //     installID: this.installID,
-                //           //     photo1:this.photo1,
-                //           //     empID: this.empID,
-                //           //     photoID: this.id1,
-                //           //     jobtype: this.jobtype
-                //           //   }
-                //           //   console.log(params);
-                //           //   this.postDataService.SaveCaseAll(params).then(photoID => {
-                //           //     console.log(photoID);
-                //           //     this.photo1 = this.postDataService.apiServer_url + photoID
-                //           //     console.log(this.photo1);                    
-                //           //     this.status1 = "1"
-                //           //     this.isTake1 = false;
-                //           //     this.isShow1 = true;  
-                //           //     this.checktakeback();
-                //           //   });
-                //         });
-                //       }
-                //     }
-                //   ]
-                // });
-                // await alert.present();
-                //#endregion
                 this.camera.getPicture(this.cameraOptions).then((imageData1) => {
                     let base64Image1 = 'data:image/jpeg;base64,' + imageData1;
                     this.photo1 = base64Image1;
@@ -1415,7 +1283,6 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                         });
                     }
                 }, (err) => {
-                    //ImgCM
                     // this.photo1 = "data:image/png;base64,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"
                     // let params = {
                     //   planID: this.planID,
@@ -1464,9 +1331,9 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                 //             }
                 //             console.log(params);
                 //             this.postDataService.SaveCaseAll(params).then(photoID => {
-                //               this.photo2 = this.postDataService.apiServer_url + photoID                    
+                //               this.photo2 = this.postDataService.apiServer_url + photoID
                 //               this.isTake2 = false;
-                //               this.isShow2 = true;    
+                //               this.isShow2 = true;
                 //               this.status2 = "1"
                 //               this.checktakeback();
                 //             });
@@ -1527,10 +1394,10 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                 //             }
                 //             console.log(params);
                 //               this.postDataService.SaveCaseAll(params).then(photoID => {
-                //                 this.photo2 = this.postDataService.apiServer_url + photoID                      
+                //                 this.photo2 = this.postDataService.apiServer_url + photoID
                 //                 this.isTake2 = false;
-                //                 this.isShow2 = true; 
-                //                 this.status2 = "1"   
+                //                 this.isShow2 = true;
+                //                 this.status2 = "1"
                 //                 this.checktakeback();
                 //             });
                 //           }
@@ -1644,11 +1511,11 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                 //             }
                 //             console.log(params);
                 //             this.postDataService.SaveCaseAll(params).then(photoID => {
-                //               this.photo3 = this.postDataService.apiServer_url + photoID                    
+                //               this.photo3 = this.postDataService.apiServer_url + photoID
                 //               this.isTake3 = false;
-                //               this.isShow3 = true; 
-                //               this.status3 = "1" 
-                //               this.checktakeback();  
+                //               this.isShow3 = true;
+                //               this.status3 = "1"
+                //               this.checktakeback();
                 //             });
                 //           }
                 //         }, (err) => {
@@ -1707,10 +1574,10 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                 //             }
                 //             console.log(params);
                 //             this.postDataService.SaveCaseAll(params).then(photoID => {
-                //               this.photo3 = this.postDataService.apiServer_url + photoID                    
+                //               this.photo3 = this.postDataService.apiServer_url + photoID
                 //               this.isTake3 = false;
-                //               this.isShow3 = true;  
-                //               this.status3 = "1"  
+                //               this.isShow3 = true;
+                //               this.status3 = "1"
                 //               this.checktakeback();
                 //             });
                 //           }
@@ -1824,10 +1691,10 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                 //             }
                 //             console.log(params);
                 //             this.postDataService.SaveCaseAll(params).then(photoID => {
-                //               this.photo4 = this.postDataService.apiServer_url + photoID                    
+                //               this.photo4 = this.postDataService.apiServer_url + photoID
                 //               this.isTake4 = false;
                 //               this.isShow4 = true;
-                //               this.status4 = "1"    
+                //               this.status4 = "1"
                 //               this.checktakeback();
                 //             });
                 //           }
@@ -1887,9 +1754,9 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                 //             }
                 //             console.log(params);
                 //             this.postDataService.SaveCaseAll(params).then(photoID => {
-                //               this.photo4 = this.postDataService.apiServer_url + photoID                    
+                //               this.photo4 = this.postDataService.apiServer_url + photoID
                 //               this.isTake4 = false;
-                //               this.isShow4 = true;    
+                //               this.isShow4 = true;
                 //               this.status4 = "1"
                 //               this.checktakeback();
                 //             });
@@ -2004,10 +1871,10 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                 //             }
                 //             console.log(params);
                 //             this.postDataService.SaveCaseAll(params).then(photoID => {
-                //               this.photo5 = this.postDataService.apiServer_url + photoID                    
+                //               this.photo5 = this.postDataService.apiServer_url + photoID
                 //               this.isTake5 = false;
-                //               this.isShow5 = true;  
-                //               this.status5 = "1"  
+                //               this.isShow5 = true;
+                //               this.status5 = "1"
                 //               this.checktakeback();
                 //             });
                 //           }
@@ -2067,11 +1934,11 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                 //             }
                 //             console.log(params);
                 //             this.postDataService.SaveCaseAll(params).then(photoID => {
-                //               this.photo5 = this.postDataService.apiServer_url + photoID                    
+                //               this.photo5 = this.postDataService.apiServer_url + photoID
                 //               this.isTake5 = false;
-                //               this.isShow5 = true; 
+                //               this.isShow5 = true;
                 //               this.status5 = "1"
-                //               this.checktakeback();   
+                //               this.checktakeback();
                 //             });
                 //           }
                 //         }, (err) => {
@@ -2184,11 +2051,11 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                 //             }
                 //             console.log(params);
                 //             this.postDataService.SaveCaseAll(params).then(photoID => {
-                //               this.photo6 = this.postDataService.apiServer_url + photoID                    
+                //               this.photo6 = this.postDataService.apiServer_url + photoID
                 //               this.isTake6 = false;
-                //               this.isShow6 = true; 
+                //               this.isShow6 = true;
                 //               this.status6 = "1"
-                //               this.checklist();   
+                //               this.checklist();
                 //             });
                 //           }
                 //         }, (err) => {
@@ -2247,10 +2114,10 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                 //             }
                 //             console.log(params);
                 //             this.postDataService.SaveCaseAll(params).then(photoID => {
-                //               this.photo6 = this.postDataService.apiServer_url + photoID                    
+                //               this.photo6 = this.postDataService.apiServer_url + photoID
                 //               this.isTake6 = false;
-                //               this.isShow6 = true; 
-                //               this.status6 = "1"   
+                //               this.isShow6 = true;
+                //               this.status6 = "1"
                 //               this.checklist();
                 //             });
                 //           }
@@ -2363,11 +2230,11 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                 //             }
                 //             console.log(params);
                 //             this.postDataService.SaveCaseAll(params).then(photoID => {
-                //               this.photo7 = this.postDataService.apiServer_url + photoID                    
+                //               this.photo7 = this.postDataService.apiServer_url + photoID
                 //               this.isTake7 = false;
-                //               this.isShow7 = true; 
-                //               this.status7 = "1" 
-                //               this.checklist();  
+                //               this.isShow7 = true;
+                //               this.status7 = "1"
+                //               this.checklist();
                 //             });
                 //           }
                 //         }, (err) => {
@@ -2426,10 +2293,10 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                 //             }
                 //             console.log(params);
                 //             this.postDataService.SaveCaseAll(params).then(photoID => {
-                //               this.photo7 = this.postDataService.apiServer_url + photoID                    
+                //               this.photo7 = this.postDataService.apiServer_url + photoID
                 //               this.isTake7 = false;
                 //               this.isShow7 = true;
-                //               this.status7 = "1"    
+                //               this.status7 = "1"
                 //               this.checklist();
                 //             });
                 //           }
@@ -2542,11 +2409,11 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                 //             }
                 //             console.log(params);
                 //             this.postDataService.SaveCaseAll(params).then(photoID => {
-                //               this.photo8 = this.postDataService.apiServer_url + photoID                   
+                //               this.photo8 = this.postDataService.apiServer_url + photoID
                 //               this.isTake8 = false;
-                //               this.isShow8 = true;  
-                //               this.status8 = "1" 
-                //               this.checklist(); 
+                //               this.isShow8 = true;
+                //               this.status8 = "1"
+                //               this.checklist();
                 //             });
                 //           }
                 //         }, (err) => {
@@ -2605,10 +2472,10 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                 //             }
                 //             console.log(params);
                 //             this.postDataService.SaveCaseAll(params).then(photoID => {
-                //               this.photo8 = this.postDataService.apiServer_url + photoID                    
+                //               this.photo8 = this.postDataService.apiServer_url + photoID
                 //               this.isTake8 = false;
                 //               this.isShow8 = true;
-                //               this.status8 = "1"    
+                //               this.status8 = "1"
                 //               this.checklist();
                 //             });
                 //           }
@@ -2721,10 +2588,10 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                 //             }
                 //             console.log(params);
                 //             this.postDataService.SaveCaseAll(params).then(photoID => {
-                //               this.photo9 = this.postDataService.apiServer_url + photoID                    
+                //               this.photo9 = this.postDataService.apiServer_url + photoID
                 //               this.isTake9 = false;
-                //               this.isShow9 = true; 
-                //               this.status9 = "1"   
+                //               this.isShow9 = true;
+                //               this.status9 = "1"
                 //               this.checklist();
                 //             });
                 //           }
@@ -2786,8 +2653,8 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                 //             this.postDataService.SaveCaseAll(params).then(photoID => {
                 //               this.photo9 = this.postDataService.apiServer_url + photoID
                 //               this.isTake9 = false;
-                //               this.isShow9 = true;  
-                //               this.status9 = "1"  
+                //               this.isShow9 = true;
+                //               this.status9 = "1"
                 //               this.checklist();
                 //             });
                 //           }
@@ -2854,7 +2721,6 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                     }
                 }, (err) => {
                     // this.photo9 = "data:image/png;base64,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"
-                    // this.resizePhoto();
                     // let params = {
                     //   planID: this.planID,
                     //   installID: this.installID,
@@ -2902,11 +2768,11 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                 //             }
                 //             console.log(params);
                 //             this.postDataService.SaveCaseAll(params).then(photoID => {
-                //               this.photo10 = this.postDataService.apiServer_url + photoID                                      
+                //               this.photo10 = this.postDataService.apiServer_url + photoID
                 //               this.isTake10 = false;
-                //               this.isShow10 = true;  
-                //               this.status10 = "1"  
-                //               this.checklist();  
+                //               this.isShow10 = true;
+                //               this.status10 = "1"
+                //               this.checklist();
                 //             });
                 //           }
                 //         }, (err) => {
@@ -2965,10 +2831,10 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                 //             }
                 //             console.log(params);
                 //             this.postDataService.SaveCaseAll(params).then(photoID => {
-                //               this.photo10 = this.postDataService.apiServer_url + photoID                    
+                //               this.photo10 = this.postDataService.apiServer_url + photoID
                 //               this.isTake10 = false;
-                //               this.isShow10 = true;  
-                //               this.status10 = "1"  
+                //               this.isShow10 = true;
+                //               this.status10 = "1"
                 //               this.checklist();
                 //             });
                 //           }
@@ -3033,8 +2899,8 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                         });
                     }
                 }, (err) => {
-                    // this.photo10 = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAKxklEQVR4Xu1ceViN2xr/ZfYY89wMkbkoGZNzb4iIyJSSjsh06hiOodE8dcx0HBFCihSHU6SUSkmdDNeQMnSKIinjuTyGa6b7rPWcXGm39zfs9l67vvXvft93ve/vt9f4vuvTev2hqAhSYwYBLYkQZrigjkiEsMWHRAhjfEiESISwhgBj/khriEQIYwgw5o40QiRCGEOAMXekESIRwhgCjLkjjRCJEMYQYMwdaYRIhDCGAGPuSCNEIoQxBBhzRxohEiGMIcCYO9IIkQhhDAHG3JFGiEQIYwiIcCc7Owt9vjNF+LEomPfrL8LS/1WlESIQxpXey+C/zQ/xp1LQydhYoJXSahIhPKEsLCiAlaUF+lsMgN+OnTy1FYtXCkL+evIEk50ccSox4QsiVapUQcjBw7CxtVOM0t8Shw4egOvsnxCXmIQuXbtx1uMjWKEJefPmDSz6mqGwsACHwo7CrHefL9h8+PCB/tMjo2NRt25dhZjNmTUDF86dw/nL6QplxQhUWEKcHB0QGXEUCcmpMDXtJROj3NwcrPJejqDg0DIxvHM7lxLnOGEiVvy8SgzWnHQrHCGLFnhh8y8+8A8IxMRJUxSCQMCOS0iSKee9bAmC9wYhNjEJ+voGCm0pQ6DCEBKwyx8ernOwcMkyzF+4GFpaWpzwkUXI+/fvYajfFiNtbPCrrx8nO8oS0nhCUk4nwd7OBrZ29vD1244aNWpwxiYlJRnBQXsQEBT8RSdoz27MnTUTZy+mwdi4M2dbyhLUWELy796lc3vjxo0RcfwEtLW1eWNC9GPiElC1alXczcvDEEsLdDcxQXDob6hWrRpve8pQ0DhCPn/+jJnTXJAQH4fYhCS019cXhENK8mncys7GFGcXai8+9gS1Z9ChgyB7ylLSKELINrZ9qxaY7eqGBYuWiMJgyCALuLl7wW70SCz3Xgmv+QtF2VOWssYQknw6CSOtreg5wNDQSFT88XGxGD3CGg0bNsS1rBw0atRIlD1lKmsEIdOcp+JqRjqdUho0aCAq/vuFhXTt6WNujh07A0TZKg9l5gkZOmgAepr2wso160THfzQ8DOO/t8e+kIOwd/hetL3yMMAsIcW7KHcPL7hMnyE69vle7jiXmooXL1/SnZVu8+aibZaHASYJychIx5CBFkq5xCMXi2SK6mveD2S6MjI2VskViFCymCMk+ngUpjtPQW7+fV6HPFkAEGIHmPemVyPkMnGBlweSz5wXipVK9JgihCze2Vl/0sW7Vq1aogDYGxiApYsXIq/gIT34GRm0w+EjEWo5ffMJhBlCHB3GoHXrNlizfiMf/0vJvnv3DiOsrVCzRg16gidk2Ay3hplZb8xbtFiUbVUoq52Qly9f0isLMsev2/iLqJhfvXqFVrpNsC/0IIaPGElt/ZGSjB3btuLAoTBRtlWlrFZCPn36BL2mOgj57TAGDLQUFfOZ1D8wzMoSmTdvl9hBkamK7Kpat2kjyr6qlNVGSN6dO3RkkLwFyU+LaWUdHMnUNc5xAhwnOIkxr1JdtRBC8g26jRvR3Y9JT1NRAf/TpBuGWA/DipWrS9ghU9WB0P1MnsblBaxyQm7fzqVnjBMnT6Fd+/aCySA1UcTOxk2bMWasQyk7nQ0N6FSl17Kl4D7UoahSQsia0UxHmwJFrkOEtgMh+7F00QK6PdY3KJ1atbayxASnSRo1VRVjoTJCHj96RE/Me0MOoKuIEpoVyxbjZGwszly4LJNPMlWF/X4Ivlu3C+VbrXoqI6RdqxYIDj2I3n36Cgq4eHtsaGRUIuX6rbGunTrStalps2aC+lG3UrkT8vbtW7qbmjzVGZOn/iAo3ufPn6OlbmOER0TBctBgmTbIdEhGoPeqNej9Vf2VoA7VqFTuhAwfMggzZ8+F9bDhgsI8eyaVni+uZt6Uu0AH7wtC1SpVMd5poqB+WFEqV0LI4krqmUg1iJDm5e4Kkikki7e8rN6+wD0IDd1Ppyqu5T9C/FGFTrkRsnTxAujqNseMn2YLioPcbdVv0AD+u/bI1b944d8YazsKdwoeCuqHNaVyIWTi+HF4++Y1Dh85xjveRw8f0rXAzn4sli73lqtPih6MO7Qvc/vLu3MGFJROCLn2vn79Gnw2+fIOLy/vDnp06USnHtNe38nVf/L4MSXu2PETGnf4kxeYUgmZ7+mGtLQ0Cigp9+fTEk7G06kn/8ETTtXonQ31sTMgqERFO5/+WJVVGiFRkccQEryXlv3zbeRy8NrVDDr11K9fX676x48f6cgYP94JU11+5NsV8/JKIcRnwzrERB+nI6N69eq8gibb4k7GnbHeZxMnPfLwxsZ2DGxG23KS1zQh0YSQqWahlwcupl/jFXvBvXv0n+7sMg1unl4KdYuKimgmUEdHR+57DoWGGBcQRQh54uW3ZTOdaurUqcM5VLLok5dNZET1MOnJSW/6jz/AwKAD3D3ncZLXVCHBhJAM3Th7W7oI82lHwn7HNOcpKHz8lFNVyevXr+nVCymC/vrZAJ8+NUlWECHkH+40zoH+wxs3acIpXjLljLW1wdOn/0FMfCJq1qypUO/F8+doo6eLwOAQjLIZrVC+IgjwJiTt8iWMGDqYjgxS0cG1kfPFVGcXzJrjyknleOQxWvaZcSNbY/LhnAJTIMSLEHLr2t3YkNc7iqysP2lmb8u2HRjJ4V9OynjIHRh5kBZ1Ih61a9dWRpwaY4MzITk5tyiw5y9dwT90dDgFqCiz962RmzezYdKlEw6FRwi+HebkGMNCnAkhqdeomDjOqVfy6YnY6OgyM3vfYuKzfi3IeSY3vxB16ih+N84wpqJcU0gImabILmftBh9O5TqkWI3Ik6dm5P23ouvwe/n59DzyLzMzuotSJC8qWg1QVkhI714m8F69tsxM3dcxkkpz/bYtEREVg379LeSG/+zZM4yzt8Otm9kV6rZWLOdyCSGLa8eOhtjku1VhP8WXgzdv58tdY3JzcmgG8MWLF0qpWFTomIYJlEnI+jWrUKt2bcx185AbEjlfkPzH7dwc+k+vV6+eTPnAgN2Y5+EGPT09untqoaenYVCpxl2ZhLi7zkZWZiY9wClqpt06w26sQ4lXseRAR0bM2bOpOBoejgf3CzF95iysXreh0m1jFeH37e+lCEk6lQjyjY/Tqefk2sq8cR1WAy3gv3sPhv1daV6sELh7F9IzrqBnz14YNdpW9ENNvkFpsnwJQkiFh6fbXIV5iW1bfbHVdzO9OmnVurUmx8+c718ISb+ShuFDB6Pg4V9ynSS3riTvfTQymrlgKoJDlBBSjW7QthVi4hNgZNRJZlzF77tJ8YEqvhtVEcAVEoPWvQdPisjB7MDhMJpvkNXIlw/o7W5iErp17yGkH0mHIwJaBh07Fvlt34k+fc1lqpD33aS4Oe1aJkeTkpgYBLR+Xr22yHPeglI2ilOspJZWaOWhGMcqq67Mc4j/dj+s8l5BP22njo94VVYySNylCBk8oB8t4Qw7GlmZcVFb7CW2veSg9+sWP418eaQ2BJXcsdZ/338ucp4yCZcvXaQHvSZNmyq5C8kcHwS0tLUbFbl6eDLzRTU+zldEWa3LV28Uif1CW0UERl0xKUxQqcuxytqvRAhjzEuESIQwhgBj7kgjRCKEMQQYc0caIRIhjCHAmDvSCJEIYQwBxtyRRohECGMIMOaONEIkQhhDgDF3/geqUez9ukynHAAAAABJRU5ErkJggg=="
-                    // this.resizePhoto();
+                    this.photo10 = "data:image/png;base64,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";
+                    //this.resizePhoto();
                     // let params = {
                     //   planID: this.planID,
                     //   installID: this.installID,
@@ -3062,8 +2928,13 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
     checktakeback() {
         if (this.jobtype == "INSTALL") {
             console.log('INSTALL');
-            if (this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
+            console.log('this.status1', this.status1);
+            if (this.status1 == "1" || this.status2 == "1" || this.status3 == "1" || this.status4 == "1" || this.status5 == "1" ||
+                this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
+                this.isenabledcheck = true;
+                this.isenabledrequest = true;
                 this.isenabledadddevice = true;
+                console.log('this.isenabledcheck', this.isenabledcheck);
             }
         }
         else if (this.jobtype == "CM") {
@@ -3095,10 +2966,12 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
         }
     }
     //#endregion
-    //#region Check Take After  
+    //#region Check Take After
     checklist() {
         if (this.jobtype == "INSTALL") {
-            if (this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
+            if (this.status1 == "1" || this.status2 == "1" || this.status3 == "1" || this.status4 == "1" || this.status5 == "1" ||
+                this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
+                this.isenabledcheck = true;
                 this.isenabledadddevice = true;
             }
         }
@@ -3305,7 +3178,7 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
         });
     }
     //#endregion
-    //#region Evaluation  
+    //#region Evaluation
     clickeva() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             const modal = yield this.modalController.create({
@@ -3356,7 +3229,7 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
         console.log(navigationExtras);
         this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
     }
-    //#region save All 
+    //#region save All
     saveData() {
         this.IsWaitsave = true;
         this.pauseTimer();
@@ -3393,6 +3266,7 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
             signature: this.sign,
             empID: this.empID,
             jobtype: this.jobtype + "3",
+            oldassetid: this.OldAssetID,
             sparepart: this.sparepart
         };
         console.log('params', params);
@@ -3458,7 +3332,7 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                             }
                         };
                         this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
-                        // this.navCtrl.navigateForward(['/menu/overview']); 
+                        // this.navCtrl.navigateForward(['/menu/overview']);
                     }
                     else if (this.jobtype == 'UNINSTALL') {
                         let params = {
@@ -3472,7 +3346,7 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                             }
                         };
                         this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
-                        // this.navCtrl.navigateForward(['/menu/overview']); 
+                        // this.navCtrl.navigateForward(['/menu/overview']);
                     }
                 }
                 this.presentToast();

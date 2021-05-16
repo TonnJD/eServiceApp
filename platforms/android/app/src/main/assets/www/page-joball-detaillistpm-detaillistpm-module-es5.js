@@ -313,6 +313,7 @@ var DetaillistpmPage = /** @class */ (function () {
                 _this.detaillistpm.empid = _this.empID;
                 _this.postDataService.postDetailListpm(_this.detaillistpm).then(function (work) {
                     _this.data = work;
+                    console.log('data install', _this.data);
                     for (var i = 0; i < _this.data.length; i++) {
                         _this.Customername = _this.data[i].CustomerName;
                         _this.data[i].productInstall = JSON.parse(_this.data[i].productInstall);
