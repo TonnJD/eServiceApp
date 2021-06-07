@@ -1764,7 +1764,7 @@ var ChangsparepartPage = /** @class */ (function () {
         this.jobtype = this.navParams.data.jobtype;
         this.empID = this.navParams.data.empID;
         this.type = this.navParams.data.type;
-        console.log(this.type);
+        console.log('this.navParams.data', this.navParams.data);
         if (this.jobtype == "INSTALL") {
             if (this.type == 'device') {
                 var param = {
@@ -1773,7 +1773,7 @@ var ChangsparepartPage = /** @class */ (function () {
                     typedevice: "GetDeviceInTran",
                     empID: this.empID
                 };
-                console.log(param);
+                console.log('param', param);
                 this.postDataService.postdevice(param).then(function (status) {
                     _this.status = status;
                     console.log(_this.status);
@@ -1813,7 +1813,7 @@ var ChangsparepartPage = /** @class */ (function () {
                         }
                     });
                     console.log(_this.Devicestorage);
-                    console.log(_this.Device);
+                    console.log('this.Device', _this.Device);
                 });
             }
             else {
@@ -2051,7 +2051,7 @@ var ChangsparepartPage = /** @class */ (function () {
             console.log(params);
             this.postDataService.postdevice(params).then(function (status) {
                 _this.modal = status;
-                console.log(_this.modal);
+                console.log('this.modal', _this.modal);
                 if (_this.modal == true) {
                     _this.modal = 0;
                 }

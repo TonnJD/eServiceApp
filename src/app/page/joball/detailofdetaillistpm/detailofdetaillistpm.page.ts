@@ -3000,6 +3000,7 @@ export class DetailofdetaillistpmPage implements OnInit {
         this.isenabledcheck = true;
         this.isenabledrequest = true;
         this.isenabledadddevice = true;
+        this.isenabledcuseva = true;
         console.log('this.isenabledcheck', this.isenabledcheck);
       }
     }
@@ -3588,21 +3589,23 @@ export class DetailofdetaillistpmPage implements OnInit {
       modal.onDidDismiss().then(data => {
         this.list = data
         this.list = this.list.data
-        console.log(this.list);
-        console.log(this.installID);
+        console.log('this.list',this.list);
+        console.log('this.installID',this.installID);
+
         if (this.list == 0) {
           let params = {
             installID: this.installID,
             typedevice: "GetSerial",
           }
-          console.log(params);
+
+          console.log('params', params);
           this.postDataService.postdevice(params).then(serial => {
             console.log(serial);
             if (serial != false) {
               this.SerialNo = serial;
               this.isenabledcuseva = true;
             }
-            console.log(this.SerialNo);
+            console.log('this.SerialNo',this.SerialNo);
           });
         }
         else {
@@ -3821,6 +3824,7 @@ export class DetailofdetaillistpmPage implements OnInit {
 
   async log() {
     let alert = this.alertController.create({
+      header: 'Alert!',
       message: 'แจ้งปัญหาเกี่ยวกับการใช้งานแอพ',
       inputs: [
         {
@@ -3847,6 +3851,7 @@ export class DetailofdetaillistpmPage implements OnInit {
     });
     (await alert).present();
   }
+  
   saveTabletProblemLog(LogName) {
     let params = {
       planID: this.planID,

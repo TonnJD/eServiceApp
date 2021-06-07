@@ -56,6 +56,7 @@ export class DetaillistpmPage implements OnInit {
   detailPM;
   jobResponse;
   sentCM;
+  notPM;
   //#endregion
 
   //#region constructor
@@ -79,7 +80,7 @@ export class DetaillistpmPage implements OnInit {
         this.type = this.myId.type
         this.date = this.myId.date
         this.datacm = this.myId.datacm
-
+        
         if (this.item == undefined || this.item == "undefined" || this.item == 'undefined') {
           this.cusID = this.myId.cusID
           this.planID = this.myId.planID
@@ -92,6 +93,7 @@ export class DetaillistpmPage implements OnInit {
           this.workfinish = this.item.WorkFinish
           this.month = this.item.month
           this.year = this.item.year
+
           if (this.cusID == undefined || this.cusID == "undefined" || this.cusID == 'undefined') {
             this.cusID = this.myId.cusID
             this.planID = this.myId.planID
@@ -319,6 +321,7 @@ export class DetaillistpmPage implements OnInit {
           for (let i = 0; i < this.data.length; i++) {
             this.Customername = this.data[i].CustomerName;
             this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+            console.log('this.data[i].productInstall', this.data[i].productInstall);
             
             for (let j = 0; j < this.data[i].productInstall.length; j++) {
 
@@ -577,13 +580,15 @@ export class DetaillistpmPage implements OnInit {
           planID: item.planID,
           empID: this.empID,
           insID: item.installId,
+          cause: item.cause,
           type: this.type
         }
-        console.log(tran);
+        console.log('tran', tran);
 
         this.postDataService.postTranService(tran).then(TranService => {
           // console.log(TranService);
         });
+
         let params = {
           planID: item.planID,
           install: item,
@@ -620,13 +625,15 @@ export class DetaillistpmPage implements OnInit {
                   planID: item.planID,
                   empID: this.empID,
                   insID: item.installId,
+                  cause: item.cause,
                   type: this.type
                 }
-                console.log(tran);
+                console.log('tran', tran);
 
                 this.postDataService.postTranService(tran).then(TranService => {
                   // console.log(TranService);
                 });
+
                 let params = {
                   planID: item.planID,
                   install: item,
@@ -709,6 +716,53 @@ export class DetaillistpmPage implements OnInit {
   }
   //#endregion
 
+  async NotPM(data, item) {
+    let alert = this.alertController.create({
+      header: 'ไม่เข้าตรวจเช็ค!',
+      message: 'กรุณาระบุสาเหตุการไม่เข้าตรวจเช็ค (PM)',
+      inputs: [
+        {
+          name: 'detail',
+          placeholder: 'เช่น: ร้านปิดบริการชั่วคราว',
+          type: 'text'
+        }
+      ],
+      buttons: [
+        {
+          text: 'ยกเลิก',
+          role: 'cancel',
+          handler: data => {
+            console.log('Cancel clicked');
+          }
+        },
+        {
+          text: 'บันทึก',
+          handler: data => {
+            this.notPM = data.detail;
+            
+            let tran = {
+              AssetID: item.AssetID,
+              Serial: item.Serial,
+              planID: item.planID,
+              empID: this.empID,
+              insID: item.installId,
+              cause: data.detail,
+              type: this.type
+            }
+
+            console.log('tran', tran);
+
+            this.postDataService.postTranService(tran).then(res => {
+              
+            });
+
+            this.ngOnInit();
+          }
+        }
+      ]
+    });
+    (await alert).present();
+  }
 
   UpdateInprogresss() {
     let params = {

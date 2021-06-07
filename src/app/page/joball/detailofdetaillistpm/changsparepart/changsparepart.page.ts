@@ -45,7 +45,7 @@ export class ChangsparepartPage implements OnInit {
     this.jobtype = this.navParams.data.jobtype;
     this.empID = this.navParams.data.empID;
     this.type = this.navParams.data.type;
-    console.log(this.type);
+    console.log('this.navParams.data', this.navParams.data);
 
     if (this.jobtype == "INSTALL") {
       if (this.type == 'device') {
@@ -55,10 +55,12 @@ export class ChangsparepartPage implements OnInit {
           typedevice: "GetDeviceInTran",
           empID: this.empID
         }
-        console.log(param);
+
+        console.log('param', param);
         this.postDataService.postdevice(param).then(status => {
           this.status = status
           console.log(this.status);
+
           if (this.status == false) {
             this.isShowDevice = false;
           } else {
@@ -73,12 +75,14 @@ export class ChangsparepartPage implements OnInit {
               })
             }
           }
+
           let params = {
             planID: this.planID,
             installID: this.installID,
             typedevice: "GetDeviceIN",
             empID: this.empID
           }
+
           console.log(params);
           this.postDataService.postdevice(params).then(data => {
             this.data = data
@@ -93,8 +97,9 @@ export class ChangsparepartPage implements OnInit {
               })
             }
           });
+
           console.log(this.Devicestorage);
-          console.log(this.Device);
+          console.log('this.Device',this.Device);
         });
       } else {
         let item = {
@@ -329,7 +334,7 @@ export class ChangsparepartPage implements OnInit {
       console.log(params);
       this.postDataService.postdevice(params).then(status => {
         this.modal = status
-        console.log(this.modal);
+        console.log('this.modal',this.modal);
         if (this.modal == true) {
           this.modal = 0
         } else {

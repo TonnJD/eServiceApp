@@ -165,6 +165,10 @@
               <label class="col-5 text" #pm>ประเภทงาน :</label>
               <label class="col-7 subtext" #pm>{{data.value.typePm}}</label>
             </div>
+            <div class="row col-12" *ngIf="data.value.JobType == 'PM' && data.value.cause != null && data.value.cause != '' && data.value.Workfinish != 1">
+              <label class="col-5 text" #pm>ไม่เข้าตรวจเช็ค :</label>
+              <label class="col-7 subtext text-danger" #pm>{{data.value.cause}}</label>
+            </div>
             <div class="row col-12" *ngIf="data.value.JobType == 'CM'">
               <label class="col-5 text">ปัญหาที่รับแจ้ง :</label>
               <label class="col-7 subtext">{{data.value.Description}}</label>
@@ -201,6 +205,9 @@
 
               <ion-button expand="block" color="success" size="small" (click)="scan(item, data.value)"
                 *ngIf="data.value.JobType != 'CM' && data.value.Workfinish == 0 else wait" #wait>เริ่มงาน</ion-button>
+
+              <ion-button expand="block" color="danger" size="small" (click)="NotPM(item, data.value)"
+                *ngIf="data.value.JobType != 'CM' && data.value.Workfinish == 0 else wait" #wait>ไม่เข้าตรวจเช็ค</ion-button>
 
               <ion-button expand="block" color="success" size="small" (click)="scan(item, data.value)"
                 *ngIf="data.value.Workfinish == 2 else waiting" #waiting>ดำเนินการต่อ
@@ -250,9 +257,9 @@
       </div>
     </div>
   </div>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="fab()">
+  <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed" (click)="fab()">
     <ion-fab-button>
       <ion-icon name="alert"></ion-icon>
     </ion-fab-button>
-  </ion-fab>
+  </ion-fab> -->
 </ion-content>

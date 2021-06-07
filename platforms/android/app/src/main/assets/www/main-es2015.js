@@ -1729,7 +1729,7 @@ let ChangsparepartPage = class ChangsparepartPage {
         this.jobtype = this.navParams.data.jobtype;
         this.empID = this.navParams.data.empID;
         this.type = this.navParams.data.type;
-        console.log(this.type);
+        console.log('this.navParams.data', this.navParams.data);
         if (this.jobtype == "INSTALL") {
             if (this.type == 'device') {
                 let param = {
@@ -1738,7 +1738,7 @@ let ChangsparepartPage = class ChangsparepartPage {
                     typedevice: "GetDeviceInTran",
                     empID: this.empID
                 };
-                console.log(param);
+                console.log('param', param);
                 this.postDataService.postdevice(param).then(status => {
                     this.status = status;
                     console.log(this.status);
@@ -1778,7 +1778,7 @@ let ChangsparepartPage = class ChangsparepartPage {
                         }
                     });
                     console.log(this.Devicestorage);
-                    console.log(this.Device);
+                    console.log('this.Device', this.Device);
                 });
             }
             else {
@@ -2008,7 +2008,7 @@ let ChangsparepartPage = class ChangsparepartPage {
             console.log(params);
             this.postDataService.postdevice(params).then(status => {
                 this.modal = status;
-                console.log(this.modal);
+                console.log('this.modal', this.modal);
                 if (this.modal == true) {
                     this.modal = 0;
                 }
