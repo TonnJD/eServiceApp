@@ -3365,6 +3365,28 @@ export class DetailofdetaillistpmPage implements OnInit {
         this.IsWaitsave = false;
 
         if (this.jobtype == 'PM') {
+          console.log('', this.spareList);
+
+          if (this.spareList.length > 0) {
+            console.log('this.isQuotation', this.isQuotation);
+            console.log('this.isRequest', this.isRequest);
+            console.log('this.requesText', this.requesText);
+            console.log('this.isBreak', this.isBreak);
+
+            let params = {
+              planID: this.planID,
+              empID: this.empID,
+              cusID: this.cusID,
+              isBreak: this.isBreak,
+              request: this.requesText,
+              isQuotation: this.isQuotation,
+              isRequest: this.isRequest,
+              spareList: this.spareList
+            }
+
+            this.postDataService.RequestSparepart(params);
+          }
+          
           let params = {
             planID: this.planID,
             installID: this.installID,

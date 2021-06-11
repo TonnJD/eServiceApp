@@ -39,6 +39,7 @@ export class SparepartPage implements OnInit {
   No;
   detailPM;
   mainData;
+  searhSparepart;
 
   constructor(public modalController: ModalController,
     private postDataService: PostDataService,
@@ -119,7 +120,7 @@ export class SparepartPage implements OnInit {
     console.log(params);
     this.postDataService.PostCus(params).then(SpareList => {
       this.SpareList = SpareList;
-      console.log('this.SpareList',this.SpareList);
+      console.log('this.SpareList', this.SpareList);
       for (let a = 0; a < this.SpareList.length; a++) {
         this.itemname.push(
           {
@@ -210,14 +211,14 @@ export class SparepartPage implements OnInit {
     }
 
     this.itemname[i].color = 'primary';
-    
+
     let params = {
       SparepartGroupID: SparepartGroupID,
       empID: this.empID,
       Type: "GetSpareImage",
       MainSKUID: MainSKUID
     }
-    
+
     this.postDataService.PostCus(params).then(SpareImage => {
       this.SpareImage = this.postDataService.apiStock + SpareImage;
       if (this.SpareImage != null) {
@@ -238,7 +239,7 @@ export class SparepartPage implements OnInit {
     this.postDataService.PostCus(params).then(SpareData => {
       this.SpareData = SpareData;
       console.log('this.SpareData', this.SpareData);
-      
+
       if (this.SpareImage != null) {
         this.AddDataToList();
       }
@@ -265,9 +266,9 @@ export class SparepartPage implements OnInit {
             Qty: res.data.Qty,
             Balance: res.data.Balance
           });
-  
+
         console.log('this.ListSpare', this.ListSpare);
-   
+
       }
     });
 
@@ -290,7 +291,7 @@ export class SparepartPage implements OnInit {
     }
 
     console.log('AddDataToList', this.DataSpare);
-    
+
   }
 
   AddToList(i, item) {
@@ -433,7 +434,8 @@ export class SparepartPage implements OnInit {
       this.itemname = this.itemname.filter((item) => {
         return (item.SparepartGroupName.toLowerCase().indexOf(val.toLowerCase()) > -1);
       })
-    } else {
+    }
+    else {
       this.itemname.splice(0);
       for (let i = 0; i < this.SpareList.length; i++) {
         this.itemname.push(
@@ -444,7 +446,38 @@ export class SparepartPage implements OnInit {
           });
       }
     }
-    console.log(this.itemname);
+    console.log('this.itemname', this.itemname);
+
+  }
+
+  searchSparepart(ev: any) {
+    const strSearch = ev.target.value;
+    
+    let params = {
+      Type: "GetSparepart",
+      searchspare: strSearch,
+      MainSKUID: this.SpareList[0].MainSKUID
+    }
+    console.log(params);
+    
+
+    this.postDataService.GetSparepart(params).then(res => {
+      this.SpareData = res;
+      this.DataSpare = this.SpareData;
+      // for (let i = 0; i < this.SpareData.length; i++) {
+      //   this.DataSpare.push(
+      //     {
+      //       ID: this.SpareData[i].ID,
+      //       PositionNo: this.SpareData[i].PositionNo,
+      //       Skuname: this.SpareData[i].Skuname,
+      //       Skucode: this.SpareData[i].Skucode,
+      //       Qty: this.SpareData[i].Qty,
+      //       SubSKUID: this.SpareData[i].SubSKUID,
+      //       Balance: this.SpareData[i].Balance,
+      //       Unit: this.SpareData[i].Unit
+      //     });
+      // }
+    });
 
   }
 

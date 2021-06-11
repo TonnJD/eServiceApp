@@ -8,7 +8,7 @@
 <ion-content>
   <div *ngIf="Type != 'history'">
     <ion-item>
-      <div class="row">
+      <div class="row" style="margin-bottom: 15px;">
         <!-- <div class="col-12" style="margin-top: 15px; margin-bottom: 15px;">
           <ion-searchbar type="text" (ionChange)="getItems($event)" placeholder="ค้นหา"></ion-searchbar>
         </div> -->
@@ -19,13 +19,13 @@
         <div class="col-sm-12" style="margin-bottom: 15px;" *ngIf="itemname.length == 0">
           <h4>ไม่พบข้อมูลอะไหล่</h4>
         </div>
-        <div class="col-sm-3" style="margin-bottom: 15px;" *ngFor="let s of itemname; let i = index">
+        <div class="col-sm-4" *ngFor="let s of itemname; let i = index">
           <ion-button expand="block" color="{{s.color}}" (click)="getImage(i,s.SparepartGroupID,s.MainSKUID)">
             {{s.SparepartGroupName}}
           </ion-button>
         </div>
 
-        <!-- <div class="col-12">        
+        <!-- <div class="col-12">
         <ion-select interface="popover" (ionChange)="getImage($event)" [(ngModel)]="SpareID">
           <ion-select-option *ngFor="let s of SpareList" [value]="s.SparepartGroupID" [selected]="s.SparepartGroupName" style="width: auto!important;">
             {{s.SparepartGroupName}}
@@ -50,12 +50,12 @@
         </div>
       </ion-slide>
     </ion-slides>
-    <div class="row" style="margin: 5px;" *ngIf="DataSpare">
-      <div class="col-md-12" style="padding:2px;" *ngIf="DataSpare.length != 0">
+    <div class="row" style="margin: 5px;">
+      <div class="col-md-12" style="padding:2px;">
         <div class="portlet box blue">
           <div class="portlet-title">
             <div class="caption">
-              <i class="fa fa-user"></i>รายการอะไหล่
+              <i class="fa fa-wrench"></i>รายการอะไหล่
             </div>
           </div>
           <div class="portlet-body">
@@ -63,11 +63,25 @@
               <div class="tab-pane active">
                 <div class="row">
                   <div class="col-12">
+                    <div class="form-group" style="padding: 10px;">
+                      <ion-searchbar type="text" (ionChange)="searchSparepart($event)" placeholder="ค้นหา"></ion-searchbar>
+                      <!-- <div class="input-group">
+                        <button class="btn btn-primary" type="button">
+                          <i class="fa fa-search" style="font-size: 1em !important;" (click)="searchSparepart()"></i>
+                        </button>
+                        <input type="text" class="form-control" placeholder="ค้นหา..." aria-label="Recipient's username" [(ngModel)]="searhSparepart">
+                      </div> -->
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
                     <div style="height: 300px; overflow-y:scroll;">
                       <table class="table table-hover">
                         <thead>
                           <tr>
                             <th class="text-center"> ลำดับที่ </th>
+                            <th> SKU Code </th>
                             <th> ชื่ออะไหล่ </th>
                             <th class="text-center"> ตำแหน่ง </th>
                             <th></th>
@@ -76,6 +90,7 @@
                         <tbody>
                           <tr *ngFor="let item of DataSpare; let i = index">
                             <td class="text-center" style="padding-top: 22px;"> {{i + 1}} </td>
+                            <td style="padding-top: 22px;"> {{item.Skucode}} </td>
                             <td style="padding-top: 22px;"> {{item.Skuname}} </td>
                             <td class="text-center" style="padding-top: 22px;"> {{item.PositionNo}} </td>
                             <td class="text-center">
@@ -100,18 +115,20 @@
         <div class="portlet box blue">
           <div class="portlet-title">
             <div class="caption">
-              <i class="fa fa-user"></i>รายการอะไหล่ที่ต้องการเบิก
+              <i class="fa fa-wrench"></i>รายการอะไหล่ที่ต้องการเบิก
             </div>
           </div>
           <div class="portlet-body">
             <div class="tab-content">
               <div class="tab-pane active">
                 <div class="row">
-                  <div class="col-12 text-right">
+                  <div class="col-12" text-right>
                     <ion-button color="success" class="text-center" (click)="addSparepart()">
                       เพิ่มรายการ
                     </ion-button>
                   </div>
+                </div>
+                <div class="row">
                   <div class="col-12">
                     <div class="table-scrollable">
                       <table class="table table-hover">
