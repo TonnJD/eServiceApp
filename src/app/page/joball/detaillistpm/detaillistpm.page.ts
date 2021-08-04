@@ -80,7 +80,7 @@ export class DetaillistpmPage implements OnInit {
         this.type = this.myId.type
         this.date = this.myId.date
         this.datacm = this.myId.datacm
-        
+        console.log('this.item PM', this.item);
         if (this.item == undefined || this.item == "undefined" || this.item == 'undefined') {
           this.cusID = this.myId.cusID
           this.planID = this.myId.planID

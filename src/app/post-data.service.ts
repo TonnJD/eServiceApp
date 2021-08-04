@@ -10,15 +10,15 @@ export class PostDataService {
 
   // test local
   // apiServer_url = 'http://localhost:41669/';
-  // apiStock = 'https://localhost:41669/';
+  // apiStock = 'https://localhost:6379/';
 
   // จาก Server จริง
-  // apiServer_url = 'https://erpsuperior.com/';
-  // apiStock = 'https://wms.erpsuperior.com/';
+  apiServer_url = 'https://erpsuperior.com/';
+  apiStock = 'https://wms.erpsuperior.com/';
 
   //จาก Server เทส
-  apiServer_url = 'https://test.erpsuperior.com/';
-  apiStock = 'https://wmstest.erpsuperior.com/';
+  // apiServer_url = 'https://test.erpsuperior.com/';
+  // apiStock = 'https://wmstest.erpsuperior.com/';
 
 
   // apiServer_url = 'https://cors-anywhere.herokuapp.com/http://superior2.wingplusweb.com/';
