@@ -73,7 +73,6 @@ export class DetaillistpmPage implements OnInit {
       this.detailPM = JSON.parse(params["data"]);
 
       console.log('detail params', this.detailPM);
-      this.planID = this.detailPM.item.planID;
 
       if (this.myId != "undefined") {
         this.item = this.myId.item
@@ -143,10 +142,9 @@ export class DetaillistpmPage implements OnInit {
           this.type = "INSTALL";
         }
         else if (this.type == "getCM") {
-          this.planID = this.item.planID;
           this.imgbf = true
-          this.detaillistpm.PlanID = this.planID;
-          this.detaillistpm.jobtype = "SuccessCM";
+          this.detaillistpm.PlanID = this.planID
+          this.detaillistpm.jobtype = "SuccessCM"
 
           this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
             this.data = work;
@@ -239,7 +237,7 @@ export class DetaillistpmPage implements OnInit {
             this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
           }
           console.log('this.data', this.data);
-          
+
         });
       });
 
@@ -276,7 +274,6 @@ export class DetaillistpmPage implements OnInit {
           this.empID = this.items[i].empID;
 
         }
-
         this.detaillistpm.cusID = this.cusID;
         this.detaillistpm.planID = this.planID;
         this.detaillistpm.month = this.month;
@@ -287,7 +284,6 @@ export class DetaillistpmPage implements OnInit {
 
         this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
           this.data = work;
-          console.log('data install', this.data);
 
           for (let i = 0; i < this.data.length; i++) {
             this.Customername = this.data[i].CustomerName;
@@ -306,7 +302,7 @@ export class DetaillistpmPage implements OnInit {
         for (let i = 0; i < this.items.length; i++) {
           this.empID = this.items[i].empID;
         }
-        
+
         this.detaillistpm.cusID = this.cusID;
         this.detaillistpm.planID = this.planID;
         this.detaillistpm.month = this.month;
@@ -534,10 +530,10 @@ export class DetaillistpmPage implements OnInit {
                       workclose: value
                     }
 
-                    console.log('tran', tran);                    
+                    console.log('tran', tran);
 
                     this.postDataService.postTranService(tran).then(TranService => {
-                      
+
                     });
 
                     let params = {
@@ -673,9 +669,9 @@ export class DetaillistpmPage implements OnInit {
     if (item.Workfinish == 1) {
       if (this.type == "CM") {
         if (item.WorkCloseID == "WorkClose001" || item.WorkCloseID == "WorkClose003") {
-          
-        } 
-        else {
+
+
+        } else {
           let params = {
             data: data,
             newinstallID: item.newinstallID,
@@ -684,14 +680,15 @@ export class DetaillistpmPage implements OnInit {
             planID: item.planID,
             type: this.type
           }
+          console.log(params);
 
           const navigationExtras: NavigationExtras = {
             queryParams: {
               data: JSON.stringify(params)
             }
           };
-
           this.navCtrl.navigateForward(['/job/jobdetail'], navigationExtras);
+          console.log("sent", navigationExtras);
         }
       }
       else if (this.type != "CM") {
@@ -1092,11 +1089,9 @@ export class DetaillistpmPage implements OnInit {
         planID: this.planID,
       }
     });
-
     modal.onDidDismiss().then(data => {
       console.log(data);
     })
-
     return await modal.present();
   }
 
