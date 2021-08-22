@@ -1,0 +1,74 @@
+<ion-toolbar color="primary">
+  <ion-title>ไม่เข้าตรวจเช็ค</ion-title>
+  <ion-buttons slot="primary">
+    <ion-icon slot="end" name="close" (click)="close()"></ion-icon>
+
+  </ion-buttons>
+</ion-toolbar>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>กรุณาถ่ายรูป</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="form-group row">
+        <div class="col-sm-3 col-md-3 col-xs-6 col-lg-3 text-center" style="padding-top:30px;padding-bottom: 15px;">
+          <a href="javascript:void(0)" (click)="Take(1)">
+            <i class="fa fa-camera" style="font-size:3.5em !important;"></i>
+          </a><br/>
+          <div style="padding-top: 5px;">
+            <span>รูปภาพที่ 1</span>
+          </div>
+          <!-- <img [src]="photo1" (click)="Take(1)"> -->
+        </div>
+        <div class="col-sm-3 col-md-3 col-xs-6 col-lg-3 text-center" style="padding-top:30px;padding-bottom: 15px;">
+          <a href="javascript:void(0)" (click)="Take(2)">
+            <i class="fa fa-camera" style="font-size:3.5em !important;"></i>
+          </a><br/>
+          <div style="padding-top: 5px;">
+            <span>รูปภาพที่ 2</span>
+          </div>
+          <!-- <img [src]="photo1" (click)="Take(1)"> -->
+        </div>
+        <div class="col-sm-3 col-md-3 col-xs-6 col-lg-3 text-center" style="padding-top:30px;padding-bottom: 15px;">
+          <a href="javascript:void(0)" (click)="Take(3)">
+            <i class="fa fa-camera" style="font-size:3.5em !important;"></i>
+          </a><br/>
+          <div style="padding-top: 5px;">
+            <span>รูปภาพที่ 3</span>
+          </div>
+          <!-- <img [src]="photo1" (click)="Take(1)"> -->
+        </div>
+        <div class="col-sm-3 col-md-3 col-xs-6 col-lg-3 text-center" style="padding-top:30px;padding-bottom: 15px;">
+          <a href="javascript:void(0)" (click)="Take(4)">
+            <i class="fa fa-camera" style="font-size:3.5em !important;"></i>
+          </a><br/>
+          <div style="padding-top: 5px;">
+            <span>รูปภาพที่ 4</span>
+          </div>
+          <!-- <img [src]="photo1" (click)="Take(1)"> -->
+        </div>
+      </div>
+    </ion-card-content>
+
+    <ion-card-header>
+      <ion-card-title>กรุณาระบุสาเหตุการไม่เข้าตรวจเช็ค (PM)</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="form-group row">
+        <div class="col-12">
+          <textarea class="form-control" rows="3" placeholder="เช่น: ร้านปิดบริการชั่วคราว"[(ngModel)]="cause">{{cause}}</textarea>
+          <!-- <small>* กรุณากรอกมากกว่า 4 ตัวอักษร</small> -->
+        </div>
+      </div>
+    </ion-card-content>
+    <hr />
+    <ion-card-content>
+      <div class="col-md-12 text-center">
+        <ion-button (click)="SaveNotCheckedPM()">บันทึก</ion-button>
+        <ion-button  color="medium" (click)="close()">ยกเลิก</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

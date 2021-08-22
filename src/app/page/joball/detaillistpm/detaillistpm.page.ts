@@ -10,6 +10,7 @@ import { CustomerevaluationPage } from '../detailofdetaillistpm/customerevaluati
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { LogPage } from '../../detaillistpm/log/log.page';
 import { RequestsparepartPage } from '../detailofdetaillistpm/requestsparepart/requestsparepart.page';
+import { NotCheckedPage } from '../not-checked/not-checked.page';
 //import { JobresponsPage } from '../../job/jobdetail/jobrespons/jobrespons.page'
 
 @Component({
@@ -72,14 +73,13 @@ export class DetaillistpmPage implements OnInit {
       this.myId = JSON.parse(params["data"]);
       this.detailPM = JSON.parse(params["data"]);
 
-      console.log('detail params', this.detailPM);
-
       if (this.myId != "undefined") {
         this.item = this.myId.item
         this.type = this.myId.type
         this.date = this.myId.date
         this.datacm = this.myId.datacm
         console.log('this.item PM', this.item);
+
         if (this.item == undefined || this.item == "undefined" || this.item == 'undefined') {
           this.cusID = this.myId.cusID
           this.planID = this.myId.planID
@@ -121,6 +121,7 @@ export class DetaillistpmPage implements OnInit {
               }
             }
           });
+
           this.type = "PM";
         }
         else if (this.type == "getIN") {
@@ -139,6 +140,7 @@ export class DetaillistpmPage implements OnInit {
               }
             }
           });
+
           this.type = "INSTALL";
         }
         else if (this.type == "getCM") {
@@ -318,7 +320,7 @@ export class DetaillistpmPage implements OnInit {
             this.Customername = this.data[i].CustomerName;
             this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
             console.log('this.data[i].productInstall', this.data[i].productInstall);
-            
+
             for (let j = 0; j < this.data[i].productInstall.length; j++) {
 
             }
@@ -597,15 +599,15 @@ export class DetaillistpmPage implements OnInit {
           month: this.month,
           year: this.year,
         }
-        console.log(params);
+        console.log('params',params);
 
         const navigationExtras: NavigationExtras = {
           queryParams: {
             data: JSON.stringify(params)
           }
         };
+
         this.navCtrl.navigateForward(['joball/listpm/detailofdetaillistpm'], navigationExtras);
-        console.log("sent", navigationExtras);
       }
       else if ((item.tranID == null && this.type != "CM")) {
         const alert = await this.alertController.create({
@@ -714,6 +716,7 @@ export class DetaillistpmPage implements OnInit {
   //#endregion
 
   async NotPM(data, item) {
+    //#region 
     let alert = this.alertController.create({
       header: 'ไม่เข้าตรวจเช็ค!',
       message: 'กรุณาระบุสาเหตุการไม่เข้าตรวจเช็ค (PM)',
@@ -736,7 +739,7 @@ export class DetaillistpmPage implements OnInit {
           text: 'บันทึก',
           handler: data => {
             this.notPM = data.detail;
-            
+
             let tran = {
               AssetID: item.AssetID,
               Serial: item.Serial,
@@ -750,7 +753,7 @@ export class DetaillistpmPage implements OnInit {
             console.log('tran', tran);
 
             this.postDataService.postTranService(tran).then(res => {
-              
+
             });
 
             this.ngOnInit();
@@ -759,6 +762,27 @@ export class DetaillistpmPage implements OnInit {
       ]
     });
     (await alert).present();
+    //#endregion
+
+    // const modal = await this.modalController.create({
+    //   component: NotCheckedPage,
+    //   cssClass: 'my-custom-modal-css-pm',
+    //   componentProps: {
+    //     AssetID: item.AssetID,
+    //     Serial: item.Serial,
+    //     planID: item.planID,
+    //     empID: this.empID,
+    //     insID: item.installId,
+    //     cause: data.detail,
+    //     type: this.type
+    //   }
+    // });
+
+    // modal.onDidDismiss().then(data => {
+
+    // });
+
+    // return await modal.present();
   }
 
   UpdateInprogresss() {

@@ -165,6 +165,10 @@
               <label class="col-5 text" #pm>ประเภทงาน :</label>
               <label class="col-7 subtext" #pm>{{data.value.typePm}}</label>
             </div>
+            <div class="row col-12" *ngIf="data.value.RoundFilter != null">
+              <label class="col-5 text" #pm>เปลี่ยนไส้กรอง :</label>
+              <label class="col-7 subtext" #pm style="font-weight: bold;color:#E78D8D;">{{data.value.RoundFilter}}</label>
+            </div>
             <div class="row col-12" *ngIf="data.value.JobType == 'PM' && data.value.cause != null && data.value.cause != '' && data.value.Workfinish != 1">
               <label class="col-5 text" #pm>ไม่เข้าตรวจเช็ค :</label>
               <label class="col-7 subtext text-danger" #pm>{{data.value.cause}}</label>
@@ -207,7 +211,7 @@
                 *ngIf="data.value.JobType != 'CM' && data.value.Workfinish == 0 else wait" #wait>เริ่มงาน</ion-button>
 
               <ion-button expand="block" color="danger" size="small" (click)="NotPM(item, data.value)"
-                *ngIf="data.value.JobType == 'PM' && data.value.Workfinish == 0 else wait" #wait>ไม่เข้าตรวจเช็ค 5</ion-button>
+                *ngIf="data.value.JobType == 'PM' && data.value.Workfinish == 0 else wait" #wait>ไม่เข้าตรวจเช็ค</ion-button>
 
               <ion-button expand="block" color="success" size="small" (click)="scan(item, data.value)"
                 *ngIf="data.value.Workfinish == 2 else waiting" #waiting>ดำเนินการต่อ

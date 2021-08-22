@@ -41,6 +41,7 @@ import { PartsWaitingListPageModule } from '../app/page/sparepart/parts-waiting-
 import { LogPageModule } from '../app/page/detaillistpm/log/log.module';
 import { RequestsparepartPageModule } from '../app/page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.module';
 import { SparepartPageModule } from '../app/page/sparepart/sparepart.module';
+import { NotCheckedPageModule } from './page/joball/not-checked/not-checked.module';
 //import { JobresponsPageModule} from '../app/page/job/jobdetail/jobrespons/jobrespons.module'
 
 @NgModule({
@@ -72,7 +73,8 @@ import { SparepartPageModule } from '../app/page/sparepart/sparepart.module';
     HttpClientModule,
     NgbModule,
     RequestsparepartPageModule,
-    SparepartPageModule
+    SparepartPageModule,
+    NotCheckedPageModule
   ],
   providers: [
     AuthGuardGuard,

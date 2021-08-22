@@ -294,7 +294,6 @@ export class DetailofdetaillistpmPage implements OnInit {
       }
 
       console.log('this.spareList', this.spareList);
-      console.log('this.myId', this.myId);
 
       this.item = this.myId.item
       this.type = this.myId.type
@@ -321,6 +320,8 @@ export class DetailofdetaillistpmPage implements OnInit {
       this.planDate = this.install.planDate;
       this.jobtype = this.install.JobType;
       this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/TabletCountTime.aspx' + '?planID=' + this.planID + "&installID=" + this.installID);
+
+      console.log('this.install', this.install);
 
       if (this.type == 'CM') {
         this.postDataService.UpdateInprogress(this.planID).then(res => {
@@ -722,6 +723,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       }
     });
   }
+
   onChecksign() {
     let paramSign = {
       installID: this.installID,
@@ -741,6 +743,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       }
     });
   }
+
   onPassCustomer() {
     let paramSign = {
       installID: this.installID,
@@ -3094,7 +3097,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       componentProps: {
         empID: this.empID,
         planID: this.planID,
-        install: this.installID,
+        install: this.install,
         InstallPlanName: this.InstallPlanName,
         ItemsName: this.ItemsName,
         ItemCode: this.ItemCode,

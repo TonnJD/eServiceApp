@@ -44,6 +44,7 @@ const routes: Routes = [
   { path: 'jobrespons', loadChildren: './page/job/jobdetail/jobrespons/jobrespons.module#JobresponsPageModule' },
   { path: 'request-sparepart', loadChildren: './page/sparepart/request-sparepart/request-sparepart.module#RequestSparepartPageModule' },  { path: 'requestsparepart', loadChildren: './page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.module#RequestsparepartPageModule' },
   { path: 'add-sparepart', loadChildren: './page/sparepart/add-sparepart/add-sparepart.module#AddSparepartPageModule' },
+  { path: 'not-checked', loadChildren: './page/joball/not-checked/not-checked.module#NotCheckedPageModule' },
 
 
 ];
