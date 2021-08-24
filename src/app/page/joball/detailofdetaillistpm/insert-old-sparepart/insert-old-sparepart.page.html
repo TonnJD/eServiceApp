@@ -1,0 +1,35 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>ข้อมูลอะไหล่เดิม</ion-title>
+    <ion-buttons slot="primary">
+      <ion-icon slot="end" name="close" (click)="close()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>กรุณาตรวจสอบข้อมูลอะไหล่เดิม ก่อนทำการเปลี่ยนอะไหล่ใหม่</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="form-group row" style="margin-top: 20px;">
+        <div class="col-md-6">
+          <label>ชื่อของอะไหล่เดิม</label>
+          <input class="form-control" [(ngModel)]="oldSpareName" />
+        </div>
+        <div class="col-md-6">
+          <label>Part No. ของอะไหล่เดิม</label>
+          <input class="form-control" [(ngModel)]="oldPartNo" />
+        </div>
+      </div>
+    </ion-card-content>
+
+    <hr />
+    <ion-card-content>
+      <div class="col-md-12 text-center" style="margin-bottom: 20px;">
+        <ion-button (click)="submit()">บันทึก</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

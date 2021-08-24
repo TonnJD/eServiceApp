@@ -253,7 +253,7 @@ export class DetailofdetaillistpmPage implements OnInit {
   isRequest = false;
   isBreak = false;
   //#endregion
-
+  checkStatus;
   spareList = [];
 
   //#region constructor
@@ -676,7 +676,7 @@ export class DetailofdetaillistpmPage implements OnInit {
     this.postDataService.SaveCaseAll(param).then(checkimgPM => {
       this.checkimgPM = checkimgPM
       console.log('checkimgPM', checkimgPM);
-      
+
       if (this.checkimgPM == true) {
         if (this.sparetype != "") {
           this.isenabledspare = true;
@@ -3000,7 +3000,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       console.log('INSTALL');
       console.log('this.status1', this.status1);
       if (this.status1 == "1" || this.status2 == "1" || this.status3 == "1" || this.status4 == "1" || this.status5 == "1" ||
-          this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
+        this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
         this.isenabledcheck = true;
         this.isenabledrequest = true;
         this.isenabledadddevice = true;
@@ -3042,7 +3042,7 @@ export class DetailofdetaillistpmPage implements OnInit {
   checklist() {
     if (this.jobtype == "INSTALL") {
       if (this.status1 == "1" || this.status2 == "1" || this.status3 == "1" || this.status4 == "1" || this.status5 == "1" ||
-          this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
+        this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
         this.isenabledcheck = true;
         this.isenabledadddevice = true;
       }
@@ -3183,20 +3183,20 @@ export class DetailofdetaillistpmPage implements OnInit {
         componentProps: {
           empID: this.empID,
           planID: this.planID,
-          install: this.installID,
+          install: this.install,
+          installID: this.install.installId,
           InstallPlanName: this.InstallPlanName,
           ItemsName: this.ItemsName,
           ItemCode: this.ItemCode,
           SerialNo: this.SerialNo,
           Cat: this.Category,
-          type: this.jobtype
+          jobtype: this.jobtype
         }
       });
 
       modal.onDidDismiss().then(res => {
         this.list = res
-        console.log('res', res);
-
+        
         for (let i = 0; i < this.list.length; i++) {
           this.list = this.list[i]
         }
@@ -3205,7 +3205,8 @@ export class DetailofdetaillistpmPage implements OnInit {
         this.idold = this.list.data.idold
         this.sparepart = this.list.data.sparepart
         this.typedevice = this.list.data.typedevice
-        console.log(this.list.data)
+        console.log('this.list.data', this.list.data)
+
         if (this.list.data == 0) {
           this.isenabledcuseva = false;
         } else {
@@ -3390,7 +3391,7 @@ export class DetailofdetaillistpmPage implements OnInit {
 
             this.postDataService.RequestSparepart(params);
           }
-          
+
           let params = {
             planID: this.planID,
             installID: this.installID,
@@ -3532,8 +3533,17 @@ export class DetailofdetaillistpmPage implements OnInit {
 
     return await modal.present();
   }
-  //#region openModalcustomereva
-  async openModalcustomereva() {
+
+  async AlertCheckChangeFilter() {
+    const alert = await this.alertController.create({
+      message: 'มีรอบการเปลียนไส้กรอง! กรุณาตรวจสอบ',
+      buttons: ['OK']
+    });
+
+    await alert.present();
+  }
+
+  async ModalCustomerEva() {
     const modal = await this.modalController.create({
       component: CustomerevaluationPage,
       cssClass: 'my-custom-modal-css',
@@ -3595,6 +3605,27 @@ export class DetailofdetaillistpmPage implements OnInit {
 
     return await modal.present();
   }
+
+  //#region openModalcustomereva
+  async openModalcustomereva() {
+    if (this.install.RoundFilter != null) {
+      this.postDataService.CheckRoundFilter(this.install.tranID).then(res => {
+        let tranData = res;
+
+        if (tranData == null && this.install.RoundFilter != null) {
+          this.AlertCheckChangeFilter();
+          return;
+        }
+        else {
+          this.ModalCustomerEva();
+        }
+      });
+    }
+    else
+    {
+      this.ModalCustomerEva();
+    }
+  }
   //#endregion
 
   //#region changspare
@@ -3615,8 +3646,8 @@ export class DetailofdetaillistpmPage implements OnInit {
       modal.onDidDismiss().then(data => {
         this.list = data
         this.list = this.list.data
-        console.log('this.list',this.list);
-        console.log('this.installID',this.installID);
+        console.log('this.list', this.list);
+        console.log('this.installID', this.installID);
 
         if (this.list == 0) {
           let params = {
@@ -3631,7 +3662,7 @@ export class DetailofdetaillistpmPage implements OnInit {
               this.SerialNo = serial;
               this.isenabledcuseva = true;
             }
-            console.log('this.SerialNo',this.SerialNo);
+            console.log('this.SerialNo', this.SerialNo);
           });
         }
         else {
@@ -3877,7 +3908,7 @@ export class DetailofdetaillistpmPage implements OnInit {
     });
     (await alert).present();
   }
-  
+
   saveTabletProblemLog(LogName) {
     let params = {
       planID: this.planID,

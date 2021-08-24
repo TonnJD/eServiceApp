@@ -476,5 +476,30 @@ export class PostDataService {
     });
   }
 
+  CheckRoundFilter(tranID) {
+    return new Promise((resovle, reject) => {
+      let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+      this.http.get(this.apiServer_url + '/API/WebService.asmx/CheckRoundFilter?tranID=' + tranID, option).subscribe(data => {
+        resovle(data);
+      }, error => {
+        reject(error)
+      });
+    });
+  }
+
+  InsertOldSparepart(installID, SKUID, nameOld, partOld, tranID, empID) {
+    return new Promise((resovle, reject) => {
+      let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+      this.http.get(this.apiServer_url + '/API/WebService.asmx/InsertOldSparepart?installID=' + tranID + "&SKUID=" + SKUID + "&nameOld=" + nameOld + "&partOld=" + partOld
+                                       + "&tranID=" + tranID + "&empID=" + empID , option).subscribe(data => {
+        resovle(data);
+      }, error => {
+        reject(error)
+      });
+    });
+  }
+
 }
 

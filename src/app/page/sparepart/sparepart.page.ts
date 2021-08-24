@@ -395,14 +395,14 @@ export class SparepartPage implements OnInit {
     }
 
     this.modalCtrl.dismiss(params);
-    // let navigationExtras: NavigationExtras = {
-    //   queryParams: {
-    //     sparelist: JSON.stringify(params.sparelist),
-    //     data: JSON.stringify(params.maindata)
-    //   }
-    // };
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        sparelist: JSON.stringify(params.sparelist),
+        data: JSON.stringify(params.maindata)
+      }
+    };
 
-    // this.navCtrl.navigateBack(['/joball/listpm/detailofdetaillistpm'], navigationExtras);
+    this.navCtrl.navigateBack(['/joball/listpm/detailofdetaillistpm'], navigationExtras);
   }
 
   close() {

@@ -4,6 +4,7 @@ import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { PostDataService } from '../../../../post-data.service';
 import { AlertController } from '@ionic/angular';
+import { InsertOldSparepartPage } from '../insert-old-sparepart/insert-old-sparepart.page';
 
 @Component({
   selector: 'app-checklistcm',
@@ -94,6 +95,8 @@ export class ChecklistcmPage implements OnInit {
     this.cat = this.navParams.data.Cat;
     this.jobtype = this.navParams.data.jobtype;
     this.stock = [];
+    console.log('this.jobtype', this.jobtype);
+
 
     let param = {
       installID: this.installID,
@@ -131,8 +134,7 @@ export class ChecklistcmPage implements OnInit {
           this.GetSpareTran();
           this.GetSpareFilter();
         }
-        else 
-        {
+        else {
           this.GetSpareTran();
           this.GetSpareCM();
         }
@@ -229,6 +231,7 @@ export class ChecklistcmPage implements OnInit {
     this.postDataService.postdevice(param).then(data => {
       this.dataspare = data
       console.log('this.dataspare', this.dataspare);
+
       for (let p = 0; p < this.dataspare.length; p++) {
         this.spareList.push(
           {
@@ -260,7 +263,7 @@ export class ChecklistcmPage implements OnInit {
       type: this.jobtype
     }
 
-    console.log(params);
+    console.log('GetSpareCM', params);
 
     this.postDataService.postdevice(params).then(res => {
       this.data = res;
@@ -294,7 +297,7 @@ export class ChecklistcmPage implements OnInit {
       empID: this.empID,
       type: this.jobtype
     }
-    
+
     this.postDataService.postdevice(params).then(res => {
       this.data = res;
       console.log('this.data', this.data);
@@ -326,8 +329,8 @@ export class ChecklistcmPage implements OnInit {
       this.isShowDevice = false;
       this.isShowDeviceDetail = false;
       this.isEditSpare = true;
-      this.GetSpareTran();
       this.GetSpareCM();
+      this.GetSpareTran();
     }
     else if (type == "device") {
       this.isShowType = false;
@@ -376,8 +379,32 @@ export class ChecklistcmPage implements OnInit {
       this.modalController.dismiss(param);
     }
   }
-
   //#endregion
+
+  async InsertOldSparepart(i, item) {
+    console.log('item', item);
+
+    const modal = await this.modalController.create({
+      component: InsertOldSparepartPage,
+      cssClass: 'my-custom-modal-css',
+      componentProps: {
+        item: item,
+        insID: this.installID,
+        tranID: this.install.tranID,
+        empID: this.empID,
+      }
+    });
+
+    modal.onDidDismiss().then(res => {
+      let status = res.data.status;
+
+      if (!status) {
+        this.remove(i, item);
+      }
+    });
+
+    return await modal.present();
+  }
 
   //#region device
 
@@ -482,6 +509,8 @@ export class ChecklistcmPage implements OnInit {
         Balance: item.Balance,
         isChecked: item.isChecked
       });
+
+    this.InsertOldSparepart(i, item);
   }
   //#region spare
 
