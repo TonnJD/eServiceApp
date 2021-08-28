@@ -476,11 +476,11 @@ export class PostDataService {
     });
   }
 
-  CheckRoundFilter(tranID) {
+  CheckRoundFilter(planID, installID) {
     return new Promise((resovle, reject) => {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-      this.http.get(this.apiServer_url + '/API/WebService.asmx/CheckRoundFilter?tranID=' + tranID, option).subscribe(data => {
+      this.http.get(this.apiServer_url + '/API/WebService.asmx/CheckRoundFilter?planID=' + planID + '&installID=' + installID, option).subscribe(data => {
         resovle(data);
       }, error => {
         reject(error)
@@ -488,12 +488,11 @@ export class PostDataService {
     });
   }
 
-  InsertOldSparepart(installID, SKUID, nameOld, partOld, tranID, empID) {
+  CheckSparepart(planID) {
     return new Promise((resovle, reject) => {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-      this.http.get(this.apiServer_url + '/API/WebService.asmx/InsertOldSparepart?installID=' + tranID + "&SKUID=" + SKUID + "&nameOld=" + nameOld + "&partOld=" + partOld
-                                       + "&tranID=" + tranID + "&empID=" + empID , option).subscribe(data => {
+      this.http.get(this.apiServer_url + '/API/WebService.asmx/CheckSparepart?planID=' + planID , option).subscribe(data => {
         resovle(data);
       }, error => {
         reject(error)

@@ -402,7 +402,7 @@ export class SparepartPage implements OnInit {
       }
     };
 
-    this.navCtrl.navigateBack(['/joball/listpm/detailofdetaillistpm'], navigationExtras);
+    //this.navCtrl.navigateBack(['/joball/listpm/detailofdetaillistpm'], navigationExtras);
   }
 
   close() {

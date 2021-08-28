@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, ModalController, NavParams } from '@ionic/angular';
+import { NavController, ModalController, NavParams, ToastController } from '@ionic/angular';
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { PostDataService } from '../../../../post-data.service';
@@ -75,6 +75,9 @@ export class ChecklistcmPage implements OnInit {
   qty5;
   jobInSpare;
   //#endregion
+  disableNon = false;
+  disableChange = false;
+  device;
 
   //#region constructor
   constructor(public modalController: ModalController,
@@ -83,7 +86,8 @@ export class ChecklistcmPage implements OnInit {
     public navCtrl: NavController,
     public alertController: AlertController,
     private postDataService: PostDataService,
-    sanitizer: DomSanitizer,) {
+    sanitizer: DomSanitizer,
+    private toastCtrl: ToastController) {
     this.empID = this.navParams.data.empID;
     this.planID = this.navParams.data.planID;
     this.install = this.navParams.data.install;
@@ -138,6 +142,24 @@ export class ChecklistcmPage implements OnInit {
           this.GetSpareTran();
           this.GetSpareCM();
         }
+      }
+      else if (this.jobtype == "CM")
+      {
+        this.postDataService.CheckSparepart(this.planID).then(res => {
+          this.device = res;
+          let length = this.device.length;
+          console.log('device', this.device);
+          
+          if (length === 0) {
+            this.disableNon = false;
+            this.disableChange = true;
+          }
+          else
+          {
+            this.disableNon = true;
+            this.disableChange = false;
+          }
+        });
       }
     });
 
@@ -396,14 +418,40 @@ export class ChecklistcmPage implements OnInit {
     });
 
     modal.onDidDismiss().then(res => {
+      let oldData = res.data;
       let status = res.data.status;
+      console.log('oldData', oldData);
 
       if (!status) {
         this.remove(i, item);
       }
+      else
+      {
+        for (let index = 0; index < this.spareList.length; index++) {
+          const element = this.spareList[index];
+          
+          if (element.AssID === oldData.assID) {
+            element.NameOld = oldData.oldName;
+            element.PartOld = oldData.oldNo;
+          }
+        }  
+        console.log('this.spareList', this.spareList);
+
+      }
     });
 
     return await modal.present();
+  }
+
+  async presentToast() {
+    const toast = await this.toastCtrl.create({
+      //header: 'เรียบร้อย',
+      message: 'บันทึกการเปลี่ยนอะไหล่',
+      //color: 'success',
+      duration: 3000
+    });
+
+    toast.present();
   }
 
   //#region device
@@ -650,7 +698,8 @@ export class ChecklistcmPage implements OnInit {
       console.log(param);
       this.modalController.dismiss(param);
     }
-    else if (type == "Spareparts") {
+    else if (type == "Spareparts")
+    {
       console.log('this.spareList', this.spareList,);
 
       let strType = (this.install.RoundFilter != null) ? "SaveSparePM" : "SaveSpareCM";
@@ -669,11 +718,15 @@ export class ChecklistcmPage implements OnInit {
       });
 
       let param = {
-        typedevice: "sparepart"
+        typedevice: "sparepart",
+        spareList: this.listreal,
+        install: this.install
       }
       console.log(params);
       this.modalController.dismiss(param);
     }
+
+    this.presentToast();
   }
   //#endregion
 

@@ -16,6 +16,7 @@ export class InsertOldSparepartPage implements OnInit {
   insID;
   tranID;
   empID;
+  spareList = [];
   status = false;
 
   constructor(private postDataService: PostDataService,
@@ -31,6 +32,8 @@ export class InsertOldSparepartPage implements OnInit {
       this.empID = this.navParams.data.empID;
       this.oldSpareName = this.item.Name;
       this.oldPartNo = this.item.SKUCode;
+      console.log('this.item', this.item);
+      
     }
 
   ngOnInit() {
@@ -38,31 +41,17 @@ export class InsertOldSparepartPage implements OnInit {
 
   close() {
     let param = {
-      status: this.status
+      status: this.status,
+      assID: this.item.AssID,
+      oldName: this.oldSpareName,
+      oldNo: this.oldPartNo
     }
 
     this.modalCtrl.dismiss(param);
   }
 
   submit() {
-    this.postDataService.InsertOldSparepart(this.insID, this.item.SKUID, this.oldSpareName, this.oldPartNo, this.tranID, this.empID).then(res => {
-      let st = res;
-      
-      if (st) {
-        this.status = true;
-        this.presentToast();
-      }
-    });
+    this.status = true;
+    this.close();
   }
-
-  async presentToast() {
-    const toast = await this.toastCtrl.create({
-      //header: 'เรียบร้อย',
-      message: 'ระบบบันทึกข้อมูลเรียบร้อยแล้ว',
-      color: 'success',
-      duration: 3000
-    });
-    toast.present();
-  }
-
 }

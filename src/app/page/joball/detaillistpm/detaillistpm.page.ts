@@ -447,6 +447,7 @@ export class DetaillistpmPage implements OnInit {
           });
 
           let params = {
+            empID: this.empID,
             planID: item.planID,
             install: item,
             data: data,

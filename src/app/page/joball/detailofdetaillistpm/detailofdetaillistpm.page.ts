@@ -59,6 +59,7 @@ export class DetailofdetaillistpmPage implements OnInit {
   isenabledcuspass = false;
   isenabledcuseva = false;
   isenabledadddevice = false;
+  ischeckSpare = false;
   isnotPM = true;
   isPM = false;
   DateStart;
@@ -255,6 +256,8 @@ export class DetailofdetaillistpmPage implements OnInit {
   //#endregion
   checkStatus;
   spareList = [];
+  listreal = [];
+  data;
 
   //#region constructor
   constructor(private camera: Camera,
@@ -298,6 +301,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       this.item = this.myId.item
       this.type = this.myId.type
       this.date = this.myId.date
+      this.empID = this.myId.empID;
       this.planmonth = this.myId.month
       this.planyear = this.myId.year
       this.install = this.myId.install
@@ -321,7 +325,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       this.jobtype = this.install.JobType;
       this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/TabletCountTime.aspx' + '?planID=' + this.planID + "&installID=" + this.installID);
 
-      console.log('this.install', this.install);
+      console.log('this.myId', this.myId);
 
       if (this.type == 'CM') {
         this.postDataService.UpdateInprogress(this.planID).then(res => {
@@ -345,6 +349,45 @@ export class DetailofdetaillistpmPage implements OnInit {
     });
   }
   //#endregion
+
+  GetSpareCM() {
+    let params = {
+      planID: this.planID,
+      installID: this.installID,
+      typedevice: "GetSpareCM",
+      empID: this.empID,
+      type: this.jobtype
+    }
+
+    this.postDataService.postdevice(params).then(res => {
+      this.data = res;
+      console.log('this.data', this.data);
+
+      this.listreal.splice(0);
+      for (let j = 0; j < this.data.length; j++) {
+        this.listreal.push(
+          {
+            AssID: this.data[j].AssID,
+            SKUID: this.data[j].SKUID,
+            SKUCode: this.data[j].SKUCode,
+            Name: this.data[j].Name,
+            No: this.data[j].No,
+            Unit: this.data[j].Unit,
+            Serial: this.data[j].Serial,
+            Balance: this.data[j].Balance,
+            PartOld: this.data[j].PartOld,
+          });
+      }
+    });
+    console.log('this.listreal', this.listreal);
+
+    if (this.listreal.length > 0) {
+      this.ischeckSpare = true;
+    }
+    else {
+      this.ischeckSpare = false;
+    }
+  }
 
   async requestSparepart() {
     const modal = await this.modalController.create({
@@ -585,7 +628,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       this.isenabledcuseva = false;
       this.isenabledrequest = true;
       this.checkcm();
-
+      this.GetSpareCM();
     }
     else if (this.jobtype == "INSTALL") {
       this.worktype = "งานติดตั้ง"
@@ -3120,6 +3163,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       this.sparepart = this.list.data.sparepart
       this.typedevice = this.list.data.typedevice
 
+      //this.install = this.list.install;
       // if (this.list.data == 0) {
       //   this.isenabledcuseva = false;
       // } else {
@@ -3196,7 +3240,7 @@ export class DetailofdetaillistpmPage implements OnInit {
 
       modal.onDidDismiss().then(res => {
         this.list = res
-        
+
         for (let i = 0; i < this.list.length; i++) {
           this.list = this.list[i]
         }
@@ -3205,16 +3249,23 @@ export class DetailofdetaillistpmPage implements OnInit {
         this.idold = this.list.data.idold
         this.sparepart = this.list.data.sparepart
         this.typedevice = this.list.data.typedevice
-        console.log('this.list.data', this.list.data)
+        let length = (this.list.data.spareList) ? this.list.data.spareList.length : 0;
+        console.log('this.list.data.spareList', this.list.data.spareList);
 
-        if (this.list.data == 0) {
-          this.isenabledcuseva = false;
-        } else {
+        if (this.typedevice == "non") {
           this.isenabledcuseva = true;
+        }
+        else if (length === 0) {
+          this.ischeckSpare = false;
+          this.isenabledcuseva = true;
+        }
+        else if (length > 0) {
+          this.ischeckSpare = true;
+          this.isenabledcuseva = false;
         }
 
         this.checkcm();
-      })
+      });
 
       return await modal.present();
     }
@@ -3608,9 +3659,12 @@ export class DetailofdetaillistpmPage implements OnInit {
 
   //#region openModalcustomereva
   async openModalcustomereva() {
+    console.log('this.install', this.install);
+
     if (this.install.RoundFilter != null) {
-      this.postDataService.CheckRoundFilter(this.install.tranID).then(res => {
+      this.postDataService.CheckRoundFilter(this.install.planID, this.install.installId).then(res => {
         let tranData = res;
+        console.log('tranData', tranData);
 
         if (tranData == null && this.install.RoundFilter != null) {
           this.AlertCheckChangeFilter();
@@ -3621,8 +3675,7 @@ export class DetailofdetaillistpmPage implements OnInit {
         }
       });
     }
-    else
-    {
+    else {
       this.ModalCustomerEva();
     }
   }
