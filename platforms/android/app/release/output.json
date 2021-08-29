@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "io.ionic.superioreService_test",
+  "applicationId": "io.ionic.superioreService",
   "variantName": "release",
   "elements": [
     {
