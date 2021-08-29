@@ -337,15 +337,17 @@ export class DetailofdetaillistpmPage implements OnInit {
 
       }
 
-      this.postDataService.checkBI(this.planID, this.installID).then(data => {
-        //console.log('checkBI count', data[0].count);
-
-        if (data[0].count > 0) {
-          this.isenabledcuseva = true;
-        } else {
-          this.isenabledcuseva = false;
-        }
-      });
+      if (this.type == 'PM') {
+        this.postDataService.checkBI(this.planID, this.installID).then(data => {
+          console.log('checkBI count', data[0].count);
+  
+          if (data[0].count > 0) {
+            this.isenabledcuseva = false;
+          } else {
+            this.isenabledcuseva = true;
+          }
+        });
+      }
     });
   }
   //#endregion
@@ -588,7 +590,7 @@ export class DetailofdetaillistpmPage implements OnInit {
 
       if (this.boo11 == true) {
         this.isenabledadddevice = true;
-        this.isenabledcuseva = true;
+        //
         this.isenabledeva = true;
         this.isenabledsig = true;
         this.isenabledcuspass = true;
@@ -599,11 +601,11 @@ export class DetailofdetaillistpmPage implements OnInit {
         if (this.isShow1 == true || this.isShow2 == true || this.isShow3 == true || this.isShow4 == true || this.isShow5 == true ||
           this.isShow6 == true || this.isShow7 == true || this.isShow8 == true || this.isShow9 == true || this.isShow10 == true) {
           this.isenabledcheck = true;
-          this.isenabledcuseva = true;
+          
         }
         else {
           this.isenabledcheck = false;
-          this.isenabledcuseva = false;
+          
         }
       }
 
@@ -625,7 +627,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       this.isenabledtitle1 = false;
       this.isenabledTakeback = true;
       this.isenabledcheck = false;
-      this.isenabledcuseva = false;
+      
       this.isenabledrequest = true;
       this.checkcm();
       this.GetSpareCM();
@@ -688,9 +690,9 @@ export class DetailofdetaillistpmPage implements OnInit {
     this.postDataService.postdevice(params).then(status => {
       console.log(status);
       if (status == true) {
-        this.isenabledcuseva = true;
+        
       } else {
-        this.isenabledcuseva = false;
+        
       }
     });
   }
@@ -741,7 +743,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       this.TechCloseJob = TechCloseJob
       if (this.TechCloseJob == true) {
         this.isenabledcheck = true;
-        this.isenabledcuseva = true;
+        
         this.isenabledeva = true;
       }
     });
@@ -3047,7 +3049,7 @@ export class DetailofdetaillistpmPage implements OnInit {
         this.isenabledcheck = true;
         this.isenabledrequest = true;
         this.isenabledadddevice = true;
-        this.isenabledcuseva = true;
+        
         console.log('this.isenabledcheck', this.isenabledcheck);
       }
     }
@@ -3065,7 +3067,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       console.log('UNINSTALL');
       if (this.status1 == "1" || this.status2 == "1" || this.status3 == "1" || this.status4 == "1" || this.status5 == "1" ||
         this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
-        this.isenabledcuseva = true;
+        
       }
     }
     else if (this.jobtype == "PM") {
@@ -3099,7 +3101,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       if (this.status1 == "1" || this.status2 == "1" || this.status3 == "1" || this.status4 == "1" || this.status5 == "1" ||
         this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
         this.isenabledcheck = true;
-        this.isenabledcuseva = true;
+        
       }
     } else if (this.jobtype == "PM") {
       if (this.status6 == "1" && this.status7 == "1" && this.status8 == "1" && this.status9 == "1" && this.status10 == "1" &&
@@ -3121,7 +3123,7 @@ export class DetailofdetaillistpmPage implements OnInit {
     //     this.isenabledrequest = true;
     //   }
     //   else if (this.jobtype == "UNINSTALL") {
-    //     this.isenabledcuseva = true;
+    //     
     //   }
     //   else if (this.jobtype == "PM") {
     //     if (this.sparetype != "") {
@@ -3165,9 +3167,9 @@ export class DetailofdetaillistpmPage implements OnInit {
 
       //this.install = this.list.install;
       // if (this.list.data == 0) {
-      //   this.isenabledcuseva = false;
+      //   
       // } else {
-      //   this.isenabledcuseva = true;
+      //   
       // }
 
       this.checkcm();
@@ -3176,6 +3178,16 @@ export class DetailofdetaillistpmPage implements OnInit {
     return await modal.present();
   }
   //#region checklist
+  async AlertCheckList() {
+    const alert = await this.alertController.create({
+      header: 'ตรวจเช็ครายการไม่ครบ!',
+      message: 'กรุณาตรวจสอบอีกครั้ง',
+      buttons: ['ตกลง']
+    });
+
+    await alert.present();
+  }
+
   async check() {
     if (this.jobtype != "CM") {
       const modal = await this.modalController.create({
@@ -3194,6 +3206,7 @@ export class DetailofdetaillistpmPage implements OnInit {
           console.log('checkBI count', data[0].count);
 
           if (data[0].count > 0) {
+            this.AlertCheckList();
             this.isenabledcuseva = false;
           } else {
             this.isenabledcuseva = true;
@@ -3215,7 +3228,7 @@ export class DetailofdetaillistpmPage implements OnInit {
         // if (this.list == "") {
         // }
         // if (this.list == 0) {
-        //   this.isenabledcuseva = true;
+        //   
         // }
       })
       return await modal.present();
@@ -3251,6 +3264,7 @@ export class DetailofdetaillistpmPage implements OnInit {
         this.typedevice = this.list.data.typedevice
         let length = (this.list.data.spareList) ? this.list.data.spareList.length : 0;
         console.log('this.list.data.spareList', this.list.data.spareList);
+        console.log('this.typedevice', this.typedevice);        
 
         if (this.typedevice == "non") {
           this.isenabledcuseva = true;
@@ -3665,6 +3679,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       this.postDataService.CheckRoundFilter(this.install.planID, this.install.installId).then(res => {
         let tranData = res;
         console.log('tranData', tranData);
+        console.log('this.install.RoundFilter', this.install.RoundFilter);
 
         if (tranData == null && this.install.RoundFilter != null) {
           this.AlertCheckChangeFilter();
@@ -3676,7 +3691,23 @@ export class DetailofdetaillistpmPage implements OnInit {
       });
     }
     else {
-      this.ModalCustomerEva();
+      if (this.jobtype == 'PM') {
+        this.postDataService.checkBI(this.planID, this.installID).then(data => {
+          console.log('checkBI count', data[0].count);
+    
+          if (data[0].count > 0) {
+            this.AlertCheckList();
+            
+          } else {
+            this.ModalCustomerEva();
+          }
+        });
+      }
+      else
+      {
+        alert(1);
+        this.ModalCustomerEva();
+      }
     }
   }
   //#endregion
@@ -3713,13 +3744,13 @@ export class DetailofdetaillistpmPage implements OnInit {
             console.log(serial);
             if (serial != false) {
               this.SerialNo = serial;
-              this.isenabledcuseva = true;
+              
             }
             console.log('this.SerialNo', this.SerialNo);
           });
         }
         else {
-          this.isenabledcuseva = false;
+          
         }
       })
       return await modal.present();
@@ -3741,7 +3772,7 @@ export class DetailofdetaillistpmPage implements OnInit {
         this.list = this.list.data
         console.log(this.list);
         if (this.list == 0) {
-          this.isenabledcuseva = true;
+          
         }
       })
 

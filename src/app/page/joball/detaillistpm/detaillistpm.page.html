@@ -166,8 +166,8 @@
               <label class="col-7 subtext" #pm>{{data.value.typePm}}</label>
             </div>
             <div class="row col-12" *ngIf="data.value.RoundFilter != null">
-              <label class="col-5 text" #pm>เปลี่ยนไส้กรอง :</label>
-              <label class="col-7 subtext" #pm style="font-weight: bold;color:#E78D8D;">{{data.value.RoundFilter}}</label>
+              <label class="col-12 text" #pm>เปลี่ยนไส้กรอง :</label>
+              <label class="col-12 subtext" #pm style="font-weight: bold;color:#E78D8D;" [innerHTML]="data.value.RoundFilter"></label>
             </div>
             <div class="row col-12" *ngIf="data.value.JobType == 'PM' && data.value.cause != null && data.value.cause != '' && data.value.Workfinish != 1">
               <label class="col-5 text" #pm>ไม่เข้าตรวจเช็ค :</label>

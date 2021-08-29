@@ -99,6 +99,7 @@ export class ChecklistPage implements OnInit {
     console.log('checklist page', params);
     this.postDataService.SaveCaseAll(params).then(data => {     
       console.log(data);
+      
       if (data == "true") {
         this.modalController.dismiss(0);
       } else {
