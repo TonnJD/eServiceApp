@@ -79,19 +79,31 @@ export class RequestsparepartPage implements OnInit {
     //   }
     // });
 
-      if (this.type != 'history') {
-        let param = {
-          isQuotation: true,
-          request: this.request
-        }
+    // let params1 = {
+    //   planID: this.planID,
+    //   empID: this.empID,
+    //   //cusID: this.cusID,
+    //   isBreak: this.isBreak,
+    //   request: this.request,
+    //   isQuotation: true,
+    //   isRequest: this.isRequest
+    // }
 
-        this.modalCtrl.dismiss(param);
+    // this.postDataService.RequestSparepart(params1);
+
+    if (this.type != 'history') {
+      let param = {
+        isQuotation: true,
+        request: this.request
       }
+
+      this.modalCtrl.dismiss(param);
+    }
   }
 
   async confirmSubmit() {
     console.log('this.isQuotation', this.isQuotation);
-    
+
     if (this.request == null) {
       const alert = await this.alertCtrl.create({
         header: 'แจ้งเตือน',
@@ -112,8 +124,8 @@ export class RequestsparepartPage implements OnInit {
               try {
                 this.submitRequest();
               } catch (error) {
-                console.log('error',error);
-                
+                console.log('error', error);
+
                 this.alertSubmitFail();
               }
             }
@@ -139,7 +151,7 @@ export class RequestsparepartPage implements OnInit {
       message: 'ไม่สามารถบักทึกได้ กรุณาลองใหม่อีกครั้ง',
       buttons: ['ตกลง']
     });
-  
+
     await alert.present();
   }
 

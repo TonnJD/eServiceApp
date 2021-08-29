@@ -214,11 +214,11 @@
                       <table class="table table-hover">
                         <thead>
                           <tr>
-                            <th style="color:blue"> ลำดับที่ </th>
-                            <th style="color:blue"> ชื่ออะไหล่ </th>
-                            <th style="color:blue"> Part No. </th>
-                            <th style="color:blue"> จำนวน </th>
-                            <th style="color:blue"></th>
+                            <th style="color:blue;"> ลำดับที่ </th>
+                            <th style="color:blue; text-align:left;"> ชื่ออะไหล่ </th>
+                            <th style="color:blue; text-align:left;"> Part No. </th>
+                            <th style="color:blue;"> จำนวน </th>
+                            <th style="color:blue;"></th>
                           </tr>
                         </thead>
                         <tbody>
@@ -226,8 +226,8 @@
                             <td>
                               <label>{{i+1}}</label>
                             </td>
-                            <td><label>{{item.Name}}</label></td>
-                            <td><label>{{item.SKUCode}}</label></td>
+                            <td style="text-align:left;"><label>{{item.Name}}</label></td>
+                            <td style="text-align:left;"><label>{{item.SKUCode}}</label></td>
                             <td><label>{{item.Balance}}</label></td>
                             <td>
                               <ion-button color="warning" class="text-center" (click)="select(i,item)">
@@ -256,10 +256,10 @@
                         <table class="table table-hover">
                           <thead>
                             <tr>
-                              <th style="color:green"> ลำดับที่ </th>
-                              <th style="color:green"> ชื่ออะไหล่ </th>
-                              <th style="color:green"> Part No. </th>
-                              <th style="color:green"> จำนวน </th>
+                              <th style="color:green;"> ลำดับที่ </th>
+                              <th style="color:green; text-align:left;"> ชื่ออะไหล่ </th>
+                              <th style="color:green; text-align:left;"> Part No. </th>
+                              <th style="color:green;"> จำนวน </th>
                               <th></th>
                             </tr>
                           </thead>
@@ -268,10 +268,10 @@
                               <td>
                                 <label>{{i+1}}</label>
                               </td>
-                              <td>
+                              <td style="text-align:left;">
                                 <label>{{item.Name}}</label>
                               </td>
-                              <td>
+                              <td style="text-align:left;">
                                 <label>{{item.SKUCode}}</label>
                               </td>
                               <td>

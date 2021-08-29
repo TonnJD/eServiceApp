@@ -152,12 +152,12 @@ export class ChecklistcmPage implements OnInit {
           
           if (length === 0) {
             this.disableNon = false;
-            this.disableChange = true;
+            //this.disableChange = true;
           }
           else
           {
             this.disableNon = true;
-            this.disableChange = false;
+            //this.disableChange = false;
           }
         });
       }
