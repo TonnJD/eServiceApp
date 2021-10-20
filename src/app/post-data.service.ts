@@ -450,6 +450,18 @@ export class PostDataService {
     });
   }
 
+  RequestQuotation(form) {
+    return new Promise((resovle, reject) => {
+      let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+      this.http.post(this.apiServer_url + '/API/WebService.asmx/RequestQuotation', JSON.stringify(form), option).subscribe(data => {
+          resovle(data);
+        }, error => {
+          reject(error)
+        });
+    });
+  }
+
   SelectRequestSparepart(planID) {
     return new Promise((resovle, reject) => {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });

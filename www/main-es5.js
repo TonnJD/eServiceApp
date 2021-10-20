@@ -7964,6 +7964,17 @@ var PostDataService = /** @class */ (function () {
             });
         });
     };
+    PostDataService.prototype.RequestQuotation = function (form) {
+        var _this = this;
+        return new Promise(function (resovle, reject) {
+            var option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
+            _this.http.post(_this.apiServer_url + '/API/WebService.asmx/RequestQuotation', JSON.stringify(form), option).subscribe(function (data) {
+                resovle(data);
+            }, function (error) {
+                reject(error);
+            });
+        });
+    };
     PostDataService.prototype.SelectRequestSparepart = function (planID) {
         var _this = this;
         return new Promise(function (resovle, reject) {

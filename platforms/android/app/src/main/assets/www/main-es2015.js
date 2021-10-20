@@ -7220,6 +7220,16 @@ let PostDataService = class PostDataService {
             });
         });
     }
+    RequestQuotation(form) {
+        return new Promise((resovle, reject) => {
+            let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
+            this.http.post(this.apiServer_url + '/API/WebService.asmx/RequestQuotation', JSON.stringify(form), option).subscribe(data => {
+                resovle(data);
+            }, error => {
+                reject(error);
+            });
+        });
+    }
     SelectRequestSparepart(planID) {
         return new Promise((resovle, reject) => {
             let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });

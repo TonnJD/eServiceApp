@@ -38,6 +38,7 @@ export class LoginPage implements OnInit {
   disconnectSubscription;
   connectSubscription;
   text ="";
+  error;
   //#endregion
 
   //#region constructor

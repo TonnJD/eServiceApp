@@ -332,9 +332,11 @@ export class ChangsparepartPage implements OnInit {
         empID: this.empID
       }
       console.log(params);
+
       this.postDataService.postdevice(params).then(status => {
         this.modal = status
         console.log('this.modal',this.modal);
+        
         if (this.modal == true) {
           this.modal = 0
         } else {
@@ -344,6 +346,7 @@ export class ChangsparepartPage implements OnInit {
       });
     }
   }
+
   scan() {
     this.barcodeScanner.scan().then(barcodeData => {
       console.log('Barcode data', barcodeData);
