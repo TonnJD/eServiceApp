@@ -3018,6 +3018,7 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
             if (this.status1 == "1" || this.status2 == "1" || this.status3 == "1" || this.status4 == "1" || this.status5 == "1" ||
                 this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
                 this.isenabledcheck = true;
+                this.isenabledcuseva = true;
             }
         }
         else if (this.jobtype == "PM") {
@@ -3376,7 +3377,7 @@ let DetailofdetaillistpmPage = class DetailofdetaillistpmPage {
                             };
                             this.postDataService.RequestSparepart(params1);
                         }
-                        else if (this.requesText.length > 0) {
+                        else if (this.requesText != undefined && this.requesText.length > 0) {
                             let params1 = {
                                 planID: this.planID,
                                 request: this.requesText,

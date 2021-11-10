@@ -126,8 +126,8 @@ export class DetaillistpmPage implements OnInit {
         }
         else if (this.type == "getIN") {
           this.imgbf = true
-          this.detaillistpm.PlanID = this.planID,
-            this.detaillistpm.jobtype = "SuccessIN"
+          this.detaillistpm.PlanID = this.planID
+          this.detaillistpm.jobtype = "SuccessIN"
 
           this.postDataService.postGetList(this.detaillistpm).then(work => {
             this.data = work;

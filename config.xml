@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.superioreService" version="1.2.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>eService 1.2.1</name>
+<widget id="io.ionic.superioreService" version="1.2.2" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>eService 1.2.2</name>
     <description>eService by Wingplus</description>
     <author email="PM@WingPlusSolution.com" href="https://www.wingplussolution.com/">WingPlusSolution</author>
     <content src="index.html" />
@@ -20,6 +20,8 @@
     <allow-intent href="https://*/*" launch-exterFnal="yes" />
     <preference name="ScrollEnabled" value="false" />
     <preference name="android-minSdkVersion" value="22" />
+    <preference name="android-targetSdkVersion" value="30" />
+    <preference name="android-compileSdkVersion " value="30" />
     <preference name="BackupWebStorage" value="none" />
     <preference name="SplashMaintainAspectRatio" value="true" />
     <preference name="FadeSplashScreenDuration" value="300" />

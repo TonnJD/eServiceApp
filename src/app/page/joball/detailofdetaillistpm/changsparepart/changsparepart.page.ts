@@ -3,6 +3,7 @@ import { ModalController, NavParams, AlertController } from '@ionic/angular';
 import { PostDataService } from '../../../../post-data.service';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ThrowStmt } from '@angular/compiler';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-changsparepart',
@@ -38,70 +39,41 @@ export class ChangsparepartPage implements OnInit {
     private postDataService: PostDataService,
     private barcodeScanner: BarcodeScanner,
     public alertController: AlertController,
-    private navParams: NavParams) {
+    private navParams: NavParams,
+    private http: HttpClient) {
 
     this.planID = this.navParams.data.planID;
     this.installID = this.navParams.data.installID;
     this.jobtype = this.navParams.data.jobtype;
     this.empID = this.navParams.data.empID;
     this.type = this.navParams.data.type;
-    console.log('this.navParams.data', this.navParams.data);
+    //console.log('this.navParams.data', this.navParams.data);
 
     if (this.jobtype == "INSTALL") {
       if (this.type == 'device') {
-        let param = {
-          planID: this.planID,
-          installID: this.installID,
-          typedevice: "GetDeviceInTran",
-          empID: this.empID
-        }
+        // let param = {
+        //   planID: this.planID,
+        //   installID: this.installID,
+        //   typedevice: "GetDeviceInTran",
+        //   empID: this.empID
+        // }
+        
+        // //this.Device = this.GetDeviceInTran(param);
+        // console.log('this.GetDeviceInTran(param)', this.GetDeviceInTran(param));
 
-        console.log('param', param);
-        this.postDataService.postdevice(param).then(status => {
-          this.status = status
-          console.log(this.status);
+        // let params = {
+        //   planID: this.planID,
+        //   installID: this.installID,
+        //   typedevice: "GetDeviceIN",
+        //   empID: this.empID
+        // }
 
-          if (this.status == false) {
-            this.isShowDevice = false;
-          } else {
-            this.isShowDevice = true;
-            for (let u = 0; u < this.status.length; u++) {
-              this.Device.push({
-                AssetID: this.status[u].AssetID,
-                AssetNo: this.status[u].AssetNo,
-                SKUID: this.status[u].SKUID,
-                SerialNo: this.status[u].SerialNo,
-                AssetTypeID: this.status[u].AssetTypeID,
-              })
-            }
-          }
+        // this.Devicestorage = this.GetDeviceIN(params);
+        // console.log('this.Devicestorage', this.Devicestorage);
 
-          let params = {
-            planID: this.planID,
-            installID: this.installID,
-            typedevice: "GetDeviceIN",
-            empID: this.empID
-          }
-
-          console.log(params);
-          this.postDataService.postdevice(params).then(data => {
-            this.data = data
-            console.log(this.data);
-            for (let i = 0; i < this.data.length; i++) {
-              this.Devicestorage.push({
-                AssetID: this.data[i].AssetID,
-                AssetNo: this.data[i].AssetNo,
-                SKUID: this.data[i].SKUID,
-                SerialNo: this.data[i].SerialNo,
-                AssetTypeID: this.data[i].AssetTypeID,
-              })
-            }
-          });
-
-          console.log(this.Devicestorage);
-          console.log('this.Device',this.Device);
-        });
-      } else {
+      }
+      else
+      {
         let item = {
           planID: this.planID,
           installID: this.installID,
@@ -222,6 +194,50 @@ export class ChangsparepartPage implements OnInit {
     }
   }
 
+  GetDeviceInTran(params) {
+    this.postDataService.postdevice(params).then(res => {
+      this.status = res;
+
+      if (this.status == false) {
+        this.isShowDevice = false;
+      }
+      else
+      {
+        this.isShowDevice = true;
+
+        for (let u = 0; u < this.status.length; u++) {
+          this.Device.push({
+            AssetID: this.status[u].AssetID,
+            AssetNo: this.status[u].AssetNo,
+            SKUID: this.status[u].SKUID,
+            SerialNo: this.status[u].SerialNo,
+            AssetTypeID: this.status[u].AssetTypeID,
+          });          
+        }
+      }
+
+      return this.Device;
+    });
+  }
+
+  GetDeviceIN(params) {
+    this.postDataService.postdevice(params).then(res => {
+      this.data = res;
+
+      for (let i = 0; i < this.data.length; i++) {
+        this.Devicestorage.push({
+          AssetID: this.data[i].AssetID,
+          AssetNo: this.data[i].AssetNo,
+          SKUID: this.data[i].SKUID,
+          SerialNo: this.data[i].SerialNo,
+          AssetTypeID: this.data[i].AssetTypeID,
+        });        
+      }
+      
+      return this.Devicestorage;
+    });
+  }
+
   DeleteDevice(index, i) {
     this.Device.splice(i, 1);
     this.Devicestorage.push({
@@ -312,6 +328,29 @@ export class ChangsparepartPage implements OnInit {
   }
 
   ngOnInit() {
+    console.log('this.navParams.data', this.navParams.data);
+
+    if (this.jobtype == "INSTALL") {
+      if (this.type == 'device') {
+        let param = {
+          planID: this.planID,
+          installID: this.installID,
+          typedevice: "GetDeviceInTran",
+          empID: this.empID
+        }
+        
+        this.GetDeviceInTran(param);
+
+        let params = {
+          planID: this.planID,
+          installID: this.installID,
+          typedevice: "GetDeviceIN",
+          empID: this.empID
+        }
+
+        this.GetDeviceIN(params);
+      }
+    }
   }
 
   async closeModal(i) {

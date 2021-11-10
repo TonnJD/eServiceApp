@@ -189,7 +189,7 @@
             <div class="row col-12"
               *ngIf="data.value.JobType == 'CM' && data.value.Workfinish == 1 && data.value.WorkCloseID == 'WorkClose004' else cm">
               <div class="col-5 text" #cm>ปัญหาเกิดจาก :</div>
-              <div class="col-7 subtext" #cm>{{data.value.ProblemBy}}</div>
+              <div class="col-7 subtext" #cm>{{data.value.ResolutionDetaill}}</div>
             </div>
             <div class="row col-12" *ngIf="data.value.sparepart != '' && data.value.JobType == 'PM' else spare">
               <div class="col-5 text" #spare>อะไหล่ที่ต้องเปลี่ยน :</div>

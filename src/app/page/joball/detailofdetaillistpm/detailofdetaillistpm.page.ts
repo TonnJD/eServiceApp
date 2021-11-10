@@ -3063,14 +3063,18 @@ export class DetailofdetaillistpmPage implements OnInit {
         console.log('this.isenabledcheck', this.isenabledcheck);
       }
     }
-    else if (this.jobtype == "UNINSTALL") {
+    else if (this.jobtype == "UNINSTALL") 
+    {
       console.log('UNINSTALL');
-      if (this.status1 == "1" || this.status2 == "1" || this.status3 == "1" || this.status4 == "1" || this.status5 == "1" ||
-        this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
 
+      if (this.status1 == "1" || this.status2 == "1" || this.status3 == "1" || this.status4 == "1" || this.status5 == "1" ||
+        this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") 
+      {
+        
       }
     }
-    else if (this.jobtype == "PM") {
+    else if (this.jobtype == "PM") 
+    {
       console.log('PM');
       if (this.status6 == "1" && this.status7 == "1" && this.status8 == "1" && this.status9 == "1" && this.status10 == "1" &&
         this.status1 == "1" && this.status2 == "1" && this.status3 == "1" && this.status4 == "1" && this.status5 == "1") {
@@ -3101,7 +3105,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       if (this.status1 == "1" || this.status2 == "1" || this.status3 == "1" || this.status4 == "1" || this.status5 == "1" ||
         this.status6 == "1" || this.status7 == "1" || this.status8 == "1" || this.status9 == "1" || this.status10 == "1") {
         this.isenabledcheck = true;
-
+        this.isenabledcuseva = true;
       }
     } else if (this.jobtype == "PM") {
       if (this.status6 == "1" && this.status7 == "1" && this.status8 == "1" && this.status9 == "1" && this.status10 == "1" &&
@@ -3414,6 +3418,7 @@ export class DetailofdetaillistpmPage implements OnInit {
     // else {
 
     // }
+    
     let params = {
       planID: this.planID,
       cusID: this.cusID,
@@ -3493,7 +3498,7 @@ export class DetailofdetaillistpmPage implements OnInit {
               
               this.postDataService.RequestSparepart(params1);
             }
-            else if (this.requesText.length > 0)
+            else if (this.requesText != undefined && this.requesText.length > 0)
             {
               let params1 = {
                 planID: this.planID,
