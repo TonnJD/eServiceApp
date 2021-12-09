@@ -45,6 +45,7 @@ export class TakeSparePartsPage implements OnInit {
   CustomerID;
   CustomerNameSearch;
   value;
+
   constructor(
     private storageService: StorageService,
     public modalController: ModalController,
@@ -57,6 +58,7 @@ export class TakeSparePartsPage implements OnInit {
       EmpID: this.empID,
       Type: "Customer"
     }
+
     this.postDataService.PostCus(params).then(Cus => {
       this.Cus = Cus;
     });
@@ -64,6 +66,7 @@ export class TakeSparePartsPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.myId = JSON.parse(params["data"]);
       this.type = this.myId.type
+
       if (this.type == "new") {
         this.type = this.myId.type
         console.log(this.type);
@@ -81,7 +84,7 @@ export class TakeSparePartsPage implements OnInit {
         this.JobID = this.myId.JobID
         this.CusID = this.myId.CusID
         console.log(this.JobID, this.type, this.CusID);
-        console.log(this.item);
+        console.log('this.item', this.item);
       }
     });
   }
@@ -106,6 +109,7 @@ export class TakeSparePartsPage implements OnInit {
         JobID: this.JobID,
         Type: "ListDetail",
       }
+
       this.postDataService.PostCus(params).then(list => {
         this.list = list
         console.log(list);

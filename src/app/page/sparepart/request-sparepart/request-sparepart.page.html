@@ -14,32 +14,150 @@
         <div class="portlet box blue">
           <div class="portlet-title">
             <div class="caption">
-              <i class="fa fa-wrench"></i> <label>เบิกอะไหล่</label>
+              <h6>ค้นหา สินค้า/อะไหล่</h6>
             </div>
-            <div class="tools">
-
-            </div>
+            <div class="tools"></div>
           </div>
+
           <div class="portlet-body">
             <div class="col-md-12 col-12" style="margin-top: 20px;">
-              <div class="form-group row">
-                <div class="col-md-5 col-5">
-                  <label>Part No.</label>
-                  <input type="text" class="form-control" placeholder="รหัสอะไหล่">
+
+              <div class="form-group row" style=" margin-bottom: 30px;">
+                <div class="col-9" style="padding-top: 5px;">
+                  <input type="text" class="form-control" placeholder="Part No. / ชื่ออะไหล่" [(ngModel)]="textSearch">
                 </div>
-                <div class="col-md-5 col-5">
-                  <label>Part Name</label>
-                  <input type="text" class="form-control" placeholder="ชื่ออะไหล่">
+                <div class="col-3">
+                  <ion-button expand="block" color="primary" (click)="searchSparepart()">
+                    <ion-icon name="search"></ion-icon>ค้นหา</ion-button>
                 </div>
-                <div class="col-md-2 col-2">
-                  <label>&nbsp;</label>
-                  <a class="btn btn-block btn-primary text-white">
-                    <i class="fa fa-search"></i> ค้นหา
-                  </a>
+              </div>
+
+              <div class="form-group">
+                <div style="height: 250px; overflow-y:scroll; width: 100%;border: 1px solid gainsboro;">
+                  <div class="table-scrollable" style="margin-top: 0 !important;border-top: 0 !important;">
+                    <table class="table table-hover">
+                      <thead>
+                        <tr>
+                          <th> SKU Code </th>
+                          <th> ชื่ออะไหล่ </th>
+                          <th class="text-center"></th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let item of partData">
+                          <td style="padding-top: 20px;"> {{item.SKUCode}} </td>
+                          <td style="padding-top: 20px;"> {{item.Name}} </td>
+                          <td class="text-center">
+                            <ion-button expand="block" color="warning" (click)="AddToList(item)" size="small">เพิ่ม
+                            </ion-button>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
+          <div class="portlet-body" *ngIf="this.selectSpareList.length > 0">
+            <div class="col-md-12 col-12" style="margin-top: 15px;">
+              <h5>รายการที่เลือก </h5>&emsp; <h6 *ngIf="this.selectSpareList.length > 0">{{this.selectSpareList.length}} รายการ</h6>
+            </div>
+            <div class="col-md-12 col-12">
+              <div style="height: 250px; overflow-y:scroll;border: 1px solid gainsboro;">
+                <div class="table-scrollable" style="margin-top: 0 !important;border-top: 0 !important;">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th> SKU Code </th>
+                        <th> ชื่ออะไหล่ </th>
+                        <th> จำนวนที่เบิก </th>
+                        <th class="text-center"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of selectSpareList; let i = index">
+                        <td style="padding-top: 20px;"> {{item.SKUCode}} </td>
+                        <td style="padding-top: 20px;"> {{item.Name}} </td>
+                        <td>
+                          <input type="number" [(ngModel)]="item.Qty" style="width: 120px; text-align: center;" min="1" class="form-control" />
+                        </td>
+                        <td class="text-center">
+                          <ion-button expand="block" color="danger" (click)="DeleteFromList(i)" size="small">ลบ
+                          </ion-button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="portlet-body" *ngIf="this.selectSpareList.length > 0">
+            <div class="col-md-12 col-12" style="margin-top: 15px;">
+              <h5>กรุณาเลือก ประเภทการเบิก </h5>
+            </div>
+            <div class="col-md-12 col-12" style="margin-top: 15px;">
+              <ion-radio-group (ionChange)="onRadioChange($event)" [(ngModel)]="problemby">
+                <ion-item>
+                  <ion-label>เบิกอะไหล่งาน PM</ion-label>
+                  <ion-radio slot="start" value="PM"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-label>เบิกอะไหล่งาน CM</ion-label>
+                  <ion-radio slot="start" value="CM"></ion-radio>
+                </ion-item>
+                <ion-item>
+                  <ion-label>เบิกอะไหล่เพื่อสำรอง</ion-label>
+                  <ion-radio slot="start" value="Spare"></ion-radio>
+                </ion-item>
+              </ion-radio-group>
+            </div>
+          </div>
+
+          <div class="portlet-body" *ngIf="this.selectSpareList.length > 0">
+            <div class="col-md-12 col-12" style="margin-top: 15px;">
+              <h5>กรุณาเลือก ร้านค้า/สาขา </h5>
+            </div>
+            <div class="col-md-12 col-12" style="margin-top: 15px;">
+              <ion-searchbar type="text" (ionChange)="searchCustomer($event)" placeholder="ค้นหา ร้านค้า/สาขา"></ion-searchbar>
+            </div>
+            <div class="col-md-12 col-12" style="margin-top: 15px;">
+              <div style="height: 250px; overflow-y:scroll; width: 100%;border: 1px solid gainsboro;">
+                <div class="table-scrollable" style="margin-top: 0 !important;border-top: 0 !important;">
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th> ร้านค้า/สาขา </th>
+                        <th class="text-center" style="width: 80px;"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of customer">
+                        <td style="padding-top: 20px;"> {{item.CustomerName}} </td>
+                        <td class="text-center" style="width: 80px;">
+                          <ion-button expand="block" color="primary" (click)="addCustomer(item)" size="small" *ngIf="item.CustomerID != cusID">เลือก
+                          </ion-button>
+                          <ion-button expand="block" color="success" (click)="rmCustomer(item)" size="small" *ngIf="item.CustomerID == cusID">เลือกแล้ว
+                          </ion-button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="portlet-body" *ngIf="this.selectSpareList.length > 0">
+            <div style="margin-top: 10px; margin-bottom: 30px;" class="text-center">
+              <ion-button color="primary" class="text-center" (click)="modalReqDetail()">
+                ตรวจสอบรายละเอียด</ion-button>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>

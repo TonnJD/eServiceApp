@@ -253,11 +253,13 @@ export class DetailofdetaillistpmPage implements OnInit {
   isQuotation = false;
   isRequest = false;
   isBreak = false;
+  serviceReportNo;
   //#endregion
   checkStatus;
   spareList = [];
   listreal = [];
   data;
+  typePM;
 
   //#region constructor
   constructor(private camera: Camera,
@@ -305,6 +307,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       this.planmonth = this.myId.month
       this.planyear = this.myId.year
       this.install = this.myId.install
+      this.typePM = this.install.typePm
       this.cusID = this.myId.data.cusID
       this.CustomerName = this.myId.data.CustomerName
       this.CustomerNameEng = this.myId.data.CustomerNameEng
@@ -323,6 +326,7 @@ export class DetailofdetaillistpmPage implements OnInit {
       this.Category = this.install.Category;
       this.planDate = this.install.planDate;
       this.jobtype = this.install.JobType;
+      this.serviceReportNo = this.install.ServiceReportNo;
       this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/TabletCountTime.aspx' + '?planID=' + this.planID + "&installID=" + this.installID);
 
       console.log('this.myId', this.myId);

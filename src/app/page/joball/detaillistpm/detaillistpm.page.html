@@ -149,6 +149,10 @@
                 </ion-button>
               </div>
             </div>
+            <div class="row col-12" *ngIf="data.value.JobType == 'CM' || data.value.JobType == 'INSTALL' || data.value.JobType == 'UNINSTALL'">
+              <label class="col-5 text">Case ID:</label>
+              <label class="col-7 subtext">{{data.value.ServiceReportNo}}</label>
+            </div>
             <div class="row col-12">
               <label class="col-5 text" *ngIf="new">New Serial No:</label>
               <label class="col-7 subtext" *ngIf="new">{{data.value.SerialNoNew}}</label>
@@ -163,7 +167,7 @@
             </div>
             <div class="row col-12" *ngIf="data.value.JobType == 'PM' else pm">
               <label class="col-5 text" #pm>ประเภทงาน :</label>
-              <label class="col-7 subtext" #pm>{{data.value.typePm}}</label>
+              <div class="col-7 subtext" [innerHtml]="data.value.typePm" #pm></div>
             </div>
             <div class="row col-12" *ngIf="data.value.RoundFilter != null">
               <label class="col-12 text" #pm>เปลี่ยนไส้กรอง :</label>
@@ -245,7 +249,7 @@
               </ion-button>  -->
 
               <ion-button expand="block" color="success" size="small" (click)="logs()"
-                *ngIf="data.value.JobType != 'PM'">สถานะการติดตามงาน</ion-button>
+                *ngIf="data.value.JobType != 'PM' && data.value.status != 'Assign'">สถานะการติดตามงาน</ion-button>
 
               <ion-button expand="block" color="success" size="small" (click)="click(item, data.value)"
                 *ngIf="data.value.Workfinish == 1 && (data.value.JobType == 'PM' || data.value.JobType == 'UNINSTALL')">

@@ -36,11 +36,19 @@
             <tr class="uppercase">
               <th colspan="2" style="color:black"> ชื่อสินค้า </th>
               <th style="color:black"> จำนวนคงเหลือ </th>
+              <th style="color:black">  </th>
             </tr>
           </thead>
           <tr *ngFor="let item of DataDetail">
-            <td colspan="2"> {{item.SKUName}} </td>
-            <td><span class="bold theme-font">{{item.Count}}</span></td>
+            <td colspan="2" style="padding-top: 19px;"> {{item.SKUName}} </td>
+            <td style="padding-top: 19px; text-align: center;">
+              <span class="bold theme-font">{{item.Count}}</span>
+            </td>
+            <td>
+              <ion-button expand="block" color="success" size="small" (click)="onReturn(item)">
+                คืนสินค้า
+              </ion-button>
+            </td>
           </tr>
         </table>
       </div>

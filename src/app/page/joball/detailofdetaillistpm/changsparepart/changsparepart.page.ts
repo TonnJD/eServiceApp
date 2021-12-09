@@ -57,7 +57,7 @@ export class ChangsparepartPage implements OnInit {
         //   typedevice: "GetDeviceInTran",
         //   empID: this.empID
         // }
-        
+
         // //this.Device = this.GetDeviceInTran(param);
         // console.log('this.GetDeviceInTran(param)', this.GetDeviceInTran(param));
 
@@ -72,8 +72,7 @@ export class ChangsparepartPage implements OnInit {
         // console.log('this.Devicestorage', this.Devicestorage);
 
       }
-      else
-      {
+      else {
         let item = {
           planID: this.planID,
           installID: this.installID,
@@ -81,24 +80,29 @@ export class ChangsparepartPage implements OnInit {
           empID: this.empID
         }
         console.log(item);
+
         this.postDataService.postdevice(item).then(qty => {
           this.qty = qty;
         });
+
         let param = {
           planID: this.planID,
           installID: this.installID,
           typedevice: "GetSpareInTran",
           empID: this.empID
         }
-        console.log(param);        
+        console.log(param);
+
         this.postDataService.postdevice(param).then(status => {
           this.status = status
           console.log(this.status);
+
           if (this.status == false) {
             this.isShowSpare = false;
           } else {
             this.isShowSpare = true;
             this.Spare.splice(0);
+
             for (let u = 0; u < this.status.length; u++) {
               this.Spare.push({
                 AssID: this.status[u].AssID,
@@ -111,6 +115,7 @@ export class ChangsparepartPage implements OnInit {
               })
             }
           }
+
           let params = {
             planID: this.planID,
             installID: this.installID,
@@ -118,10 +123,13 @@ export class ChangsparepartPage implements OnInit {
             empID: this.empID
           }
           console.log(params);
+          
           this.postDataService.postdevice(params).then(data => {
             this.data = data
             console.log(this.data);
+
             this.Sparestorage.splice(0);
+
             for (let i = 0; i < this.data.length; i++) {
               this.Sparestorage.push({
                 AssID: this.data[i].AssID,
@@ -157,12 +165,12 @@ export class ChangsparepartPage implements OnInit {
           for (let u = 0; u < this.status.length; u++) {
             this.PM.push({
               AssID: this.status[u].AssID,
-                SKUID: this.status[u].SKUID,
-                SKUCode: this.status[u].SKUCode,
-                Name: this.status[u].Name,
-                Unit: this.status[u].Unit,
-                No: this.status[u].No,
-                Serial: this.status[u].Serial,
+              SKUID: this.status[u].SKUID,
+              SKUCode: this.status[u].SKUCode,
+              Name: this.status[u].Name,
+              Unit: this.status[u].Unit,
+              No: this.status[u].No,
+              Serial: this.status[u].Serial,
             })
           }
         }
@@ -179,12 +187,12 @@ export class ChangsparepartPage implements OnInit {
           for (let i = 0; i < this.data.length; i++) {
             this.PMstorage.push({
               AssID: this.data[i].AssID,
-                SKUID: this.data[i].SKUID,
-                SKUCode: this.data[i].SKUCode,
-                Name: this.data[i].Name,
-                Unit: this.data[i].Unit,
-                No: this.data[i].No,
-                Serial: this.data[i].Serial,
+              SKUID: this.data[i].SKUID,
+              SKUCode: this.data[i].SKUCode,
+              Name: this.data[i].Name,
+              Unit: this.data[i].Unit,
+              No: this.data[i].No,
+              Serial: this.data[i].Serial,
             })
           }
         });
@@ -201,8 +209,7 @@ export class ChangsparepartPage implements OnInit {
       if (this.status == false) {
         this.isShowDevice = false;
       }
-      else
-      {
+      else {
         this.isShowDevice = true;
 
         for (let u = 0; u < this.status.length; u++) {
@@ -212,7 +219,7 @@ export class ChangsparepartPage implements OnInit {
             SKUID: this.status[u].SKUID,
             SerialNo: this.status[u].SerialNo,
             AssetTypeID: this.status[u].AssetTypeID,
-          });          
+          });
         }
       }
 
@@ -231,9 +238,9 @@ export class ChangsparepartPage implements OnInit {
           SKUID: this.data[i].SKUID,
           SerialNo: this.data[i].SerialNo,
           AssetTypeID: this.data[i].AssetTypeID,
-        });        
+        });
       }
-      
+
       return this.Devicestorage;
     });
   }
@@ -338,7 +345,7 @@ export class ChangsparepartPage implements OnInit {
           typedevice: "GetDeviceInTran",
           empID: this.empID
         }
-        
+
         this.GetDeviceInTran(param);
 
         let params = {
@@ -360,7 +367,7 @@ export class ChangsparepartPage implements OnInit {
 
   checkin() {
     console.log(this.jobtype);
-    
+
     if (this.jobtype != "INSTALL") {
       this.closeModal(0);
     } else {
@@ -374,8 +381,8 @@ export class ChangsparepartPage implements OnInit {
 
       this.postDataService.postdevice(params).then(status => {
         this.modal = status
-        console.log('this.modal',this.modal);
-        
+        console.log('this.modal', this.modal);
+
         if (this.modal == true) {
           this.modal = 0
         } else {
@@ -429,6 +436,7 @@ export class ChangsparepartPage implements OnInit {
         empID: this.empID
       }
       console.log(params);
+
       this.postDataService.postdevice(params).then(data => {
         this.data = data
         if (this.data == false) {
@@ -437,6 +445,7 @@ export class ChangsparepartPage implements OnInit {
           this.checkin();
         }
         console.log(this.data);
+        
       });
     }
   }

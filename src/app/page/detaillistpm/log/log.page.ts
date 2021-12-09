@@ -15,6 +15,7 @@ export class LogPage implements OnInit {
   insID;
   planID;
   url: SafeResourceUrl;
+  
   constructor(public modalController: ModalController,
     private navParams: NavParams,
     public navCtrl: NavController,

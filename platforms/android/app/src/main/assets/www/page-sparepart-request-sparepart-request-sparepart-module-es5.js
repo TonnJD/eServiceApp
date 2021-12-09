@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title>เบิกอะไหล่</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row\" style=\"padding: 5px;\">\r\n      <div class=\"col-md-12 col-12\">\r\n        <div class=\"portlet box blue\">\r\n          <div class=\"portlet-title\">\r\n            <div class=\"caption\">\r\n              <i class=\"fa fa-wrench\"></i> <label>เบิกอะไหล่</label>\r\n            </div>\r\n            <div class=\"tools\">\r\n\r\n            </div>\r\n          </div>\r\n          <div class=\"portlet-body\">\r\n            <div class=\"col-md-12 col-12\" style=\"margin-top: 20px;\">\r\n              <div class=\"form-group row\">\r\n                <div class=\"col-md-5 col-5\">\r\n                  <label>Part No.</label>\r\n                  <input type=\"text\" class=\"form-control\" placeholder=\"รหัสอะไหล่\">\r\n                </div>\r\n                <div class=\"col-md-5 col-5\">\r\n                  <label>Part Name</label>\r\n                  <input type=\"text\" class=\"form-control\" placeholder=\"ชื่ออะไหล่\">\r\n                </div>\r\n                <div class=\"col-md-2 col-2\">\r\n                  <label>&nbsp;</label>\r\n                  <a class=\"btn btn-block btn-primary text-white\">\r\n                    <i class=\"fa fa-search\"></i> ค้นหา\r\n                  </a>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button></ion-back-button>\r\n    </ion-buttons>\r\n    <ion-title>เบิกอะไหล่</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row\" style=\"padding: 5px;\">\r\n      <div class=\"col-md-12 col-12\">\r\n        <div class=\"portlet box blue\">\r\n          <div class=\"portlet-title\">\r\n            <div class=\"caption\">\r\n              <h6>ค้นหา สินค้า/อะไหล่</h6>\r\n            </div>\r\n            <div class=\"tools\"></div>\r\n          </div>\r\n\r\n          <div class=\"portlet-body\">\r\n            <div class=\"col-md-12 col-12\" style=\"margin-top: 5px;\">\r\n              <div class=\"form-group row\">\r\n                <ion-searchbar type=\"text\" (ionChange)=\"searchSparepart($event)\" placeholder=\"ค้นหา\"></ion-searchbar>\r\n              </div>\r\n              <div class=\"form-group\">\r\n                <div style=\"height: 300px; overflow-y:scroll; width: 100%;\">\r\n                  <div class=\"table-scrollable\">\r\n                    <table class=\"table table-hover\">\r\n                      <thead>\r\n                        <tr>\r\n                          <th> SKU Code </th>\r\n                          <th> ชื่ออะไหล่ </th>\r\n                          <th class=\"text-center\"></th>\r\n                        </tr>\r\n                      </thead>\r\n                      <tbody>\r\n                        <tr *ngFor=\"let item of partData\">\r\n                          <td> {{item.SKUCode}} </td>\r\n                          <td> {{item.Name}} </td>\r\n                          <td class=\"text-center\">\r\n                            <ion-button expand=\"block\" color=\"warning\" (click)=\"AddToList(item)\" size=\"small\">เพิ่ม\r\n                            </ion-button>\r\n                          </td>\r\n                        </tr>\r\n                      </tbody>\r\n                    </table>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n\r\n          <div class=\"portlet-body\" *ngIf=\"this.selectSpareList.length > 0\">\r\n            <div class=\"col-md-12 col-12\" style=\"margin-top: 15px;\">\r\n              <h5>รายการที่เลือก </h5>&emsp; <h6 *ngIf=\"this.selectSpareList.length > 0\">{{this.selectSpareList.length}} รายการ</h6>\r\n            </div>\r\n            <div class=\"col-md-12 col-12\">\r\n              <div style=\"height: 300px; overflow-y:scroll;\">\r\n                <div class=\"table-scrollable\">\r\n                  <table class=\"table table-hover\">\r\n                    <thead>\r\n                      <tr>\r\n                        <th> SKU Code </th>\r\n                        <th> ชื่ออะไหล่ </th>\r\n                        <th> จำนวนที่เบิก </th>\r\n                        <th class=\"text-center\"></th>\r\n                      </tr>\r\n                    </thead>\r\n                    <tbody>\r\n                      <tr *ngFor=\"let item of selectSpareList; let i = index\">\r\n                        <td> {{item.SKUCode}} </td>\r\n                        <td> {{item.Name}} </td>\r\n                        <td style=\"padding-top: 18px;\">\r\n                          <input type=\"number\" [(ngModel)]=\"item.Qty\" style=\"width: 120px; text-align: right;\" min=\"1\" />\r\n                        </td>\r\n                        <td class=\"text-center\">\r\n                          <ion-button expand=\"block\" color=\"danger\" (click)=\"DeleteFromList(i)\" size=\"small\">ลบ\r\n                          </ion-button>\r\n                        </td>\r\n                      </tr>\r\n                    </tbody>\r\n                  </table>\r\n                </div>\r\n              </div>\r\n            </div>\r\n            <div style=\"margin-top: 10px; margin-bottom: 30px;\" class=\"text-center\">\r\n              <ion-button color=\"primary\" class=\"text-center\" (click)=\"submitSpareList()\">\r\n                ยืนยันการเบิกอะไหล่</ion-button>\r\n            </div>\r\n          </div>\r\n\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>"
 
 /***/ }),
 
@@ -85,20 +85,160 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RequestSparepartPage", function() { return RequestSparepartPage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _post_data_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../post-data.service */ "./src/app/post-data.service.ts");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../storage.service */ "./src/app/storage.service.ts");
+
+
+
 
 
 var RequestSparepartPage = /** @class */ (function () {
-    function RequestSparepartPage() {
+    function RequestSparepartPage(postDataService, alertCtrl, navCtrl, storageService, toastCtrl) {
+        this.postDataService = postDataService;
+        this.alertCtrl = alertCtrl;
+        this.navCtrl = navCtrl;
+        this.storageService = storageService;
+        this.toastCtrl = toastCtrl;
+        this.partData = [];
+        this.selectSpareList = [];
     }
     RequestSparepartPage.prototype.ngOnInit = function () {
+        var _this = this;
+        this.storageService.getUser().then(function (items) {
+            for (var i = 0; i < items.length; i++) {
+                _this.empID = items[i].empID;
+            }
+        });
     };
+    RequestSparepartPage.prototype.Search = function () {
+        // this.postDataService.SearchSparepart(this.PartName).then(res => {
+        //   this.partData = res;
+        //   console.log(this.partData);
+        // });
+    };
+    RequestSparepartPage.prototype.searchSparepart = function (ev) {
+        var _this = this;
+        var strSearch = ev.target.value;
+        this.partData = [];
+        this.postDataService.SearchSparepart(strSearch).then(function (res) {
+            _this.data = res;
+            console.log('res', res);
+            for (var i = 0; i < _this.data.length; i++) {
+                _this.partData.push({
+                    Name: _this.data[i].Name,
+                    SKUCode: _this.data[i].SKUCode,
+                    SKUID: _this.data[i].SKUID,
+                });
+            }
+        });
+    };
+    RequestSparepartPage.prototype.AddToList = function (item) {
+        console.log('item', item);
+        var check = false;
+        if (this.selectSpareList != []) {
+            for (var j = 0; j < this.selectSpareList.length; j++) {
+                var a = this.selectSpareList[j].SKUID;
+                if (item.SKUID == a) {
+                    console.log(a);
+                    check = true;
+                    break;
+                }
+            }
+            if (check == false) {
+                this.selectSpareList.push({
+                    Name: item.Name,
+                    SKUCode: item.SKUCode,
+                    SKUID: item.SKUID,
+                    Qty: 1
+                });
+            }
+            else {
+                this.alertMeanSpart();
+            }
+        }
+        else {
+            this.selectSpareList.push({
+                Name: item.Name,
+                SKUCode: item.SKUCode,
+                SKUID: item.SKUID,
+                Qty: 1
+            });
+        }
+    };
+    RequestSparepartPage.prototype.submitSpareList = function () {
+        var params = {
+            empID: this.empID,
+            sparelist: this.selectSpareList
+        };
+        this.postDataService.InsertRequisition(params);
+        this.toastSuccess();
+        var navigationExtras = {
+            queryParams: {
+                sparelist: JSON.stringify(params.sparelist),
+                data: JSON.stringify(params)
+            }
+        };
+        this.navCtrl.navigateBack(['/menu/sparepart'], navigationExtras);
+    };
+    RequestSparepartPage.prototype.DeleteFromList = function (i) {
+        this.selectSpareList.splice(i, 1);
+    };
+    RequestSparepartPage.prototype.alertMeanSpart = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var alert;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.alertCtrl.create({
+                            message: 'รายการอะไหล่ซ้ำ',
+                            buttons: ['OK']
+                        })];
+                    case 1:
+                        alert = _a.sent();
+                        return [4 /*yield*/, alert.present()];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    RequestSparepartPage.prototype.toastSuccess = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var toast;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.toastCtrl.create({
+                            header: 'ระบบบันทึกข้อมูลเรียบร้อยแล้ว',
+                            duration: 3000,
+                            color: 'success'
+                        })];
+                    case 1:
+                        toast = _a.sent();
+                        toast.present();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    RequestSparepartPage.ctorParameters = function () { return [
+        { type: _post_data_service__WEBPACK_IMPORTED_MODULE_2__["PostDataService"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] },
+        { type: _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"] }
+    ]; };
     RequestSparepartPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'app-request-sparepart',
             template: __webpack_require__(/*! raw-loader!./request-sparepart.page.html */ "./node_modules/raw-loader/index.js!./src/app/page/sparepart/request-sparepart/request-sparepart.page.html"),
             styles: [__webpack_require__(/*! ./request-sparepart.page.scss */ "./src/app/page/sparepart/request-sparepart/request-sparepart.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_post_data_service__WEBPACK_IMPORTED_MODULE_2__["PostDataService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"],
+            _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"]])
     ], RequestSparepartPage);
     return RequestSparepartPage;
 }());

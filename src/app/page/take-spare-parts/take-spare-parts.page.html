@@ -14,17 +14,39 @@
         <div class="portlet box blue">
           <div class="portlet-title">
             <div class="caption">
-              <i class="fa fa-user"></i>ข้อมูลลูกค้า</div>
-            <div class="tools" *ngIf="Status != 'อนุมัติ' && Status != 'รออนุมัติ' && JobID != null; else lblOld">
-              <span class="label label-sm label-success circle" (click)="Save()" #lblOld>บันทึก</span>
-            </div>
-            <div class="tools" *ngIf="Status != 'อนุมัติ' && Status != 'รออนุมัติ' && JobID != null; else lblTake">
-              <span class="label label-sm label-success circle" (click)="Requested()" #lblTake>ขอเบิกอะไหล่</span>
+              <i class="fa fa-user"></i>ข้อมูลลูกค้า
             </div>
           </div>
           <div class="portlet-body">
             <div class="tab-content">
               <div class="tab-pane active">
+                <div class="row">
+                  <div class="col-12">
+                    <button (click)="Save()" class="btn btn-success" *ngIf="Status != 'ปิดใบเบิก' && Status != 'รอช่างรับ' && Status != 'อนุมัติ' && Status != 'รออนุมัติ' && CusID != null;">
+                      <span style="color: white;">บันทึก</span>
+                    </button>
+                    <button (click)="Requested()" class="btn btn-primary" *ngIf="Status != 'ปิดใบเบิก' && Status != 'รอช่างรับ' && Status != 'อนุมัติ' && Status != 'รออนุมัติ' && CusID != null;">
+                      <span style="color: white;">ขอเบิกอะไหล่</span>
+                    </button>
+
+                    <!-- <div class="tools"
+                      *ngIf="Status != 'อนุมัติ' && Status != 'รออนุมัติ' && JobID != null; else lblOld">
+                      <button (click)="Save()" class="btn btn-success" #lblOld>
+                        <span style="color: white;">บันทึก</span>
+                      </button>
+                      <span class="label label-sm label-success circle" (click)="Save()" #lblOld>บันทึก</span>
+                    </div>
+                    <div class="tools"
+                      *ngIf="Status != 'อนุมัติ' && Status != 'รออนุมัติ' && JobID != null; else lblTake">
+                      <button (click)="Requested()" class="btn btn-primary" #lblTake>
+                        <span style="color: white;">ขอเบิกอะไหล่</span>
+                      </button>
+                      <span class="label label-sm label-success circle" (click)="Requested()"
+                        #lblTake>ขอเบิกอะไหล่</span>
+                    </div> -->
+
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col-12">
                     <ion-list>
@@ -36,7 +58,7 @@
                           <ion-input [(ngModel)]="CustomerNameSearch"></ion-input>
                         </div>
                         <div class="col-2 pull-right">
-                          <ion-icon name="search" (click)="onChange($event,'SearchCustomerName')"></ion-icon>                          
+                          <ion-icon name="search" (click)="onChange($event,'SearchCustomerName')"></ion-icon>
                         </div>
                       </ion-item>
                       <ion-item>
@@ -48,7 +70,7 @@
                         </div>
                         <div class="col-2 pull-right" *ngIf="JobID == null; else lblNew">
                           <ion-icon name="search" (click)="onChange($event,'code')" #lblNew></ion-icon>
-                          
+
                         </div>
                         <div class="col-8" *ngIf="JobID != null; else lblOld">
                           <ion-label #lblOld>{{CustomerCode}}</ion-label>
@@ -58,8 +80,9 @@
                         <div class="col-4">
                           <ion-label color="primary">ชื่อลูกค้า</ion-label>
                         </div>
-                        <div class="col-8"  *ngIf="JobID == null; else lblNew">
-                          <ion-select interface="popover" (ionChange)="onChange($event,'cus')" #lblNew [(ngModel)]="CustomerID">
+                        <div class="col-8" *ngIf="JobID == null; else lblNew">
+                          <ion-select interface="popover" (ionChange)="onChange($event,'cus')" #lblNew
+                            [(ngModel)]="CustomerID">
                             <ion-select-option style="text-align: left;" *ngFor="let title of Cus"
                               [value]="title.CustomerID" [selected]="true">{{title.CustomerName}}</ion-select-option>
                           </ion-select>
@@ -147,10 +170,9 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-12" style="text-align: right; padding: 20px;"
-        *ngIf="Status != 'อนุมัติ' && Status != 'รออนุมัติ' && CusID != null; else lblOld">
-        <span class="label label-sm label-warning" (click)="spare()" #lblOld> เพิ่มเครื่อง </span>
-      </div>
+      <!-- <div class="col-lg-12" style="text-align: right; padding: 20px;">
+        <span class="label label-sm label-warning" (click)="spare()"> เพิ่มเครื่อง </span>
+      </div> -->
       <!-- <div class="col-lg-12" style="text-align: right; padding: 20px;"
         *ngIf="Status != 'อนุมัติ' && Status != 'รออนุมัติ' && CusID != null; else lblOld">
         <span class="label label-sm label-warning" (click)="takespare()" #lblOld> เพิ่มอะไหล่ </span>
@@ -165,8 +187,7 @@
                     <th> ลำดับที่ </th>
                     <th> ประเภทเครื่อง </th>
                     <th> รายละเอียดเครื่อง </th>
-                    <th> จำนวน </th>
-                    <th> </th>
+                    <th style="text-align: right;"> จำนวน </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -174,7 +195,7 @@
                     <td> {{i+1}}</td>
                     <td> {{item.AssetType}} </td>
                     <td> {{item.AssetNo}} </td>
-                    <td> {{item.Qty}} </td>
+                    <td style="text-align: right;"> {{item.Qty}} </td>
                     <!-- <td *ngIf="Status == 'ช่างขอเบิกอะไหล่'; else lblOld">
                       <span class="label label-sm label-warning" (click)="Edit(item)" #lblOld> แก้ไข </span>
                     </td> -->

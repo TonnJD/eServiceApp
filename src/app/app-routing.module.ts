@@ -46,6 +46,7 @@ const routes: Routes = [
   { path: 'add-sparepart', loadChildren: './page/sparepart/add-sparepart/add-sparepart.module#AddSparepartPageModule' },
   { path: 'not-checked', loadChildren: './page/joball/not-checked/not-checked.module#NotCheckedPageModule' },
   { path: 'insert-old-sparepart', loadChildren: './page/joball/detailofdetaillistpm/insert-old-sparepart/insert-old-sparepart.module#InsertOldSparepartPageModule' },
+  { path: 'req-detail', loadChildren: './page/sparepart/req-detail/req-detail.module#ReqDetailPageModule' },
 
 
 ];

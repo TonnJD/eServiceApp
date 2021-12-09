@@ -43,6 +43,7 @@ import { RequestsparepartPageModule } from '../app/page/joball/detailofdetaillis
 import { SparepartPageModule } from '../app/page/sparepart/sparepart.module';
 import { NotCheckedPageModule } from './page/joball/not-checked/not-checked.module';
 import { InsertOldSparepartPageModule } from './page/joball/detailofdetaillistpm/insert-old-sparepart/insert-old-sparepart.module';
+import { ReqDetailPageModule } from './page/sparepart/req-detail/req-detail.module';
 //import { JobresponsPageModule} from '../app/page/job/jobdetail/jobrespons/jobrespons.module'
 
 @NgModule({
@@ -76,7 +77,8 @@ import { InsertOldSparepartPageModule } from './page/joball/detailofdetaillistpm
     RequestsparepartPageModule,
     SparepartPageModule,
     NotCheckedPageModule,
-    InsertOldSparepartPageModule
+    InsertOldSparepartPageModule,
+    ReqDetailPageModule
   ],
   providers: [
     AuthGuardGuard,

@@ -1,0 +1,65 @@
+<ion-toolbar color="primary">
+  <ion-title>รายละเอียดขอเบิกอะไหล่</ion-title>
+  <ion-buttons slot="primary">
+    <ion-icon slot="end" name="close" (click)="close()"></ion-icon>
+  </ion-buttons>
+</ion-toolbar>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>รายการอะไหล่</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="col-12">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th> SKU Code </th>
+              <th> ชื่ออะไหล่ </th>
+              <th style="text-align: right;"> จำนวนที่เบิก </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of sparelist; let i = index">
+              <td> {{item.SKUCode}} </td>
+              <td> {{item.Name}} </td>
+              <td style="text-align: right;"> {{item.Qty}} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ion-card-content>
+
+    <ion-card-header>
+      <ion-card-title>รายละเอียดเพิ่มเติม</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="col-12">
+        <table class="table">
+          <thead>
+            <tr>
+              <th> ประเภทการเบิก </th>
+              <th> ร้านค้า/สาขา </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td> {{reqTypeStr}} </td>
+              <td> {{cusName}} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </ion-card-content>
+    
+    <hr />
+    <ion-card-content>
+      <div class="col-md-12 text-center" style="margin-bottom: 30px;">
+        <ion-button (click)="submit()">ยืนยันการเบิกอะไหล่</ion-button>
+        <ion-button color="warning" (click)="close()">แก้ไข</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

@@ -26,7 +26,7 @@ export class CmPage implements OnInit {
   json: any;
   listpmdetail;
   job;
-  myempID: string;
+  myempID: string
   empid: any;
   listpm;
   load = false;

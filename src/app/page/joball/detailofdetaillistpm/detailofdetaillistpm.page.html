@@ -78,6 +78,7 @@
                     <p class="profile-desc-text" *ngIf="jobtype == 'INSTALL' && OldItemsName != null">เครื่องที่รื้อถอน:</p>
                     <p class="profile-desc-text" *ngIf="jobtype == 'INSTALL'">เครื่องที่ติดตั้ง:</p>
                     <p class="profile-desc-text">Serial No:</p>
+                    <p class="profile-desc-text">ประเภทงาน:</p>
                     <p class="profile-desc-text" *ngIf="install.RoundFilter != null">เปลี่ยนไส้กรอง:</p>
                   </div>
                   <div class="col-8">
@@ -87,11 +88,16 @@
                     <p class="profile-desc-text" *ngIf="jobtype == 'INSTALL' && OldItemsName != null">{{OldItemsName}}</p>
                     <p class="profile-desc-text" *ngIf="jobtype == 'INSTALL'">{{ItemsName}}</p>
                     <p class="profile-desc-text">{{SerialNo}}</p>
-                    <p class="profile-desc-text" [innerHTML]='install.RoundFilter'></p>                    
+                    <p class="profile-desc-text" [innerHtml]="typePM"></p>
+                    <p class="profile-desc-text" [innerHTML]='install.RoundFilter'></p>
                   </div>
                 </div>
                 
-                <div class="row" style="margin-top: 15px; margin-bottom: 10px;padding-left: 10px;">
+                <div class="row" style="margin-top: 15px; margin-bottom: 10px;padding-left: 10px;" *ngIf="jobtype == 'CM' || jobtype == 'INSTALL' || jobtype == 'UNINSTALL'">
+                  <div class="col-xs-12 col-md-3 col-lg-3 h5">Case ID:</div>
+                  <div class="col-xs-12 col-md-9 col-lg-9 h5">{{serviceReportNo}}</div>
+                </div>
+                <div class="row" style="margin-bottom: 10px;padding-left: 10px;">
                   <div class="col-xs-12 col-md-3 col-lg-3 h5">สินค้าที่ติดตั้ง:</div>
                   <div class="col-xs-12 col-md-9 col-lg-9 h5">{{InstallPlanName}}</div>
                 </div>
@@ -114,6 +120,10 @@
                 <div class="row" style="margin-bottom: 10px;padding-left: 10px;" *ngIf="jobtype == 'INSTALL'">
                   <div class="col-xs-12 col-md-3 col-lg-3 h5">Serial No:</div>
                   <div class="col-xs-12 col-md-9 col-lg-9 h5">{{SerialNo}}</div>
+                </div>
+                <div class="row" style="margin-bottom: 10px;padding-left: 10px;" *ngIf="jobtype == 'PM'">
+                  <div class="col-xs-12 col-md-3 col-lg-3 h5">ประเภทงาน:</div>
+                  <div class="col-xs-12 col-md-9 col-lg-9 h5" [innerHtml]="typePM"></div>
                 </div>
                 <div class="row" style="margin-bottom: 10px;padding-left: 10px;" *ngIf="install.RoundFilter != null">
                   <div class="col-xs-12 col-md-3 col-lg-3 h5">เปลี่ยนไส้กรอง:</div>

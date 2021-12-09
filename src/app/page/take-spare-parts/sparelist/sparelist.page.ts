@@ -59,14 +59,16 @@ async loaddata() {
       this.postDataService.PostCus(params).then(list => {
         this.list = list
         console.log(list);
+        
         if (this.list.length == 0) {
           this.loads = false;
-        }else{
+        } else{
           this.loads = true;
         }
       });
     });
   }
+
   Detail(item){
     console.log(item);
     
@@ -86,6 +88,7 @@ async loaddata() {
     console.log(navigationExtras);
     this.navCtrl.navigateForward(['take-spare-parts'], navigationExtras);
   }
+
   NewSpare(){
     let params = {
       type: "new"
@@ -102,6 +105,7 @@ async loaddata() {
     console.log(navigationExtras);
     this.navCtrl.navigateForward(['request-sparepart'], navigationExtras);
   }
+  
   async Delete(item) {
     const alert = await this.alertController.create({
       header: 'แจ้งเตือน!',

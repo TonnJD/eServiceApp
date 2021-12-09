@@ -6,11 +6,11 @@
     <ion-title>รายการเบิกอะไหล่</ion-title>
     <ion-buttons slot="primary">
       <ion-button (click)="loadpage()">
-        <ion-icon slot="icon-only" name="refresh"></ion-icon>  
-    </ion-button>
-  </ion-buttons>
+        <ion-icon slot="icon-only" name="refresh"></ion-icon>
+      </ion-button>
+    </ion-buttons>
 
-    
+
   </ion-toolbar>
 </ion-header>
 
@@ -24,15 +24,21 @@
         <div class="portlet box blue">
           <div class="portlet-title">
             <div class="caption">
-              <i class="fa fa-user"></i>รายการเบิกอะไหล่</div>
-              <div class="tools">
-                  <span class="label label-sm label-success circle"
-                  (click)="NewSpare()">เปิดใบเบิกอะไหล่</span>
-              </div>
+              <i class="fa fa-user"></i>รายการเบิกอะไหล่
+            </div>
+            <!-- <div class="tools">
+              <span class="label label-sm label-success circle" (click)="NewSpare()">เปิดใบเบิกอะไหล่</span>
+            </div> -->
           </div>
           <div class="portlet-body">
             <div class="tab-content">
               <div class="tab-pane active">
+                <div class="row">
+                  <div class="col-12 text-right" style="padding-top: 10px; padding-bottom: 10px;">
+                    <ion-button color="primary" (click)="NewSpare()">
+                      <ion-icon name="add"></ion-icon> เปิดใบเบิกอะไหล่</ion-button>
+                  </div>
+                </div>
                 <div class="row">
                   <div class="col-12">
                     <div class="table-scrollable">
@@ -41,30 +47,31 @@
                           <tr>
                             <th> ลำดับที่ </th>
                             <th> เลขที่เอกสาร </th>
-                            <th> ชื่อลูกค้า </th>
+                            <th style="text-align: center;"> ชื่อลูกค้า </th>
                             <th> สถานะ </th>
-                            <th> วันที่สร้างเอกสาร </th>
+                            <th style="text-align: center;"> วันที่<br>สร้างเอกสาร </th>
+                            <th></th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr *ngFor="let item of list; let i = index">
-                            <td> {{i+1}}</td>
+                            <td style="text-align: center;"> {{i+1}}</td>
                             <td> {{item.ServiceReportNo}} </td>
                             <td> {{item.CustomerName}} </td>
                             <td> {{item.Status}} </td>
                             <td> {{item.CreatedDate}} </td>
-                            <td *ngIf="item.Status != 'ช่างขอเบิกอะไหล่'; else lblEdit" > 
-                              <span class="label label-sm label-warning circle" #lblEdit
-                                (click)="Detail(item)">ดู</span>
+                            <td *ngIf="item.Status != 'ช่างขอเบิกอะไหล่'; else lblEdit">
+                              <ion-button color="warning" (click)="Detail(item)">
+                                <ion-icon name="eye"></ion-icon>  
+                              </ion-button>
                             </td>
-                            <td *ngIf="item.Status == 'ช่างขอเบิกอะไหล่'; else lblView" > 
+                            <td *ngIf="item.Status == 'ช่างขอเบิกอะไหล่'; else lblView">
                               <span class="label label-sm label-warning circle" #lblView
-                              (click)="Detail(item)">แก้ไข</span>
-                          </td>
-                          <td *ngIf="item.Status == 'ช่างขอเบิกอะไหล่'; else lblView" > 
-                            <span class="label label-sm label-danger circle" #lblView
-                            (click)="Delete(item)">ลบ</span>
-                        </td>
+                                (click)="Detail(item)">แก้ไข</span>
+                            </td>
+                            <td *ngIf="item.Status == 'ช่างขอเบิกอะไหล่'; else lblView">
+                              <span class="label label-sm label-danger circle" #lblView (click)="Delete(item)">ลบ</span>
+                            </td>
                           </tr>
                         </tbody>
                       </table>

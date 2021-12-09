@@ -1,10 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpRequest, HttpEvent, HttpHeaders } from '@angular/common/http';
-import { Http, Headers } from "@angular/http";
+//import { Http, Headers } from "@angular/http";
+import { HTTP } from '@ionic-native/http';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class PostDataService {
   data;
 
@@ -12,14 +14,13 @@ export class PostDataService {
   // apiServer_url = 'http://localhost:41669/';
   // apiStock = 'https://localhost:6379/';
 
-  // จาก Server จริง
+  //จาก Server จริง
   apiServer_url = 'https://erpsuperior.com/';
   apiStock = 'https://wms.erpsuperior.com/';
 
   //จาก Server เทส
   // apiServer_url = 'https://test.erpsuperior.com/';
   // apiStock = 'https://wmstest.erpsuperior.com/';
-
 
   // apiServer_url = 'https://cors-anywhere.herokuapp.com/http://superior2.wingplusweb.com/';
   // apiServer_url = 'https://cors-anywhere.herokuapp.com/https://superior2.wingplusweb.com/';
@@ -49,19 +50,33 @@ export class PostDataService {
         });
     });
   }
+
+  // login(user) {
+  //   return new Promise((resovle, reject) => {
+
+  //     let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+  //     this.http.post(this.apiServer_url + '/API/Login.ashx' + '?email=' + user.email + '&password=' + user.password,
+  //       JSON.stringify(user), option).subscribe(data => {
+  //         resovle(data);
+  //       }, error => {
+  //         reject(error)
+  //       });
+  //   });
+  // }
+
   login(user) {
     return new Promise((resovle, reject) => {
-
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-      this.http.post(this.apiServer_url + '/API/Login.ashx' + '?email=' + user.email + '&password=' + user.password,
-        JSON.stringify(user), option).subscribe(data => {
-          resovle(data);
-        }, error => {
-          reject(error)
-        });
+      this.http.get(this.apiServer_url + '/API/User.asmx/Login?email=' + user.email + '&password=' + user.password, option).subscribe(data => {
+        resovle(data);
+      }, error => {
+        reject(error)
+      });
     });
   }
+
   postjobOverview(user) {
     return new Promise((resovle, reject) => {
 
@@ -505,6 +520,54 @@ export class PostDataService {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
       this.http.get(this.apiServer_url + '/API/WebService.asmx/CheckSparepart?planID=' + planID , option).subscribe(data => {
+        resovle(data);
+      }, error => {
+        reject(error)
+      });
+    });
+  }
+
+  ReturnProduct(SKUID, value, empID) {
+    return new Promise((resovle, reject) => {
+      let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+      this.http.get(this.apiServer_url + '/API/WebService.asmx/ReturnProduct?skuid=' + SKUID + '&value=' + value + "&empID=" + empID, option).subscribe(data => {
+        resovle(data);
+      }, error => {
+        reject(error)
+      });
+    });
+  }
+
+  SearchSparepart(searchText) {
+    return new Promise((resovle, reject) => {
+      let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+      this.http.get(this.apiServer_url + '/API/Sparepart.asmx/SearchSparepart?searchText=' + searchText, option).subscribe(data => {
+        resovle(data);
+      }, error => {
+        reject(error)
+      });
+    });
+  }
+
+  InsertRequisition(form) {
+    return new Promise((resovle, reject) => {
+      let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+      this.http.post(this.apiServer_url + '/API/WebService.asmx/InsertRequisition', JSON.stringify(form), option).subscribe(data => {
+        resovle(data);
+      }, error => {
+        reject(error)
+      });
+    });
+  }
+
+  CustomerList(searchText) {
+    return new Promise((resovle, reject) => {
+      let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+      this.http.get(this.apiServer_url + '/API/WebService.asmx/CustomerList?searchText=' + searchText, option).subscribe(data => {
         resovle(data);
       }, error => {
         reject(error)
