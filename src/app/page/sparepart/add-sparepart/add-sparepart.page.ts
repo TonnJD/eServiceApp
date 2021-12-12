@@ -8,6 +8,7 @@ import { PostDataService } from 'src/app/post-data.service';
   styleUrls: ['./add-sparepart.page.scss'],
 })
 export class AddSparepartPage implements OnInit {
+  sparepartNo;
   sparepartName;
   sparepartAmount = 1;
 
@@ -41,6 +42,7 @@ export class AddSparepartPage implements OnInit {
       let param = {
         ID: '',
         PositionNo: '',
+        Skucode: this.sparepartNo,
         Skuname: this.sparepartName,
         SubSKUID: '',
         Qty: this.sparepartAmount,

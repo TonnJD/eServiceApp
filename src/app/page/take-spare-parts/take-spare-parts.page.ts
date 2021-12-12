@@ -40,6 +40,7 @@ export class TakeSparePartsPage implements OnInit {
   item;
   Status;
   ServiceReportNo;
+  RequisionType;
   JobDeviceID;
   code;
   CustomerID;
@@ -66,6 +67,8 @@ export class TakeSparePartsPage implements OnInit {
     this.route.queryParams.subscribe(params => {
       this.myId = JSON.parse(params["data"]);
       this.type = this.myId.type
+      console.log('this.myId', this.myId);
+      
 
       if (this.type == "new") {
         this.type = this.myId.type
@@ -77,6 +80,7 @@ export class TakeSparePartsPage implements OnInit {
         this.CustomerName = this.item.CustomerName
         this.AddressSite = this.item.AddressSite
         this.ServiceReportNo = this.item.ServiceReportNo
+        this.RequisionType = this.item.RequisionType
         this.Status = this.item.Status
         this.TelCompany = this.item.TelCompany
         this.EngineerTel = this.item.EngineerTel

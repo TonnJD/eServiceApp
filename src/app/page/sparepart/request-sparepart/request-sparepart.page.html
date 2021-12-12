@@ -57,11 +57,34 @@
                   </div>
                 </div>
               </div>
+
+              
+            </div>
+          </div>
+
+          <div class="portlet-body">
+            <div class="col-md-12">
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <ion-button color="primary" (click)="addSparepart()">
+                    <ion-icon name="add"></ion-icon>เพิ่มรายการ
+                  </ion-button>
+                </div>
+              </div>
+              <div class="form-group row">
+                <div class="col-md-12">
+                  <div class="alert alert-primary" role="alert">
+                    <h5 class="alert-heading">หมายเหตุ:</h5>
+                    <hr>
+                    <p class="mb-0">กดปุ่มเพิ่มรายการ กรณีที่ไม่มีรายการอะไหล่ในระบบ</p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 
           <div class="portlet-body" *ngIf="this.selectSpareList.length > 0">
-            <div class="col-md-12 col-12" style="margin-top: 15px;">
+            <div class="col-md-12 col-12">
               <h5>รายการที่เลือก </h5>&emsp; <h6 *ngIf="this.selectSpareList.length > 0">{{this.selectSpareList.length}} รายการ</h6>
             </div>
             <div class="col-md-12 col-12">
@@ -110,7 +133,7 @@
                   <ion-radio slot="start" value="CM"></ion-radio>
                 </ion-item>
                 <ion-item>
-                  <ion-label>เบิกอะไหล่เพื่อสำรอง</ion-label>
+                  <ion-label>เบิกอะไหล่สำรอง</ion-label>
                   <ion-radio slot="start" value="Spare"></ion-radio>
                 </ion-item>
               </ion-radio-group>

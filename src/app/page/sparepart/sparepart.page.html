@@ -135,19 +135,22 @@
                         <thead>
                           <tr>
                             <th class="text-center"> ลำดับ </th>
+                            <th> SKU Code </th>
                             <th> ชื่ออะไหล่ </th>
-                            <th> จำนวนที่ต้องการเบิก </th>
+                            <th> จำนวนที่เบิก </th>
                             <th></th>
                           </tr>
                         </thead>
                         <tbody>
                           <tr *ngFor="let item of ListSpare; let i = index">
                             <td class="text-center" style="padding-top: 22px;"> {{i + 1}} </td>
+                            <td style="padding-top: 22px;"> {{item.Skucode}} </td>
                             <td style="padding-top: 22px;"> {{item.Skuname}} </td>
-                            <td style="padding-top: 18px;"> <input type="number" [(ngModel)]="item.Qty"
-                                style="width: 120px; text-align: right;" /> </td>
+                            <td style="padding-top: 18px; width: 120px;">
+                              <input type="number" [(ngModel)]="item.Qty" class="form-control" style="text-align: center;" />
+                              </td>
                             <!-- <td> {{item.Balance}} </td> -->
-                            <td>
+                            <td style="padding-top: 20px;">
                               <ion-button expand="block" color="danger" (click)="DeleteFromList(i,item)" size="small">ลบ
                               </ion-button>
                               <!-- <span class="label label-sm label-warning circle"
@@ -156,10 +159,7 @@
                           </tr>
                         </tbody>
                       </table>
-                      <div style="margin-top: 10px; margin-bottom: 10px;" class="text-center" *ngIf="ListSpare != null">
-                        <ion-button color="primary" class="text-center" (click)="submitSpareList()">
-                          ยืนยันการเบิกอะไหล่</ion-button>
-                      </div>
+                      
                       <!-- <div style="margin-top: 10px; margin-bottom: 10px;" class="text-center" *ngIf="ListSpare != null">
                         <ion-button color="primary" class="text-center" (click)="SaveSpare(ListSpare)">
                           ยืนยันการเบิกอะไหล่</ion-button>
@@ -167,6 +167,27 @@
                     </div>
                   </div>
                 </div>
+
+                <div class="row">
+                  <div class="col-12" style="margin-top: 20px;">
+                    <div class="form-group">
+                      <div class="col-12">
+                        <div class="alert alert-primary" role="alert">
+                          <h5 class="alert-heading">หมายเหตุ:</h5>
+                          <hr>
+                          <p class="mb-0">เมื่อปิดงานเรียบร้อย รายการขอเบิกอะไหล่จะถูกส่งเข้าระบบ</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-12">
+                    <div style="margin-top: 10px; margin-bottom: 30px;" class="text-center" *ngIf="ListSpare != null">
+                      <ion-button color="primary" class="text-center" (click)="submitSpareList()">
+                        ยืนยันการเบิกอะไหล่</ion-button>
+                    </div>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>

@@ -261,6 +261,7 @@ export class SparepartPage implements OnInit {
           {
             ID: res.data.ID,
             PositionNo: res.data.PositionNo,
+            Skucode: res.data.Skucode,
             Skuname: res.data.Skuname,
             SubSKUID: res.data.SubSKUID,
             Qty: res.data.Qty,

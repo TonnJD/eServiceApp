@@ -5,6 +5,7 @@ import { NavController, ModalController, AlertController, NavParams, ToastContro
 import { ActivatedRoute, NavigationExtras } from '@angular/router';
 import { StorageService, User } from '../../../storage.service';
 import { ReqDetailPage } from '../req-detail/req-detail.page';
+import { AddSparepartPage } from '../add-sparepart/add-sparepart.page';
 
 @Component({
   selector: 'app-request-sparepart',
@@ -22,7 +23,7 @@ export class RequestSparepartPage implements OnInit {
   textSearch;
   isSearching = false;
   customer;
-  cusID;
+  cusID = '';
   cusName = '';
   reqType;
 
@@ -62,7 +63,7 @@ export class RequestSparepartPage implements OnInit {
     this.postDataService.SearchSparepart(strSearch).then(res => {
       this.data = res;
       console.log('res', res);
-      
+
       for (let i = 0; i < this.data.length; i++) {
         this.partData.push(
           {
@@ -130,23 +131,23 @@ export class RequestSparepartPage implements OnInit {
     this.cusName = '';
   }
 
-  submitSpareList() {    
+  submitSpareList() {
     let params = {
       empID: this.empID,
       sparelist: this.selectSpareList
     }
-    
-    this.postDataService.InsertRequisition(params);
-    this.toastSuccess();
 
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-        sparelist: JSON.stringify(params.sparelist),
-        data: JSON.stringify(params)
-      }
-    };
+    // this.postDataService.InsertRequisition(params);
+    // this.toastSuccess();
 
-    this.navCtrl.navigateBack(['/menu/sparepart'], navigationExtras);
+    // let navigationExtras: NavigationExtras = {
+    //   queryParams: {
+    //     sparelist: JSON.stringify(params.sparelist),
+    //     data: JSON.stringify(params)
+    //   }
+    // };
+
+    // this.navCtrl.navigateBack(['/menu/sparepart'], navigationExtras);
   }
 
   DeleteFromList(i) {
@@ -184,6 +185,18 @@ export class RequestSparepartPage implements OnInit {
   }
 
   async modalReqDetail() {
+    console.log('this.reqType', this.reqType);
+    
+    if (this.reqType == undefined) {
+      this.alertReqType();
+      return;
+    } else if (this.reqType == 'PM' || this.reqType == 'CM') {
+      if (this.cusID == '' && this.cusName == '') {
+        this.alertCustomer();
+        return; 
+      }
+    }
+
     const modal = await this.modalCtrl.create({
       component: ReqDetailPage,
       cssClass: 'my-custom-modal-css',
@@ -206,23 +219,80 @@ export class RequestSparepartPage implements OnInit {
           reqType: this.reqType,
           sparelist: this.selectSpareList
         }
-        
-        this.postDataService.InsertRequisition(params);
-        this.toastSuccess();
-    
-        let navigationExtras: NavigationExtras = {
-          queryParams: {
-            sparelist: JSON.stringify(params.sparelist),
-            data: JSON.stringify(params)
+
+        this.postDataService.InsertRequisition(params).then(res => {
+          let status = res;
+
+          if (status) {
+            this.toastSuccess();
+
+            let navigationExtras: NavigationExtras = {
+              queryParams: {
+                sparelist: JSON.stringify(params.sparelist),
+                data: JSON.stringify(params)
+              }
+            };
+
+            this.navCtrl.navigateBack(['/menu/sparepart'], navigationExtras);
+          } else {
+            this.alertInsertReq();
           }
-        };
-    
-        this.navCtrl.navigateBack(['/menu/sparepart'], navigationExtras);
+        });
       }
-      
+
     })
 
     return await modal.present();
+  }
+
+  async addSparepart() {
+    const modal = await this.modalCtrl.create({
+      component: AddSparepartPage,
+      //cssClass: 'my-custom-modal-css',
+      componentProps: {
+      }
+    });
+
+    modal.onDidDismiss().then(res => {
+      console.log('res', res);
+
+      if (res.data != 'close') {
+        this.selectSpareList.push(
+          {
+            Name: res.data.Skuname,
+            SKUCode: res.data.Skucode,
+            SKUID: '',
+            Qty: res.data.Qty
+          }
+        );
+      }
+    });
+
+    return await modal.present();
+  }
+
+  async alertInsertReq() {
+    const alert = await this.alertCtrl.create({
+      message: 'ขอเบิกอะไหล่เกิดข้อผิดพลาด กรุณาลองใหม่อีกครั้ง',
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  async alertReqType() {
+    const alert = await this.alertCtrl.create({
+      message: 'กรุณาเลือกประเภทการเบิก',
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
+
+  async alertCustomer() {
+    const alert = await this.alertCtrl.create({
+      message: 'กรุณาเลือกร้าน/สาขา กรณีเลือกประเภทการเบิกงาน PM และ เบิกงาน CM',
+      buttons: ['OK']
+    });
+    await alert.present();
   }
 
 }

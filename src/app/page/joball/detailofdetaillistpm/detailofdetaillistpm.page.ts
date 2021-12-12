@@ -3461,7 +3461,8 @@ export class DetailofdetaillistpmPage implements OnInit {
               request: this.requesText,
               isQuotation: this.isQuotation,
               isRequest: this.isRequest,
-              spareList: this.spareList
+              spareList: this.spareList,
+              jobType: this.jobtype
             }
 
             this.postDataService.RequestSparepart(params);
@@ -3497,7 +3498,8 @@ export class DetailofdetaillistpmPage implements OnInit {
                 request: this.requesText,
                 isQuotation: this.isQuotation,
                 isRequest: this.isRequest,
-                spareList: this.spareList
+                spareList: this.spareList,
+                jobType: this.jobtype
               }
               
               this.postDataService.RequestSparepart(params1);

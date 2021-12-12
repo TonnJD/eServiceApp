@@ -13,7 +13,11 @@
         <ion-card-title>รายละเอียดขอเสนอราคา / ขอเบิกอะไหล่</ion-card-title>
       </ion-card-header> -->
       <div class="form-group row" style="margin-top:20px;">
-        <div class="col-9">
+        <div class="col-4">
+          <label>Part No.</label>
+          <input type="text" class="form-control" [(ngModel)]="sparepartNo" />
+        </div>
+        <div class="col-5">
           <label>ชื่ออะไหล่</label>
           <input type="text" class="form-control" [(ngModel)]="sparepartName" />
         </div>
