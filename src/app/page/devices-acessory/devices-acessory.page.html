@@ -35,7 +35,7 @@
           <thead>
             <tr class="uppercase">
               <th colspan="2" style="color:black"> ชื่อสินค้า </th>
-              <th style="color:black"> จำนวนคงเหลือ </th>
+              <th style="color:black; text-align: center;"> จำนวนคงเหลือ </th>
               <th style="color:black">  </th>
             </tr>
           </thead>
@@ -45,9 +45,12 @@
               <span class="bold theme-font">{{item.Count}}</span>
             </td>
             <td>
-              <ion-button expand="block" color="success" size="small" (click)="onReturn(item)">
-                คืนสินค้า
+              <ion-button expand="block" color="success" size="small" (click)="modalDeviceSpareList(item)">
+                รายละเอียด
               </ion-button>
+              <!-- <ion-button expand="block" color="success" size="small" (click)="onReturn(item)">
+                คืนสินค้า
+              </ion-button> -->
             </td>
           </tr>
         </table>

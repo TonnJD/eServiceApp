@@ -1,0 +1,61 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>รายการอะไหล่</ion-title>
+    <ion-buttons slot="primary">
+      <ion-icon slot="end" name="close" (click)="close()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <div class="row" style="margin: 5px;">
+    <div class="col-12" style="text-align: center; margin-top: 20px;" *ngIf="load == false">
+      <label>ไม่พบข้อมูล</label>
+    </div>
+  </div>
+  <div class="row" style="margin: 5px;" *ngIf="load == true">
+    <div class="col-sm-4" *ngFor="let item of Data">
+      <div (click)="showDetail(item)">
+        <a href="javascript:;" class="icon-btn col-12">
+          <h5> {{item.ProductNameTH}} </h5>
+          <span class="badge badge-danger"> {{item.Count}} </span>
+        </a>
+      </div>
+    </div>
+  </div> -->
+  <div class="row" style="margin: 5px;">
+    <div class="col-12" style="text-align: center; margin-top: 20px;" *ngIf="load == false">
+      <div class="alert alert-primary" role="alert">
+        <h5 class="alert-heading">ไม่พบข้อมูล</h5>
+        <hr>
+        <!-- <p class="mb-0">กดปุ่มเพิ่มรายการ กรณีที่ไม่มีรายการอะไหล่ในระบบ</p> -->
+      </div>
+    </div>
+    <div class="col-12" *ngIf="load == true">
+      <div class="table-scrollable table-scrollable-borderless">
+        <table class="table table-hover table-light">
+          <thead>
+            <tr class="uppercase">
+              <th style="color:black"> Part No. </th>
+              <th style="color:black"> ชื่อสินค้า </th>
+              <th style="color:black"> ร้านค้า/สาขา </th>
+              <th style="color:black; text-align: center;"> จำนวน </th>
+              <th style="color:black">  </th>
+            </tr>
+          </thead>
+          <tr *ngFor="let item of spareList">
+            <td style="padding-top: 19px;"> {{item.SKUCode}} </td>
+            <td style="padding-top: 19px;"> {{item.SKUName}} </td>
+            <td style="padding-top: 19px;"> {{item.CusName}} </td>
+            <td style="padding-top: 19px; text-align: center;"> {{item.Count}} </td>
+            <td>
+              <ion-button expand="block" color="success" size="small" (click)="onReturn(item)">
+                คืนสินค้า
+              </ion-button>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</ion-content>

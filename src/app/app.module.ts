@@ -44,6 +44,7 @@ import { SparepartPageModule } from '../app/page/sparepart/sparepart.module';
 import { NotCheckedPageModule } from './page/joball/not-checked/not-checked.module';
 import { InsertOldSparepartPageModule } from './page/joball/detailofdetaillistpm/insert-old-sparepart/insert-old-sparepart.module';
 import { ReqDetailPageModule } from './page/sparepart/req-detail/req-detail.module';
+import { DeviceSpareListPageModule } from './page/devices-acessory/device-spare-list/device-spare-list.module';
 //import { JobresponsPageModule} from '../app/page/job/jobdetail/jobrespons/jobrespons.module'
 
 @NgModule({
@@ -78,7 +79,8 @@ import { ReqDetailPageModule } from './page/sparepart/req-detail/req-detail.modu
     SparepartPageModule,
     NotCheckedPageModule,
     InsertOldSparepartPageModule,
-    ReqDetailPageModule
+    ReqDetailPageModule,
+    DeviceSpareListPageModule
   ],
   providers: [
     AuthGuardGuard,
