@@ -127,15 +127,16 @@ let LoginPage = class LoginPage {
             // this.checkNetwork();
         }, 500);
         this.user = [];
-        this.route.queryParams.subscribe(params => {
-            this.authService.authenticationState.subscribe(state => {
-                if (state) {
-                    this.router.navigate(['/menu/overview']);
-                }
-                else {
-                    this.router.navigate(['login']);
-                }
-            });
+        // this.route.queryParams.subscribe(params => {
+        // });
+        this.authService.authenticationState.subscribe(state => {
+            alert('state: ' + state);
+            if (state) {
+                this.router.navigate(['/menu/overview']);
+            }
+            else {
+                this.router.navigate(['login']);
+            }
         });
     }
     //#endregion
@@ -167,7 +168,7 @@ let LoginPage = class LoginPage {
     //#endregion
     //#region login
     login() {
-        this.load();
+        //this.load();
         this.user.email = this.user.email;
         this.user.password = this.user.password;
         this.user.type = "eservice";
@@ -187,10 +188,13 @@ let LoginPage = class LoginPage {
                 this.Tablet = this.data[i].Tablet;
                 this.link = this.data[i].Link;
             }
+            alert(this.name);
             if (this.status == false) {
                 this.false();
             }
             else if (this.Tablet == "On" && this.status == true) {
+                // alert(true);
+                // this.router.navigate(['/menu/overview']);
                 this.true();
             }
             else {

@@ -656,7 +656,7 @@ module.exports = "<ion-toolbar>\r\n  <ion-title>ประวัติการ�
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>รายการอะไหล่</ion-title>\r\n    <ion-buttons slot=\"primary\">\r\n      <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <!-- <div class=\"row\" style=\"margin: 5px;\">\r\n    <div class=\"col-12\" style=\"text-align: center; margin-top: 20px;\" *ngIf=\"load == false\">\r\n      <label>ไม่พบข้อมูล</label>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" style=\"margin: 5px;\" *ngIf=\"load == true\">\r\n    <div class=\"col-sm-4\" *ngFor=\"let item of Data\">\r\n      <div (click)=\"showDetail(item)\">\r\n        <a href=\"javascript:;\" class=\"icon-btn col-12\">\r\n          <h5> {{item.ProductNameTH}} </h5>\r\n          <span class=\"badge badge-danger\"> {{item.Count}} </span>\r\n        </a>\r\n      </div>\r\n    </div>\r\n  </div> -->\r\n  <div class=\"row\" style=\"margin: 5px;\">\r\n    <div class=\"col-12\">\r\n      <div class=\"table-scrollable table-scrollable-borderless\">\r\n        <table class=\"table table-hover table-light\">\r\n          <thead>\r\n            <tr class=\"uppercase\">\r\n              <th colspan=\"2\" style=\"color:black\"> Part No. </th>\r\n              <th colspan=\"2\" style=\"color:black\"> ชื่อสินค้า </th>\r\n              <th style=\"color:black\"> ร้านค้า/สาขา </th>\r\n              <th style=\"color:black\">  </th>\r\n            </tr>\r\n          </thead>\r\n          <tr *ngFor=\"let item of spareList\">\r\n            <td colspan=\"2\" style=\"padding-top: 19px;\"> {{item.SKUCode}} </td>\r\n            <td colspan=\"2\" style=\"padding-top: 19px;\"> {{item.SKUName}} </td>\r\n            <td style=\"padding-top: 19px; text-align: center;\"> {{item.cusName}} </td>\r\n            <td>\r\n              <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"onReturn(item)\">\r\n                คืนสินค้า\r\n              </ion-button>\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>รายการอะไหล่</ion-title>\r\n    <ion-buttons slot=\"primary\">\r\n      <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <!-- <div class=\"row\" style=\"margin: 5px;\">\r\n    <div class=\"col-12\" style=\"text-align: center; margin-top: 20px;\" *ngIf=\"load == false\">\r\n      <label>ไม่พบข้อมูล</label>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" style=\"margin: 5px;\" *ngIf=\"load == true\">\r\n    <div class=\"col-sm-4\" *ngFor=\"let item of Data\">\r\n      <div (click)=\"showDetail(item)\">\r\n        <a href=\"javascript:;\" class=\"icon-btn col-12\">\r\n          <h5> {{item.ProductNameTH}} </h5>\r\n          <span class=\"badge badge-danger\"> {{item.Count}} </span>\r\n        </a>\r\n      </div>\r\n    </div>\r\n  </div> -->\r\n  <div class=\"row\" style=\"margin: 5px;\">\r\n    <div class=\"col-12\" style=\"text-align: center; margin-top: 20px;\" *ngIf=\"load == false\">\r\n      <div class=\"alert alert-primary\" role=\"alert\">\r\n        <h5 class=\"alert-heading\">ไม่พบข้อมูล</h5>\r\n        <hr>\r\n        <!-- <p class=\"mb-0\">กดปุ่มเพิ่มรายการ กรณีที่ไม่มีรายการอะไหล่ในระบบ</p> -->\r\n      </div>\r\n    </div>\r\n    <div class=\"col-12\" *ngIf=\"load == true\">\r\n      <div class=\"table-scrollable table-scrollable-borderless\">\r\n        <table class=\"table table-hover table-light\">\r\n          <thead>\r\n            <tr class=\"uppercase\">\r\n              <th style=\"color:black\"> Part No. </th>\r\n              <th style=\"color:black\"> ชื่อสินค้า </th>\r\n              <th style=\"color:black\"> ร้านค้า/สาขา </th>\r\n              <th style=\"color:black; text-align: center;\"> จำนวน </th>\r\n              <th style=\"color:black\">  </th>\r\n            </tr>\r\n          </thead>\r\n          <tr *ngFor=\"let item of spareList\">\r\n            <td style=\"padding-top: 19px;\"> {{item.SKUCode}} </td>\r\n            <td style=\"padding-top: 19px;\"> {{item.SKUName}} </td>\r\n            <td style=\"padding-top: 19px;\"> {{item.CusName}} </td>\r\n            <td style=\"padding-top: 19px; text-align: center;\"> {{item.Count}} </td>\r\n            <td>\r\n              <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"onReturn(item)\">\r\n                คืนสินค้า\r\n              </ion-button>\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -1588,11 +1588,18 @@ let DeviceSpareListPage = class DeviceSpareListPage {
         this.postDataService = postDataService;
         this.toastCtrl = toastCtrl;
         this.navParams = navParams;
+        this.load = false;
         this.navData = this.navParams.data;
         this.empID = this.navData.empID;
         this.postDataService.SparepartWaitReturnList(this.navData.item.SKUID, this.empID).then(res => {
             this.spareList = res;
             console.log('this.spareList', this.spareList);
+            if (this.spareList.length == 0) {
+                this.load = false;
+            }
+            else {
+                this.load = true;
+            }
         });
     }
     close() {
@@ -1600,7 +1607,6 @@ let DeviceSpareListPage = class DeviceSpareListPage {
     }
     onReturn(item) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            console.log('item', item.Count);
             this.alertAmountReturn(item);
         });
     }
@@ -1609,13 +1615,13 @@ let DeviceSpareListPage = class DeviceSpareListPage {
             const alert = yield this.alertCtrl.create({
                 header: 'จำนวนสินค้าที่ต้องการคืน',
                 subHeader: item.SKUName,
-                message: 'คงเหลือ: ' + item.Count,
+                //message: 'คงเหลือ: ' + item.Count,
                 mode: 'ios',
                 inputs: [
                     {
                         type: 'number',
                         min: 1,
-                        max: parseInt(item.Count),
+                        max: item.Count,
                         name: 'value',
                         placeholder: 'จำนวน',
                         value: 1
@@ -1635,6 +1641,8 @@ let DeviceSpareListPage = class DeviceSpareListPage {
                                 this.alertLess(item); //ใส่จำนวนสินค้าไม่ถูกต้อง
                             }
                             else {
+                                console.log('item', item);
+                                console.log('data', data);
                                 this.alertReturnSubmit(item, data.value);
                             }
                         }
@@ -1676,29 +1684,42 @@ let DeviceSpareListPage = class DeviceSpareListPage {
                         cssClass: 'btn btn-primary',
                         text: 'ยืนยัน',
                         handler: () => {
-                            this.postDataService.ReturnProduct(item.SKUID, value, this.empID).then(res => {
-                                let params1 = {
-                                    empID: this.empID,
-                                    type: "Detail",
-                                    ProductID: this.productID
-                                };
-                                this.postDataService.GetDevice(params1).then(list => {
-                                    //this.DataDetail = list
-                                });
-                                let params2 = {
-                                    empID: this.empID,
-                                    type: "Overall",
-                                };
-                                this.postDataService.GetDevice(params2).then(list => {
-                                    this.data = list;
-                                    if (this.data == []) {
+                            this.postDataService.ReturnProduct(item.SKUID, this.empID, item.Count, item.CusID).then(res => {
+                                this.postDataService.SparepartWaitReturnList(this.navData.item.SKUID, this.empID).then(res => {
+                                    this.spareList = res;
+                                    console.log('this.spareList', this.spareList);
+                                    if (this.spareList.length == 0) {
                                         this.load = false;
                                     }
                                     else {
                                         this.load = true;
                                     }
-                                    this.presentToast();
+                                    this.modalCtrl.dismiss('ReturnSuccess');
                                 });
+                                // let params1 = {
+                                //   empID: this.empID,
+                                //   type: "Detail",
+                                //   ProductID: this.productID
+                                // }
+                                // this.postDataService.GetDevice(params1).then(list => {
+                                //   //this.DataDetail = list
+                                // });
+                                // let params2 = {
+                                //   empID: this.empID,
+                                //   type: "Overall",
+                                // }
+                                // this.postDataService.GetDevice(params2).then(list => {
+                                //   this.data = list
+                                //   if (this.data == [])
+                                //   {
+                                //     this.load = false;
+                                //   }
+                                //   else
+                                //   {
+                                //     this.load = true;
+                                //   }
+                                //   this.presentToast()
+                                // });
                             });
                         }
                     }
@@ -7292,11 +7313,11 @@ let PostDataService = class PostDataService {
     constructor(http) {
         this.http = http;
         // test local
-        this.apiServer_url = 'http://localhost:41669/';
-        this.apiStock = 'https://localhost:6379/';
+        // apiServer_url = 'http://localhost:41669/';
+        // apiStock = 'https://localhost:6379/';
         //จาก Server จริง
-        // apiServer_url = 'https://erpsuperior.com/';
-        // apiStock = 'https://wms.erpsuperior.com/';
+        this.apiServer_url = 'https://erpsuperior.com/';
+        this.apiStock = 'https://wms.erpsuperior.com/';
         //จาก Server เทส
         // apiServer_url = 'https://test.erpsuperior.com/';
         // apiStock = 'https://wmstest.erpsuperior.com/';
@@ -7710,10 +7731,10 @@ let PostDataService = class PostDataService {
             });
         });
     }
-    ReturnProduct(SKUID, value, empID) {
+    ReturnProduct(SKUID, empID, qty, cusID) {
         return new Promise((resovle, reject) => {
             let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
-            this.http.get(this.apiServer_url + '/API/WebService.asmx/ReturnProduct?skuid=' + SKUID + '&value=' + value + "&empID=" + empID, option).subscribe(data => {
+            this.http.get(this.apiServer_url + '/API/WebService.asmx/ReturnProduct?skuid=' + SKUID + '&empID=' + empID + '&strQty=' + qty + '&strCusID=' + cusID, option).subscribe(data => {
                 resovle(data);
             }, error => {
                 reject(error);
@@ -7754,6 +7775,16 @@ let PostDataService = class PostDataService {
         return new Promise((resovle, reject) => {
             let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
             this.http.get(this.apiServer_url + '/API/WebService.asmx/SparepartWaitReturnList?skuID=' + skuID + '&empID=' + empID, option).subscribe(data => {
+                resovle(data);
+            }, error => {
+                reject(error);
+            });
+        });
+    }
+    RoundFilterList(empID) {
+        return new Promise((resovle, reject) => {
+            let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
+            this.http.get(this.apiServer_url + '/API/WebService.asmx/RoundFilterList?empID=' + empID, option).subscribe(data => {
                 resovle(data);
             }, error => {
                 reject(error);

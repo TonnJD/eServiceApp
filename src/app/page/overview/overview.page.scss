@@ -11,6 +11,11 @@ label{
   ion-item{
     --ion-background-color:#fff;
  }
+
+ .portlet.box.blue>.portlet-title>.caption, .portlet.box.blue>.portlet-title>.caption>
+ {
+    font-size: 1.3em !important;
+ }
 //     .background{
 //         background-color: white;
 //         padding: 0px;

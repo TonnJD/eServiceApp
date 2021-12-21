@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>เครื่องและอุปกรณ์คงเหลือ</ion-title>\r\n    <ion-buttons slot=\"primary\">\r\n      <ion-button (click)=\"loadpage()\">\r\n        <ion-icon slot=\"icon-only\" name=\"refresh\"></ion-icon>  \r\n    </ion-button>\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div class=\"row\" style=\"margin: 5px;\">\r\n    <div class=\"col-12\" style=\"text-align: center; margin-top: 20px;\" *ngIf=\"load == false\">\r\n      <label>ไม่พบข้อมูล</label>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" style=\"margin: 5px;\" *ngIf=\"load == true\">\r\n    <div class=\"col-sm-4\" *ngFor=\"let item of Data\">\r\n      <div (click)=\"showDetail(item)\">\r\n        <a href=\"javascript:;\" class=\"icon-btn col-12\">\r\n          <h5> {{item.ProductNameTH}} </h5>\r\n          <span class=\"badge badge-danger\"> {{item.Count}} </span>\r\n        </a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" style=\"margin: 5px;\" *ngIf=\"isShowDetail\">\r\n    <div class=\"col-12\">\r\n      <div class=\"table-scrollable table-scrollable-borderless\">\r\n        <table class=\"table table-hover table-light\">\r\n          <thead>\r\n            <tr class=\"uppercase\">\r\n              <th colspan=\"2\" style=\"color:black\"> ชื่อสินค้า </th>\r\n              <th style=\"color:black\"> จำนวนคงเหลือ </th>\r\n              <th style=\"color:black\">  </th>\r\n            </tr>\r\n          </thead>\r\n          <tr *ngFor=\"let item of DataDetail\">\r\n            <td colspan=\"2\" style=\"padding-top: 19px;\"> {{item.SKUName}} </td>\r\n            <td style=\"padding-top: 19px; text-align: center;\">\r\n              <span class=\"bold theme-font\">{{item.Count}}</span>\r\n            </td>\r\n            <td>\r\n              <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"modalDeviceSpareList(item)\">\r\n                รายละเอียด\r\n              </ion-button>\r\n              <!-- <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"onReturn(item)\">\r\n                คืนสินค้า\r\n              </ion-button> -->\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>เครื่องและอุปกรณ์คงเหลือ</ion-title>\r\n    <ion-buttons slot=\"primary\">\r\n      <ion-button (click)=\"loadpage()\">\r\n        <ion-icon slot=\"icon-only\" name=\"refresh\"></ion-icon>  \r\n    </ion-button>\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div class=\"row\" style=\"margin: 5px;\">\r\n    <div class=\"col-12\" style=\"text-align: center; margin-top: 20px;\" *ngIf=\"load == false\">\r\n      <label>ไม่พบข้อมูล</label>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" style=\"margin: 5px;\" *ngIf=\"load == true\">\r\n    <div class=\"col-sm-4\" *ngFor=\"let item of Data\">\r\n      <div (click)=\"showDetail(item)\">\r\n        <a href=\"javascript:;\" class=\"icon-btn col-12\">\r\n          <h5> {{item.ProductNameTH}} </h5>\r\n          <span class=\"badge badge-danger\"> {{item.Count}} </span>\r\n        </a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" style=\"margin: 5px;\" *ngIf=\"isShowDetail\">\r\n    <div class=\"col-12\">\r\n      <div class=\"table-scrollable table-scrollable-borderless\">\r\n        <table class=\"table table-hover table-light\">\r\n          <thead>\r\n            <tr class=\"uppercase\">\r\n              <th colspan=\"2\" style=\"color:black\"> ชื่อสินค้า </th>\r\n              <th style=\"color:black; text-align: center;\"> จำนวนคงเหลือ </th>\r\n              <th style=\"color:black\">  </th>\r\n            </tr>\r\n          </thead>\r\n          <tr *ngFor=\"let item of DataDetail\">\r\n            <td colspan=\"2\" style=\"padding-top: 19px;\"> {{item.SKUName}} </td>\r\n            <td style=\"padding-top: 19px; text-align: center;\">\r\n              <span class=\"bold theme-font\">{{item.Count}}</span>\r\n            </td>\r\n            <td>\r\n              <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"modalDeviceSpareList(item)\">\r\n                รายละเอียด\r\n              </ion-button>\r\n              <!-- <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"onReturn(item)\">\r\n                คืนสินค้า\r\n              </ion-button> -->\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>"
 
 /***/ }),
 
@@ -165,59 +165,7 @@ var DevicesAcessoryPage = /** @class */ (function () {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 console.log('item', item.Count);
-                this.alertAmountReturn(item);
                 return [2 /*return*/];
-            });
-        });
-    };
-    DevicesAcessoryPage.prototype.alertAmountReturn = function (item) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var alert;
-            var _this = this;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.alertCtrl.create({
-                            header: 'จำนวนสินค้าที่ต้องการคืน',
-                            subHeader: item.SKUName,
-                            message: 'คงเหลือ: ' + item.Count,
-                            mode: 'ios',
-                            inputs: [
-                                {
-                                    type: 'number',
-                                    min: 1,
-                                    max: parseInt(item.Count),
-                                    name: 'value',
-                                    placeholder: 'จำนวน',
-                                    value: 1
-                                }
-                            ],
-                            buttons: [
-                                {
-                                    text: 'ยกเลิก'
-                                },
-                                {
-                                    text: 'ตกลง',
-                                    handler: function (data) {
-                                        if (data.value == 0) {
-                                            _this.alertLess(item); //ใส่จำนวนสินค้าไม่ถูกต้อง
-                                        }
-                                        else if (data.value > item.Count) {
-                                            _this.alertLess(item); //ใส่จำนวนสินค้าไม่ถูกต้อง
-                                        }
-                                        else {
-                                            _this.alertReturnSubmit(item, data.value);
-                                        }
-                                    }
-                                }
-                            ]
-                        })];
-                    case 1:
-                        alert = _a.sent();
-                        return [4 /*yield*/, alert.present()];
-                    case 2:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
             });
         });
     };
@@ -235,63 +183,6 @@ var DevicesAcessoryPage = /** @class */ (function () {
                                     text: 'ตกลง',
                                     handler: function () {
                                         _this.onReturn(item);
-                                    }
-                                }
-                            ]
-                        })];
-                    case 1:
-                        alert = _a.sent();
-                        return [4 /*yield*/, alert.present()];
-                    case 2:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    DevicesAcessoryPage.prototype.alertReturnSubmit = function (item, value) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
-            var alert;
-            var _this = this;
-            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
-                switch (_a.label) {
-                    case 0: return [4 /*yield*/, this.alertCtrl.create({
-                            header: 'ต้องการคืนสินค้า',
-                            subHeader: item.SKUName,
-                            message: 'จำนวนที่คืน: ' + value,
-                            mode: 'ios',
-                            buttons: [
-                                {
-                                    text: 'ยกเลิก'
-                                },
-                                {
-                                    cssClass: 'btn btn-primary',
-                                    text: 'ยืนยัน',
-                                    handler: function () {
-                                        _this.postDataService.ReturnProduct(item.SKUID, value, _this.empID).then(function (res) {
-                                            var params1 = {
-                                                empID: _this.empID,
-                                                type: "Detail",
-                                                ProductID: _this.productID
-                                            };
-                                            _this.postDataService.GetDevice(params1).then(function (list) {
-                                                _this.DataDetail = list;
-                                            });
-                                            var params2 = {
-                                                empID: _this.empID,
-                                                type: "Overall",
-                                            };
-                                            _this.postDataService.GetDevice(params2).then(function (list) {
-                                                _this.Data = list;
-                                                if (_this.Data == []) {
-                                                    _this.load = false;
-                                                }
-                                                else {
-                                                    _this.load = true;
-                                                }
-                                                _this.presentToast();
-                                            });
-                                        });
                                     }
                                 }
                             ]
@@ -342,10 +233,29 @@ var DevicesAcessoryPage = /** @class */ (function () {
                         modal = _a.sent();
                         modal.onDidDismiss().then(function (res) {
                             var type = res.data;
-                            if (type == 'submit') {
-                                var params = {
-                                    empID: _this.empID
+                            if (type == 'ReturnSuccess') {
+                                var params1 = {
+                                    empID: _this.empID,
+                                    type: "Detail",
+                                    ProductID: _this.productID
                                 };
+                                _this.postDataService.GetDevice(params1).then(function (list) {
+                                    _this.DataDetail = list;
+                                });
+                                var params2 = {
+                                    empID: _this.empID,
+                                    type: "Overall",
+                                };
+                                _this.postDataService.GetDevice(params2).then(function (list) {
+                                    _this.Data = list;
+                                    if (_this.Data == []) {
+                                        _this.load = false;
+                                    }
+                                    else {
+                                        _this.load = true;
+                                    }
+                                    _this.presentToast();
+                                });
                             }
                         });
                         return [4 /*yield*/, modal.present()];

@@ -74,6 +74,7 @@ export class OverviewPage implements OnInit {
   datas;
   item;
   worknew;
+  filterList;
   //#endregion
 
   //#region constructor
@@ -100,12 +101,14 @@ export class OverviewPage implements OnInit {
       this.ngOnInit();
       this.checkversion();
     }, 500);
+
     this.user = [];
     this.test = [];
     this.ChangeMonth();
     this.Today = new Date();
-    this.onReload();
+    //this.onReload();
   }
+  
   loadpage() {
     setTimeout(() => {
       this.load();
@@ -465,7 +468,8 @@ export class OverviewPage implements OnInit {
   ngOnInit() {
     this.storageService.getUser().then(items => {
       this.items = items;
-      console.log(items);
+      console.log('this.items', this.items);
+
       for (let i = 0; i < this.items.length; i++) {
         this.empID = this.items[i].empID;
         this.name = this.items[i].name
@@ -473,6 +477,13 @@ export class OverviewPage implements OnInit {
         this.username = this.items[i].username
         console.log(this.empID);
       }
+
+      this.postDataService.RoundFilterList(this.empID).then(res => {
+        this.filterList = res;
+        console.log('this.filterList', this.filterList);
+        
+      });
+
       this.user.empID = this.empID;
       this.user.month = this.intMonth;
       this.user.year = this.intYear;

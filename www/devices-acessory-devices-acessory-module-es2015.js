@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>เครื่องและอุปกรณ์คงเหลือ</ion-title>\r\n    <ion-buttons slot=\"primary\">\r\n      <ion-button (click)=\"loadpage()\">\r\n        <ion-icon slot=\"icon-only\" name=\"refresh\"></ion-icon>  \r\n    </ion-button>\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div class=\"row\" style=\"margin: 5px;\">\r\n    <div class=\"col-12\" style=\"text-align: center; margin-top: 20px;\" *ngIf=\"load == false\">\r\n      <label>ไม่พบข้อมูล</label>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" style=\"margin: 5px;\" *ngIf=\"load == true\">\r\n    <div class=\"col-sm-4\" *ngFor=\"let item of Data\">\r\n      <div (click)=\"showDetail(item)\">\r\n        <a href=\"javascript:;\" class=\"icon-btn col-12\">\r\n          <h5> {{item.ProductNameTH}} </h5>\r\n          <span class=\"badge badge-danger\"> {{item.Count}} </span>\r\n        </a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" style=\"margin: 5px;\" *ngIf=\"isShowDetail\">\r\n    <div class=\"col-12\">\r\n      <div class=\"table-scrollable table-scrollable-borderless\">\r\n        <table class=\"table table-hover table-light\">\r\n          <thead>\r\n            <tr class=\"uppercase\">\r\n              <th colspan=\"2\" style=\"color:black\"> ชื่อสินค้า </th>\r\n              <th style=\"color:black\"> จำนวนคงเหลือ </th>\r\n              <th style=\"color:black\">  </th>\r\n            </tr>\r\n          </thead>\r\n          <tr *ngFor=\"let item of DataDetail\">\r\n            <td colspan=\"2\" style=\"padding-top: 19px;\"> {{item.SKUName}} </td>\r\n            <td style=\"padding-top: 19px; text-align: center;\">\r\n              <span class=\"bold theme-font\">{{item.Count}}</span>\r\n            </td>\r\n            <td>\r\n              <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"modalDeviceSpareList(item)\">\r\n                รายละเอียด\r\n              </ion-button>\r\n              <!-- <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"onReturn(item)\">\r\n                คืนสินค้า\r\n              </ion-button> -->\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>เครื่องและอุปกรณ์คงเหลือ</ion-title>\r\n    <ion-buttons slot=\"primary\">\r\n      <ion-button (click)=\"loadpage()\">\r\n        <ion-icon slot=\"icon-only\" name=\"refresh\"></ion-icon>  \r\n    </ion-button>\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div class=\"row\" style=\"margin: 5px;\">\r\n    <div class=\"col-12\" style=\"text-align: center; margin-top: 20px;\" *ngIf=\"load == false\">\r\n      <label>ไม่พบข้อมูล</label>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" style=\"margin: 5px;\" *ngIf=\"load == true\">\r\n    <div class=\"col-sm-4\" *ngFor=\"let item of Data\">\r\n      <div (click)=\"showDetail(item)\">\r\n        <a href=\"javascript:;\" class=\"icon-btn col-12\">\r\n          <h5> {{item.ProductNameTH}} </h5>\r\n          <span class=\"badge badge-danger\"> {{item.Count}} </span>\r\n        </a>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <div class=\"row\" style=\"margin: 5px;\" *ngIf=\"isShowDetail\">\r\n    <div class=\"col-12\">\r\n      <div class=\"table-scrollable table-scrollable-borderless\">\r\n        <table class=\"table table-hover table-light\">\r\n          <thead>\r\n            <tr class=\"uppercase\">\r\n              <th colspan=\"2\" style=\"color:black\"> ชื่อสินค้า </th>\r\n              <th style=\"color:black; text-align: center;\"> จำนวนคงเหลือ </th>\r\n              <th style=\"color:black\">  </th>\r\n            </tr>\r\n          </thead>\r\n          <tr *ngFor=\"let item of DataDetail\">\r\n            <td colspan=\"2\" style=\"padding-top: 19px;\"> {{item.SKUName}} </td>\r\n            <td style=\"padding-top: 19px; text-align: center;\">\r\n              <span class=\"bold theme-font\">{{item.Count}}</span>\r\n            </td>\r\n            <td>\r\n              <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"modalDeviceSpareList(item)\">\r\n                รายละเอียด\r\n              </ion-button>\r\n              <!-- <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"onReturn(item)\">\r\n                คืนสินค้า\r\n              </ion-button> -->\r\n            </td>\r\n          </tr>\r\n        </table>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>"
 
 /***/ }),
 
@@ -157,47 +157,7 @@ let DevicesAcessoryPage = class DevicesAcessoryPage {
     onReturn(item) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             console.log('item', item.Count);
-            this.alertAmountReturn(item);
-        });
-    }
-    alertAmountReturn(item) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            const alert = yield this.alertCtrl.create({
-                header: 'จำนวนสินค้าที่ต้องการคืน',
-                subHeader: item.SKUName,
-                message: 'คงเหลือ: ' + item.Count,
-                mode: 'ios',
-                inputs: [
-                    {
-                        type: 'number',
-                        min: 1,
-                        max: parseInt(item.Count),
-                        name: 'value',
-                        placeholder: 'จำนวน',
-                        value: 1
-                    }
-                ],
-                buttons: [
-                    {
-                        text: 'ยกเลิก'
-                    },
-                    {
-                        text: 'ตกลง',
-                        handler: (data) => {
-                            if (data.value == 0) {
-                                this.alertLess(item); //ใส่จำนวนสินค้าไม่ถูกต้อง
-                            }
-                            else if (data.value > item.Count) {
-                                this.alertLess(item); //ใส่จำนวนสินค้าไม่ถูกต้อง
-                            }
-                            else {
-                                this.alertReturnSubmit(item, data.value);
-                            }
-                        }
-                    }
-                ]
-            });
-            yield alert.present();
+            //this.alertAmountReturn(item);
         });
     }
     alertLess(item) {
@@ -210,52 +170,6 @@ let DevicesAcessoryPage = class DevicesAcessoryPage {
                         text: 'ตกลง',
                         handler: () => {
                             this.onReturn(item);
-                        }
-                    }
-                ]
-            });
-            yield alert.present();
-        });
-    }
-    alertReturnSubmit(item, value) {
-        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            const alert = yield this.alertCtrl.create({
-                header: 'ต้องการคืนสินค้า',
-                subHeader: item.SKUName,
-                message: 'จำนวนที่คืน: ' + value,
-                mode: 'ios',
-                buttons: [
-                    {
-                        text: 'ยกเลิก'
-                    },
-                    {
-                        cssClass: 'btn btn-primary',
-                        text: 'ยืนยัน',
-                        handler: () => {
-                            this.postDataService.ReturnProduct(item.SKUID, value, this.empID).then(res => {
-                                let params1 = {
-                                    empID: this.empID,
-                                    type: "Detail",
-                                    ProductID: this.productID
-                                };
-                                this.postDataService.GetDevice(params1).then(list => {
-                                    this.DataDetail = list;
-                                });
-                                let params2 = {
-                                    empID: this.empID,
-                                    type: "Overall",
-                                };
-                                this.postDataService.GetDevice(params2).then(list => {
-                                    this.Data = list;
-                                    if (this.Data == []) {
-                                        this.load = false;
-                                    }
-                                    else {
-                                        this.load = true;
-                                    }
-                                    this.presentToast();
-                                });
-                            });
                         }
                     }
                 ]
@@ -285,10 +199,29 @@ let DevicesAcessoryPage = class DevicesAcessoryPage {
             });
             modal.onDidDismiss().then(res => {
                 let type = res.data;
-                if (type == 'submit') {
-                    let params = {
-                        empID: this.empID
+                if (type == 'ReturnSuccess') {
+                    let params1 = {
+                        empID: this.empID,
+                        type: "Detail",
+                        ProductID: this.productID
                     };
+                    this.postDataService.GetDevice(params1).then(list => {
+                        this.DataDetail = list;
+                    });
+                    let params2 = {
+                        empID: this.empID,
+                        type: "Overall",
+                    };
+                    this.postDataService.GetDevice(params2).then(list => {
+                        this.Data = list;
+                        if (this.Data == []) {
+                            this.load = false;
+                        }
+                        else {
+                            this.load = true;
+                        }
+                        this.presentToast();
+                    });
                 }
             });
             return yield modal.present();
