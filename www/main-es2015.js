@@ -102,6 +102,9 @@ var map = {
 		"./src/app/page/joball/detaillistpm/detaillistpm.module.ts",
 		"page-joball-detaillistpm-detaillistpm-module"
 	],
+	"./page/joball/detaillistpm/update-product/update-product.module": [
+		"./src/app/page/joball/detaillistpm/update-product/update-product.module.ts"
+	],
 	"./page/joball/detailofdetaillistpm/changsparepart/changsparepart.module": [
 		"./src/app/page/joball/detailofdetaillistpm/changsparepart/changsparepart.module.ts"
 	],
@@ -671,6 +674,17 @@ module.exports = "<ion-toolbar>\r\n  <ion-title>ภาพหน้างาน</
 
 /***/ }),
 
+/***/ "./node_modules/raw-loader/index.js!./src/app/page/joball/detaillistpm/update-product/update-product.page.html":
+/*!************************************************************************************************************!*\
+  !*** ./node_modules/raw-loader!./src/app/page/joball/detaillistpm/update-product/update-product.page.html ***!
+  \************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>ตรวจสอบความถูกต้อง</ion-title>\r\n    <ion-buttons slot=\"primary\">\r\n      <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-card>\r\n    <div class=\"col-12\" style=\"margin-top: 15px;\">\r\n      <div class=\"alert alert-warning\" role=\"alert\">\r\n        <h4>กรุณาตรวจสอบเครื่องในร้าน (สำคัญมาก)</h4>\r\n      </div>\r\n    </div>\r\n    <ion-card-header>\r\n      <ion-card-title>ข้อมูลเครื่องปัจจุบัน</ion-card-title>\r\n      <div style=\"margin-top:15px;\">\r\n        <h5>{{item.ItemsName}}</h5>\r\n      </div>\r\n    </ion-card-header>\r\n\r\n    <!-- <ion-card-header>\r\n      <ion-card-title>กรอกข้อมูลเครื่องที่ถูกต้องในร้าน</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <div class=\"col-12\">\r\n        <input type=\"text\" class=\"form-control\" />\r\n        <small>* กรุณากรอกมากกว่า 4 ตัวอักษร</small>\r\n      </div>\r\n    </ion-card-content> -->\r\n    \r\n    <ion-card-header>\r\n      <ion-card-title>ประเภทข้อมูล</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <ion-radio-group (ionChange)=\"onChange($event.detail.value)\">\r\n        <div class=\"row\">\r\n          <div class=\"col-md-12\">\r\n            <ion-item>\r\n              <ion-label>ข้อมูลถูกต้อง</ion-label>\r\n              <ion-radio slot=\"start\" value=\"matched\"></ion-radio>\r\n            </ion-item>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-12\">\r\n            <ion-item>\r\n              <ion-label>ข้อมูลไม่ถูกต้อง</ion-label>\r\n              <ion-radio slot=\"start\" value=\"not-matched\"></ion-radio>\r\n            </ion-item>\r\n          </div>\r\n        </div>\r\n      </ion-radio-group>\r\n    </ion-card-content>\r\n    <ion-card-content *ngIf=\"showInstallName\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"installName\" placeholder=\"โปรดระบุ\" maxlength=\"100\" />\r\n          <small>* กรุณากรอกมากว่า 4 ตัวอักษร</small>\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n    \r\n    <hr />\r\n    <ion-card-content>\r\n      <div class=\"col-md-12 text-center\" style=\"margin-bottom: 30px;\">\r\n        <ion-button (click)=\"submit()\" color=\"success\">ส่งข้อมูลและเริ่มงาน</ion-button>\r\n      </div>\r\n    </ion-card-content>\r\n  </ion-card>\r\n\r\n</ion-content>\r\n"
+
+/***/ }),
+
 /***/ "./node_modules/raw-loader/index.js!./src/app/page/joball/detailofdetaillistpm/changsparepart/changsparepart.page.html":
 /*!********************************************************************************************************************!*\
   !*** ./node_modules/raw-loader!./src/app/page/joball/detailofdetaillistpm/changsparepart/changsparepart.page.html ***!
@@ -678,7 +692,7 @@ module.exports = "<ion-toolbar>\r\n  <ion-title>ภาพหน้างาน</
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-toolbar color=\"primary\">\r\n  <ion-title *ngIf=\"jobtype == 'PM' else pm\" #pm>เปลี่ยนอะไหล่</ion-title>\r\n  <ion-title *ngIf=\"jobtype == 'INSTALL' && type!= 'device' else install\" #install>เพิ่มอุปกรณ์เสริม</ion-title>\r\n  <ion-title *ngIf=\"type == 'device' else device\" #device>เพิ่มเครื่อง</ion-title>\r\n  <ion-buttons slot=\"primary\">\r\n    <ion-icon slot=\"end\" name=\"close\" (click)=\"checkin()\"></ion-icon>\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n\r\n<ion-content>\r\n  <div class=\"container-fluid\" style=\"background-color: white;\">\r\n    <div *ngIf=\"jobtype == 'PM' else pm\" #pm>\r\n      <div class=\"tab-content\">\r\n        <div class=\"tab-pane active\">\r\n          <div class=\"row\">\r\n            <div class=\"col-12\">\r\n              <div class=\"table-scrollable\">\r\n                <table class=\"table table-hover\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th> ลำดับที่ </th>\r\n                      <th> ชื่ออุปกรณ์เสริม </th>\r\n                      <th> รหัสสินค้า </th>\r\n                      <th> จำนวน </th>\r\n                      <th></th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let item of PMstorage; let i = index\">\r\n                      <td style=\"padding-top:15px;\">\r\n                        {{i+1}}\r\n                      </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.Name}} </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.Serial}} </td>\r\n                      <td style=\"padding-top:15px;\">{{item.No}}</td>\r\n                      <td>\r\n                        <ion-button color=\"warning\" class=\"text-center\" (click)=\"AddPM(item,i)\"> เลือก</ion-button>\r\n                      </td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"tab-content\" *ngIf=\"isShowPM\">\r\n        <div class=\"tab-pane active\">\r\n          <div class=\"row\">\r\n            <div class=\"col-12\">\r\n              <div class=\"table-scrollable\">\r\n                <table class=\"table table-hover\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th> ลำดับที่ </th>\r\n                      <th> ชื่ออุปกรณ์เสริม </th>\r\n                      <th> รหัสสินค้า </th>\r\n                      <th> จำนวน </th>\r\n                      <th></th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let item of PM; let i = index\">\r\n                      <td style=\"padding-top:15px;\">\r\n                        {{i+1}}\r\n                      </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.Name}} </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.Serial}} </td>\r\n                      <td style=\"padding-top:15px;\">{{item.No}}</td>\r\n                      <td>\r\n                        <ion-button color=\"danger\" class=\"text-center\" (click)=\"DeletePM(item,i)\"> ลบ</ion-button>\r\n                      </td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"text-center\">\r\n          <ion-button shape=\"round\" color=\"success\" class=\"text-center\" (click)=\"submit()\">บันทึก</ion-button>\r\n        </div>\r\n      </div>      \r\n    </div>\r\n    <div *ngIf=\"jobtype == 'INSTALL' && type!= 'device' else install\" #install>\r\n      <ion-item *ngFor=\"let i of qty;\">\r\n        ชื่ออุปกรณ์เสริม : {{i.Name}}\r\n        จำนวน : {{i.No}}\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-icon name=\"search\" (click)=\"Searchsku()\"></ion-icon>\r\n        <ion-input type=\"text\" placeholder=\"Part No.\" name=\"skuID\" [(ngModel)]=\"skuID\"></ion-input>\r\n        <ion-icon name=\"barcode\" (click)=\"scan()\"></ion-icon>\r\n      </ion-item>\r\n      <div class=\"tab-content\">\r\n        <div class=\"tab-pane active\">\r\n          <div class=\"row\">\r\n            <div class=\"col-md-12 text-center\" style=\"margin-top: 20px;\">\r\n              <h4>อุปกรณ์เสริมที่ยังไม่ได้ติดตั้ง</h4>\r\n            </div>\r\n            <div class=\"col-12\">\r\n              <div class=\"table-scrollable\">\r\n                <table class=\"table table-hover\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th> ลำดับที่ </th>\r\n                      <th> ชื่ออุปกรณ์เสริม </th>\r\n                      <th> รหัสสินค้า </th>\r\n                      <th> จำนวน </th>\r\n                      <th> หน่วย </th>\r\n                      <th></th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let item of Sparestorage; let i = index\">\r\n                      <td style=\"padding-top:15px;\">\r\n                        {{i+1}}\r\n                      </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.Name}} </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.Serial}} </td>\r\n                      <td style=\"padding-top:15px;\">{{item.No}}</td>\r\n                      <td style=\"padding-top:15px;\">{{item.Unit}}</td>\r\n                      <td>\r\n                        <ion-button color=\"warning\" class=\"text-center\" (click)=\"AddSpare(item,i)\"> เลือก</ion-button>\r\n                      </td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n              <hr>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"tab-content\" *ngIf=\"isShowSpare\">\r\n        <div class=\"tab-pane active\">\r\n          <div class=\"row\">\r\n            <div class=\"col-md-12 text-center\" style=\"margin-top: 20px;\">\r\n              <h4>อุปกรณ์เสริมที่จะติดตั้ง</h4>\r\n            </div>\r\n            <div class=\"col-12\">\r\n              <div class=\"table-scrollable\">\r\n                <table class=\"table table-hover\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th> ลำดับที่ </th>\r\n                      <th> ชื่ออุปกรณ์เสริม </th>\r\n                      <th> รหัสสินค้า </th>\r\n                      <th> จำนวน </th>\r\n                      <th> หน่วย </th>\r\n                      <th></th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let item of Spare; let i = index\">\r\n                      <td style=\"padding-top:15px;\">\r\n                        {{i+1}}\r\n                      </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.Name}} </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.Serial}} </td>\r\n                      <td style=\"padding-top:15px;\">{{item.No}}</td>\r\n                      <td style=\"padding-top:15px;\">{{item.Unit}}</td>\r\n                      <td>\r\n                        <ion-button color=\"danger\" class=\"text-center\" (click)=\"DeleteSpare(item,i)\">ลบ</ion-button>\r\n                      </td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n                <div class=\"text-center\" style=\"padding-bottom: 10px;\">\r\n                  <ion-button color=\"success\" class=\"text-center\" (click)=\"SaveSpareIn(Spare)\">บันทึก</ion-button>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div *ngIf=\"type == 'device' else device\" #device>      \r\n      <ion-item>\r\n        <ion-icon name=\"search\" (click)=\"Searchsku()\"></ion-icon>\r\n        <ion-input type=\"text\" placeholder=\"Serial\" name=\"skuID\" [(ngModel)]=\"skuID\"></ion-input>\r\n        <ion-icon name=\"barcode\" (click)=\"scan()\"></ion-icon>\r\n      </ion-item>\r\n      <div class=\"tab-content\">\r\n        <div class=\"tab-pane active\">\r\n          <div class=\"row\">\r\n            <div class=\"col-md-12 text-center\" style=\"margin-top: 20px;\">\r\n              <h4>เครื่องที่ยังไม่ได้ติดตั้ง</h4>\r\n            </div>\r\n            <div class=\"col-12\">\r\n              <div class=\"table-scrollable\">\r\n                <table class=\"table table-hover\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th> ลำดับที่ </th>\r\n                      <th> ชื่อเครื่อง </th>\r\n                      <th> Serial No. </th>\r\n                      <th> ประเภทเครื่อง </th>\r\n                      <th></th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let item of Devicestorage; let i = index\">\r\n                      <td style=\"padding-top:15px;\">\r\n                        {{i+1}}\r\n                      </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.AssetNo}} </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.SerialNo}}</td>\r\n                      <td style=\"padding-top:15px;\">{{item.AssetTypeID}}</td>\r\n                      <td>\r\n                        <ion-button color=\"warning\" class=\"text-center\" (click)=\"AddDevice(item,i)\"> เลือก</ion-button>\r\n                      </td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n            </div>\r\n           <div class=\"col-md-12\">\r\n            <hr style=\"color: blue !important;height: 5px;\">\r\n           </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"tab-content\" *ngIf=\"isShowDevice\">\r\n        <div class=\"tab-pane active\">\r\n          <div class=\"row\">\r\n            <div class=\"col-md-12 text-center\" style=\"margin-top: 20px;\">\r\n              <h4>เครื่องที่จะติดตั้ง</h4>\r\n            </div>\r\n            <div class=\"col-12\">\r\n              <div class=\"table-scrollable\">\r\n                <table class=\"table table-hover\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th> ชื่อเครื่อง </th>\r\n                      <th> Serial No. </th>\r\n                      <th> ประเภทเครื่อง </th>\r\n                      <th></th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let item of Device; let i = index\">\r\n                      <td style=\"padding-top:15px;\"> {{item.AssetNo}} </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.SerialNo}}</td>\r\n                      <td style=\"padding-top:15px;\">{{item.AssetTypeID}}</td>\r\n                      <td>\r\n                        <ion-button color=\"danger\" class=\"text-center\" (click)=\"DeleteDevice(item,i)\"> ลบ</ion-button>\r\n                      </td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n                <div class=\"text-center\">\r\n                  <ion-button color=\"success\" class=\"text-center\" (click)=\"saveDevice(Device)\">บันทึก</ion-button>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>"
+module.exports = "<ion-toolbar color=\"primary\">\r\n  <ion-title *ngIf=\"jobtype == 'PM' else pm\" #pm>เปลี่ยนอะไหล่</ion-title>\r\n  <ion-title *ngIf=\"jobtype == 'INSTALL' && type!= 'device' else install\" #install>เพิ่มอุปกรณ์เสริม</ion-title>\r\n  <ion-title *ngIf=\"type == 'device' else device\" #device>เพิ่มเครื่อง</ion-title>\r\n  <ion-buttons slot=\"primary\">\r\n    <ion-icon slot=\"end\" name=\"close\" (click)=\"checkin()\"></ion-icon>\r\n  </ion-buttons>\r\n</ion-toolbar>\r\n\r\n<ion-content>\r\n  <div class=\"container-fluid\" style=\"background-color: white;\">\r\n    <div *ngIf=\"jobtype == 'PM' else pm\" #pm>\r\n      <div class=\"tab-content\">\r\n        <div class=\"tab-pane active\">\r\n          <div class=\"row\">\r\n            <div class=\"col-12\">\r\n              <div class=\"table-scrollable\">\r\n                <table class=\"table table-hover\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th> ลำดับที่ </th>\r\n                      <th> ชื่ออุปกรณ์เสริม </th>\r\n                      <th> รหัสสินค้า </th>\r\n                      <th> จำนวน </th>\r\n                      <th></th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let item of PMstorage; let i = index\">\r\n                      <td style=\"padding-top:15px;\">\r\n                        {{i+1}}\r\n                      </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.Name}} </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.Serial}} </td>\r\n                      <td style=\"padding-top:15px;\">{{item.No}}</td>\r\n                      <td>\r\n                        <ion-button color=\"warning\" class=\"text-center\" (click)=\"AddPM(item,i)\"> เลือก</ion-button>\r\n                      </td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"tab-content\" *ngIf=\"isShowPM\">\r\n        <div class=\"tab-pane active\">\r\n          <div class=\"row\">\r\n            <div class=\"col-12\">\r\n              <div class=\"table-scrollable\">\r\n                <table class=\"table table-hover\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th> ลำดับที่ </th>\r\n                      <th> ชื่ออุปกรณ์เสริม </th>\r\n                      <th> รหัสสินค้า </th>\r\n                      <th> จำนวน </th>\r\n                      <th></th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let item of PM; let i = index\">\r\n                      <td style=\"padding-top:15px;\">\r\n                        {{i+1}}\r\n                      </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.Name}} </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.Serial}} </td>\r\n                      <td style=\"padding-top:15px;\">{{item.No}}</td>\r\n                      <td>\r\n                        <ion-button color=\"danger\" class=\"text-center\" (click)=\"DeletePM(item,i)\"> ลบ</ion-button>\r\n                      </td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n        <div class=\"text-center\">\r\n          <ion-button shape=\"round\" color=\"success\" class=\"text-center\" (click)=\"submit()\">บันทึก</ion-button>\r\n        </div>\r\n      </div>      \r\n    </div>\r\n    <div *ngIf=\"jobtype == 'INSTALL' && type!= 'device' else install\" #install>\r\n      <ion-item *ngFor=\"let i of qty;\">\r\n        ชื่ออุปกรณ์เสริม : {{i.Name}}\r\n        จำนวน : {{i.No}}\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-icon name=\"search\" (click)=\"Searchsku()\"></ion-icon>\r\n        <ion-input type=\"text\" placeholder=\"Part No.\" name=\"skuID\" [(ngModel)]=\"skuID\"></ion-input>\r\n        <ion-icon name=\"barcode\" (click)=\"scan()\"></ion-icon>\r\n      </ion-item>\r\n      <div class=\"tab-content\">\r\n        <div class=\"tab-pane active\">\r\n          <div class=\"row\">\r\n            <div class=\"col-md-12 text-center\" style=\"margin-top: 20px;\">\r\n              <h4>อุปกรณ์เสริมที่ยังไม่ได้ติดตั้ง</h4>\r\n            </div>\r\n            <div class=\"col-12\">\r\n              <div class=\"table-scrollable\">\r\n                <table class=\"table table-hover\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th> ลำดับที่ </th>\r\n                      <th> ชื่ออุปกรณ์เสริม </th>\r\n                      <th> รหัสสินค้า </th>\r\n                      <th> จำนวน </th>\r\n                      <th> หน่วย </th>\r\n                      <th></th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let item of Sparestorage; let i = index\">\r\n                      <td style=\"padding-top:15px;\">\r\n                        {{i+1}}\r\n                      </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.Name}} </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.Serial}} </td>\r\n                      <td style=\"padding-top:15px;\">{{item.No}}</td>\r\n                      <td style=\"padding-top:15px;\">{{item.Unit}}</td>\r\n                      <td>\r\n                        <ion-button color=\"warning\" class=\"text-center\" (click)=\"AddSpare(item,i)\"> เลือก</ion-button>\r\n                      </td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n              <hr>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"tab-content\" *ngIf=\"isShowSpare\">\r\n        <div class=\"tab-pane active\">\r\n          <div class=\"row\">\r\n            <div class=\"col-md-12 text-center\" style=\"margin-top: 20px;\">\r\n              <h4>อุปกรณ์เสริมที่จะติดตั้ง</h4>\r\n            </div>\r\n            <div class=\"col-12\">\r\n              <div class=\"table-scrollable\">\r\n                <table class=\"table table-hover\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th> ลำดับที่ </th>\r\n                      <th> ชื่ออุปกรณ์เสริม </th>\r\n                      <th> รหัสสินค้า </th>\r\n                      <th> จำนวน </th>\r\n                      <th> หน่วย </th>\r\n                      <th></th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let item of Spare; let i = index\">\r\n                      <td style=\"padding-top:15px;\">\r\n                        {{i+1}}\r\n                      </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.Name}} </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.Serial}} </td>\r\n                      <td style=\"padding-top:15px;\">{{item.No}}</td>\r\n                      <td style=\"padding-top:15px;\">{{item.Unit}}</td>\r\n                      <td>\r\n                        <ion-button color=\"danger\" class=\"text-center\" (click)=\"DeleteSpare(item,i)\">ลบ</ion-button>\r\n                      </td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n                <div class=\"text-center\" style=\"padding-bottom: 10px;\">\r\n                  <ion-button color=\"success\" class=\"text-center\" (click)=\"SaveSpareIn(Spare)\">บันทึก</ion-button>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n    <div *ngIf=\"type == 'device' else device\" #device>      \r\n      <ion-item>\r\n        <ion-icon name=\"search\" (click)=\"Searchsku()\"></ion-icon>\r\n        <ion-input type=\"text\" placeholder=\"Serial\" name=\"skuID\" [(ngModel)]=\"skuID\"></ion-input>\r\n        <ion-icon name=\"barcode\" (click)=\"scan()\"></ion-icon>\r\n      </ion-item>\r\n      <div class=\"tab-content\">\r\n        <div class=\"tab-pane active\">\r\n          <div class=\"row\">\r\n            <div class=\"col-md-12 text-center\" style=\"margin-top: 20px;\">\r\n              <h4>เครื่องที่ยังไม่ได้ติดตั้ง</h4>\r\n            </div>\r\n            <div class=\"col-12\">\r\n              <div class=\"table-scrollable\">\r\n                <table class=\"table table-hover\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th> ลำดับที่ </th>\r\n                      <th> ชื่อเครื่อง </th>\r\n                      <th> Serial No. </th>\r\n                      <th> ประเภทเครื่อง </th>\r\n                      <th></th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let item of Devicestorage; let i = index\">\r\n                      <td style=\"padding-top:15px;\">\r\n                        {{i+1}}\r\n                      </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.AssetNo}} </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.SerialNo}}</td>\r\n                      <td style=\"padding-top:15px;\">{{item.AssetTypeID}}</td>\r\n                      <td>\r\n                        <ion-button color=\"warning\" class=\"text-center\" (click)=\"AddDevice(item,i)\"> เลือก</ion-button>\r\n                      </td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n              </div>\r\n            </div>\r\n           <div class=\"col-md-12\">\r\n            <hr style=\"color: blue !important;height: 5px;\">\r\n           </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n      <div class=\"tab-content\" *ngIf=\"isShowDevice\">\r\n        <div class=\"tab-pane active\">\r\n          <div class=\"row\">\r\n            <div class=\"col-md-12 text-center\" style=\"margin-top: 20px;\">\r\n              <h4>เครื่องที่จะติดตั้ง</h4>\r\n            </div>\r\n            <div class=\"col-12\">\r\n              <div class=\"table-scrollable\">\r\n                <table class=\"table table-hover\">\r\n                  <thead>\r\n                    <tr>\r\n                      <th> ชื่อเครื่อง </th>\r\n                      <th> Serial No. </th>\r\n                      <th> ประเภทเครื่อง </th>\r\n                      <th></th>\r\n                    </tr>\r\n                  </thead>\r\n                  <tbody>\r\n                    <tr *ngFor=\"let item of Device; let i = index\">\r\n                      <td style=\"padding-top:15px;\"> {{item.AssetNo}} </td>\r\n                      <td style=\"padding-top:15px;\"> {{item.SerialNo}}</td>\r\n                      <td style=\"padding-top:15px;\">{{item.AssetTypeID}}</td>\r\n                      <td>\r\n                        <ion-button color=\"danger\" class=\"text-center\" (click)=\"DeleteDevice(item,i)\"> ลบ</ion-button>\r\n                      </td>\r\n                    </tr>\r\n                  </tbody>\r\n                </table>\r\n                <div class=\"text-center\" style=\"padding-top: 15px; padding-bottom: 15px;\">\r\n                  <ion-button color=\"success\" class=\"text-center\" (click)=\"saveDevice(Device)\">บันทึก</ion-button>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>"
 
 /***/ }),
 
@@ -934,6 +948,7 @@ const routes = [
     { path: 'insert-old-sparepart', loadChildren: './page/joball/detailofdetaillistpm/insert-old-sparepart/insert-old-sparepart.module#InsertOldSparepartPageModule' },
     { path: 'req-detail', loadChildren: './page/sparepart/req-detail/req-detail.module#ReqDetailPageModule' },
     { path: 'device-spare-list', loadChildren: './page/devices-acessory/device-spare-list/device-spare-list.module#DeviceSpareListPageModule' },
+    { path: 'update-product', loadChildren: './page/joball/detaillistpm/update-product/update-product.module#UpdateProductPageModule' },
 ];
 let AppRoutingModule = class AppRoutingModule {
 };
@@ -1095,6 +1110,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _page_joball_detailofdetaillistpm_insert_old_sparepart_insert_old_sparepart_module__WEBPACK_IMPORTED_MODULE_43__ = __webpack_require__(/*! ./page/joball/detailofdetaillistpm/insert-old-sparepart/insert-old-sparepart.module */ "./src/app/page/joball/detailofdetaillistpm/insert-old-sparepart/insert-old-sparepart.module.ts");
 /* harmony import */ var _page_sparepart_req_detail_req_detail_module__WEBPACK_IMPORTED_MODULE_44__ = __webpack_require__(/*! ./page/sparepart/req-detail/req-detail.module */ "./src/app/page/sparepart/req-detail/req-detail.module.ts");
 /* harmony import */ var _page_devices_acessory_device_spare_list_device_spare_list_module__WEBPACK_IMPORTED_MODULE_45__ = __webpack_require__(/*! ./page/devices-acessory/device-spare-list/device-spare-list.module */ "./src/app/page/devices-acessory/device-spare-list/device-spare-list.module.ts");
+/* harmony import */ var _page_joball_detaillistpm_update_product_update_product_module__WEBPACK_IMPORTED_MODULE_46__ = __webpack_require__(/*! ./page/joball/detaillistpm/update-product/update-product.module */ "./src/app/page/joball/detaillistpm/update-product/update-product.module.ts");
 
 
 
@@ -1142,6 +1158,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 //import { JobresponsPageModule} from '../app/page/job/jobdetail/jobrespons/jobrespons.module'
+
 let AppModule = class AppModule {
 };
 AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
@@ -1178,7 +1195,8 @@ AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
             _page_joball_not_checked_not_checked_module__WEBPACK_IMPORTED_MODULE_42__["NotCheckedPageModule"],
             _page_joball_detailofdetaillistpm_insert_old_sparepart_insert_old_sparepart_module__WEBPACK_IMPORTED_MODULE_43__["InsertOldSparepartPageModule"],
             _page_sparepart_req_detail_req_detail_module__WEBPACK_IMPORTED_MODULE_44__["ReqDetailPageModule"],
-            _page_devices_acessory_device_spare_list_device_spare_list_module__WEBPACK_IMPORTED_MODULE_45__["DeviceSpareListPageModule"]
+            _page_devices_acessory_device_spare_list_device_spare_list_module__WEBPACK_IMPORTED_MODULE_45__["DeviceSpareListPageModule"],
+            _page_joball_detaillistpm_update_product_update_product_module__WEBPACK_IMPORTED_MODULE_46__["UpdateProductPageModule"]
         ],
         providers: [
             _app_auth_auth_guard_guard__WEBPACK_IMPORTED_MODULE_37__["AuthGuardGuard"],
@@ -1961,6 +1979,186 @@ ShowimginstallPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/page/joball/detaillistpm/update-product/update-product.module.ts":
+/*!**********************************************************************************!*\
+  !*** ./src/app/page/joball/detaillistpm/update-product/update-product.module.ts ***!
+  \**********************************************************************************/
+/*! exports provided: UpdateProductPageModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UpdateProductPageModule", function() { return UpdateProductPageModule; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/* harmony import */ var _angular_forms__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/forms */ "./node_modules/@angular/forms/fesm2015/forms.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _update_product_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./update-product.page */ "./src/app/page/joball/detaillistpm/update-product/update-product.page.ts");
+
+
+
+
+
+
+
+const routes = [
+    {
+        path: '',
+        component: _update_product_page__WEBPACK_IMPORTED_MODULE_6__["UpdateProductPage"]
+    }
+];
+let UpdateProductPageModule = class UpdateProductPageModule {
+};
+UpdateProductPageModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["NgModule"])({
+        imports: [
+            _angular_common__WEBPACK_IMPORTED_MODULE_2__["CommonModule"],
+            _angular_forms__WEBPACK_IMPORTED_MODULE_3__["FormsModule"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["IonicModule"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["RouterModule"].forChild(routes)
+        ],
+        declarations: [_update_product_page__WEBPACK_IMPORTED_MODULE_6__["UpdateProductPage"]]
+    })
+], UpdateProductPageModule);
+
+
+
+/***/ }),
+
+/***/ "./src/app/page/joball/detaillistpm/update-product/update-product.page.scss":
+/*!**********************************************************************************!*\
+  !*** ./src/app/page/joball/detaillistpm/update-product/update-product.page.scss ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiJzcmMvYXBwL3BhZ2Uvam9iYWxsL2RldGFpbGxpc3RwbS91cGRhdGUtcHJvZHVjdC91cGRhdGUtcHJvZHVjdC5wYWdlLnNjc3MifQ== */"
+
+/***/ }),
+
+/***/ "./src/app/page/joball/detaillistpm/update-product/update-product.page.ts":
+/*!********************************************************************************!*\
+  !*** ./src/app/page/joball/detaillistpm/update-product/update-product.page.ts ***!
+  \********************************************************************************/
+/*! exports provided: UpdateProductPage */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UpdateProductPage", function() { return UpdateProductPage; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _post_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../post-data.service */ "./src/app/post-data.service.ts");
+
+
+
+
+
+let UpdateProductPage = class UpdateProductPage {
+    constructor(route, navParams, modalCtrl, postDataService, alertCtrl, navCtrl, toastCtrl) {
+        this.route = route;
+        this.navParams = navParams;
+        this.modalCtrl = modalCtrl;
+        this.postDataService = postDataService;
+        this.alertCtrl = alertCtrl;
+        this.navCtrl = navCtrl;
+        this.toastCtrl = toastCtrl;
+        this.showInstallName = false;
+        this.dataType = '';
+        this.data = this.navParams.data;
+        this.item = this.data.params.install;
+        this.tran = this.data.tran;
+        this.params = this.data.params;
+        console.log('this.data', this.data);
+    }
+    ngOnInit() {
+    }
+    close() {
+        this.modalCtrl.dismiss();
+    }
+    submit() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            console.log('this.dataType', this.dataType);
+            if (this.showInstallName && (this.installName == '' || this.installName.length < 4)) {
+                const alert = yield this.alertCtrl.create({
+                    header: 'แจ้งเตือน',
+                    message: 'กรุณากรอกมากกว่า 4 ตัวอักษร',
+                    buttons: ['OK']
+                });
+                yield alert.present();
+            }
+            else if (this.dataType == '') {
+                const alert = yield this.alertCtrl.create({
+                    header: 'แจ้งเตือน',
+                    message: 'กรุณาเลือกประเภทข้อมูล',
+                    buttons: ['OK']
+                });
+                yield alert.present();
+            }
+            else {
+                this.postDataService.RecheckInstallPlan(this.tran.insID, this.installName).then(res => {
+                    this.SuccessAlert();
+                    this.modalCtrl.dismiss('success');
+                });
+            }
+        });
+    }
+    onChange(type) {
+        this.dataType = type;
+        if (type == 'matched') {
+            this.showInstallName = false;
+            this.installName = 'ถูกต้อง';
+        }
+        else {
+            this.showInstallName = true;
+            this.installName = '';
+        }
+    }
+    SuccessAlert() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const toast = yield this.toastCtrl.create({
+                header: 'ส่งข้อมูลเรียบร้อย',
+                //mode: 'ios',
+                //color: 'success',
+                //showCloseButton: true,
+                duration: 3000,
+            });
+            toast.present();
+        });
+    }
+};
+UpdateProductPage.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
+    { type: _post_data_service__WEBPACK_IMPORTED_MODULE_4__["PostDataService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"] }
+];
+UpdateProductPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-update-product',
+        template: __webpack_require__(/*! raw-loader!./update-product.page.html */ "./node_modules/raw-loader/index.js!./src/app/page/joball/detaillistpm/update-product/update-product.page.html"),
+        styles: [__webpack_require__(/*! ./update-product.page.scss */ "./src/app/page/joball/detaillistpm/update-product/update-product.page.scss")]
+    }),
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"],
+        _post_data_service__WEBPACK_IMPORTED_MODULE_4__["PostDataService"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"]])
+], UpdateProductPage);
+
+
+
+/***/ }),
+
 /***/ "./src/app/page/joball/detailofdetaillistpm/changsparepart/changsparepart.module.ts":
 /*!******************************************************************************************!*\
   !*** ./src/app/page/joball/detailofdetaillistpm/changsparepart/changsparepart.module.ts ***!
@@ -2043,13 +2241,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let ChangsparepartPage = class ChangsparepartPage {
-    constructor(modalController, postDataService, barcodeScanner, alertController, navParams, http) {
+    constructor(modalController, postDataService, barcodeScanner, alertController, navParams, http, toastCtrl) {
         this.modalController = modalController;
         this.postDataService = postDataService;
         this.barcodeScanner = barcodeScanner;
         this.alertController = alertController;
         this.navParams = navParams;
         this.http = http;
+        this.toastCtrl = toastCtrl;
         this.AsList = [];
         this.Device = [];
         this.Devicestorage = [];
@@ -2453,9 +2652,21 @@ let ChangsparepartPage = class ChangsparepartPage {
             };
             console.log(params);
             this.postDataService.postdevice(params).then(data => {
-                alert("บันทึกข้อมูลเรียบร้อยแล้วค่ะ");
+                this.SuccessAlert();
             });
         }
+    }
+    SuccessAlert() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const toast = yield this.toastCtrl.create({
+                header: 'เพิ่มเครื่องเรียบร้อย',
+                //mode: 'ios',
+                //color: 'success',
+                //showCloseButton: true,
+                duration: 3000,
+            });
+            toast.present();
+        });
     }
     Searchsku() {
         console.log(this.skuID);
@@ -2623,7 +2834,8 @@ ChangsparepartPage.ctorParameters = () => [
     { type: _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_4__["BarcodeScanner"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"] },
-    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"] }
+    { type: _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"] }
 ];
 ChangsparepartPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -2636,7 +2848,8 @@ ChangsparepartPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_4__["BarcodeScanner"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"],
-        _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"]])
+        _angular_common_http__WEBPACK_IMPORTED_MODULE_5__["HttpClient"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ToastController"]])
 ], ChangsparepartPage);
 
 
@@ -7785,6 +7998,16 @@ let PostDataService = class PostDataService {
         return new Promise((resovle, reject) => {
             let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
             this.http.get(this.apiServer_url + '/API/WebService.asmx/RoundFilterList?empID=' + empID, option).subscribe(data => {
+                resovle(data);
+            }, error => {
+                reject(error);
+            });
+        });
+    }
+    RecheckInstallPlan(insID, insName) {
+        return new Promise((resovle, reject) => {
+            let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
+            this.http.get(this.apiServer_url + '/API/WebService.asmx/RecheckInstallPlan?insID=' + insID + '&installName=' + insName, option).subscribe(data => {
                 resovle(data);
             }, error => {
                 reject(error);

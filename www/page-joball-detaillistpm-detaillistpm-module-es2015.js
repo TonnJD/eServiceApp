@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button></ion-back-button>\r\n      <ion-title>ข้อมูลของ {{Customername}} </ion-title>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row\" style=\"padding: 5px;\" *ngFor=\"let item of data\">\r\n      <div class=\"col-md-6 col-sm-12 col-xs-12\" id=\"\" style=\"padding: 0px;padding-right: 5px;\">\r\n        <div class=\"portlet blue box\">\r\n          <div class=\"portlet-title\">\r\n            <div class=\"caption\">\r\n              <i class=\"fa fa-user\"></i>ลูกค้า\r\n            </div>\r\n\r\n          </div>\r\n          <div class=\"row\" style=\"padding: 15px;\">\r\n            <div class=\"col-4 text\">ชื่อลูกค้า </div>\r\n            <label class=\"col-8 subtext padding\">{{item.CustomerName}} {{item.CustomerNameEng}}</label>\r\n            <label class=\"col-4 text\">อีเมลล์</label>\r\n            <label class=\"col-8 subtext padding\">{{item.Email}}</label>\r\n            <label class=\"col-4 text\">โทรศัพท์</label>\r\n            <label class=\"col-8 subtext padding\">{{item.Phone}}</label>\r\n            <label class=\"col-4 text\">แฟกซ์</label>\r\n            <label class=\"col-8 subtext padding\">{{item.Fax}}</label>\r\n            <label class=\"col-4 text\">ที่อยู่</label>\r\n            <label class=\"col-8 subtext\">{{item.Address}}</label>\r\n            <label class=\"col-4 text\">ชื่อบิล</label>\r\n            <label class=\"col-8 subtext padding\">{{item.BillName}}</label>\r\n          </div>\r\n        </div>\r\n        <div class=\"portlet blue box\">\r\n          <div class=\"portlet-title\">\r\n            <div class=\"caption\">\r\n              <i class=\"fa fa-bank\"></i>สำนักงานใหญ่\r\n            </div>\r\n\r\n          </div>\r\n          <div class=\"row\" style=\"padding: 15px\">\r\n            <label class=\"col-4 text\">ชื่อบัญชี</label>\r\n            <label class=\"col-8 subtext padding\">{{item.AccountName}}</label>\r\n            <label class=\"col-4 text\">ประเภทธุรกิจ</label>\r\n            <label class=\"col-8 subtext padding\">{{item.IndustryType}}</label>\r\n            <label class=\"col-4 text\">อีเมลล์</label>\r\n            <label class=\"col-8 subtext padding\">{{item.AccountEmail}}</label>\r\n            <label class=\"col-4 text\">โทรศัพท์</label>\r\n            <label class=\"col-8 subtext padding\">{{item.AccountPhone}}</label>\r\n            <label class=\"col-4 text\">แฟกซ์</label>\r\n            <label class=\"col-8 subtext padding\">{{item.AccountFax}}</label>\r\n            <label class=\"col-4 text\">รหัสลูกค้า</label>\r\n            <label class=\"col-8 subtext padding\">{{item.CustomerCode}}</label>\r\n            <label class=\"col-4 text\">ชื่อบิล</label>\r\n            <label class=\"col-8 subtext padding\">{{item.AccountBill}}</label>\r\n          </div>\r\n        </div>\r\n        <div class=\"portlet blue box\">\r\n          <div class=\"portlet-title\">\r\n            <div class=\"caption\">\r\n              <i class=\"fa fa-user\"></i>พนักงานขาย\r\n            </div>\r\n\r\n          </div>\r\n          <div class=\"row\" style=\"padding: 15px\">\r\n            <label class=\"col-4 text\">สถานะการทำงาน</label>\r\n            <label class=\"col-8 subtext padding\">{{item.WorkStatus}}</label>\r\n            <label class=\"col-4 text\">ประเภทงาน</label>\r\n            <label class=\"col-8 subtext padding\">{{item.WorkType}}</label>\r\n            <label class=\"col-4 text\">ชื่อ</label>\r\n            <label class=\"col-8 subtext padding\">{{item.NameSale}}</label>\r\n            <label class=\"col-4 text\">เพศ</label>\r\n            <label class=\"col-8 subtext padding\">{{item.Gender}}</label>\r\n            <label class=\"col-4 text\">กลุ่มงาน</label>\r\n            <label class=\"col-8 subtext padding\">-</label>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"col-md-6 col-sm-12 col-xs-12\" id=\"\" style=\"padding: 0px;\">\r\n        <div class=\"portlet blue box\">\r\n          <div class=\"portlet-title\">\r\n            <div class=\"caption\">\r\n              <i class=\"fa fa-cube\"></i>สินค้า\r\n            </div>\r\n\r\n          </div>\r\n          <div style=\"padding: 5px;\" *ngFor=\"let data of item.productInstall | keyvalue\">\r\n            <!-- <div (click)=\"click(item, data.value)\"> -->\r\n            <div class=\"row col-12\">\r\n              <div class=\"col-5 text\">สถานะ:</div>\r\n              <div class=\"col-7 subtext\" #lblWait style=\"color: #E78D8D;font-size: 14px;font-weight: bold;\"\r\n                *ngIf=\"data.value.Workfinish == 0; else lblWait\">รอการตรวจสอบ</div>\r\n              <div class=\"col-7 subtext\" #lblSuccess style=\"color: green;font-size: 14px;font-weight: bold;\"\r\n                *ngIf=\"data.value.Workfinish == 1; else lblSuccess\">งานเสร็จแล้ว</div>\r\n              <div class=\"col-7 subtext\" #lblwaiting style=\"color: rgb(35, 7, 248);font-size: 14px;font-weight: bold;\"\r\n                *ngIf=\"data.value.Workfinish == 2; else lblwaiting\">รอลูกค้าประเมิน</div>\r\n            </div>\r\n            <div class=\"row col-12\">\r\n              <div class=\"col-5 text\">สินค้าที่ติดตั้ง:</div>\r\n              <div class=\"col-7 subtext\">{{data.value.InstallPlanName}}</div>\r\n            </div>\r\n            <div class=\"row col-12\">\r\n              <label class=\"col-5 text\">รหัสสินค้า:</label>\r\n              <label class=\"col-7 subtext\">{{data.value.ItemCode}}</label>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType == 'INSTALL' && data.value.OldAssetName != null\">\r\n              <label class=\"col-5 text\">เครื่องที่รื้อถอน:</label>\r\n              <label class=\"col-7 subtext\">{{data.value.OldAssetName}}</label>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType == 'INSTALL'\">\r\n              <label class=\"col-5 text\">เครื่องที่ติดตั้ง:</label>\r\n              <label class=\"col-7 subtext\">{{data.value.ItemsName}}</label>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType != 'INSTALL'\">\r\n              <label class=\"col-5 text\">ชื่อสินค้า:</label>\r\n              <label class=\"col-7 subtext\">{{data.value.ItemsName}}</label>\r\n            </div>\r\n            <div class=\"row col-12\">\r\n              <label class=\"col-5 text\">Serial No:</label>\r\n              <label class=\"col-7 subtext\">{{data.value.SerialNo}}</label>\r\n              <!-- <ion-input class=\"col-6\" *ngIf=\"data.value.JobType == 'PM'\" type=\"text\" style=\"padding: 0px!important;padding-left: 5px!important;\" name=\"SerialNo\" [(ngModel)]=\"data.value.SerialNo\"> -->\r\n              <!-- </ion-input> -->\r\n              <!-- <div class=\"col-1\" *ngIf=\"data.value.JobType == 'PM'\">\r\n                    <ion-button size=\"small\" (click)=\"viewpic(item, data.value)\">\r\n                      <ion-icon name=\"view\"></ion-icon>\r\n                    </ion-button>\r\n                  </div> -->\r\n              <!-- <div class=\"col-1\" *ngIf=\"data.value.JobType == 'PM'\">\r\n                  <ion-button size=\"small\" (click)=\"SaveSerial(data.value)\">\r\n                    <ion-icon name=\"save\"></ion-icon>\r\n                  </ion-button>\r\n                </div> -->\r\n              <!-- <div class=\"col-1\" *ngIf=\"data.value.JobType == 'PM'\">\r\n                  <ion-button size=\"small\" (click)=\"SaveSerialBarcode(data.value)\">\r\n                    <ion-icon name=\"barcode\"></ion-icon>\r\n                  </ion-button>\r\n                </div> -->\r\n            </div>\r\n            <div class=\"row col-12\">\r\n              <label class=\"col-5 text\">Asset No:</label>\r\n              <div class=\"col-7\" *ngIf=\"data.value.JobType == 'PM'\">\r\n                <label>{{data.value.AssetplateSFS}}</label>&nbsp;\r\n                <ion-button size=\"small\" (click)=\"SaveSerialBarcode(data.value)\" style=\"margin-top: 0px;\"\r\n                  title=\"สแกน Barcode\">\r\n                  <ion-icon name=\"barcode\"></ion-icon>\r\n                </ion-button>\r\n              </div>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType == 'CM' || data.value.JobType == 'INSTALL' || data.value.JobType == 'UNINSTALL'\">\r\n              <label class=\"col-5 text\">Case ID:</label>\r\n              <label class=\"col-7 subtext\">{{data.value.ServiceReportNo}}</label>\r\n            </div>\r\n            <div class=\"row col-12\">\r\n              <label class=\"col-5 text\" *ngIf=\"new\">New Serial No:</label>\r\n              <label class=\"col-7 subtext\" *ngIf=\"new\">{{data.value.SerialNoNew}}</label>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType != 'PM' && data.value.JobType != 'CM' else pmnot\">\r\n              <label class=\"col-5 text\" #pmnot>ประเภทงาน :</label>\r\n              <label class=\"col-7 subtext\" #pmnot>{{data.value.JobType}}</label>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType == 'CM' else cm\">\r\n              <label class=\"col-5 text\" #cm>ประเภทงาน :</label>\r\n              <label class=\"col-7 subtext\" #pmnot>CM</label>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType == 'PM' else pm\">\r\n              <label class=\"col-5 text\" #pm>ประเภทงาน :</label>\r\n              <div class=\"col-7 subtext\" [innerHtml]=\"data.value.typePm\" #pm></div>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.RoundFilter != null\">\r\n              <label class=\"col-12 text\" #pm>เปลี่ยนไส้กรอง :</label>\r\n              <label class=\"col-12 subtext\" #pm style=\"font-weight: bold;color:#E78D8D;\" [innerHTML]=\"data.value.RoundFilter\"></label>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType == 'PM' && data.value.cause != null && data.value.cause != '' && data.value.Workfinish != 1\">\r\n              <label class=\"col-5 text\" #pm>ไม่เข้าตรวจเช็ค :</label>\r\n              <label class=\"col-7 subtext text-danger\" #pm>{{data.value.cause}}</label>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType == 'CM'\">\r\n              <label class=\"col-5 text\">ปัญหาที่รับแจ้ง :</label>\r\n              <label class=\"col-7 subtext\">{{data.value.Description}}</label>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType == 'CM' && data.value.Workfinish == 1 else cm\">\r\n              <div class=\"col-5 text\" #cm>การปิดงาน :</div>\r\n              <div class=\"col-7 subtext\" #cm>{{data.value.WorkClose}}</div>\r\n            </div>\r\n            <div class=\"row col-12\"\r\n              *ngIf=\"data.value.JobType == 'CM' && data.value.Workfinish == 1 && data.value.WorkCloseID == 'WorkClose004' && data.value.newinstallID != null else cm\">\r\n              <div class=\"col-5 text\" #cm>การเปลี่ยนอุปกรณ์ :</div>\r\n              <div class=\"col-7 subtext\" #cm>{{data.value.TypeChang}}</div>\r\n            </div>\r\n            <div class=\"row col-12\"\r\n              *ngIf=\"data.value.JobType == 'CM' && data.value.Workfinish == 1 && data.value.WorkCloseID == 'WorkClose004' else cm\">\r\n              <div class=\"col-5 text\" #cm>ปัญหาเกิดจาก :</div>\r\n              <div class=\"col-7 subtext\" #cm>{{data.value.ResolutionDetaill}}</div>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.sparepart != '' && data.value.JobType == 'PM' else spare\">\r\n              <div class=\"col-5 text\" #spare>อะไหล่ที่ต้องเปลี่ยน :</div>\r\n              <div class=\"col-7 subtext\" #spare>\r\n                <div [innerHTML]=\"data.value.sparepart\"></div>\r\n              </div>\r\n            </div>\r\n            <!-- </div> -->\r\n\r\n            <div class=\"col-12\">\r\n              <ion-button expand=\"block\" size=\"small\" (click)=\"Imgbf(data.value)\" *ngIf=\"imgbefore\">ภาพหน้างาน\r\n              </ion-button>\r\n\r\n              <ion-button expand=\"block\" color=\"warning\" size=\"small\" (click)=\"assign(data.value)\"\r\n                *ngIf=\"data.value.JobType == 'CM' && data.value.status == 'Assign' else assigns\" #assigns>ตอบรับงาน\r\n              </ion-button>\r\n\r\n              <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"scan(item, data.value)\"\r\n                *ngIf=\"data.value.JobType != 'CM' && data.value.Workfinish == 0 else wait\" #wait>เริ่มงาน</ion-button>\r\n\r\n              <ion-button expand=\"block\" color=\"danger\" size=\"small\" (click)=\"NotPM(item, data.value)\"\r\n                *ngIf=\"data.value.JobType == 'PM' && data.value.Workfinish == 0 else wait\" #wait>ไม่เข้าตรวจเช็ค</ion-button>\r\n\r\n              <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"scan(item, data.value)\"\r\n                *ngIf=\"data.value.Workfinish == 2 else waiting\" #waiting>ดำเนินการต่อ\r\n              </ion-button>\r\n\r\n              <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"scan(item, data.value)\"\r\n                *ngIf=\"data.value.JobType == 'CM' && data.value.Workfinish == 0 && data.value.status != 'Assign'\" #wait>\r\n                เริ่มงาน</ion-button>\r\n\r\n              <!-- <ion-button expand=\"block\" size=\"small\" (click)=\"showSpare(data.value)\"\r\n                *ngIf=\"data.value.JobType == 'PM' && data.value.Workfinish == 0\">เบิกอะไหล่</ion-button>\r\n\r\n              <ion-button expand=\"block\" size=\"small\" (click)=\"showSpareHistory(data.value)\"\r\n                *ngIf=\"data.value.JobType == 'PM'\">\r\n                ประวัติการเบิกอะไหล่</ion-button> -->\r\n\r\n              <!-- <ion-button expand=\"block\" size=\"small\" (click)=\"showSpare(data.value)\"\r\n                *ngIf=\"data.value.JobType == 'CM' && data.value.Workfinish == 0 && type != 'New'\">เบิกอะไหล่\r\n              </ion-button> -->\r\n\r\n              <ion-button expand=\"block\" size=\"small\" (click)=\"showSpareHistory(data.value)\"\r\n                *ngIf=\"data.value.JobType == 'CM' && type != 'New'\">\r\n                ประวัติการเบิกอะไหล่</ion-button>\r\n\r\n              <!-- <ion-button expand=\"block\" color=\"warning\" size=\"small\" (click)=\"imgice(data.value)\"\r\n                *ngIf=\"data.value.Workfinish == 1 && data.value.JobType == 'INSTALL' else ice\" #ice>ชั่งน้ำแข็ง\r\n              </ion-button> -->\r\n\r\n              <!-- <ion-button expand=\"block\" color=\"warning\" size=\"small\" (click)=\"viewpic(item, data.value)\"\r\n                *ngIf=\"data.value.JobType != 'UNINSTALL' && data.value.isSerial == true else sn\" #sn>ดูรูป Serial\r\n              </ion-button>  -->\r\n\r\n              <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"logs()\"\r\n                *ngIf=\"data.value.JobType != 'PM' && data.value.status != 'Assign'\">สถานะการติดตามงาน</ion-button>\r\n\r\n              <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"click(item, data.value)\"\r\n                *ngIf=\"data.value.Workfinish == 1 && (data.value.JobType == 'PM' || data.value.JobType == 'UNINSTALL')\">\r\n                รายละเอียด</ion-button>\r\n\r\n              <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"click(item, data.value)\"\r\n                *ngIf=\"data.value.Workfinish == 1 && data.value.JobType == 'CM' && data.value.WorkCloseID == 'WorkClose004'\">\r\n                รายละเอียด</ion-button>\r\n            </div>\r\n            <hr />\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <!-- <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" (click)=\"fab()\">\r\n    <ion-fab-button>\r\n      <ion-icon name=\"alert\"></ion-icon>\r\n    </ion-fab-button>\r\n  </ion-fab> -->\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-back-button></ion-back-button>\r\n      <ion-title>ข้อมูลของ {{Customername}} </ion-title>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row\" style=\"padding: 5px;\" *ngFor=\"let item of data\">\r\n      <div class=\"col-md-6 col-sm-12 col-xs-12\" id=\"\" style=\"padding: 0px;padding-right: 5px;\">\r\n        <div class=\"portlet blue box\">\r\n          <div class=\"portlet-title\">\r\n            <div class=\"caption\">\r\n              <i class=\"fa fa-user\"></i>ลูกค้า\r\n            </div>\r\n\r\n          </div>\r\n          <div class=\"row\" style=\"padding: 15px;\">\r\n            <div class=\"col-4 text\">ชื่อลูกค้า </div>\r\n            <label class=\"col-8 subtext padding\">{{item.CustomerName}} {{item.CustomerNameEng}}</label>\r\n            <label class=\"col-4 text\">อีเมลล์</label>\r\n            <label class=\"col-8 subtext padding\">{{item.Email}}</label>\r\n            <label class=\"col-4 text\">โทรศัพท์</label>\r\n            <label class=\"col-8 subtext padding\">{{item.Phone}}</label>\r\n            <label class=\"col-4 text\">แฟกซ์</label>\r\n            <label class=\"col-8 subtext padding\">{{item.Fax}}</label>\r\n            <label class=\"col-4 text\">ที่อยู่</label>\r\n            <label class=\"col-8 subtext\">{{item.Address}}</label>\r\n            <label class=\"col-4 text\">ชื่อบิล</label>\r\n            <label class=\"col-8 subtext padding\">{{item.BillName}}</label>\r\n          </div>\r\n        </div>\r\n        <div class=\"portlet blue box\">\r\n          <div class=\"portlet-title\">\r\n            <div class=\"caption\">\r\n              <i class=\"fa fa-bank\"></i>สำนักงานใหญ่\r\n            </div>\r\n\r\n          </div>\r\n          <div class=\"row\" style=\"padding: 15px\">\r\n            <label class=\"col-4 text\">ชื่อบัญชี</label>\r\n            <label class=\"col-8 subtext padding\">{{item.AccountName}}</label>\r\n            <label class=\"col-4 text\">ประเภทธุรกิจ</label>\r\n            <label class=\"col-8 subtext padding\">{{item.IndustryType}}</label>\r\n            <label class=\"col-4 text\">อีเมลล์</label>\r\n            <label class=\"col-8 subtext padding\">{{item.AccountEmail}}</label>\r\n            <label class=\"col-4 text\">โทรศัพท์</label>\r\n            <label class=\"col-8 subtext padding\">{{item.AccountPhone}}</label>\r\n            <label class=\"col-4 text\">แฟกซ์</label>\r\n            <label class=\"col-8 subtext padding\">{{item.AccountFax}}</label>\r\n            <label class=\"col-4 text\">รหัสลูกค้า</label>\r\n            <label class=\"col-8 subtext padding\">{{item.CustomerCode}}</label>\r\n            <label class=\"col-4 text\">ชื่อบิล</label>\r\n            <label class=\"col-8 subtext padding\">{{item.AccountBill}}</label>\r\n          </div>\r\n        </div>\r\n        <div class=\"portlet blue box\">\r\n          <div class=\"portlet-title\">\r\n            <div class=\"caption\">\r\n              <i class=\"fa fa-user\"></i>พนักงานขาย\r\n            </div>\r\n\r\n          </div>\r\n          <div class=\"row\" style=\"padding: 15px\">\r\n            <label class=\"col-4 text\">สถานะการทำงาน</label>\r\n            <label class=\"col-8 subtext padding\">{{item.WorkStatus}}</label>\r\n            <label class=\"col-4 text\">ประเภทงาน</label>\r\n            <label class=\"col-8 subtext padding\">{{item.WorkType}}</label>\r\n            <label class=\"col-4 text\">ชื่อ</label>\r\n            <label class=\"col-8 subtext padding\">{{item.NameSale}}</label>\r\n            <label class=\"col-4 text\">เพศ</label>\r\n            <label class=\"col-8 subtext padding\">{{item.Gender}}</label>\r\n            <label class=\"col-4 text\">กลุ่มงาน</label>\r\n            <label class=\"col-8 subtext padding\">-</label>\r\n          </div>\r\n        </div>\r\n      </div>\r\n\r\n      <div class=\"col-md-6 col-sm-12 col-xs-12\" id=\"\" style=\"padding: 0px;\">\r\n        <div class=\"portlet blue box\">\r\n          <div class=\"portlet-title\">\r\n            <div class=\"caption\">\r\n              <i class=\"fa fa-cube\"></i>สินค้า\r\n            </div>\r\n\r\n          </div>\r\n          <div style=\"padding: 5px;\" *ngFor=\"let data of item.productInstall | keyvalue\">\r\n            <!-- <div (click)=\"click(item, data.value)\"> -->\r\n            <div class=\"row col-12\">\r\n              <div class=\"col-5 text\">สถานะ:</div>\r\n              <div class=\"col-7 subtext\" #lblWait style=\"color: #E78D8D;font-size: 14px;font-weight: bold;\"\r\n                *ngIf=\"data.value.Workfinish == 0; else lblWait\">รอการตรวจสอบ</div>\r\n              <div class=\"col-7 subtext\" #lblSuccess style=\"color: green;font-size: 14px;font-weight: bold;\"\r\n                *ngIf=\"data.value.Workfinish == 1; else lblSuccess\">งานเสร็จแล้ว</div>\r\n              <div class=\"col-7 subtext\" #lblwaiting style=\"color: rgb(35, 7, 248);font-size: 14px;font-weight: bold;\"\r\n                *ngIf=\"data.value.Workfinish == 2; else lblwaiting\">รอลูกค้าประเมิน</div>\r\n            </div>\r\n            <div class=\"row col-12\">\r\n              <div class=\"col-5 text\">สินค้าที่ติดตั้ง:</div>\r\n              <div class=\"col-7 subtext\">{{data.value.InstallPlanName}}</div>\r\n            </div>\r\n            <div class=\"row col-12\">\r\n              <label class=\"col-5 text\">รหัสสินค้า:</label>\r\n              <label class=\"col-7 subtext\">{{data.value.ItemCode}}</label>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType == 'INSTALL' && data.value.OldAssetName != null\">\r\n              <label class=\"col-5 text\">เครื่องที่รื้อถอน:</label>\r\n              <label class=\"col-7 subtext\">{{data.value.OldAssetName}}</label>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType == 'INSTALL'\">\r\n              <label class=\"col-5 text\">เครื่องที่ติดตั้ง:</label>\r\n              <label class=\"col-7 subtext\">{{data.value.ItemsName}}</label>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType != 'INSTALL'\">\r\n              <label class=\"col-5 text\">ชื่อสินค้า:</label>\r\n              <label class=\"col-7 subtext\">{{data.value.ItemsName}}</label>\r\n            </div>\r\n            <div class=\"row col-12\">\r\n              <label class=\"col-5 text\">Serial No:</label>\r\n              <label class=\"col-7 subtext\">{{data.value.SerialNo}}</label>\r\n              <!-- <ion-input class=\"col-6\" *ngIf=\"data.value.JobType == 'PM'\" type=\"text\" style=\"padding: 0px!important;padding-left: 5px!important;\" name=\"SerialNo\" [(ngModel)]=\"data.value.SerialNo\"> -->\r\n              <!-- </ion-input> -->\r\n              <!-- <div class=\"col-1\" *ngIf=\"data.value.JobType == 'PM'\">\r\n                    <ion-button size=\"small\" (click)=\"viewpic(item, data.value)\">\r\n                      <ion-icon name=\"view\"></ion-icon>\r\n                    </ion-button>\r\n                  </div> -->\r\n              <!-- <div class=\"col-1\" *ngIf=\"data.value.JobType == 'PM'\">\r\n                  <ion-button size=\"small\" (click)=\"SaveSerial(data.value)\">\r\n                    <ion-icon name=\"save\"></ion-icon>\r\n                  </ion-button>\r\n                </div> -->\r\n              <!-- <div class=\"col-1\" *ngIf=\"data.value.JobType == 'PM'\">\r\n                  <ion-button size=\"small\" (click)=\"SaveSerialBarcode(data.value)\">\r\n                    <ion-icon name=\"barcode\"></ion-icon>\r\n                  </ion-button>\r\n                </div> -->\r\n            </div>\r\n            <div class=\"row col-12\">\r\n              <label class=\"col-5 text\">Asset No:</label>\r\n              <div class=\"col-7\" *ngIf=\"data.value.JobType == 'PM'\">\r\n                <label>{{data.value.AssetplateSFS}}</label>&nbsp;\r\n                <ion-button size=\"small\" (click)=\"SaveSerialBarcode(data.value)\" style=\"margin-top: 0px;\"\r\n                  title=\"สแกน Barcode\">\r\n                  <ion-icon name=\"barcode\"></ion-icon>\r\n                </ion-button>\r\n              </div>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType == 'CM' || data.value.JobType == 'INSTALL' || data.value.JobType == 'UNINSTALL'\">\r\n              <label class=\"col-5 text\">Case ID:</label>\r\n              <label class=\"col-7 subtext\">{{data.value.ServiceReportNo}}</label>\r\n            </div>\r\n            <div class=\"row col-12\">\r\n              <label class=\"col-5 text\" *ngIf=\"new\">New Serial No:</label>\r\n              <label class=\"col-7 subtext\" *ngIf=\"new\">{{data.value.SerialNoNew}}</label>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType != 'PM' && data.value.JobType != 'CM' else pmnot\">\r\n              <label class=\"col-5 text\" #pmnot>ประเภทงาน :</label>\r\n              <label class=\"col-7 subtext\" #pmnot>{{data.value.JobType}}</label>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType == 'CM' else cm\">\r\n              <label class=\"col-5 text\" #cm>ประเภทงาน :</label>\r\n              <label class=\"col-7 subtext\" #pmnot>CM</label>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType == 'PM' else pm\">\r\n              <label class=\"col-5 text\" #pm>ประเภทงาน :</label>\r\n              <div class=\"col-7 subtext\" [innerHtml]=\"data.value.typePm\" #pm></div>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.RoundFilter != null\">\r\n              <label class=\"col-12 text\" #pm>เปลี่ยนไส้กรอง :</label>\r\n              <label class=\"col-12 subtext\" #pm style=\"font-weight: bold;color:#E78D8D;\" [innerHTML]=\"data.value.RoundFilter\"></label>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType == 'PM' && data.value.cause != null && data.value.cause != '' && data.value.Workfinish != 1\">\r\n              <label class=\"col-5 text\" #pm>ไม่เข้าตรวจเช็ค :</label>\r\n              <label class=\"col-7 subtext text-danger\" #pm>{{data.value.cause}}</label>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType == 'CM'\">\r\n              <label class=\"col-5 text\">ปัญหาที่รับแจ้ง :</label>\r\n              <label class=\"col-7 subtext\">{{data.value.Description}}</label>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.JobType == 'CM' && data.value.Workfinish == 1 else cm\">\r\n              <div class=\"col-5 text\" #cm>การปิดงาน :</div>\r\n              <div class=\"col-7 subtext\" #cm>{{data.value.WorkClose}}</div>\r\n            </div>\r\n            <div class=\"row col-12\"\r\n              *ngIf=\"data.value.JobType == 'CM' && data.value.Workfinish == 1 && data.value.WorkCloseID == 'WorkClose004' && data.value.newinstallID != null else cm\">\r\n              <div class=\"col-5 text\" #cm>การเปลี่ยนอุปกรณ์ :</div>\r\n              <div class=\"col-7 subtext\" #cm>{{data.value.TypeChang}}</div>\r\n            </div>\r\n            <div class=\"row col-12\"\r\n              *ngIf=\"data.value.JobType == 'CM' && data.value.Workfinish == 1 && data.value.WorkCloseID == 'WorkClose004' else cm\">\r\n              <div class=\"col-5 text\" #cm>ปัญหาเกิดจาก :</div>\r\n              <div class=\"col-7 subtext\" #cm>{{data.value.ResolutionDetaill}}</div>\r\n            </div>\r\n            <div class=\"row col-12\" *ngIf=\"data.value.sparepart != '' && data.value.JobType == 'PM' else spare\">\r\n              <div class=\"col-5 text\" #spare>อะไหล่ที่ต้องเปลี่ยน :</div>\r\n              <div class=\"col-7 subtext\" #spare>\r\n                <div [innerHTML]=\"data.value.sparepart\"></div>\r\n              </div>\r\n            </div>\r\n            <!-- </div> -->\r\n\r\n            <div class=\"col-12\">\r\n              <ion-button expand=\"block\" size=\"small\" (click)=\"Imgbf(data.value)\" *ngIf=\"imgbefore\">ภาพหน้างาน\r\n              </ion-button>\r\n\r\n              <ion-button expand=\"block\" color=\"warning\" size=\"small\" (click)=\"assign(data.value)\"\r\n                *ngIf=\"data.value.JobType == 'CM' && data.value.status == 'Assign' else assigns\" #assigns>ตอบรับงาน\r\n              </ion-button>\r\n\r\n              <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"scan(item, data.value)\"\r\n                *ngIf=\"data.value.JobType != 'CM' && data.value.Workfinish == 0 else wait\" #wait>เริ่มงาน</ion-button>\r\n\r\n              <!-- <ion-button expand=\"block\" color=\"primary\" size=\"small\" (click)=\"scan(item, data.value)\"\r\n                *ngIf=\"data.value.JobType != 'CM' && data.value.Workfinish == 0 else wait\" #wait>ตรวจสอบข้อมูล</ion-button> -->\r\n\r\n              <ion-button expand=\"block\" color=\"danger\" size=\"small\" (click)=\"NotPM(item, data.value)\"\r\n                *ngIf=\"data.value.JobType == 'PM' && data.value.Workfinish == 0 else wait\" #wait>ไม่เข้าตรวจเช็ค</ion-button>\r\n\r\n              <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"scan(item, data.value)\"\r\n                *ngIf=\"data.value.Workfinish == 2 else waiting\" #waiting>ดำเนินการต่อ\r\n              </ion-button>\r\n\r\n              <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"scan(item, data.value)\"\r\n                *ngIf=\"data.value.JobType == 'CM' && data.value.Workfinish == 0 && data.value.status != 'Assign'\" #wait>\r\n                เริ่มงาน</ion-button>\r\n\r\n              <!-- <ion-button expand=\"block\" size=\"small\" (click)=\"showSpare(data.value)\"\r\n                *ngIf=\"data.value.JobType == 'PM' && data.value.Workfinish == 0\">เบิกอะไหล่</ion-button>\r\n\r\n              <ion-button expand=\"block\" size=\"small\" (click)=\"showSpareHistory(data.value)\"\r\n                *ngIf=\"data.value.JobType == 'PM'\">\r\n                ประวัติการเบิกอะไหล่</ion-button> -->\r\n\r\n              <!-- <ion-button expand=\"block\" size=\"small\" (click)=\"showSpare(data.value)\"\r\n                *ngIf=\"data.value.JobType == 'CM' && data.value.Workfinish == 0 && type != 'New'\">เบิกอะไหล่\r\n              </ion-button> -->\r\n\r\n              <ion-button expand=\"block\" size=\"small\" (click)=\"showSpareHistory(data.value)\"\r\n                *ngIf=\"data.value.JobType == 'CM' && type != 'New'\">\r\n                ประวัติการเบิกอะไหล่</ion-button>\r\n\r\n              <!-- <ion-button expand=\"block\" color=\"warning\" size=\"small\" (click)=\"imgice(data.value)\"\r\n                *ngIf=\"data.value.Workfinish == 1 && data.value.JobType == 'INSTALL' else ice\" #ice>ชั่งน้ำแข็ง\r\n              </ion-button> -->\r\n\r\n              <!-- <ion-button expand=\"block\" color=\"warning\" size=\"small\" (click)=\"viewpic(item, data.value)\"\r\n                *ngIf=\"data.value.JobType != 'UNINSTALL' && data.value.isSerial == true else sn\" #sn>ดูรูป Serial\r\n              </ion-button>  -->\r\n\r\n              <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"logs()\"\r\n                *ngIf=\"data.value.JobType != 'PM' && data.value.status != 'Assign'\">สถานะการติดตามงาน</ion-button>\r\n\r\n              <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"click(item, data.value)\"\r\n                *ngIf=\"data.value.Workfinish == 1 && (data.value.JobType == 'PM' || data.value.JobType == 'UNINSTALL')\">\r\n                รายละเอียด</ion-button>\r\n\r\n              <ion-button expand=\"block\" color=\"success\" size=\"small\" (click)=\"click(item, data.value)\"\r\n                *ngIf=\"data.value.Workfinish == 1 && data.value.JobType == 'CM' && data.value.WorkCloseID == 'WorkClose004'\">\r\n                รายละเอียด</ion-button>\r\n            </div>\r\n            <hr />\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n  <!-- <ion-fab vertical=\"bottom\" horizontal=\"end\" slot=\"fixed\" (click)=\"fab()\">\r\n    <ion-fab-button>\r\n      <ion-icon name=\"alert\"></ion-icon>\r\n    </ion-fab-button>\r\n  </ion-fab> -->\r\n</ion-content>"
 
 /***/ }),
 
@@ -91,6 +91,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/barcode-scanner/ngx */ "./node_modules/@ionic-native/barcode-scanner/ngx/index.js");
 /* harmony import */ var _detaillistpm_log_log_page__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../../detaillistpm/log/log.page */ "./src/app/page/detaillistpm/log/log.page.ts");
 /* harmony import */ var _detailofdetaillistpm_requestsparepart_requestsparepart_page__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../detailofdetaillistpm/requestsparepart/requestsparepart.page */ "./src/app/page/joball/detailofdetaillistpm/requestsparepart/requestsparepart.page.ts");
+/* harmony import */ var _update_product_update_product_page__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./update-product/update-product.page */ "./src/app/page/joball/detaillistpm/update-product/update-product.page.ts");
+
 
 
 
@@ -106,7 +108,7 @@ __webpack_require__.r(__webpack_exports__);
 let DetaillistpmPage = class DetaillistpmPage {
     //#endregion
     //#region constructor
-    constructor(route, navCtrl, postDataService, storageService, alertController, modalController, barcodeScanner) {
+    constructor(route, navCtrl, postDataService, storageService, alertController, modalController, barcodeScanner, toastCtrl) {
         this.route = route;
         this.navCtrl = navCtrl;
         this.postDataService = postDataService;
@@ -114,6 +116,7 @@ let DetaillistpmPage = class DetaillistpmPage {
         this.alertController = alertController;
         this.modalController = modalController;
         this.barcodeScanner = barcodeScanner;
+        this.toastCtrl = toastCtrl;
         this.new = false;
         this.imgbf = true;
         this.imgbefore = true;
@@ -594,57 +597,118 @@ let DetaillistpmPage = class DetaillistpmPage {
                     this.navCtrl.navigateForward(['joball/listpm/detailofdetaillistpm'], navigationExtras);
                 }
                 else if ((item.tranID == null && this.type != "CM")) {
-                    const alert = yield this.alertController.create({
-                        header: 'แจ้งเตือน!',
-                        message: 'ต้องการเริ่มทำงาน',
-                        buttons: [
-                            {
-                                text: 'ตกลง',
-                                handler: () => {
-                                    let tran = {
-                                        AssetID: item.AssetID,
-                                        Serial: item.Serial,
-                                        planID: item.planID,
-                                        empID: this.empID,
-                                        insID: item.installId,
-                                        cause: item.cause,
-                                        type: this.type
-                                    };
-                                    console.log('tran', tran);
-                                    this.postDataService.postTranService(tran).then(TranService => {
-                                        // console.log(TranService);
-                                    });
-                                    let params = {
-                                        planID: item.planID,
-                                        install: item,
-                                        data: data,
-                                        insID: item.installId,
-                                        sparetype: item.sparepart,
-                                        item: this.item,
-                                        type: this.type,
-                                        date: this.date,
-                                        month: this.month,
-                                        year: this.year,
-                                    };
-                                    console.log(params);
-                                    const navigationExtras = {
-                                        queryParams: {
-                                            data: JSON.stringify(params)
-                                        }
-                                    };
-                                    this.navCtrl.navigateForward(['joball/listpm/detailofdetaillistpm'], navigationExtras);
-                                    console.log("sent", navigationExtras);
-                                }
-                            }, {
-                                text: 'ยกเลิก',
-                                role: 'cancel',
-                                cssClass: 'secondary',
-                                handler: (blah) => {
-                                }
+                    let tran = {
+                        AssetID: item.AssetID,
+                        Serial: item.Serial,
+                        planID: item.planID,
+                        empID: this.empID,
+                        insID: item.installId,
+                        cause: item.cause,
+                        type: this.type
+                    };
+                    let params = {
+                        planID: item.planID,
+                        install: item,
+                        data: data,
+                        insID: item.installId,
+                        sparetype: item.sparepart,
+                        item: this.item,
+                        type: this.type,
+                        date: this.date,
+                        month: this.month,
+                        year: this.year,
+                    };
+                    if (this.type == 'PM') {
+                        const modal = yield this.modalController.create({
+                            component: _update_product_update_product_page__WEBPACK_IMPORTED_MODULE_11__["UpdateProductPage"],
+                            //cssClass: 'my-custom-modal-css',
+                            componentProps: {
+                                tran: tran,
+                                params: params
                             }
-                        ]
-                    });
-                    yield alert.present();
+                        });
+                        modal.onDidDismiss().then(res => {
+                            let sres = res.data;
+                            if (sres == 'success') {
+                                console.log('sres', sres);
+                                this.postDataService.postTranService(tran).then(TranService => {
+                                    // console.log(TranService);
+                                });
+                                const navigationExtras = {
+                                    queryParams: {
+                                        data: JSON.stringify(params)
+                                    }
+                                };
+                                this.navCtrl.navigateForward(['joball/listpm/detailofdetaillistpm'], navigationExtras);
+                            }
+                            else {
+                                this.NotRecheckAlert();
+                            }
+                        });
+                        return yield modal.present();
+                    }
+                    else {
+                        this.postDataService.postTranService(tran).then(TranService => {
+                            // console.log(TranService);
+                        });
+                        const navigationExtras = {
+                            queryParams: {
+                                data: JSON.stringify(params)
+                            }
+                        };
+                        this.navCtrl.navigateForward(['joball/listpm/detailofdetaillistpm'], navigationExtras);
+                    }
+                    // const alert = await this.alertController.create({
+                    //   header: 'แจ้งเตือน!',
+                    //   message: 'ต้องการเริ่มทำงาน',
+                    //   buttons: [
+                    //     {
+                    //       text: 'ตกลง',
+                    //       handler: () => {
+                    //         let tran = {
+                    //           AssetID: item.AssetID,
+                    //           Serial: item.Serial,
+                    //           planID: item.planID,
+                    //           empID: this.empID,
+                    //           insID: item.installId,
+                    //           cause: item.cause,
+                    //           type: this.type
+                    //         }
+                    //         console.log('tran', tran);
+                    //         this.postDataService.postTranService(tran).then(TranService => {
+                    //           // console.log(TranService);
+                    //         });
+                    //         let params = {
+                    //           planID: item.planID,
+                    //           install: item,
+                    //           data: data,
+                    //           insID: item.installId,
+                    //           sparetype: item.sparepart,
+                    //           item: this.item,
+                    //           type: this.type,
+                    //           date: this.date,
+                    //           month: this.month,
+                    //           year: this.year,
+                    //         }
+                    //         console.log(params);
+                    //         const navigationExtras: NavigationExtras = {
+                    //           queryParams: {
+                    //             data: JSON.stringify(params)
+                    //           }
+                    //         };
+                    //         this.navCtrl.navigateForward(['joball/listpm/detailofdetaillistpm'], navigationExtras);
+                    //         console.log("sent", navigationExtras);
+                    //       }
+                    //     }, {
+                    //       text: 'ยกเลิก',
+                    //       role: 'cancel',
+                    //       cssClass: 'secondary',
+                    //       handler: (blah) => {
+                    //       }
+                    //     }
+                    //   ]
+                    // });
+                    // await alert.present();
                 }
             }
             //รายละเอียด
@@ -692,6 +756,18 @@ let DetaillistpmPage = class DetaillistpmPage {
         });
     }
     //#endregion
+    NotRecheckAlert() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const toast = yield this.toastCtrl.create({
+                header: 'ไม่สามารถส่งข้อมูลได้',
+                //mode: 'ios',
+                color: 'danger',
+                //showCloseButton: true,
+                duration: 3000,
+            });
+            toast.present();
+        });
+    }
     NotPM(data, item) {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             //#region 
@@ -1080,7 +1156,8 @@ DetaillistpmPage.ctorParameters = () => [
     { type: _storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"] },
-    { type: _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_8__["BarcodeScanner"] }
+    { type: _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_8__["BarcodeScanner"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"] }
 ];
 DetaillistpmPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -1094,7 +1171,8 @@ DetaillistpmPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"],
-        _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_8__["BarcodeScanner"]])
+        _ionic_native_barcode_scanner_ngx__WEBPACK_IMPORTED_MODULE_8__["BarcodeScanner"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"]])
 ], DetaillistpmPage);
 
 

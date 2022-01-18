@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="io.ionic.superioreService_lite" version="1.2.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>eService 1.2.5 Lite</name>
+<widget id="io.ionic.superioreService_Test" version="1.2.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>eService 1.2.5 Test</name>
     <description>eService by Wingplus</description>
     <author email="PM@WingPlusSolution.com" href="https://www.wingplussolution.com/">WingPlusSolution</author>
     <content src="index.html" />
