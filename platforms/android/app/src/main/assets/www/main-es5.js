@@ -8330,14 +8330,14 @@ var PostDataService = /** @class */ (function () {
     function PostDataService(http) {
         this.http = http;
         // test local
-        this.apiServer_url = 'http://localhost:41669/';
-        this.apiStock = 'https://localhost:6379/';
+        // apiServer_url = 'http://localhost:41669/';
+        // apiStock = 'https://localhost:6379/';
         //จาก Server จริง
         // apiServer_url = 'https://erpsuperior.com/';
         // apiStock = 'https://wms.erpsuperior.com/';
         //จาก Server เทส
-        // apiServer_url = 'https://test.erpsuperior.com/';
-        // apiStock = 'https://wmstest.erpsuperior.com/';
+        this.apiServer_url = 'https://test.erpsuperior.com/';
+        this.apiStock = 'https://wmstest.erpsuperior.com/';
         // apiServer_url = 'https://cors-anywhere.herokuapp.com/http://superior2.wingplusweb.com/';
         // apiServer_url = 'https://cors-anywhere.herokuapp.com/https://superior2.wingplusweb.com/';
         this.httpOptions = {

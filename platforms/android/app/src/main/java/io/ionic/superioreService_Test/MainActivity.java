@@ -17,7 +17,7 @@
        under the License.
  */
 
-package io.ionic.superioreService_lite;
+package io.ionic.superioreService_Test;
 
 import android.os.Bundle;
 import org.apache.cordova.*;

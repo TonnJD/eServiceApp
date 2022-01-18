@@ -138,7 +138,8 @@
       "cordova-plugin-browsertab": {}
     },
     "platforms": [
-      "browser"
+      "browser",
+      "android"
     ]
   }
 }
