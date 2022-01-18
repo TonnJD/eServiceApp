@@ -214,6 +214,9 @@
               <ion-button expand="block" color="success" size="small" (click)="scan(item, data.value)"
                 *ngIf="data.value.JobType != 'CM' && data.value.Workfinish == 0 else wait" #wait>เริ่มงาน</ion-button>
 
+              <!-- <ion-button expand="block" color="primary" size="small" (click)="scan(item, data.value)"
+                *ngIf="data.value.JobType != 'CM' && data.value.Workfinish == 0 else wait" #wait>ตรวจสอบข้อมูล</ion-button> -->
+
               <ion-button expand="block" color="danger" size="small" (click)="NotPM(item, data.value)"
                 *ngIf="data.value.JobType == 'PM' && data.value.Workfinish == 0 else wait" #wait>ไม่เข้าตรวจเช็ค</ion-button>
 

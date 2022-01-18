@@ -131,16 +131,15 @@ var LoginPage = /** @class */ (function () {
             // this.checkNetwork();
         }, 500);
         this.user = [];
-        // this.route.queryParams.subscribe(params => {
-        // });
-        this.authService.authenticationState.subscribe(function (state) {
-            alert('state: ' + state);
-            if (state) {
-                _this.router.navigate(['/menu/overview']);
-            }
-            else {
-                _this.router.navigate(['login']);
-            }
+        this.route.queryParams.subscribe(function (params) {
+            _this.authService.authenticationState.subscribe(function (state) {
+                if (state) {
+                    _this.router.navigate(['/menu/overview']);
+                }
+                else {
+                    _this.router.navigate(['login']);
+                }
+            });
         });
     }
     //#endregion
@@ -181,7 +180,7 @@ var LoginPage = /** @class */ (function () {
     //#region login
     LoginPage.prototype.login = function () {
         var _this = this;
-        //this.load();
+        this.load();
         this.user.email = this.user.email;
         this.user.password = this.user.password;
         this.user.type = "eservice";
@@ -201,13 +200,10 @@ var LoginPage = /** @class */ (function () {
                 _this.Tablet = _this.data[i].Tablet;
                 _this.link = _this.data[i].Link;
             }
-            alert(_this.name);
             if (_this.status == false) {
                 _this.false();
             }
             else if (_this.Tablet == "On" && _this.status == true) {
-                // alert(true);
-                // this.router.navigate(['/menu/overview']);
                 _this.true();
             }
             else {

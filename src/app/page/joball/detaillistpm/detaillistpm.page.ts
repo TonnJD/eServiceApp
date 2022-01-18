@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { NavController, AlertController, ModalController } from '@ionic/angular';
+import { NavController, AlertController, ModalController, ToastController } from '@ionic/angular';
 import { NavigationExtras } from '@angular/router';
 import { PostDataService } from '../../../post-data.service';
 import { StorageService } from '../../../storage.service';
@@ -11,6 +11,7 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { LogPage } from '../../detaillistpm/log/log.page';
 import { RequestsparepartPage } from '../detailofdetaillistpm/requestsparepart/requestsparepart.page';
 import { NotCheckedPage } from '../not-checked/not-checked.page';
+import { UpdateProductPage } from './update-product/update-product.page';
 //import { JobresponsPage } from '../../job/jobdetail/jobrespons/jobrespons.page'
 
 @Component({
@@ -67,7 +68,8 @@ export class DetaillistpmPage implements OnInit {
     private storageService: StorageService,
     public alertController: AlertController,
     public modalController: ModalController,
-    private barcodeScanner: BarcodeScanner,) {
+    private barcodeScanner: BarcodeScanner,
+    private toastCtrl: ToastController) {
     this.detaillistpm = [];
     this.route.queryParams.subscribe(params => {
       this.myId = JSON.parse(params["data"]);
@@ -611,60 +613,132 @@ export class DetaillistpmPage implements OnInit {
         this.navCtrl.navigateForward(['joball/listpm/detailofdetaillistpm'], navigationExtras);
       }
       else if ((item.tranID == null && this.type != "CM")) {
-        const alert = await this.alertController.create({
-          header: 'แจ้งเตือน!',
-          message: 'ต้องการเริ่มทำงาน',
-          buttons: [
-            {
-              text: 'ตกลง',
-              handler: () => {
-                let tran = {
-                  AssetID: item.AssetID,
-                  Serial: item.Serial,
-                  planID: item.planID,
-                  empID: this.empID,
-                  insID: item.installId,
-                  cause: item.cause,
-                  type: this.type
-                }
-                console.log('tran', tran);
+        let tran = {
+          AssetID: item.AssetID,
+          Serial: item.Serial,
+          planID: item.planID,
+          empID: this.empID,
+          insID: item.installId,
+          cause: item.cause,
+          type: this.type
+        }
+        
+        let params = {
+          planID: item.planID,
+          install: item,
+          data: data,
+          insID: item.installId,
+          sparetype: item.sparepart,
+          item: this.item,
+          type: this.type,
+          date: this.date,
+          month: this.month,
+          year: this.year,
+        }
 
-                this.postDataService.postTranService(tran).then(TranService => {
-                  // console.log(TranService);
-                });
-
-                let params = {
-                  planID: item.planID,
-                  install: item,
-                  data: data,
-                  insID: item.installId,
-                  sparetype: item.sparepart,
-                  item: this.item,
-                  type: this.type,
-                  date: this.date,
-                  month: this.month,
-                  year: this.year,
-                }
-                console.log(params);
-
-                const navigationExtras: NavigationExtras = {
-                  queryParams: {
-                    data: JSON.stringify(params)
-                  }
-                };
-                this.navCtrl.navigateForward(['joball/listpm/detailofdetaillistpm'], navigationExtras);
-                console.log("sent", navigationExtras);
-              }
-            }, {
-              text: 'ยกเลิก',
-              role: 'cancel',
-              cssClass: 'secondary',
-              handler: (blah) => {
-              }
+        if (this.type == 'PM') {
+          const modal = await this.modalController.create({
+            component: UpdateProductPage,
+            //cssClass: 'my-custom-modal-css',
+            componentProps: {
+              tran: tran,
+              params: params
             }
-          ]
-        });
-        await alert.present();
+          });
+  
+          modal.onDidDismiss().then(res => {
+            let sres = res.data;
+  
+            if (sres == 'success') {
+              console.log('sres', sres);
+  
+              this.postDataService.postTranService(tran).then(TranService => {
+                // console.log(TranService);
+              });
+        
+              const navigationExtras: NavigationExtras = {
+                queryParams: {
+                  data: JSON.stringify(params)
+                }
+              };
+              
+              this.navCtrl.navigateForward(['joball/listpm/detailofdetaillistpm'], navigationExtras);
+            }
+            else {
+              this.NotRecheckAlert();
+            }
+          });
+  
+          return await modal.present();
+        }
+        else {
+          this.postDataService.postTranService(tran).then(TranService => {
+            // console.log(TranService);
+          });
+    
+          const navigationExtras: NavigationExtras = {
+            queryParams: {
+              data: JSON.stringify(params)
+            }
+          };
+          
+          this.navCtrl.navigateForward(['joball/listpm/detailofdetaillistpm'], navigationExtras);
+        }
+
+        // const alert = await this.alertController.create({
+        //   header: 'แจ้งเตือน!',
+        //   message: 'ต้องการเริ่มทำงาน',
+        //   buttons: [
+        //     {
+        //       text: 'ตกลง',
+        //       handler: () => {
+        //         let tran = {
+        //           AssetID: item.AssetID,
+        //           Serial: item.Serial,
+        //           planID: item.planID,
+        //           empID: this.empID,
+        //           insID: item.installId,
+        //           cause: item.cause,
+        //           type: this.type
+        //         }
+        //         console.log('tran', tran);
+
+        //         this.postDataService.postTranService(tran).then(TranService => {
+        //           // console.log(TranService);
+        //         });
+
+        //         let params = {
+        //           planID: item.planID,
+        //           install: item,
+        //           data: data,
+        //           insID: item.installId,
+        //           sparetype: item.sparepart,
+        //           item: this.item,
+        //           type: this.type,
+        //           date: this.date,
+        //           month: this.month,
+        //           year: this.year,
+        //         }
+        //         console.log(params);
+
+        //         const navigationExtras: NavigationExtras = {
+        //           queryParams: {
+        //             data: JSON.stringify(params)
+        //           }
+        //         };
+        //         this.navCtrl.navigateForward(['joball/listpm/detailofdetaillistpm'], navigationExtras);
+        //         console.log("sent", navigationExtras);
+        //       }
+        //     }, {
+        //       text: 'ยกเลิก',
+        //       role: 'cancel',
+        //       cssClass: 'secondary',
+        //       handler: (blah) => {
+        //       }
+        //     }
+        //   ]
+        // });
+        // await alert.present();
       }
     }
 
@@ -715,6 +789,18 @@ export class DetaillistpmPage implements OnInit {
     }
   }
   //#endregion
+
+  async NotRecheckAlert() {
+    const toast = await this.toastCtrl.create({
+      header: 'ไม่สามารถส่งข้อมูลได้',
+      //mode: 'ios',
+      color: 'danger',
+      //showCloseButton: true,
+      duration: 3000,
+    });
+
+    toast.present();
+  }
 
   async NotPM(data, item) {
     //#region 

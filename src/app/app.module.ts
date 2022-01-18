@@ -46,6 +46,7 @@ import { InsertOldSparepartPageModule } from './page/joball/detailofdetaillistpm
 import { ReqDetailPageModule } from './page/sparepart/req-detail/req-detail.module';
 import { DeviceSpareListPageModule } from './page/devices-acessory/device-spare-list/device-spare-list.module';
 //import { JobresponsPageModule} from '../app/page/job/jobdetail/jobrespons/jobrespons.module'
+import { UpdateProductPageModule } from './page/joball/detaillistpm/update-product/update-product.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -80,7 +81,8 @@ import { DeviceSpareListPageModule } from './page/devices-acessory/device-spare-
     NotCheckedPageModule,
     InsertOldSparepartPageModule,
     ReqDetailPageModule,
-    DeviceSpareListPageModule
+    DeviceSpareListPageModule,
+    UpdateProductPageModule
   ],
   providers: [
     AuthGuardGuard,

@@ -512,7 +512,7 @@ var OverviewPage = /** @class */ (function () {
         var _this = this;
         this.storageService.getUser().then(function (items) {
             _this.items = items;
-            console.log(items);
+            console.log('this.items', _this.items);
             for (var i = 0; i < _this.items.length; i++) {
                 _this.empID = _this.items[i].empID;
                 _this.name = _this.items[i].name;

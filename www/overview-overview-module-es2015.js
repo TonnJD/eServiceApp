@@ -486,7 +486,7 @@ let OverviewPage = class OverviewPage {
     ngOnInit() {
         this.storageService.getUser().then(items => {
             this.items = items;
-            console.log(items);
+            console.log('this.items', this.items);
             for (let i = 0; i < this.items.length; i++) {
                 this.empID = this.items[i].empID;
                 this.name = this.items[i].name;

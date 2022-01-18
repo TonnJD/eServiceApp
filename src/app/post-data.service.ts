@@ -11,12 +11,12 @@ export class PostDataService {
   data;
 
   // test local
-  // apiServer_url = 'http://localhost:41669/';
-  // apiStock = 'https://localhost:6379/';
+  apiServer_url = 'http://localhost:41669/';
+  apiStock = 'https://localhost:6379/';
 
   //จาก Server จริง
-  apiServer_url = 'https://erpsuperior.com/';
-  apiStock = 'https://wms.erpsuperior.com/';
+  // apiServer_url = 'https://erpsuperior.com/';
+  // apiStock = 'https://wms.erpsuperior.com/';
 
   //จาก Server เทส
   // apiServer_url = 'https://test.erpsuperior.com/';
@@ -592,6 +592,18 @@ export class PostDataService {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
       this.http.get(this.apiServer_url + '/API/WebService.asmx/RoundFilterList?empID=' + empID, option).subscribe(data => {
+        resovle(data);
+      }, error => {
+        reject(error)
+      });
+    });
+  }
+
+  RecheckInstallPlan(insID, insName) {
+    return new Promise((resovle, reject) => {
+      let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
+
+      this.http.get(this.apiServer_url + '/API/WebService.asmx/RecheckInstallPlan?insID=' + insID + '&installName=' + insName, option).subscribe(data => {
         resovle(data);
       }, error => {
         reject(error)

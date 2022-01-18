@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>ตรวจสอบความถูกต้อง</ion-title>
+    <ion-buttons slot="primary">
+      <ion-icon slot="end" name="close" (click)="close()"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <div class="col-12" style="margin-top: 15px;">
+      <div class="alert alert-warning" role="alert">
+        <h4>กรุณาตรวจสอบเครื่องในร้าน (สำคัญมาก)</h4>
+      </div>
+    </div>
+    <ion-card-header>
+      <ion-card-title>ข้อมูลเครื่องปัจจุบัน</ion-card-title>
+      <div style="margin-top:15px;">
+        <h5>{{item.ItemsName}}</h5>
+      </div>
+    </ion-card-header>
+
+    <!-- <ion-card-header>
+      <ion-card-title>กรอกข้อมูลเครื่องที่ถูกต้องในร้าน</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="col-12">
+        <input type="text" class="form-control" />
+        <small>* กรุณากรอกมากกว่า 4 ตัวอักษร</small>
+      </div>
+    </ion-card-content> -->
+    
+    <ion-card-header>
+      <ion-card-title>ประเภทข้อมูล</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-radio-group (ionChange)="onChange($event.detail.value)">
+        <div class="row">
+          <div class="col-md-12">
+            <ion-item>
+              <ion-label>ข้อมูลถูกต้อง</ion-label>
+              <ion-radio slot="start" value="matched"></ion-radio>
+            </ion-item>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <ion-item>
+              <ion-label>ข้อมูลไม่ถูกต้อง</ion-label>
+              <ion-radio slot="start" value="not-matched"></ion-radio>
+            </ion-item>
+          </div>
+        </div>
+      </ion-radio-group>
+    </ion-card-content>
+    <ion-card-content *ngIf="showInstallName">
+      <div class="row">
+        <div class="col-12">
+          <input type="text" class="form-control" [(ngModel)]="installName" placeholder="โปรดระบุ" maxlength="100" />
+          <small>* กรุณากรอกมากว่า 4 ตัวอักษร</small>
+        </div>
+      </div>
+    </ion-card-content>
+    
+    <hr />
+    <ion-card-content>
+      <div class="col-md-12 text-center" style="margin-bottom: 30px;">
+        <ion-button (click)="submit()" color="success">ส่งข้อมูลและเริ่มงาน</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+</ion-content>

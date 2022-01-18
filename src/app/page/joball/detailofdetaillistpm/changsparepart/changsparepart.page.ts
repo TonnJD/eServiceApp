@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams, AlertController } from '@ionic/angular';
+import { ModalController, NavParams, AlertController, ToastController } from '@ionic/angular';
 import { PostDataService } from '../../../../post-data.service';
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 import { ThrowStmt } from '@angular/compiler';
@@ -40,7 +40,8 @@ export class ChangsparepartPage implements OnInit {
     private barcodeScanner: BarcodeScanner,
     public alertController: AlertController,
     private navParams: NavParams,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private toastCtrl: ToastController) {
 
     this.planID = this.navParams.data.planID;
     this.installID = this.navParams.data.installID;
@@ -467,11 +468,24 @@ export class ChangsparepartPage implements OnInit {
         assID: assID
       }
       console.log(params);
+
       this.postDataService.postdevice(params).then(data => {
-        alert("บันทึกข้อมูลเรียบร้อยแล้วค่ะ");
+        this.SuccessAlert();
       });
     }
 
+  }
+
+  async SuccessAlert() {
+    const toast = await this.toastCtrl.create({
+      header: 'เพิ่มเครื่องเรียบร้อย',
+      //mode: 'ios',
+      //color: 'success',
+      //showCloseButton: true,
+      duration: 3000,
+    });
+
+    toast.present();
   }
 
   Searchsku() {
