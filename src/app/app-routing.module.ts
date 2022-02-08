@@ -5,7 +5,7 @@ import { AuthGuardGuard } from '../app/auth/auth-guard.guard';
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'menu', loadChildren: './page/menu/menu.module#MenuPageModule', canActivate: [AuthGuardGuard] },
+  { path: 'menu', loadChildren: './page/menu/menu.module#MenuPageModule' },
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'job/jobdetail', loadChildren: './page/job/jobdetail/jobdetail.module#JobdetailPageModule' },
   { path: 'job/reportcheckpm', loadChildren: './page/job/reportcheckpm/reportcheckpm.module#ReportcheckpmPageModule' },
@@ -48,7 +48,8 @@ const routes: Routes = [
   { path: 'not-checked', loadChildren: './page/joball/not-checked/not-checked.module#NotCheckedPageModule' },
   { path: 'insert-old-sparepart', loadChildren: './page/joball/detailofdetaillistpm/insert-old-sparepart/insert-old-sparepart.module#InsertOldSparepartPageModule' },
   { path: 'req-detail', loadChildren: './page/sparepart/req-detail/req-detail.module#ReqDetailPageModule' },
-  { path: 'device-spare-list', loadChildren: './page/devices-acessory/device-spare-list/device-spare-list.module#DeviceSpareListPageModule' },  { path: 'update-product', loadChildren: './page/joball/detaillistpm/update-product/update-product.module#UpdateProductPageModule' },
+  { path: 'device-spare-list', loadChildren: './page/devices-acessory/device-spare-list/device-spare-list.module#DeviceSpareListPageModule' },
+  { path: 'update-product', loadChildren: './page/joball/detaillistpm/update-product/update-product.module#UpdateProductPageModule' },
 
 
 

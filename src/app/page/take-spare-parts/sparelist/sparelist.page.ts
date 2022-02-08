@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { PostDataService } from '../../../post-data.service';
 import { StorageService, User } from '../../../storage.service';
-import { NavigationExtras } from '@angular/router';
+import { ActivatedRoute, Data, Router, NavigationExtras } from '@angular/router';
 import { NavController, AlertController,LoadingController } from '@ionic/angular';
 
 @Component({
@@ -13,11 +13,14 @@ export class SparelistPage implements OnInit {
   empID;
   list;
   loads = false;
+  items;
+
   constructor(private postDataService: PostDataService,
     private storageService: StorageService, 
     public alertController: AlertController,
     public loadingController: LoadingController,
-    public navCtrl: NavController) { 
+    public navCtrl: NavController,
+    private route: ActivatedRoute) { 
       setTimeout(() => {
         this.ngOnInit();
       }, 500);
@@ -45,18 +48,17 @@ async loaddata() {
   }
 
   load() {
-    this.storageService.getUser().then(items => {
-      for (let i = 0; i < items.length; i++) {
-        this.empID = items[i].empID;
-      }
+    this.route.queryParams.subscribe(params => {
+      this.items = JSON.parse(params["data"]);
+      this.empID = this.items.empID;
 
-      let params =
+      let param =
       {
         EmpID: this.empID,
         Type: "List",
       }
 
-      this.postDataService.PostCus(params).then(list => {
+      this.postDataService.PostCus(param).then(list => {
         this.list = list
         console.log(list);
         
@@ -67,6 +69,29 @@ async loaddata() {
         }
       });
     });
+
+    // this.storageService.getUser().then(items => {
+    //   for (let i = 0; i < items.length; i++) {
+    //     this.empID = items[i].empID;
+    //   }
+
+    //   let params =
+    //   {
+    //     EmpID: this.empID,
+    //     Type: "List",
+    //   }
+
+    //   this.postDataService.PostCus(params).then(list => {
+    //     this.list = list
+    //     console.log(list);
+        
+    //     if (this.list.length == 0) {
+    //       this.loads = false;
+    //     } else{
+    //       this.loads = true;
+    //     }
+    //   });
+    // });
   }
 
   Detail(item){
@@ -89,20 +114,13 @@ async loaddata() {
     this.navCtrl.navigateForward(['take-spare-parts'], navigationExtras);
   }
 
-  NewSpare(){
-    let params = {
-      type: "new"
-    }
-
-    console.log(params);
-
+  NewSpare() {
     const navigationExtras: NavigationExtras = {
       queryParams: {
-        data: JSON.stringify(params)
+        data: JSON.stringify(this.items)
       }
     };
     
-    console.log(navigationExtras);
     this.navCtrl.navigateForward(['request-sparepart'], navigationExtras);
   }
   

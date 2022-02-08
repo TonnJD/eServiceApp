@@ -44,10 +44,12 @@ export class ChecklistPage implements OnInit {
     this.date = this.navParams.data.date;
     this.item = this.navParams.data.item;
     this.types = this.navParams.data.types;
+
     console.log('this.empID', this.empID);
     console.log('this.planID', this.planID);
     console.log('this.installID', this.installID);
     console.log('this.tranid', this.tranid);
+
     this.tran = [];;       
     if (this.type == "new") {
       this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/CK_Check.aspx' + '?empID=' + this.empID + '&serviceplanid=' + this.planID + '&installplanid=' + this.installID);
@@ -82,7 +84,7 @@ export class ChecklistPage implements OnInit {
     console.log(navigationExtras);
     this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
     //this.navCtrl.navigateForward(['/menu/overview']);   
-  }  
+  }
   //#region start
 
   ngOnInit() {

@@ -9,7 +9,7 @@
     </ion-toolbar>
   </ion-header>
   <ion-content>
-    <ion-list *ngFor="let p of pageservice">
+    <!-- <ion-list *ngFor="let p of pageservice">
       <ion-menu-toggle menu="first" autoHide="false">
         <ion-item [routerLink]="p.url" routerDirection="root" routerLinkActive="active">
           <ion-icon [name]="p.icon" slot="start"></ion-icon>
@@ -18,7 +18,19 @@
           </ion-label>
         </ion-item>
       </ion-menu-toggle>
+    </ion-list> -->
+
+    <ion-list *ngFor="let p of pageservice">
+      <ion-menu-toggle menu="first" autoHide="false">
+        <ion-item routerDirection="root" routerLinkActive="active" (click)="onOpenItem(p)">
+          <ion-icon [name]="p.icon" slot="start"></ion-icon>
+          <ion-label>
+            {{ p.title }}
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle>
     </ion-list>
+
   </ion-content>
 </ion-menu>
 

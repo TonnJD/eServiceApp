@@ -26,6 +26,7 @@ export class RequestSparepartPage implements OnInit {
   cusID = '';
   cusName = '';
   reqType;
+  items;
 
   constructor(
     private postDataService: PostDataService,
@@ -34,15 +35,21 @@ export class RequestSparepartPage implements OnInit {
     private storageService: StorageService,
     private toastCtrl: ToastController,
     private loadCtrl: LoadingController,
-    private modalCtrl: ModalController
-  ) { }
+    private modalCtrl: ModalController,
+    private route: ActivatedRoute
+  ) {
+    this.route.queryParams.subscribe(params => {
+      this.items = JSON.parse(params["data"]);
+      this.empID = this.items.empID;
+    });
+  }
 
   ngOnInit() {
-    this.storageService.getUser().then(items => {
-      for (let i = 0; i < items.length; i++) {
-        this.empID = items[i].empID;
-      }
-    });
+    // this.storageService.getUser().then(items => {
+    //   for (let i = 0; i < items.length; i++) {
+    //     this.empID = items[i].empID;
+    //   }
+    // });
   }
 
   searchCustomer(ev: any) {
@@ -186,6 +193,8 @@ export class RequestSparepartPage implements OnInit {
 
   async modalReqDetail() {
     console.log('this.reqType', this.reqType);
+    console.log('this.items', this.items);
+    
     
     if (this.reqType == undefined) {
       this.alertReqType();
@@ -201,11 +210,12 @@ export class RequestSparepartPage implements OnInit {
       component: ReqDetailPage,
       cssClass: 'my-custom-modal-css',
       componentProps: {
-        empID: this.empID,
+        empID: this.items.empID,
         cusID: this.cusID,
         cusName: this.cusName,
         reqType: this.reqType,
-        sparelist: this.selectSpareList
+        sparelist: this.selectSpareList,
+        items: this.items
       }
     });
 
@@ -214,7 +224,7 @@ export class RequestSparepartPage implements OnInit {
 
       if (type == 'submit') {
         let params = {
-          empID: this.empID,
+          empID: this.items.empID,
           cusID: this.cusID,
           reqType: this.reqType,
           sparelist: this.selectSpareList

@@ -41,6 +41,7 @@ export class CustomerevaluationPage implements OnInit {
   test;
   base64;
   urlImg;
+  items;
 
   @ViewChild(SignaturePad, { static: false }) signaturePad;
 
@@ -58,22 +59,29 @@ export class CustomerevaluationPage implements OnInit {
     public navCtrl: NavController,
     private navParams: NavParams,
     private route: ActivatedRoute) {
+
     this.route.queryParams.subscribe(params => {
       this.myId = JSON.parse(params["data"]);
       this.item = this.myId.item
       this.date = this.myId.date
+      this.items = this.myId.items
     });
 
+    console.log('this.items', this.items);
+    console.log('this.navParams', this.navParams);
+    console.log('this.navParams.data', this.navParams.data);
+    
     this.resolution = this.navParams.data.resolution;
     this.resolutiondetail = this.navParams.data.resolutiondetail;
     this.installID = this.navParams.data.installID
     this.jobtype = this.navParams.data.jobtype
     this.planID = this.navParams.data.planID
     this.header = this.navParams.data.header
-    this.empID = this.navParams.data.empID
+    this.empID = (this.navParams.data.empID == undefined) ? this.items.empID : this.navParams.data.empID
     this.workclose = this.navParams.data.workclose
     this.problemby = this.navParams.data.problemby
     this.TecComment = this.navParams.data.TecComment
+    console.log('this.empID', this.empID);
 
     this.postDataService.SelectSignatureTech(this.planID, this.installID).then(res => {
       if (res != null) {
@@ -270,7 +278,7 @@ export class CustomerevaluationPage implements OnInit {
         let params = {
           installID: this.installID,
           planID: this.planID,
-          empID: this.empID,
+          empID: (this.empID != undefined) ? this.empID : this.items.empID,
           workclose: this.workclose,
           jobtype: "saveclosecustomer",
           resolution: this.resolution,
@@ -278,18 +286,24 @@ export class CustomerevaluationPage implements OnInit {
           problemby: this.problemby,
         }
 
+        console.log('params', params);
+
         this.postDataService.SaveCaseAll(params).then(data => {
           if (data == true) {
             this.alertSuccess();
-            let params = {
+
+            let param = {
+              empID: (this.empID != undefined) ? this.empID : this.items.empID,
               item: this.item,
               type: "getCM",
               date: this.date,
+              items: this.items
             }
-            console.log(params);
+            console.log('getCM params', param);
+
             let navigationExtras: NavigationExtras = {
               queryParams: {
-                data: JSON.stringify(params)
+                data: JSON.stringify(param)
               }
             };
 

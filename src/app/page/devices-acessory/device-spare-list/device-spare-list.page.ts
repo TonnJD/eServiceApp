@@ -23,6 +23,8 @@ export class DeviceSpareListPage implements OnInit {
     private toastCtrl: ToastController,
     private navParams: NavParams) {
     this.navData = this.navParams.data;
+    console.log('this.navData', this.navData);
+    
     this.empID = this.navData.empID;
 
     this.postDataService.SparepartWaitReturnList(this.navData.item.SKUID, this.empID).then(res => {

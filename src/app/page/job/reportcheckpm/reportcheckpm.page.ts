@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NavigationExtras } from '@angular/router';
 import { StorageService } from '../../../storage.service';
 import { PostDataService } from '../../../post-data.service';
-import { NavController, AlertController } from '@ionic/angular';
+import { NavController, AlertController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-reportcheckpm',
@@ -34,32 +34,35 @@ export class ReportcheckpmPage implements OnInit {
 
   //#region constructor
   constructor(public DataService: AuthServiceService,
-    public alertController: AlertController,
+    public alertCtrl: AlertController,
     private route: ActivatedRoute,
     public navCtrl: NavController,
     private storageService: StorageService,
-    private postDataService: PostDataService,) {
+    private postDataService: PostDataService,
+    private loadingCtrl: LoadingController) {
     this.json;
     this.listpmdetail = [];
     this.job = [];
-    this.storageService.getUser().then(items => {
-      this.items = items;  
-      for (let i = 0; i < this.items.length; i++) {
-        this.myempID = this.items[i].empID;
-        this.name = this.items[i].name;
-      }
-    });
+
+    // this.storageService.getUser().then(items => {
+    //   this.items = items;  
+    //   for (let i = 0; i < this.items.length; i++) {
+    //     this.myempID = this.items[i].empID;
+    //     this.name = this.items[i].name;
+    //   }
+    // });
 
     this.route.queryParams.subscribe(params => {
+      this.items = JSON.parse(params["data"]);
       this.listpm = null;
       this.ChangeMonth();
-      this.ngOnInit();
+      //this.ngOnInit();
     });
 
-    this.ChangeMonth()
-    setTimeout(() => {
-      this.ngOnInit();
-    }, 500);
+    // this.ChangeMonth()
+    // setTimeout(() => {
+    //   this.ngOnInit();
+    // }, 500);
   }
   //#endregion
 
@@ -78,7 +81,7 @@ export class ReportcheckpmPage implements OnInit {
 
   //#region click
   click(item, data) {
-    console.log('item', item);
+    console.log('item click', item);
     let param = {
       planID: item.value.planID,
       empID: this.empid,
@@ -90,6 +93,7 @@ export class ReportcheckpmPage implements OnInit {
 
       if (status == true) {
         let params = {
+          empID: this.items.empID,
           item: item.value,
           type: this.type,
           date: data.planDate,
@@ -115,15 +119,31 @@ export class ReportcheckpmPage implements OnInit {
 
   //#region alert status
   async status() {
-    const alert = await this.alertController.create({
+    const alert = await this.alertCtrl.create({
       message: 'ยังไม่ถึงกำหนดรอบการตรวจเช็ค',
       buttons: ['OK']
     });
     await alert.present();
   }
   //#endregion
+
+  async loadingData() {
+    let loading = await this.loadingCtrl.create({
+      message: 'Please wait...'
+    });
+  
+    loading.present();
+  
+    setTimeout(() => {
+      loading.dismiss();
+    }, 5000);
+  }
+
   //#region ChangMonth
   ChangeMonth() {
+    this.load = true;
+    this.listpm = false;
+
     const month = new Date().getMonth() + 1;
     this.intMonth = month;
     const year = new Date().getFullYear();
@@ -196,37 +216,63 @@ export class ReportcheckpmPage implements OnInit {
     //   this.intYear = year
     // }
 
-    this.storageService.getUser().then(items => {
-      this.items = items;
-      // console.log(items);      
-      for (let i = 0; i < this.items.length; i++) {
-        this.empid = this.items[i].empID
-        this.name = this.items[i].name;
-      }
-      this.job.empID = this.empid;
-      this.job.month = this.intMonth;
-      this.job.year = this.intYear;
-      this.job.jobtype = this.type
-      console.log(this.job);
+    // this.storageService.getUser().then(items => {
+    //   this.items = items;
+    //   // console.log(items);      
+    //   for (let i = 0; i < this.items.length; i++) {
+    //     this.empid = this.items[i].empID
+    //     this.name = this.items[i].name;
+    //   }
+    //   this.job.empID = this.empid;
+    //   this.job.month = this.intMonth;
+    //   this.job.year = this.intYear;
+    //   this.job.jobtype = this.type
+    //   console.log(this.job);
 
-      this.postDataService.postJobList(this.job).then(work => {
-        this.listpm = work;
+    //   this.postDataService.postJobList(this.job).then(work => {
+    //     this.listpm = work;
         
-        for (let i = 0; i < this.listpm.length; i++) {
-          this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
-        }
-      });
+    //     for (let i = 0; i < this.listpm.length; i++) {
+    //       this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
+    //     }
+    //   });
+    // });
+
+    console.log('this.items', this.items);
+
+    // this.job.empID = this.empid;
+    // this.job.month = this.intMonth;
+    // this.job.year = this.intYear;
+    // this.job.jobtype = this.type
+
+    let parJob = {
+      empID: this.items.empID,
+      month: this.intMonth,
+      year: this.intYear,
+      jobtype: this.type,
+    }
+
+    this.postDataService.postJobList(parJob).then(work => {
+      this.listpm = work;
+      
+      for (let i = 0; i < this.listpm.length; i++) {
+        this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
+      }
     });
   }
   //#endregion
 
   //#region ChangMonthNext
-  changeMonthNext(value) {
-    console.log(value);
+  async changeMonthNext(value) {
+    console.log('value next', value);
     this.load = true;
-
+    this.listpm = false;
     // const year = new Date().getFullYear();
     //#region nextmonth
+    console.log('this.month', this.month);
+    console.log('this.intMonth', this.intMonth);
+    console.log('this.intYear', this.intYear);
+    
     if (this.month == 'มกราคม') {
       this.month = 'กุมภาพันธ์'
       this.intMonth = 2;
@@ -294,58 +340,75 @@ export class ReportcheckpmPage implements OnInit {
     //#endregion
 
     if (value == false) {
-      this.job.empID = this.empid;
-      this.job.month = this.intMonth;
-      this.job.year = this.intYear;
-      this.job.jobtype = this.type
-      console.log(this.job);
-
-      this.postDataService.postJobList(this.job).then(work => {
-        this.listpm = work;
-        
-        for (let i = 0; i < this.listpm.length; i++) {
-          this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
-        }
-      });
+      // this.job.empID = this.empid;
+      // this.job.month = this.intMonth;
+      // this.job.year = this.intYear;
+      // this.job.jobtype = this.type      
     }
 
-    if (value != false) {
-      this.listpm = false;
+    let parJob = {
+      empID: this.items.empID,
+      month: this.intMonth,
+      year: this.intYear,
+      jobtype: this.type,
     }
 
-    this.storageService.getUser().then(items => {
-      this.items = items;
-      // console.log(items);      
-      for (let i = 0; i < this.items.length; i++) {
-        this.empid = this.items[i].empID
-        this.name = this.items[i].name;
+    this.postDataService.postJobList(parJob).then(work => {
+      this.listpm = work;
+      console.log('this.listpm next', this.listpm);
+
+      for (let i = 0; i < this.listpm.length; i++) {
+        this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
       }
-      this.job.empID = this.empid;
-      this.job.month = this.intMonth;
-      this.job.year = this.intYear;
-      this.job.jobtype = this.type
-      console.log(this.job);
 
-      this.postDataService.postJobList(this.job).then(work => {
-        this.listpm = work;
-
-        for (let i = 0; i < this.listpm.length; i++) {
-          this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
-        }
-        
-        if (this.listpm == false) {
-          this.load = false;
-        }
-
-      });
+      if (this.listpm == false) {
+        this.load = false;
+      }
     });
+
+    // if (value != false) {
+    //   this.listpm = false;
+    // }
+
+    // this.storageService.getUser().then(items => {
+    //   this.items = items;
+    //   // console.log(items);      
+    //   for (let i = 0; i < this.items.length; i++) {
+    //     this.empid = this.items[i].empID
+    //     this.name = this.items[i].name;
+    //   }
+    //   this.job.empID = this.empid;
+    //   this.job.month = this.intMonth;
+    //   this.job.year = this.intYear;
+    //   this.job.jobtype = this.type
+    //   console.log(this.job);
+
+    //   this.postDataService.postJobList(this.job).then(work => {
+    //     this.listpm = work;
+
+    //     for (let i = 0; i < this.listpm.length; i++) {
+    //       this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
+    //     }
+        
+    //     if (this.listpm == false) {
+    //       this.load = false;
+    //     }
+
+    //   });
+    // });
   }
   //#endregion
 
   //#region ChangBack
-  changeMonthBack(value) {
+  async changeMonthBack(value) {
+    console.log('value back', value);
     this.load = true;
+    this.listpm = false;
     //#region backmonth
+    console.log('this.month', this.month);
+    console.log('this.intMonth', this.intMonth);
+    console.log('this.intYear', this.intYear);
+
     if (this.month == 'มกราคม') {
       this.month = 'ธันวาคม'
       this.intMonth = 12;
@@ -410,71 +473,79 @@ export class ReportcheckpmPage implements OnInit {
 
     //#endregion
     if (value == false) {
-      this.job.empID = this.empid;
-      this.job.month = this.intMonth;
-      this.job.year = this.intYear;
-      this.job.jobtype = this.type
-      console.log(this.job);
-
-      this.postDataService.postJobList(this.job).then(work => {
-        this.listpm = work;
-        console.log(this.listpm);
-
-
-        for (let i = 0; i < this.listpm.length; i++) {
-          this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
-        }
-
-        // console.log('listpm', this.listpm);
-
-      });
-    }
-    if (value != false) {
-      this.listpm = false;
+      // this.job.empID = this.empid;
+      // this.job.month = this.intMonth;
+      // this.job.year = this.intYear;
+      // this.job.jobtype = this.type
+      // console.log(this.job);
     }
 
-    this.storageService.getUser().then(items => {
-      this.items = items;
-      // console.log(items);      
-      for (let i = 0; i < this.items.length; i++) {
-        this.empid = this.items[i].empID
-        this.name = this.items[i].name;
+    let parJob = {
+      empID: this.items.empID,
+      month: this.intMonth,
+      year: this.intYear,
+      jobtype: this.type,
+    }
+
+    this.postDataService.postJobList(parJob).then(work => {
+      this.listpm = work;
+      //console.log('this.listpm back', this.listpm);
+
+      for (let i = 0; i < this.listpm.length; i++) {
+        this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
       }
-      this.job.empID = this.empid;
-      this.job.month = this.intMonth;
-      this.job.year = this.intYear;
-      this.job.jobtype = this.type
-      console.log(this.job);
 
-      this.postDataService.postJobList(this.job).then(work => {
-        this.listpm = work;
-        console.log(this.listpm);
-
-
-        for (let i = 0; i < this.listpm.length; i++) {
-          this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
-        }
-
-        // console.log('listpm', this.listpm);
-        if (this.listpm == false) {
-          this.load = false;
-        }
-      });
+      if (this.listpm == false) {
+        this.load = false;
+      }
     });
-  }
 
+    // this.load = false;
+
+    // if (value != false) {
+    //   this.listpm = false;
+    // }    
+    // this.storageService.getUser().then(items => {
+    //   this.items = items;
+    //   // console.log(items);      
+    //   for (let i = 0; i < this.items.length; i++) {
+    //     this.empid = this.items[i].empID
+    //     this.name = this.items[i].name;
+    //   }
+    //   this.job.empID = this.empid;
+    //   this.job.month = this.intMonth;
+    //   this.job.year = this.intYear;
+    //   this.job.jobtype = this.type
+    //   console.log(this.job);
+
+    //   this.postDataService.postJobList(this.job).then(work => {
+    //     this.listpm = work;
+    //     console.log(this.listpm);
+
+
+    //     for (let i = 0; i < this.listpm.length; i++) {
+    //       this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
+    //     }
+
+    //     // console.log('listpm', this.listpm);
+    //     if (this.listpm == false) {
+    //       this.load = false;
+    //     }
+    //   });
+    // });
+  }
   //#endregion
 
   //#region start
   ngOnInit() {
-    this.storageService.getUser().then(items => {
-      this.items = items;
-      // console.log(items);      
-      for (let i = 0; i < this.items.length; i++) {
-        this.empid = this.items[i].empID
-        this.name = this.items[i].name;
-      }
-    });
+    // this.storageService.getUser().then(items => {
+    //   this.items = items;
+    //   // console.log(items);      
+    //   for (let i = 0; i < this.items.length; i++) {
+    //     this.empid = this.items[i].empID
+    //     this.name = this.items[i].name;
+    //   }
+    // });
 
   }
   //#endregion

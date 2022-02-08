@@ -54,7 +54,7 @@ export class OverviewPage implements OnInit {
   empID;
   user;
   jobOverview;
-  items: User[] = [];
+  items;
   cm;
   pm;
   install;
@@ -97,8 +97,50 @@ export class OverviewPage implements OnInit {
     private barcodeScanner: BarcodeScanner,
     private router: Router) {
 
+      this.route.queryParams.subscribe(params => {
+        this.items = JSON.parse(params["data"]);
+        console.log('this.items', this.items);
+  
+        this.empID = this.items.empID;
+        this.name = this.items.name;
+        this.position = this.items.position;
+        this.username = this.items.username;
+        console.log('this.empID', this.empID);
+  
+        this.postDataService.RoundFilterList(this.empID).then(res => {
+          this.filterList = res;
+          console.log('this.filterList', this.filterList);
+  
+        });
+  
+        this.user.empID = this.empID;
+        this.user.month = this.intMonth;
+        this.user.year = this.intYear;
+        console.log(this.user);
+  
+        this.postDataService.postjobOverview(this.user).then(work => {
+          console.log('worknow', work);
+  
+          this.jobOverview = work;
+  
+          for (let i = 0; i < this.jobOverview.length; i++) {
+            this.workall = this.jobOverview[i].WorkAll;
+            this.workfinish = this.jobOverview[i].WorkFinish;
+            this.cm = this.jobOverview[i].cm;
+            this.pm = this.jobOverview[i].pm;
+            this.install = this.jobOverview[i].install;
+            this.uninstall = this.jobOverview[i].uninstall;
+            this.job = this.jobOverview[i].job;
+            this.wait = this.jobOverview[i].wait;
+            this.ice = this.jobOverview[i].ice;
+            this.jobupload = this.jobOverview[i].jobupload;
+            this.worknew = this.jobOverview[i].worknew
+          }
+        });
+      });
+
     setTimeout(() => {
-      this.ngOnInit();
+      //this.ngOnInit();
       this.checkversion();
     }, 500);
 
@@ -110,11 +152,55 @@ export class OverviewPage implements OnInit {
   }
   
   loadpage() {
-    setTimeout(() => {
-      this.load();
-      this.ngOnInit();
-      this.noti();
-    }, 500);
+    this.route.queryParams.subscribe(params => {
+      this.items = JSON.parse(params["data"]);
+      console.log('this.items', this.items);
+
+      this.empID = this.items.empID;
+      this.name = this.items.name;
+      this.position = this.items.position;
+      this.username = this.items.username;
+      console.log('this.empID', this.empID);
+
+      this.postDataService.RoundFilterList(this.empID).then(res => {
+        this.filterList = res;
+        console.log('this.filterList', this.filterList);
+
+      });
+
+      this.user.empID = this.empID;
+      this.user.month = this.intMonth;
+      this.user.year = this.intYear;
+      console.log(this.user);
+
+      this.postDataService.postjobOverview(this.user).then(work => {
+        console.log('worknow', work);
+
+        this.jobOverview = work;
+
+        for (let i = 0; i < this.jobOverview.length; i++) {
+          this.workall = this.jobOverview[i].WorkAll;
+          this.workfinish = this.jobOverview[i].WorkFinish;
+          this.cm = this.jobOverview[i].cm;
+          this.pm = this.jobOverview[i].pm;
+          this.install = this.jobOverview[i].install;
+          this.uninstall = this.jobOverview[i].uninstall;
+          this.job = this.jobOverview[i].job;
+          this.wait = this.jobOverview[i].wait;
+          this.ice = this.jobOverview[i].ice;
+          this.jobupload = this.jobOverview[i].jobupload;
+          this.worknew = this.jobOverview[i].worknew
+        }
+      });
+    });
+    
+    this.load();
+
+    // setTimeout(() => {
+    //   this.load();
+    //   //this.ngOnInit();
+    //   //this.noti();
+    // }, 500);
   }
 
   onReload() {
@@ -131,6 +217,7 @@ export class OverviewPage implements OnInit {
     //   attachments: ['file://img/rb-leipzig.jpg']
     // });
   }
+
   async load() {
     const loading = await this.loadingController.create({
       message: 'กำลังโหลดข้อมูล...',
@@ -466,46 +553,46 @@ export class OverviewPage implements OnInit {
   }
 
   ngOnInit() {
-    this.storageService.getUser().then(items => {
-      this.items = items;
-      console.log('this.items', this.items);
+    // this.storageService.getUser().then(items => {
+    //   this.items = items;
+    //   console.log('this.items', this.items);
 
-      for (let i = 0; i < this.items.length; i++) {
-        this.empID = this.items[i].empID;
-        this.name = this.items[i].name
-        this.position = this.items[i].position
-        this.username = this.items[i].username
-        console.log(this.empID);
-      }
+    //   for (let i = 0; i < this.items.length; i++) {
+    //     this.empID = this.items[i].empID;
+    //     this.name = this.items[i].name
+    //     this.position = this.items[i].position
+    //     this.username = this.items[i].username
+    //     console.log(this.empID);
+    //   }
 
-      this.postDataService.RoundFilterList(this.empID).then(res => {
-        this.filterList = res;
-        console.log('this.filterList', this.filterList);
+    //   this.postDataService.RoundFilterList(this.empID).then(res => {
+    //     this.filterList = res;
+    //     console.log('this.filterList', this.filterList);
         
-      });
+    //   });
 
-      this.user.empID = this.empID;
-      this.user.month = this.intMonth;
-      this.user.year = this.intYear;
-      console.log(this.user);
-      this.postDataService.postjobOverview(this.user).then(work => {
-        console.log('worknow', work);
-        this.jobOverview = work;
-        for (let i = 0; i < this.jobOverview.length; i++) {
-          this.workall = this.jobOverview[i].WorkAll;
-          this.workfinish = this.jobOverview[i].WorkFinish;
-          this.cm = this.jobOverview[i].cm;
-          this.pm = this.jobOverview[i].pm;
-          this.install = this.jobOverview[i].install;
-          this.uninstall = this.jobOverview[i].uninstall;
-          this.job = this.jobOverview[i].job;
-          this.wait = this.jobOverview[i].wait;
-          this.ice = this.jobOverview[i].ice;
-          this.jobupload = this.jobOverview[i].jobupload;
-          this.worknew = this.jobOverview[i].worknew
-        }
-      });
-    });
+    //   this.user.empID = this.empID;
+    //   this.user.month = this.intMonth;
+    //   this.user.year = this.intYear;
+    //   console.log(this.user);
+    //   this.postDataService.postjobOverview(this.user).then(work => {
+    //     console.log('worknow', work);
+    //     this.jobOverview = work;
+    //     for (let i = 0; i < this.jobOverview.length; i++) {
+    //       this.workall = this.jobOverview[i].WorkAll;
+    //       this.workfinish = this.jobOverview[i].WorkFinish;
+    //       this.cm = this.jobOverview[i].cm;
+    //       this.pm = this.jobOverview[i].pm;
+    //       this.install = this.jobOverview[i].install;
+    //       this.uninstall = this.jobOverview[i].uninstall;
+    //       this.job = this.jobOverview[i].job;
+    //       this.wait = this.jobOverview[i].wait;
+    //       this.ice = this.jobOverview[i].ice;
+    //       this.jobupload = this.jobOverview[i].jobupload;
+    //       this.worknew = this.jobOverview[i].worknew
+    //     }
+    //   });
+    // });
     // this.localNotifications.schedule({
     //   id: 1,
     //   text: 'งานทั้งหมด' + this.job + "งาน",
@@ -713,38 +800,44 @@ export class OverviewPage implements OnInit {
   }
 
   next(type) {
-    console.log(type);
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        data: JSON.stringify(this.items)
+      }
+    };
 
     if (type == 'worknew') {
-      this.router.navigate(['/job/worknew']);
-      this.popoverController.dismiss();
+      this.router.navigate(['/job/worknew'], navigationExtras);
+      //this.popoverController.dismiss();
     }
 
     if (type == 'pm') {
-      this.router.navigate(['/job/reportcheckpm']);
-      this.popoverController.dismiss();
+      this.router.navigate(['/job/reportcheckpm'], navigationExtras);
+      //this.popoverController.dismiss();
     }
 
     if (type == 'cm') {
-      this.router.navigate(['/job/cm']);
-      this.popoverController.dismiss();
+      this.router.navigate(['/job/cm'], navigationExtras);
+      //this.popoverController.dismiss();
     }
 
     if (type == 'install') {
-      this.router.navigate(['/job/install']);
-      this.popoverController.dismiss();
+      this.router.navigate(['/job/install'], navigationExtras);
+      //this.popoverController.dismiss();
     }
 
     if (type == 'uninstall') {
 
-      this.router.navigate(['/job/uninstall']);
-      this.popoverController.dismiss();
+      this.router.navigate(['/job/uninstall'], navigationExtras);
+      //this.popoverController.dismiss();
     }
+
     if (type == 'waiting') {
 
       this.router.navigate(['/waitspare']);
       this.popoverController.dismiss();
     }
+    
     if (type == 'ice') {
 
       let params = {

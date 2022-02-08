@@ -78,6 +78,7 @@ export class ChecklistcmPage implements OnInit {
   disableNon = false;
   disableChange = false;
   device;
+  items;
 
   //#region constructor
   constructor(public modalController: ModalController,
@@ -88,6 +89,7 @@ export class ChecklistcmPage implements OnInit {
     private postDataService: PostDataService,
     sanitizer: DomSanitizer,
     private toastCtrl: ToastController) {
+
     this.empID = this.navParams.data.empID;
     this.planID = this.navParams.data.planID;
     this.install = this.navParams.data.install;
@@ -100,7 +102,8 @@ export class ChecklistcmPage implements OnInit {
     this.jobtype = this.navParams.data.jobtype;
     this.stock = [];
     console.log('this.jobtype', this.jobtype);
-
+    console.log('this.navParams.data', this.navParams.data);
+    
 
     let param = {
       installID: this.installID,

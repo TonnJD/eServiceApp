@@ -7,7 +7,7 @@ import { StorageService, User } from '../storage.service';
 import { Network } from '@ionic-native/network/ngx';
 import { AuthenticationService } from '../auth/authentication.service';
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -20,6 +20,7 @@ export class LoginPage implements OnInit {
   //#region data
   name;
   username;
+  password;
   position;
   empID;
   workall;
@@ -27,6 +28,7 @@ export class LoginPage implements OnInit {
   data;
   user;
   status;
+  userStatus = false;
   role;
   items: User[] = [];
   newUser: User = <User>{};
@@ -50,8 +52,8 @@ export class LoginPage implements OnInit {
     private platform: Platform,
     private storageService: StorageService,
     private network: Network,
-    private authService: AuthenticationService,
-    private DataService: AuthServiceService,
+    // private authService: AuthenticationService,
+    // private DataService: AuthServiceService,
     sanitizer: DomSanitizer,
     private router: Router,
     private route: ActivatedRoute,) {    
@@ -65,16 +67,16 @@ export class LoginPage implements OnInit {
     }, 500);
 
     this.user = [];
-    this.route.queryParams.subscribe(params => {
-      this.authService.authenticationState.subscribe(state => {
-        if (state) {
-          this.router.navigate(['/menu/overview']);
-        } else {
-          this.router.navigate(['login']);
-        }
-      });
+    // this.route.queryParams.subscribe(params => {
+    //   // this.authService.authenticationState.subscribe(state => {
+    //   //   if (state) {
+    //   //     this.router.navigate(['/menu/overview']);
+    //   //   } else {
+    //   //     this.router.navigate(['login']);
+    //   //   }
+    //   // });
       
-    });
+    // });
     
   }
   //#endregion
@@ -110,38 +112,78 @@ export class LoginPage implements OnInit {
 
   //#region login
   login() {
-    this.load();
-    this.user.email = this.user.email;
-    this.user.password = this.user.password;
-    this.user.type = "eservice"
-    console.log(this.user);
-    
-    this.postDataService.login(this.user).then(data => {
-      this.data = data;
-      console.log(this.data);
-      
-      for (let i = 0; i < this.data.length; i++) {
-        this.status = this.data[i].Status;
-        this.name = this.data[i].Name;
-        this.username = this.data[i].Username;
-        this.position = this.data[i].Position;
-        this.workall = this.data[i].WorkAll;
-        this.workfinish = this.data[i].WorkFinish;
-        this.empID = this.data[i].empID;
-        this.role = this.data[i].roleID;
-        this.Tablet = this.data[i].Tablet;
-        this.link = this.data[i].Link;
+    let params = {
+      email: this.username,
+      password: this.password,
+    }
+
+    console.log('params', params);
+
+
+    this.postDataService.login(params).then(res => {
+      this.user = res;
+      console.log('this.user', this.user);
+
+      this.newUser.id = this.user[0].id;
+      this.newUser.name = this.user[0].Name;
+      this.newUser.username = this.user[0].Username;
+      this.newUser.position = this.user[0].Position;
+      this.newUser.empID = this.user[0].empID;
+      this.newUser.role = this.user[0].roleID;
+      this.newUser.status = this.user[0].Status;
+      this.newUser.link = this.user[0].link;
+      //console.log('this.newUser', this.newUser);      
+
+      this.userStatus = this.user[0].Status;
+
+      if (this.userStatus) {
+        const navigationExtras: NavigationExtras = {
+          queryParams: {
+            data: JSON.stringify(this.newUser)
+          }
+        };
+
+        alert('Login Success');
+        this.router.navigate(['/menu/overview'], navigationExtras);
       }
-      if (this.status == false) {
-        this.false();
+      else {
+        alert('Incorrect password');
       }
-      else if (this.Tablet == "On" && this.status == true) {
-        this.true();
-      }
-      else  {
-        this.access();
-      }
-    });
+
+    }, error => alert('can\'t login'));
+
+    // this.load();
+    // this.user.email = this.user.email;
+    // this.user.password = this.user.password;
+    // this.user.type = "eservice"
+    // console.log(this.user);
+
+    // this.postDataService.login(this.user).then(data => {
+    //   this.data = data;
+    //   console.log(this.data);
+
+    //   for (let i = 0; i < this.data.length; i++) {
+    //     this.status = this.data[i].Status;
+    //     this.name = this.data[i].Name;
+    //     this.username = this.data[i].Username;
+    //     this.position = this.data[i].Position;
+    //     this.workall = this.data[i].WorkAll;
+    //     this.workfinish = this.data[i].WorkFinish;
+    //     this.empID = this.data[i].empID;
+    //     this.role = this.data[i].roleID;
+    //     this.Tablet = this.data[i].Tablet;
+    //     this.link = this.data[i].Link;
+    //   }
+    //   if (this.status == false) {
+    //     this.false();
+    //   }
+    //   else if (this.Tablet == "On" && this.status == true) {
+    //     this.true();
+    //   }
+    //   else  {
+    //     this.access();
+    //   }
+    // });
   }
   //#endregion
 
@@ -163,6 +205,7 @@ export class LoginPage implements OnInit {
     await alert.present();
     this.storageService.resetLocalStorage();
   }
+
   true() {
     this.newUser.id = 1;
     this.newUser.name = this.name;
@@ -172,12 +215,14 @@ export class LoginPage implements OnInit {
     this.newUser.role = this.role;
     this.newUser.status = this.status;
     this.newUser.link = this.link;
-    console.log(this.newUser);
+    console.log('true', this.newUser);
     
-    this.authService.login(this.newUser);
-    this.storageService.addUser(this.newUser).then(item => {
-      this.newUser = <User>{};
-    });
+    this.router.navigate(['/menu/overview']);
+
+    // this.authService.login(this.newUser);
+    // this.storageService.addUser(this.newUser).then(item => {
+    //   this.newUser = <User>{};
+    // });
   }
 
   //#endregion

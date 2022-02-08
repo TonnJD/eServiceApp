@@ -71,16 +71,18 @@ export class DetaillistpmPage implements OnInit {
     private barcodeScanner: BarcodeScanner,
     private toastCtrl: ToastController) {
     this.detaillistpm = [];
+
     this.route.queryParams.subscribe(params => {
       this.myId = JSON.parse(params["data"]);
       this.detailPM = JSON.parse(params["data"]);
+      this.items = this.myId.items;
+      console.log('this.myId', this.myId);
 
       if (this.myId != "undefined") {
         this.item = this.myId.item
         this.type = this.myId.type
         this.date = this.myId.date
         this.datacm = this.myId.datacm
-        console.log('this.item PM', this.item);
 
         if (this.item == undefined || this.item == "undefined" || this.item == 'undefined') {
           this.cusID = this.myId.cusID
@@ -137,9 +139,6 @@ export class DetaillistpmPage implements OnInit {
             for (let i = 0; i < this.data.length; i++) {
               this.Customername = this.data[i].CustomerName;
               this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
-              for (let j = 0; j < this.data[i].productInstall.length; j++) {
-                console.log(this.data[i].productInstall[j]);
-              }
             }
           });
 
@@ -204,10 +203,110 @@ export class DetaillistpmPage implements OnInit {
           this.type = "UNINSTALL";
         }
 
-        this.ngOnInit();
+        //this.ngOnInit();
       }
       else {
         alert("ไม่พบข้อมูล");
+      }
+
+      if (this.type == "CM") {
+        this.imgbf = true
+  
+        this.detaillistpm.cusID = this.cusID;
+        this.detaillistpm.planID = this.planID;
+        this.detaillistpm.month = this.month;
+        this.detaillistpm.year = this.year;
+        this.detaillistpm.type = this.type;
+        this.detaillistpm.date = this.date;
+        this.detaillistpm.empid = this.empID;
+  
+        this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
+          this.data = work;
+  
+          for (let i = 0; i < this.data.length; i++) {
+            this.Customername = this.data[i].CustomerName;
+            this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+          }
+          console.log('this.data', this.data);
+  
+        });
+  
+        let workclose = {
+          jobtype: "getworkclose"
+        }
+  
+        this.postDataService.SaveCaseAll(workclose).then(data => {
+          this.getworkclose = data
+  
+          for (let i = 0; i < this.getworkclose.length; i++) {
+            if (i == 1) {
+              this.getworkclose1 = this.getworkclose[1].SystemDataName;
+              this.getworkclosevalue1 = this.getworkclose[1].SystemID;
+              this.text = 'ปิดงาน'
+            } else if (i == 3) {
+              this.getworkclose2 = this.getworkclose[3].SystemDataName;
+              this.getworkclosevalue2 = this.getworkclose[3].SystemID;
+              this.text = 'ตกลง'
+            } else if (i == 0) {
+              this.getworkclose3 = this.getworkclose[0].SystemDataName;
+              this.getworkclosevalue3 = this.getworkclose[0].SystemID;
+              this.text = 'บันทึก'
+            }
+          }
+        });
+      }
+      else if (this.type == "INSTALL") {
+        this.imgbf = true
+
+        this.route.queryParams.subscribe(params => {
+          this.items = JSON.parse(params["data"]);
+        });
+        console.log('this.items install', this.items); 
+  
+        this.detaillistpm.cusID = this.items.item.cusID;
+        this.detaillistpm.planID = this.items.item.planID;
+        this.detaillistpm.month = this.items.item.month;
+        this.detaillistpm.year = this.items.item.year;
+        this.detaillistpm.type = this.type;
+        this.detaillistpm.date = this.date;
+        this.detaillistpm.empid = this.items.empID;
+        console.log('this.detaillistpm install', this.detaillistpm);      
+  
+        this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
+          this.data = work;
+  
+          for (let i = 0; i < this.data.length; i++) {
+            this.Customername = this.data[i].CustomerName;
+            this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+          }
+        });     
+      }
+      else {
+        this.route.queryParams.subscribe(params => {
+          this.items = JSON.parse(params["data"]);
+        });
+  
+        console.log('this.items', this.items);
+  
+        this.detaillistpm.cusID = this.items.item.cusID;
+        this.detaillistpm.planID = this.items.item.planID;
+        this.detaillistpm.month = this.items.item.month;
+        this.detaillistpm.year = this.items.item.year;
+        this.detaillistpm.type = this.items.type;
+        this.detaillistpm.date = this.items.date;
+        this.detaillistpm.empid = this.items.empID;
+  
+        console.log('this.detaillistpm', this.detaillistpm);
+  
+        this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
+          this.data = work;
+  
+          for (let i = 0; i < this.data.length; i++) {
+            this.Customername = this.data[i].CustomerName;
+            this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+            console.log('this.data[i].productInstall', this.data[i].productInstall);
+          }
+        });
       }
     });
   }
@@ -216,120 +315,197 @@ export class DetaillistpmPage implements OnInit {
 
   //#region start
   ngOnInit() {
-    if (this.type == "CM") {
-      this.imgbf = true
-      this.storageService.getUser().then(items => {
-        this.items = items;
+    // if (this.type == "CM") {
+    //   this.imgbf = true
+    //   // this.storageService.getUser().then(items => {
+    //   //   this.items = items;
 
-        for (let i = 0; i < this.items.length; i++) {
-          this.empID = this.items[i].empID;
-        }
+    //   //   for (let i = 0; i < this.items.length; i++) {
+    //   //     this.empID = this.items[i].empID;
+    //   //   }
 
-        this.detaillistpm.cusID = this.cusID;
-        this.detaillistpm.planID = this.planID;
-        this.detaillistpm.month = this.month;
-        this.detaillistpm.year = this.year;
-        this.detaillistpm.type = this.type;
-        this.detaillistpm.date = this.date;
-        this.detaillistpm.empid = this.empID;
+    //   //   this.detaillistpm.cusID = this.cusID;
+    //   //   this.detaillistpm.planID = this.planID;
+    //   //   this.detaillistpm.month = this.month;
+    //   //   this.detaillistpm.year = this.year;
+    //   //   this.detaillistpm.type = this.type;
+    //   //   this.detaillistpm.date = this.date;
+    //   //   this.detaillistpm.empid = this.empID;
 
-        this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
-          this.data = work;
+    //   //   this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
+    //   //     this.data = work;
 
-          for (let i = 0; i < this.data.length; i++) {
-            this.Customername = this.data[i].CustomerName;
-            this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
-          }
-          console.log('this.data', this.data);
+    //   //     for (let i = 0; i < this.data.length; i++) {
+    //   //       this.Customername = this.data[i].CustomerName;
+    //   //       this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+    //   //     }
+    //   //     console.log('this.data', this.data);
 
-        });
-      });
+    //   //   });
+    //   // });
 
-      let workclose = {
-        jobtype: "getworkclose"
-      }
+    //   this.detaillistpm.cusID = this.cusID;
+    //   this.detaillistpm.planID = this.planID;
+    //   this.detaillistpm.month = this.month;
+    //   this.detaillistpm.year = this.year;
+    //   this.detaillistpm.type = this.type;
+    //   this.detaillistpm.date = this.date;
+    //   this.detaillistpm.empid = this.empID;
 
-      this.postDataService.SaveCaseAll(workclose).then(data => {
-        this.getworkclose = data
+    //   this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
+    //     this.data = work;
 
-        for (let i = 0; i < this.getworkclose.length; i++) {
-          if (i == 1) {
-            this.getworkclose1 = this.getworkclose[1].SystemDataName;
-            this.getworkclosevalue1 = this.getworkclose[1].SystemID;
-            this.text = 'ปิดงาน'
-          } else if (i == 3) {
-            this.getworkclose2 = this.getworkclose[3].SystemDataName;
-            this.getworkclosevalue2 = this.getworkclose[3].SystemID;
-            this.text = 'ตกลง'
-          } else if (i == 0) {
-            this.getworkclose3 = this.getworkclose[0].SystemDataName;
-            this.getworkclosevalue3 = this.getworkclose[0].SystemID;
-            this.text = 'บันทึก'
-          }
-        }
-      });
-    }
-    else if (this.type == "INSTALL") {
-      this.imgbf = true
-      this.storageService.getUser().then(items => {
-        this.items = items;
+    //     for (let i = 0; i < this.data.length; i++) {
+    //       this.Customername = this.data[i].CustomerName;
+    //       this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+    //     }
+    //     console.log('this.data', this.data);
 
-        for (let i = 0; i < this.items.length; i++) {
-          this.empID = this.items[i].empID;
+    //   });
 
-        }
-        this.detaillistpm.cusID = this.cusID;
-        this.detaillistpm.planID = this.planID;
-        this.detaillistpm.month = this.month;
-        this.detaillistpm.year = this.year;
-        this.detaillistpm.type = this.type;
-        this.detaillistpm.date = this.date;
-        this.detaillistpm.empid = this.empID;
+    //   //console.log('this.items', this.items);
 
-        this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
-          this.data = work;
+    //   let workclose = {
+    //     jobtype: "getworkclose"
+    //   }
 
-          for (let i = 0; i < this.data.length; i++) {
-            this.Customername = this.data[i].CustomerName;
-            this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
-            for (let j = 0; j < this.data[i].productInstall.length; j++) {
+    //   this.postDataService.SaveCaseAll(workclose).then(data => {
+    //     this.getworkclose = data
 
-            }
-          }
-        });
-      });
-    }
-    else {
-      this.storageService.getUser().then(items => {
-        this.items = items;
+    //     for (let i = 0; i < this.getworkclose.length; i++) {
+    //       if (i == 1) {
+    //         this.getworkclose1 = this.getworkclose[1].SystemDataName;
+    //         this.getworkclosevalue1 = this.getworkclose[1].SystemID;
+    //         this.text = 'ปิดงาน'
+    //       } else if (i == 3) {
+    //         this.getworkclose2 = this.getworkclose[3].SystemDataName;
+    //         this.getworkclosevalue2 = this.getworkclose[3].SystemID;
+    //         this.text = 'ตกลง'
+    //       } else if (i == 0) {
+    //         this.getworkclose3 = this.getworkclose[0].SystemDataName;
+    //         this.getworkclosevalue3 = this.getworkclose[0].SystemID;
+    //         this.text = 'บันทึก'
+    //       }
+    //     }
+    //   });
+    // }
+    // else if (this.type == "INSTALL") {
+    //   this.imgbf = true
+    //   // this.storageService.getUser().then(items => {
+    //   //   this.items = items;
 
-        for (let i = 0; i < this.items.length; i++) {
-          this.empID = this.items[i].empID;
-        }
+    //   //   for (let i = 0; i < this.items.length; i++) {
+    //   //     this.empID = this.items[i].empID;
 
-        this.detaillistpm.cusID = this.cusID;
-        this.detaillistpm.planID = this.planID;
-        this.detaillistpm.month = this.month;
-        this.detaillistpm.year = this.year;
-        this.detaillistpm.type = this.type;
-        this.detaillistpm.date = this.date;
-        this.detaillistpm.empid = this.empID;
+    //   //   }
+    //   //   this.detaillistpm.cusID = this.cusID;
+    //   //   this.detaillistpm.planID = this.planID;
+    //   //   this.detaillistpm.month = this.month;
+    //   //   this.detaillistpm.year = this.year;
+    //   //   this.detaillistpm.type = this.type;
+    //   //   this.detaillistpm.date = this.date;
+    //   //   this.detaillistpm.empid = this.empID;
 
-        this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
-          this.data = work;
+    //   //   this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
+    //   //     this.data = work;
 
-          for (let i = 0; i < this.data.length; i++) {
-            this.Customername = this.data[i].CustomerName;
-            this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
-            console.log('this.data[i].productInstall', this.data[i].productInstall);
+    //   //     for (let i = 0; i < this.data.length; i++) {
+    //   //       this.Customername = this.data[i].CustomerName;
+    //   //       this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+    //   //       for (let j = 0; j < this.data[i].productInstall.length; j++) {
 
-            for (let j = 0; j < this.data[i].productInstall.length; j++) {
+    //   //       }
+    //   //     }
+    //   //   });
+    //   // });
 
-            }
-          }
-        });
-      });
-    }
+    //   this.route.queryParams.subscribe(params => {
+    //     this.items = JSON.parse(params["data"]);
+    //   });
+    //   console.log('this.items', this.items); 
+
+    //   this.detaillistpm.cusID = this.items.item.cusID;
+    //   this.detaillistpm.planID = this.items.item.planID;
+    //   this.detaillistpm.month = this.items.item.month;
+    //   this.detaillistpm.year = this.items.item.year;
+    //   this.detaillistpm.type = this.type;
+    //   this.detaillistpm.date = this.date;
+    //   this.detaillistpm.empid = this.items.empID;
+    //   console.log('this.detaillistpm', this.detaillistpm);      
+
+    //   this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
+    //     this.data = work;
+
+    //     for (let i = 0; i < this.data.length; i++) {
+    //       this.Customername = this.data[i].CustomerName;
+    //       this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+    //       // for (let j = 0; j < this.data[i].productInstall.length; j++) {
+
+    //       // }
+    //     }
+    //   });     
+    // }
+    // else {
+    //   this.route.queryParams.subscribe(params => {
+    //     this.items = JSON.parse(params["data"]);
+    //   });
+
+    //   console.log('this.items', this.items);
+
+    //   this.detaillistpm.cusID = this.items.item.cusID;
+    //   this.detaillistpm.planID = this.items.item.planID;
+    //   this.detaillistpm.month = this.items.item.month;
+    //   this.detaillistpm.year = this.items.item.year;
+    //   this.detaillistpm.type = this.items.type;
+    //   this.detaillistpm.date = this.items.date;
+    //   this.detaillistpm.empid = this.items.empID;
+
+    //   console.log('this.detaillistpm', this.detaillistpm);
+
+    //   this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
+    //     this.data = work;
+
+    //     for (let i = 0; i < this.data.length; i++) {
+    //       this.Customername = this.data[i].CustomerName;
+    //       this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+    //       console.log('this.data[i].productInstall', this.data[i].productInstall);
+
+    //       // for (let j = 0; j < this.data[i].productInstall.length; j++) {
+
+    //       // }
+    //     }
+    //   });
+      
+    //   // this.storageService.getUser().then(items => {
+    //   //   this.items = items;
+
+    //   //   for (let i = 0; i < this.items.length; i++) {
+    //   //     this.empID = this.items[i].empID;
+    //   //   }
+
+    //   //   this.detaillistpm.cusID = this.cusID;
+    //   //   this.detaillistpm.planID = this.planID;
+    //   //   this.detaillistpm.month = this.month;
+    //   //   this.detaillistpm.year = this.year;
+    //   //   this.detaillistpm.type = this.type;
+    //   //   this.detaillistpm.date = this.date;
+    //   //   this.detaillistpm.empid = this.empID;
+
+    //   //   this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
+    //   //     this.data = work;
+
+    //   //     for (let i = 0; i < this.data.length; i++) {
+    //   //       this.Customername = this.data[i].CustomerName;
+    //   //       this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+    //   //       console.log('this.data[i].productInstall', this.data[i].productInstall);
+
+    //   //       for (let j = 0; j < this.data[i].productInstall.length; j++) {
+
+    //   //       }
+    //   //     }
+    //   //   });
+    //   // });
+    // }
   }
 
   //#endregion
@@ -348,11 +524,14 @@ export class DetaillistpmPage implements OnInit {
         empID: this.empID,
         workclose: workclose,
         item: this.item,
-        date: this.date
+        date: this.date,
+        items: this.items
       }
     });
+
     modal.onDidDismiss().then(data => {
     })
+
     return await modal.present();
   }
 
@@ -439,17 +618,19 @@ export class DetaillistpmPage implements OnInit {
             AssetID: item.AssetID,
             Serial: item.Serial,
             planID: item.planID,
-            empID: this.empID,
+            empID: this.items.empID,
             insID: item.installId,
             type: this.type
           }
+
+          console.log('tran', tran);
 
           this.postDataService.postTranService(tran).then(TranService => {
             // console.log(TranService);
           });
 
           let params = {
-            empID: this.empID,
+            empID: this.items.empID,
             planID: item.planID,
             install: item,
             data: data,
@@ -462,6 +643,8 @@ export class DetaillistpmPage implements OnInit {
             year: this.year,
             sentCM: this.detailPM
           }
+
+          console.log('params', params);
 
           const navigationExtras: NavigationExtras = {
             queryParams: {
@@ -500,6 +683,7 @@ export class DetaillistpmPage implements OnInit {
                       jobtype: "saveclose",
                       workclose: value
                     }
+                    console.log('params ' + value, params);
 
                     this.postDataService.SaveCaseAll(params).then(result => {
                       if (result == true) {
@@ -529,13 +713,13 @@ export class DetaillistpmPage implements OnInit {
                       AssetID: item.AssetID,
                       Serial: item.Serial,
                       planID: item.planID,
-                      empID: this.empID,
+                      empID: this.items.empID,
                       insID: item.installId,
                       type: this.type,
                       workclose: value
                     }
 
-                    console.log('tran', tran);
+                    console.log('tran ' + value, tran);
 
                     this.postDataService.postTranService(tran).then(TranService => {
 
@@ -552,7 +736,9 @@ export class DetaillistpmPage implements OnInit {
                       date: this.date,
                       month: this.month,
                       year: this.year,
+                      empID: this.items.empID,
                     }
+                    console.log('params', params);
 
                     const navigationExtras: NavigationExtras = {
                       queryParams: {
@@ -579,18 +765,18 @@ export class DetaillistpmPage implements OnInit {
           AssetID: item.AssetID,
           Serial: item.Serial,
           planID: item.planID,
-          empID: this.empID,
+          empID: this.items.empID,
           insID: item.installId,
           cause: item.cause,
           type: this.type
         }
-        console.log('tran', tran);
 
         this.postDataService.postTranService(tran).then(TranService => {
           // console.log(TranService);
         });
 
         let params = {
+          empID: this.items.empID,
           planID: item.planID,
           install: item,
           data: data,
@@ -602,7 +788,6 @@ export class DetaillistpmPage implements OnInit {
           month: this.month,
           year: this.year,
         }
-        console.log('params',params);
 
         const navigationExtras: NavigationExtras = {
           queryParams: {
@@ -617,13 +802,14 @@ export class DetaillistpmPage implements OnInit {
           AssetID: item.AssetID,
           Serial: item.Serial,
           planID: item.planID,
-          empID: this.empID,
+          empID: this.items.empID,
           insID: item.installId,
           cause: item.cause,
           type: this.type
         }
         
         let params = {
+          empID: this.items.empID,
           planID: item.planID,
           install: item,
           data: data,
@@ -672,6 +858,7 @@ export class DetaillistpmPage implements OnInit {
           return await modal.present();
         }
         else {
+          //alert();
           this.postDataService.postTranService(tran).then(TranService => {
             // console.log(TranService);
           });
@@ -747,9 +934,10 @@ export class DetaillistpmPage implements OnInit {
       if (this.type == "CM") {
         if (item.WorkCloseID == "WorkClose001" || item.WorkCloseID == "WorkClose003") {
 
-
-        } else {
+        }
+        else {
           let params = {
+            empID: this.items.empID,
             data: data,
             newinstallID: item.newinstallID,
             installID: item.installId,
@@ -757,19 +945,20 @@ export class DetaillistpmPage implements OnInit {
             planID: item.planID,
             type: this.type
           }
-          console.log(params);
+          console.log('params', params);
 
           const navigationExtras: NavigationExtras = {
             queryParams: {
               data: JSON.stringify(params)
             }
           };
+
           this.navCtrl.navigateForward(['/job/jobdetail'], navigationExtras);
-          console.log("sent", navigationExtras);
         }
       }
       else if (this.type != "CM") {
         let params = {
+          empID: this.items.empID,
           data: data,
           installID: item.installId,
           tranID: item.tranID,
@@ -894,7 +1083,7 @@ export class DetaillistpmPage implements OnInit {
         cssClass: 'my-custom-modal-css',
         componentProps: {
           installId: item.installId,
-          empID: this.empID,
+          empID: this.items.empID,
           planID: item.planID,
         }
       });
@@ -909,7 +1098,7 @@ export class DetaillistpmPage implements OnInit {
       component: RequestsparepartPage,
       cssClass: 'my-custom-modal-css-pm',
       componentProps: {
-        empID: this.empID,
+        empID: this.items.empID,
         insID: value.installId,
         planID: value.planID,
         ItemsName: value.ItemsName,
@@ -1076,7 +1265,8 @@ export class DetaillistpmPage implements OnInit {
       type: this.type,
       date: this.date,
       ItemsName: value.ItemsName,
-      Type: "jobrespons"
+      Type: "jobrespons",
+      items: this.items
     }
 
     const navigationExtras: NavigationExtras = {
@@ -1195,7 +1385,7 @@ export class DetaillistpmPage implements OnInit {
       component: LogPage,
       cssClass: 'my-custom-modal-css-pm',
       componentProps: {
-        empID: this.empID,
+        empID: this.items.empID,
         insID: this.insID,
         planID: this.planID,
       }

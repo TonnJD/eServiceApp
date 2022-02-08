@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController, NavParams, AlertController } from '@ionic/angular';
+import { ActivatedRoute, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'app-req-detail',
@@ -16,10 +17,21 @@ export class ReqDetailPage implements OnInit {
   empID;
   reqType;
   reqTypeStr;
+  items;
 
   constructor(
     private modalCtrl: ModalController,
-    private navParams: NavParams) {
+    private navParams: NavParams,
+    private route: ActivatedRoute) {
+
+    this.route.queryParams.subscribe(params => {
+      this.items = JSON.parse(params["data"]);
+      console.log('this.items', this.items);
+      
+    });
+
+    console.log('this.navParams.data', this.navParams.data);
+    
 
     this.data = this.navParams.data;
     this.empID = this.data.empID;

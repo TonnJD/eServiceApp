@@ -7,6 +7,8 @@ import { PostDataService } from '../../../post-data.service';
 import { StorageService } from '../../../storage.service';
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { AuthenticationService } from '../../../auth/authentication.service';
+import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
   selector: 'app-calendarpm',
   templateUrl: './calendarpm.page.html',
@@ -39,23 +41,36 @@ export class CalendarpmPage implements OnInit {
   //#region constructor
   constructor(private postDataService: PostDataService,
     private storageService: StorageService,
-    private auth:AuthenticationService,
-    sanitizer: DomSanitizer) {
-    this.storageService.getUser().then(items => {
-      this.items = items;
-      // console.log(items);      
-      for (let i = 0; i < this.items.length; i++) {
-        this.myempID = this.items[i].empID;
-        console.log(this.myempID);
-      }
-      const month = new Date().getMonth() + 1;
-      const year = new Date().getFullYear();
-      this.myempID = this.myempID
-      this.month = month
-      this.year = year
-      this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/WebFormCalendar.aspx' + '?empid=' + this.myempID + '&year=' + this.year + '&month=' + this.month);
-      // this.url = sanitizer.bypassSecurityTrustResourceUrl('http://localhost:41669/Web/RP_CusTransToReport.aspx' + '?tranID=83203a1c-89d7-4090-a9cb-a351e4c90953');
-    });
+    sanitizer: DomSanitizer,
+    private route: ActivatedRoute
+    ) {
+      this.route.queryParams.subscribe(params => {
+        this.items = JSON.parse(params["data"]);
+        this.myempID = this.items.empID;
+
+        const month = new Date().getMonth() + 1;
+        const year = new Date().getFullYear();
+        this.myempID = this.myempID
+        this.month = month
+        this.year = year
+        this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/WebFormCalendar.aspx' + '?empid=' + this.myempID + '&year=' + this.year + '&month=' + this.month);
+      });
+
+    // this.storageService.getUser().then(items => {
+    //   this.items = items;
+    //   // console.log(items);      
+    //   for (let i = 0; i < this.items.length; i++) {
+    //     this.myempID = this.items[i].empID;
+    //     console.log(this.myempID);
+    //   }
+    //   const month = new Date().getMonth() + 1;
+    //   const year = new Date().getFullYear();
+    //   this.myempID = this.myempID
+    //   this.month = month
+    //   this.year = year
+    //   this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/WebFormCalendar.aspx' + '?empid=' + this.myempID + '&year=' + this.year + '&month=' + this.month);
+    //   // this.url = sanitizer.bypassSecurityTrustResourceUrl('http://localhost:41669/Web/RP_CusTransToReport.aspx' + '?tranID=83203a1c-89d7-4090-a9cb-a351e4c90953');
+    // });
   }
 
   //#endregion

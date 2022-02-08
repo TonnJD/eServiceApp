@@ -40,6 +40,7 @@ export class JobresponsPage implements OnInit {
   No;
   url: SafeResourceUrl;
   jobResponse;
+  items;
   //#endregion
 
   constructor(public modalController: ModalController,
@@ -50,6 +51,7 @@ export class JobresponsPage implements OnInit {
     sanitizer: DomSanitizer,
     private router: Router) {
     this.buttonColor = 'medium';
+
     this.route.queryParams.subscribe(params => {
       this.data = JSON.parse(params["data"]);
       this.insID = this.data.insID;
@@ -61,6 +63,9 @@ export class JobresponsPage implements OnInit {
       this.ItemsName = this.data.ItemsName;
       this.cusID = this.item.cusID;
       this.Type = this.data.Type;
+      this.items = this.data.items.items;
+      console.log('this.items', this.data.items.items);
+      
       this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/TabletRespone.aspx' + '?planID=' + this.planID + "&empId=" + this.empID);
     });
   }
@@ -70,7 +75,15 @@ export class JobresponsPage implements OnInit {
       this.jobResponse = res;
       
       if (this.jobResponse.StatusID == 'Response') {
-        this.router.navigateByUrl('/menu/overview'); 
+        const navigationExtras: NavigationExtras = {
+          queryParams: {
+            data: JSON.stringify(this.items)
+          }
+        };
+
+        console.log('this.items', this.items);
+        
+        this.router.navigate(['/menu/overview'], navigationExtras); 
       }
     });
   }

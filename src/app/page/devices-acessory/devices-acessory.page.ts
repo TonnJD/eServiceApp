@@ -3,7 +3,7 @@ import { PostDataService } from '../../post-data.service';
 import { StorageService, User } from '../../storage.service';
 import { AlertController, NavController, ToastController, ModalController } from '@ionic/angular';
 import { NavigationExtras } from '@angular/router';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { DeviceSpareListPage } from './device-spare-list/device-spare-list.page';
 
 const TOKEN_KEY = 'auth-token';
@@ -25,29 +25,36 @@ export class DevicesAcessoryPage implements OnInit {
 
   constructor(
     private postDataService: PostDataService,
-    private storage: StorageService,
-    private storageService: StorageService,
+    //private storage: StorageService,
+    //private storageService: StorageService,
     private alertCtrl: AlertController,
     private navCtrl: NavController,
     private router: Router,
     private toastCtrl: ToastController,
-    private modalCtrl: ModalController) {
+    private modalCtrl: ModalController,
+    private route: ActivatedRoute) {
+      this.route.queryParams.subscribe(params => {
+        this.items = JSON.parse(params["data"]);
+        this.empID = this.items.empID;
 
-    setTimeout(() => {
-      this.ngOnInit();
-    }, 500);
+        this.loadProduct();
+      });
+
+    // setTimeout(() => {
+    //   this.ngOnInit();
+    // }, 500);
   }
 
   ngOnInit() {
-    this.storageService.getUser().then(items => {
-      this.items = items;
+    // this.storageService.getUser().then(items => {
+    //   this.items = items;
 
-      for (let i = 0; i < this.items.length; i++) {
-        this.empID = this.items[i].empID;
-      }
-    });
+    //   for (let i = 0; i < this.items.length; i++) {
+    //     this.empID = this.items[i].empID;
+    //   }
+    // });
 
-    this.loadProduct();
+    // this.loadProduct();
   }
 
   loadpage() {
