@@ -128,12 +128,13 @@ var DetaillistpmPage = /** @class */ (function () {
         this.route.queryParams.subscribe(function (params) {
             _this.myId = JSON.parse(params["data"]);
             _this.detailPM = JSON.parse(params["data"]);
+            _this.items = _this.myId.items;
+            console.log('this.myId', _this.myId);
             if (_this.myId != "undefined") {
                 _this.item = _this.myId.item;
                 _this.type = _this.myId.type;
                 _this.date = _this.myId.date;
                 _this.datacm = _this.myId.datacm;
-                console.log('this.item PM', _this.item);
                 if (_this.item == undefined || _this.item == "undefined" || _this.item == 'undefined') {
                     _this.cusID = _this.myId.cusID;
                     _this.planID = _this.myId.planID;
@@ -181,9 +182,6 @@ var DetaillistpmPage = /** @class */ (function () {
                         for (var i = 0; i < _this.data.length; i++) {
                             _this.Customername = _this.data[i].CustomerName;
                             _this.data[i].productInstall = JSON.parse(_this.data[i].productInstall);
-                            for (var j = 0; j < _this.data[i].productInstall.length; j++) {
-                                console.log(_this.data[i].productInstall[j]);
-                            }
                         }
                     });
                     _this.type = "INSTALL";
@@ -240,24 +238,13 @@ var DetaillistpmPage = /** @class */ (function () {
                     });
                     _this.type = "UNINSTALL";
                 }
-                _this.ngOnInit();
+                //this.ngOnInit();
             }
             else {
                 alert("ไม่พบข้อมูล");
             }
-        });
-    }
-    //#endregion
-    //#region start
-    DetaillistpmPage.prototype.ngOnInit = function () {
-        var _this = this;
-        if (this.type == "CM") {
-            this.imgbf = true;
-            this.storageService.getUser().then(function (items) {
-                _this.items = items;
-                for (var i = 0; i < _this.items.length; i++) {
-                    _this.empID = _this.items[i].empID;
-                }
+            if (_this.type == "CM") {
+                _this.imgbf = true;
                 _this.detaillistpm.cusID = _this.cusID;
                 _this.detaillistpm.planID = _this.planID;
                 _this.detaillistpm.month = _this.month;
@@ -273,81 +260,233 @@ var DetaillistpmPage = /** @class */ (function () {
                     }
                     console.log('this.data', _this.data);
                 });
-            });
-            var workclose = {
-                jobtype: "getworkclose"
-            };
-            this.postDataService.SaveCaseAll(workclose).then(function (data) {
-                _this.getworkclose = data;
-                for (var i = 0; i < _this.getworkclose.length; i++) {
-                    if (i == 1) {
-                        _this.getworkclose1 = _this.getworkclose[1].SystemDataName;
-                        _this.getworkclosevalue1 = _this.getworkclose[1].SystemID;
-                        _this.text = 'ปิดงาน';
+                var workclose = {
+                    jobtype: "getworkclose"
+                };
+                _this.postDataService.SaveCaseAll(workclose).then(function (data) {
+                    _this.getworkclose = data;
+                    for (var i = 0; i < _this.getworkclose.length; i++) {
+                        if (i == 1) {
+                            _this.getworkclose1 = _this.getworkclose[1].SystemDataName;
+                            _this.getworkclosevalue1 = _this.getworkclose[1].SystemID;
+                            _this.text = 'ปิดงาน';
+                        }
+                        else if (i == 3) {
+                            _this.getworkclose2 = _this.getworkclose[3].SystemDataName;
+                            _this.getworkclosevalue2 = _this.getworkclose[3].SystemID;
+                            _this.text = 'ตกลง';
+                        }
+                        else if (i == 0) {
+                            _this.getworkclose3 = _this.getworkclose[0].SystemDataName;
+                            _this.getworkclosevalue3 = _this.getworkclose[0].SystemID;
+                            _this.text = 'บันทึก';
+                        }
                     }
-                    else if (i == 3) {
-                        _this.getworkclose2 = _this.getworkclose[3].SystemDataName;
-                        _this.getworkclosevalue2 = _this.getworkclose[3].SystemID;
-                        _this.text = 'ตกลง';
-                    }
-                    else if (i == 0) {
-                        _this.getworkclose3 = _this.getworkclose[0].SystemDataName;
-                        _this.getworkclosevalue3 = _this.getworkclose[0].SystemID;
-                        _this.text = 'บันทึก';
-                    }
-                }
-            });
-        }
-        else if (this.type == "INSTALL") {
-            this.imgbf = true;
-            this.storageService.getUser().then(function (items) {
-                _this.items = items;
-                for (var i = 0; i < _this.items.length; i++) {
-                    _this.empID = _this.items[i].empID;
-                }
-                _this.detaillistpm.cusID = _this.cusID;
-                _this.detaillistpm.planID = _this.planID;
-                _this.detaillistpm.month = _this.month;
-                _this.detaillistpm.year = _this.year;
+                });
+            }
+            else if (_this.type == "INSTALL") {
+                _this.imgbf = true;
+                _this.route.queryParams.subscribe(function (params) {
+                    _this.items = JSON.parse(params["data"]);
+                });
+                console.log('this.items install', _this.items);
+                _this.detaillistpm.cusID = _this.items.item.cusID;
+                _this.detaillistpm.planID = _this.items.item.planID;
+                _this.detaillistpm.month = _this.items.item.month;
+                _this.detaillistpm.year = _this.items.item.year;
                 _this.detaillistpm.type = _this.type;
                 _this.detaillistpm.date = _this.date;
-                _this.detaillistpm.empid = _this.empID;
+                _this.detaillistpm.empid = _this.items.empID;
+                console.log('this.detaillistpm install', _this.detaillistpm);
                 _this.postDataService.postDetailListpm(_this.detaillistpm).then(function (work) {
                     _this.data = work;
                     for (var i = 0; i < _this.data.length; i++) {
                         _this.Customername = _this.data[i].CustomerName;
                         _this.data[i].productInstall = JSON.parse(_this.data[i].productInstall);
-                        for (var j = 0; j < _this.data[i].productInstall.length; j++) {
-                        }
                     }
                 });
-            });
-        }
-        else {
-            this.storageService.getUser().then(function (items) {
-                _this.items = items;
-                for (var i = 0; i < _this.items.length; i++) {
-                    _this.empID = _this.items[i].empID;
-                }
-                _this.detaillistpm.cusID = _this.cusID;
-                _this.detaillistpm.planID = _this.planID;
-                _this.detaillistpm.month = _this.month;
-                _this.detaillistpm.year = _this.year;
-                _this.detaillistpm.type = _this.type;
-                _this.detaillistpm.date = _this.date;
-                _this.detaillistpm.empid = _this.empID;
+            }
+            else {
+                _this.route.queryParams.subscribe(function (params) {
+                    _this.items = JSON.parse(params["data"]);
+                });
+                console.log('this.items', _this.items);
+                _this.detaillistpm.cusID = _this.items.item.cusID;
+                _this.detaillistpm.planID = _this.items.item.planID;
+                _this.detaillistpm.month = _this.items.item.month;
+                _this.detaillistpm.year = _this.items.item.year;
+                _this.detaillistpm.type = _this.items.type;
+                _this.detaillistpm.date = _this.items.date;
+                _this.detaillistpm.empid = _this.items.empID;
+                console.log('this.detaillistpm', _this.detaillistpm);
                 _this.postDataService.postDetailListpm(_this.detaillistpm).then(function (work) {
                     _this.data = work;
                     for (var i = 0; i < _this.data.length; i++) {
                         _this.Customername = _this.data[i].CustomerName;
                         _this.data[i].productInstall = JSON.parse(_this.data[i].productInstall);
                         console.log('this.data[i].productInstall', _this.data[i].productInstall);
-                        for (var j = 0; j < _this.data[i].productInstall.length; j++) {
-                        }
                     }
                 });
-            });
-        }
+            }
+        });
+    }
+    //#endregion
+    //#region start
+    DetaillistpmPage.prototype.ngOnInit = function () {
+        // if (this.type == "CM") {
+        //   this.imgbf = true
+        //   // this.storageService.getUser().then(items => {
+        //   //   this.items = items;
+        //   //   for (let i = 0; i < this.items.length; i++) {
+        //   //     this.empID = this.items[i].empID;
+        //   //   }
+        //   //   this.detaillistpm.cusID = this.cusID;
+        //   //   this.detaillistpm.planID = this.planID;
+        //   //   this.detaillistpm.month = this.month;
+        //   //   this.detaillistpm.year = this.year;
+        //   //   this.detaillistpm.type = this.type;
+        //   //   this.detaillistpm.date = this.date;
+        //   //   this.detaillistpm.empid = this.empID;
+        //   //   this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
+        //   //     this.data = work;
+        //   //     for (let i = 0; i < this.data.length; i++) {
+        //   //       this.Customername = this.data[i].CustomerName;
+        //   //       this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+        //   //     }
+        //   //     console.log('this.data', this.data);
+        //   //   });
+        //   // });
+        //   this.detaillistpm.cusID = this.cusID;
+        //   this.detaillistpm.planID = this.planID;
+        //   this.detaillistpm.month = this.month;
+        //   this.detaillistpm.year = this.year;
+        //   this.detaillistpm.type = this.type;
+        //   this.detaillistpm.date = this.date;
+        //   this.detaillistpm.empid = this.empID;
+        //   this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
+        //     this.data = work;
+        //     for (let i = 0; i < this.data.length; i++) {
+        //       this.Customername = this.data[i].CustomerName;
+        //       this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+        //     }
+        //     console.log('this.data', this.data);
+        //   });
+        //   //console.log('this.items', this.items);
+        //   let workclose = {
+        //     jobtype: "getworkclose"
+        //   }
+        //   this.postDataService.SaveCaseAll(workclose).then(data => {
+        //     this.getworkclose = data
+        //     for (let i = 0; i < this.getworkclose.length; i++) {
+        //       if (i == 1) {
+        //         this.getworkclose1 = this.getworkclose[1].SystemDataName;
+        //         this.getworkclosevalue1 = this.getworkclose[1].SystemID;
+        //         this.text = 'ปิดงาน'
+        //       } else if (i == 3) {
+        //         this.getworkclose2 = this.getworkclose[3].SystemDataName;
+        //         this.getworkclosevalue2 = this.getworkclose[3].SystemID;
+        //         this.text = 'ตกลง'
+        //       } else if (i == 0) {
+        //         this.getworkclose3 = this.getworkclose[0].SystemDataName;
+        //         this.getworkclosevalue3 = this.getworkclose[0].SystemID;
+        //         this.text = 'บันทึก'
+        //       }
+        //     }
+        //   });
+        // }
+        // else if (this.type == "INSTALL") {
+        //   this.imgbf = true
+        //   // this.storageService.getUser().then(items => {
+        //   //   this.items = items;
+        //   //   for (let i = 0; i < this.items.length; i++) {
+        //   //     this.empID = this.items[i].empID;
+        //   //   }
+        //   //   this.detaillistpm.cusID = this.cusID;
+        //   //   this.detaillistpm.planID = this.planID;
+        //   //   this.detaillistpm.month = this.month;
+        //   //   this.detaillistpm.year = this.year;
+        //   //   this.detaillistpm.type = this.type;
+        //   //   this.detaillistpm.date = this.date;
+        //   //   this.detaillistpm.empid = this.empID;
+        //   //   this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
+        //   //     this.data = work;
+        //   //     for (let i = 0; i < this.data.length; i++) {
+        //   //       this.Customername = this.data[i].CustomerName;
+        //   //       this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+        //   //       for (let j = 0; j < this.data[i].productInstall.length; j++) {
+        //   //       }
+        //   //     }
+        //   //   });
+        //   // });
+        //   this.route.queryParams.subscribe(params => {
+        //     this.items = JSON.parse(params["data"]);
+        //   });
+        //   console.log('this.items', this.items); 
+        //   this.detaillistpm.cusID = this.items.item.cusID;
+        //   this.detaillistpm.planID = this.items.item.planID;
+        //   this.detaillistpm.month = this.items.item.month;
+        //   this.detaillistpm.year = this.items.item.year;
+        //   this.detaillistpm.type = this.type;
+        //   this.detaillistpm.date = this.date;
+        //   this.detaillistpm.empid = this.items.empID;
+        //   console.log('this.detaillistpm', this.detaillistpm);      
+        //   this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
+        //     this.data = work;
+        //     for (let i = 0; i < this.data.length; i++) {
+        //       this.Customername = this.data[i].CustomerName;
+        //       this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+        //       // for (let j = 0; j < this.data[i].productInstall.length; j++) {
+        //       // }
+        //     }
+        //   });     
+        // }
+        // else {
+        //   this.route.queryParams.subscribe(params => {
+        //     this.items = JSON.parse(params["data"]);
+        //   });
+        //   console.log('this.items', this.items);
+        //   this.detaillistpm.cusID = this.items.item.cusID;
+        //   this.detaillistpm.planID = this.items.item.planID;
+        //   this.detaillistpm.month = this.items.item.month;
+        //   this.detaillistpm.year = this.items.item.year;
+        //   this.detaillistpm.type = this.items.type;
+        //   this.detaillistpm.date = this.items.date;
+        //   this.detaillistpm.empid = this.items.empID;
+        //   console.log('this.detaillistpm', this.detaillistpm);
+        //   this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
+        //     this.data = work;
+        //     for (let i = 0; i < this.data.length; i++) {
+        //       this.Customername = this.data[i].CustomerName;
+        //       this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+        //       console.log('this.data[i].productInstall', this.data[i].productInstall);
+        //       // for (let j = 0; j < this.data[i].productInstall.length; j++) {
+        //       // }
+        //     }
+        //   });
+        //   // this.storageService.getUser().then(items => {
+        //   //   this.items = items;
+        //   //   for (let i = 0; i < this.items.length; i++) {
+        //   //     this.empID = this.items[i].empID;
+        //   //   }
+        //   //   this.detaillistpm.cusID = this.cusID;
+        //   //   this.detaillistpm.planID = this.planID;
+        //   //   this.detaillistpm.month = this.month;
+        //   //   this.detaillistpm.year = this.year;
+        //   //   this.detaillistpm.type = this.type;
+        //   //   this.detaillistpm.date = this.date;
+        //   //   this.detaillistpm.empid = this.empID;
+        //   //   this.postDataService.postDetailListpm(this.detaillistpm).then(work => {
+        //   //     this.data = work;
+        //   //     for (let i = 0; i < this.data.length; i++) {
+        //   //       this.Customername = this.data[i].CustomerName;
+        //   //       this.data[i].productInstall = JSON.parse(this.data[i].productInstall);
+        //   //       console.log('this.data[i].productInstall', this.data[i].productInstall);
+        //   //       for (let j = 0; j < this.data[i].productInstall.length; j++) {
+        //   //       }
+        //   //     }
+        //   //   });
+        //   // });
+        // }
     };
     //#endregion
     DetaillistpmPage.prototype.popupclose = function (item, header, workclose) {
@@ -368,7 +507,8 @@ var DetaillistpmPage = /** @class */ (function () {
                                     empID: this.empID,
                                     workclose: workclose,
                                     item: this.item,
-                                    date: this.date
+                                    date: this.date,
+                                    items: this.items
                                 }
                             })];
                     case 1:
@@ -468,15 +608,16 @@ var DetaillistpmPage = /** @class */ (function () {
                             AssetID: item.AssetID,
                             Serial: item.Serial,
                             planID: item.planID,
-                            empID: this.empID,
+                            empID: this.items.empID,
                             insID: item.installId,
                             type: this.type
                         };
+                        console.log('tran', tran);
                         this.postDataService.postTranService(tran).then(function (TranService) {
                             // console.log(TranService);
                         });
                         params = {
-                            empID: this.empID,
+                            empID: this.items.empID,
                             planID: item.planID,
                             install: item,
                             data: data,
@@ -489,6 +630,7 @@ var DetaillistpmPage = /** @class */ (function () {
                             year: this.year,
                             sentCM: this.detailPM
                         };
+                        console.log('params', params);
                         navigationExtras = {
                             queryParams: {
                                 data: JSON.stringify(params)
@@ -523,6 +665,7 @@ var DetaillistpmPage = /** @class */ (function () {
                                                 jobtype: "saveclose",
                                                 workclose: value
                                             };
+                                            console.log('params ' + value, params);
                                             _this.postDataService.SaveCaseAll(params).then(function (result) {
                                                 if (result == true) {
                                                     _this.imgbf = true;
@@ -549,12 +692,12 @@ var DetaillistpmPage = /** @class */ (function () {
                                                 AssetID: item.AssetID,
                                                 Serial: item.Serial,
                                                 planID: item.planID,
-                                                empID: _this.empID,
+                                                empID: _this.items.empID,
                                                 insID: item.installId,
                                                 type: _this.type,
                                                 workclose: value
                                             };
-                                            console.log('tran', tran);
+                                            console.log('tran ' + value, tran);
                                             _this.postDataService.postTranService(tran).then(function (TranService) {
                                             });
                                             var params = {
@@ -568,7 +711,9 @@ var DetaillistpmPage = /** @class */ (function () {
                                                 date: _this.date,
                                                 month: _this.month,
                                                 year: _this.year,
+                                                empID: _this.items.empID,
                                             };
+                                            console.log('params', params);
                                             var navigationExtras = {
                                                 queryParams: {
                                                     data: JSON.stringify(params)
@@ -595,16 +740,16 @@ var DetaillistpmPage = /** @class */ (function () {
                             AssetID: item.AssetID,
                             Serial: item.Serial,
                             planID: item.planID,
-                            empID: this.empID,
+                            empID: this.items.empID,
                             insID: item.installId,
                             cause: item.cause,
                             type: this.type
                         };
-                        console.log('tran', tran);
                         this.postDataService.postTranService(tran).then(function (TranService) {
                             // console.log(TranService);
                         });
                         params = {
+                            empID: this.items.empID,
                             planID: item.planID,
                             install: item,
                             data: data,
@@ -616,7 +761,6 @@ var DetaillistpmPage = /** @class */ (function () {
                             month: this.month,
                             year: this.year,
                         };
-                        console.log('params', params);
                         navigationExtras = {
                             queryParams: {
                                 data: JSON.stringify(params)
@@ -630,12 +774,13 @@ var DetaillistpmPage = /** @class */ (function () {
                             AssetID: item.AssetID,
                             Serial: item.Serial,
                             planID: item.planID,
-                            empID: this.empID,
+                            empID: this.items.empID,
                             insID: item.installId,
                             cause: item.cause,
                             type: this.type
                         };
                         params_1 = {
+                            empID: this.items.empID,
                             planID: item.planID,
                             install: item,
                             data: data,
@@ -679,6 +824,7 @@ var DetaillistpmPage = /** @class */ (function () {
                         return [4 /*yield*/, modal.present()];
                     case 10: return [2 /*return*/, _a.sent()];
                     case 11:
+                        //alert();
                         this.postDataService.postTranService(tran_1).then(function (TranService) {
                             // console.log(TranService);
                         });
@@ -697,6 +843,7 @@ var DetaillistpmPage = /** @class */ (function () {
                                 }
                                 else {
                                     params = {
+                                        empID: this.items.empID,
                                         data: data,
                                         newinstallID: item.newinstallID,
                                         installID: item.installId,
@@ -704,18 +851,18 @@ var DetaillistpmPage = /** @class */ (function () {
                                         planID: item.planID,
                                         type: this.type
                                     };
-                                    console.log(params);
+                                    console.log('params', params);
                                     navigationExtras = {
                                         queryParams: {
                                             data: JSON.stringify(params)
                                         }
                                     };
                                     this.navCtrl.navigateForward(['/job/jobdetail'], navigationExtras);
-                                    console.log("sent", navigationExtras);
                                 }
                             }
                             else if (this.type != "CM") {
                                 params = {
+                                    empID: this.items.empID,
                                     data: data,
                                     installID: item.installId,
                                     tranID: item.tranID,
@@ -838,7 +985,7 @@ var DetaillistpmPage = /** @class */ (function () {
                                 cssClass: 'my-custom-modal-css',
                                 componentProps: {
                                     installId: item.installId,
-                                    empID: this.empID,
+                                    empID: this.items.empID,
                                     planID: item.planID,
                                 }
                             })];
@@ -862,7 +1009,7 @@ var DetaillistpmPage = /** @class */ (function () {
                             component: _detailofdetaillistpm_requestsparepart_requestsparepart_page__WEBPACK_IMPORTED_MODULE_10__["RequestsparepartPage"],
                             cssClass: 'my-custom-modal-css-pm',
                             componentProps: {
-                                empID: this.empID,
+                                empID: this.items.empID,
                                 insID: value.installId,
                                 planID: value.planID,
                                 ItemsName: value.ItemsName,
@@ -1020,7 +1167,8 @@ var DetaillistpmPage = /** @class */ (function () {
                     type: this.type,
                     date: this.date,
                     ItemsName: value.ItemsName,
-                    Type: "jobrespons"
+                    Type: "jobrespons",
+                    items: this.items
                 };
                 navigationExtras = {
                     queryParams: {
@@ -1090,7 +1238,7 @@ var DetaillistpmPage = /** @class */ (function () {
                             component: _detaillistpm_log_log_page__WEBPACK_IMPORTED_MODULE_9__["LogPage"],
                             cssClass: 'my-custom-modal-css-pm',
                             componentProps: {
-                                empID: this.empID,
+                                empID: this.items.empID,
                                 insID: this.insID,
                                 planID: this.planID,
                             }

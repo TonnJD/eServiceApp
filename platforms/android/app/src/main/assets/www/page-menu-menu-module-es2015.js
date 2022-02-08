@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-menu side=\"start\" menuId=\"first\" contentId=\"content1\">\r\n  <ion-header>\r\n    <ion-toolbar color=\"primary\">\r\n      <ion-buttons slot=\"start\">\r\n        <img src=\"../../../assets/img/logo.png\" width=\"20%\" />\r\n        <ion-title>eService</ion-title>\r\n      </ion-buttons>\r\n      <ion-menu-button slot=\"end\"></ion-menu-button>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  <ion-content>\r\n    <ion-list *ngFor=\"let p of pageservice\">\r\n      <ion-menu-toggle menu=\"first\" autoHide=\"false\">\r\n        <ion-item [routerLink]=\"p.url\" routerDirection=\"root\" routerLinkActive=\"active\">\r\n          <ion-icon [name]=\"p.icon\" slot=\"start\"></ion-icon>\r\n          <ion-label>\r\n            {{ p.title }}\r\n          </ion-label>\r\n        </ion-item>\r\n      </ion-menu-toggle>\r\n    </ion-list>\r\n  </ion-content>\r\n</ion-menu>\r\n\r\n<ion-router-outlet id=\"content1\"></ion-router-outlet>"
+module.exports = "<ion-menu side=\"start\" menuId=\"first\" contentId=\"content1\">\r\n  <ion-header>\r\n    <ion-toolbar color=\"primary\">\r\n      <ion-buttons slot=\"start\">\r\n        <img src=\"../../../assets/img/logo.png\" width=\"20%\" />\r\n        <ion-title>eService</ion-title>\r\n      </ion-buttons>\r\n      <ion-menu-button slot=\"end\"></ion-menu-button>\r\n    </ion-toolbar>\r\n  </ion-header>\r\n  <ion-content>\r\n    <!-- <ion-list *ngFor=\"let p of pageservice\">\r\n      <ion-menu-toggle menu=\"first\" autoHide=\"false\">\r\n        <ion-item [routerLink]=\"p.url\" routerDirection=\"root\" routerLinkActive=\"active\">\r\n          <ion-icon [name]=\"p.icon\" slot=\"start\"></ion-icon>\r\n          <ion-label>\r\n            {{ p.title }}\r\n          </ion-label>\r\n        </ion-item>\r\n      </ion-menu-toggle>\r\n    </ion-list> -->\r\n\r\n    <ion-list *ngFor=\"let p of pageservice\">\r\n      <ion-menu-toggle menu=\"first\" autoHide=\"false\">\r\n        <ion-item routerDirection=\"root\" routerLinkActive=\"active\" (click)=\"onOpenItem(p)\">\r\n          <ion-icon [name]=\"p.icon\" slot=\"start\"></ion-icon>\r\n          <ion-label>\r\n            {{ p.title }}\r\n          </ion-label>\r\n        </ion-item>\r\n      </ion-menu-toggle>\r\n    </ion-list>\r\n\r\n  </ion-content>\r\n</ion-menu>\r\n\r\n<ion-router-outlet id=\"content1\"></ion-router-outlet>"
 
 /***/ }),
 
@@ -123,63 +123,77 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _storage_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../storage.service */ "./src/app/storage.service.ts");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
 
 
 
 
 let MenuPage = class MenuPage {
-    constructor(storageService, menu) {
+    constructor(storageService, menu, route, router) {
         this.storageService = storageService;
         this.menu = menu;
+        this.route = route;
+        this.router = router;
         this.pageservice = [
             {
+                id: 'overview',
                 title: 'ภาพรวมการทำงาน',
                 url: '/menu/overview',
-                icon: 'home'
+                icon: 'home',
             },
             {
+                id: 'job',
                 title: 'งานในความรับผิดชอบ',
                 url: '/menu/job',
                 icon: 'person'
             },
-            // {
-            //   title: 'งานทั้งหมด',
-            //   url: '/menu/joball',
-            //   icon: 'people'
-            // },
             {
+                id: 'sparepart',
                 title: 'เบิกอะไหล่',
                 url: '/menu/sparepart',
                 icon: 'hammer'
             },
             {
+                id: 'device',
                 title: 'เครื่องและอุปกรณ์คงเหลือ',
                 url: '/menu/device',
                 icon: 'briefcase'
             },
             {
+                id: 'product',
                 title: 'สินค้าและคู่มือ',
                 url: '/menu/product',
                 icon: 'bookmarks'
             },
-            // {
-            //   title: 'ข่าว',
-            //   url: '/menu/news',
-            //   icon: 'alert'
-            // },
             {
+                id: 'setting',
                 title: 'ตั้งค่า',
                 url: '/menu/setting',
                 icon: 'settings'
             }
         ];
+        this.route.queryParams.subscribe(params => {
+            this.items = JSON.parse(params["data"]);
+        });
+    }
+    onOpenItem(item) {
+        const navigationExtras = {
+            queryParams: {
+                data: JSON.stringify(this.items)
+            }
+        };
+        console.log('this.items menu', this.items);
+        this.router.navigate([item.url], navigationExtras);
     }
     ngOnInit() {
     }
 };
 MenuPage.ctorParameters = () => [
     { type: _storage_service__WEBPACK_IMPORTED_MODULE_2__["StorageService"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["MenuController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["MenuController"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] }
 ];
 MenuPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -188,7 +202,9 @@ MenuPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         styles: [__webpack_require__(/*! ./menu.page.scss */ "./src/app/page/menu/menu.page.scss")]
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_storage_service__WEBPACK_IMPORTED_MODULE_2__["StorageService"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["MenuController"]])
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["MenuController"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"]])
 ], MenuPage);
 
 

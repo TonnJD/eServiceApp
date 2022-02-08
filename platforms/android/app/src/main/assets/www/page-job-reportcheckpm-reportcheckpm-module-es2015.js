@@ -97,34 +97,36 @@ __webpack_require__.r(__webpack_exports__);
 let ReportcheckpmPage = class ReportcheckpmPage {
     //#endregion
     //#region constructor
-    constructor(DataService, alertController, route, navCtrl, storageService, postDataService) {
+    constructor(DataService, alertCtrl, route, navCtrl, storageService, postDataService, loadingCtrl) {
         this.DataService = DataService;
-        this.alertController = alertController;
+        this.alertCtrl = alertCtrl;
         this.route = route;
         this.navCtrl = navCtrl;
         this.storageService = storageService;
         this.postDataService = postDataService;
+        this.loadingCtrl = loadingCtrl;
         this.type = "PM";
         this.load = false;
         this.json;
         this.listpmdetail = [];
         this.job = [];
-        this.storageService.getUser().then(items => {
-            this.items = items;
-            for (let i = 0; i < this.items.length; i++) {
-                this.myempID = this.items[i].empID;
-                this.name = this.items[i].name;
-            }
-        });
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;  
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.myempID = this.items[i].empID;
+        //     this.name = this.items[i].name;
+        //   }
+        // });
         this.route.queryParams.subscribe(params => {
+            this.items = JSON.parse(params["data"]);
             this.listpm = null;
             this.ChangeMonth();
-            this.ngOnInit();
+            //this.ngOnInit();
         });
-        this.ChangeMonth();
-        setTimeout(() => {
-            this.ngOnInit();
-        }, 500);
+        // this.ChangeMonth()
+        // setTimeout(() => {
+        //   this.ngOnInit();
+        // }, 500);
     }
     //#endregion
     //#region load 
@@ -141,7 +143,7 @@ let ReportcheckpmPage = class ReportcheckpmPage {
     //#endregion
     //#region click
     click(item, data) {
-        console.log('item', item);
+        console.log('item click', item);
         let param = {
             planID: item.value.planID,
             empID: this.empid,
@@ -151,6 +153,7 @@ let ReportcheckpmPage = class ReportcheckpmPage {
             console.log(status);
             if (status == true) {
                 let params = {
+                    empID: this.items.empID,
                     item: item.value,
                     type: this.type,
                     date: data.planDate,
@@ -172,7 +175,7 @@ let ReportcheckpmPage = class ReportcheckpmPage {
     //#region alert status
     status() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            const alert = yield this.alertController.create({
+            const alert = yield this.alertCtrl.create({
                 message: 'ยังไม่ถึงกำหนดรอบการตรวจเช็ค',
                 buttons: ['OK']
             });
@@ -180,8 +183,21 @@ let ReportcheckpmPage = class ReportcheckpmPage {
         });
     }
     //#endregion
+    loadingData() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            let loading = yield this.loadingCtrl.create({
+                message: 'Please wait...'
+            });
+            loading.present();
+            setTimeout(() => {
+                loading.dismiss();
+            }, 5000);
+        });
+    }
     //#region ChangMonth
     ChangeMonth() {
+        this.load = true;
+        this.listpm = false;
         const month = new Date().getMonth() + 1;
         this.intMonth = month;
         const year = new Date().getFullYear();
@@ -251,128 +267,135 @@ let ReportcheckpmPage = class ReportcheckpmPage {
         // if (this.intYear > year) {
         //   this.intYear = year
         // }
-        this.storageService.getUser().then(items => {
-            this.items = items;
-            // console.log(items);      
-            for (let i = 0; i < this.items.length; i++) {
-                this.empid = this.items[i].empID;
-                this.name = this.items[i].name;
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   // console.log(items);      
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.empid = this.items[i].empID
+        //     this.name = this.items[i].name;
+        //   }
+        //   this.job.empID = this.empid;
+        //   this.job.month = this.intMonth;
+        //   this.job.year = this.intYear;
+        //   this.job.jobtype = this.type
+        //   console.log(this.job);
+        //   this.postDataService.postJobList(this.job).then(work => {
+        //     this.listpm = work;
+        //     for (let i = 0; i < this.listpm.length; i++) {
+        //       this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
+        //     }
+        //   });
+        // });
+        console.log('this.items', this.items);
+        // this.job.empID = this.empid;
+        // this.job.month = this.intMonth;
+        // this.job.year = this.intYear;
+        // this.job.jobtype = this.type
+        let parJob = {
+            empID: this.items.empID,
+            month: this.intMonth,
+            year: this.intYear,
+            jobtype: this.type,
+        };
+        this.postDataService.postJobList(parJob).then(work => {
+            this.listpm = work;
+            for (let i = 0; i < this.listpm.length; i++) {
+                this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
             }
-            this.job.empID = this.empid;
-            this.job.month = this.intMonth;
-            this.job.year = this.intYear;
-            this.job.jobtype = this.type;
-            console.log(this.job);
-            this.postDataService.postJobList(this.job).then(work => {
-                this.listpm = work;
-                for (let i = 0; i < this.listpm.length; i++) {
-                    this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
-                }
-            });
         });
     }
     //#endregion
     //#region ChangMonthNext
     changeMonthNext(value) {
-        console.log(value);
-        this.load = true;
-        // const year = new Date().getFullYear();
-        //#region nextmonth
-        if (this.month == 'มกราคม') {
-            this.month = 'กุมภาพันธ์';
-            this.intMonth = 2;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'กุมภาพันธ์') {
-            this.month = 'มีนาคม';
-            this.intMonth = 3;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'มีนาคม') {
-            this.month = 'เมษายน';
-            this.intMonth = 4;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'เมษายน') {
-            this.month = 'พฤษภาคม';
-            this.intMonth = 5;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'พฤษภาคม') {
-            this.month = 'มิถุนายน';
-            this.intMonth = 6;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'มิถุนายน') {
-            this.month = 'กรกฎาคม';
-            this.intMonth = 7;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'กรกฎาคม') {
-            this.month = 'สิงหาคม';
-            this.intMonth = 8;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'สิงหาคม') {
-            this.month = 'กันยายน';
-            this.intMonth = 9;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'กันยายน') {
-            this.month = 'ตุลาคม';
-            this.intMonth = 10;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'ตุลาคม') {
-            this.month = 'พฤศจิกายน';
-            this.intMonth = 11;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'พฤศจิกายน') {
-            this.month = 'ธันวาคม';
-            this.intMonth = 12;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'ธันวาคม') {
-            this.month = 'มกราคม';
-            this.intMonth = 1;
-            this.intYear = this.intYear + 1;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        // if (this.intYear > year) {
-        //   this.intYear = year
-        // }
-        //#endregion
-        if (value == false) {
-            this.job.empID = this.empid;
-            this.job.month = this.intMonth;
-            this.job.year = this.intYear;
-            this.job.jobtype = this.type;
-            console.log(this.job);
-            this.postDataService.postJobList(this.job).then(work => {
-                this.listpm = work;
-                for (let i = 0; i < this.listpm.length; i++) {
-                    this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
-                }
-            });
-        }
-        if (value != false) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            console.log('value next', value);
+            this.load = true;
             this.listpm = false;
-        }
-        this.storageService.getUser().then(items => {
-            this.items = items;
-            // console.log(items);      
-            for (let i = 0; i < this.items.length; i++) {
-                this.empid = this.items[i].empID;
-                this.name = this.items[i].name;
+            // const year = new Date().getFullYear();
+            //#region nextmonth
+            console.log('this.month', this.month);
+            console.log('this.intMonth', this.intMonth);
+            console.log('this.intYear', this.intYear);
+            if (this.month == 'มกราคม') {
+                this.month = 'กุมภาพันธ์';
+                this.intMonth = 2;
+                this.textShow = this.month + " " + this.intYear;
             }
-            this.job.empID = this.empid;
-            this.job.month = this.intMonth;
-            this.job.year = this.intYear;
-            this.job.jobtype = this.type;
-            console.log(this.job);
-            this.postDataService.postJobList(this.job).then(work => {
+            else if (this.month == 'กุมภาพันธ์') {
+                this.month = 'มีนาคม';
+                this.intMonth = 3;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'มีนาคม') {
+                this.month = 'เมษายน';
+                this.intMonth = 4;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'เมษายน') {
+                this.month = 'พฤษภาคม';
+                this.intMonth = 5;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'พฤษภาคม') {
+                this.month = 'มิถุนายน';
+                this.intMonth = 6;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'มิถุนายน') {
+                this.month = 'กรกฎาคม';
+                this.intMonth = 7;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'กรกฎาคม') {
+                this.month = 'สิงหาคม';
+                this.intMonth = 8;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'สิงหาคม') {
+                this.month = 'กันยายน';
+                this.intMonth = 9;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'กันยายน') {
+                this.month = 'ตุลาคม';
+                this.intMonth = 10;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'ตุลาคม') {
+                this.month = 'พฤศจิกายน';
+                this.intMonth = 11;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'พฤศจิกายน') {
+                this.month = 'ธันวาคม';
+                this.intMonth = 12;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'ธันวาคม') {
+                this.month = 'มกราคม';
+                this.intMonth = 1;
+                this.intYear = this.intYear + 1;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            // if (this.intYear > year) {
+            //   this.intYear = year
+            // }
+            //#endregion
+            if (value == false) {
+                // this.job.empID = this.empid;
+                // this.job.month = this.intMonth;
+                // this.job.year = this.intYear;
+                // this.job.jobtype = this.type      
+            }
+            let parJob = {
+                empID: this.items.empID,
+                month: this.intMonth,
+                year: this.intYear,
+                jobtype: this.type,
+            };
+            this.postDataService.postJobList(parJob).then(work => {
                 this.listpm = work;
+                console.log('this.listpm next', this.listpm);
                 for (let i = 0; i < this.listpm.length; i++) {
                     this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
                 }
@@ -380,129 +403,170 @@ let ReportcheckpmPage = class ReportcheckpmPage {
                     this.load = false;
                 }
             });
+            // if (value != false) {
+            //   this.listpm = false;
+            // }
+            // this.storageService.getUser().then(items => {
+            //   this.items = items;
+            //   // console.log(items);      
+            //   for (let i = 0; i < this.items.length; i++) {
+            //     this.empid = this.items[i].empID
+            //     this.name = this.items[i].name;
+            //   }
+            //   this.job.empID = this.empid;
+            //   this.job.month = this.intMonth;
+            //   this.job.year = this.intYear;
+            //   this.job.jobtype = this.type
+            //   console.log(this.job);
+            //   this.postDataService.postJobList(this.job).then(work => {
+            //     this.listpm = work;
+            //     for (let i = 0; i < this.listpm.length; i++) {
+            //       this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
+            //     }
+            //     if (this.listpm == false) {
+            //       this.load = false;
+            //     }
+            //   });
+            // });
         });
     }
     //#endregion
     //#region ChangBack
     changeMonthBack(value) {
-        this.load = true;
-        //#region backmonth
-        if (this.month == 'มกราคม') {
-            this.month = 'ธันวาคม';
-            this.intMonth = 12;
-            this.intYear = this.intYear - 1;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'กุมภาพันธ์') {
-            this.month = 'มกราคม';
-            this.intMonth = 1;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'มีนาคม') {
-            this.month = 'กุมภาพันธ์';
-            this.intMonth = 2;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'เมษายน') {
-            this.month = 'มีนาคม';
-            this.intMonth = 3;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'พฤษภาคม') {
-            this.month = 'เมษายน';
-            this.intMonth = 4;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'มิถุนายน') {
-            this.month = 'พฤษภาคม';
-            this.intMonth = 5;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'กรกฎาคม') {
-            this.month = 'มิถุนายน';
-            this.intMonth = 6;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'สิงหาคม') {
-            this.month = 'กรกฎาคม';
-            this.intMonth = 7;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'กันยายน') {
-            this.month = 'สิงหาคม';
-            this.intMonth = 8;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'ตุลาคม') {
-            this.month = 'กันยายน';
-            this.intMonth = 9;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'พฤศจิกายน') {
-            this.month = 'ตุลาคม';
-            this.intMonth = 10;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        else if (this.month == 'ธันวาคม') {
-            this.month = 'พฤศจิกายน';
-            this.intMonth = 11;
-            this.textShow = this.month + " " + this.intYear;
-        }
-        //#endregion
-        if (value == false) {
-            this.job.empID = this.empid;
-            this.job.month = this.intMonth;
-            this.job.year = this.intYear;
-            this.job.jobtype = this.type;
-            console.log(this.job);
-            this.postDataService.postJobList(this.job).then(work => {
-                this.listpm = work;
-                console.log(this.listpm);
-                for (let i = 0; i < this.listpm.length; i++) {
-                    this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
-                }
-                // console.log('listpm', this.listpm);
-            });
-        }
-        if (value != false) {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            console.log('value back', value);
+            this.load = true;
             this.listpm = false;
-        }
-        this.storageService.getUser().then(items => {
-            this.items = items;
-            // console.log(items);      
-            for (let i = 0; i < this.items.length; i++) {
-                this.empid = this.items[i].empID;
-                this.name = this.items[i].name;
+            //#region backmonth
+            console.log('this.month', this.month);
+            console.log('this.intMonth', this.intMonth);
+            console.log('this.intYear', this.intYear);
+            if (this.month == 'มกราคม') {
+                this.month = 'ธันวาคม';
+                this.intMonth = 12;
+                this.intYear = this.intYear - 1;
+                this.textShow = this.month + " " + this.intYear;
             }
-            this.job.empID = this.empid;
-            this.job.month = this.intMonth;
-            this.job.year = this.intYear;
-            this.job.jobtype = this.type;
-            console.log(this.job);
-            this.postDataService.postJobList(this.job).then(work => {
+            else if (this.month == 'กุมภาพันธ์') {
+                this.month = 'มกราคม';
+                this.intMonth = 1;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'มีนาคม') {
+                this.month = 'กุมภาพันธ์';
+                this.intMonth = 2;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'เมษายน') {
+                this.month = 'มีนาคม';
+                this.intMonth = 3;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'พฤษภาคม') {
+                this.month = 'เมษายน';
+                this.intMonth = 4;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'มิถุนายน') {
+                this.month = 'พฤษภาคม';
+                this.intMonth = 5;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'กรกฎาคม') {
+                this.month = 'มิถุนายน';
+                this.intMonth = 6;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'สิงหาคม') {
+                this.month = 'กรกฎาคม';
+                this.intMonth = 7;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'กันยายน') {
+                this.month = 'สิงหาคม';
+                this.intMonth = 8;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'ตุลาคม') {
+                this.month = 'กันยายน';
+                this.intMonth = 9;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'พฤศจิกายน') {
+                this.month = 'ตุลาคม';
+                this.intMonth = 10;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            else if (this.month == 'ธันวาคม') {
+                this.month = 'พฤศจิกายน';
+                this.intMonth = 11;
+                this.textShow = this.month + " " + this.intYear;
+            }
+            //#endregion
+            if (value == false) {
+                // this.job.empID = this.empid;
+                // this.job.month = this.intMonth;
+                // this.job.year = this.intYear;
+                // this.job.jobtype = this.type
+                // console.log(this.job);
+            }
+            let parJob = {
+                empID: this.items.empID,
+                month: this.intMonth,
+                year: this.intYear,
+                jobtype: this.type,
+            };
+            this.postDataService.postJobList(parJob).then(work => {
                 this.listpm = work;
-                console.log(this.listpm);
+                //console.log('this.listpm back', this.listpm);
                 for (let i = 0; i < this.listpm.length; i++) {
                     this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
                 }
-                // console.log('listpm', this.listpm);
                 if (this.listpm == false) {
                     this.load = false;
                 }
             });
+            // this.load = false;
+            // if (value != false) {
+            //   this.listpm = false;
+            // }    
+            // this.storageService.getUser().then(items => {
+            //   this.items = items;
+            //   // console.log(items);      
+            //   for (let i = 0; i < this.items.length; i++) {
+            //     this.empid = this.items[i].empID
+            //     this.name = this.items[i].name;
+            //   }
+            //   this.job.empID = this.empid;
+            //   this.job.month = this.intMonth;
+            //   this.job.year = this.intYear;
+            //   this.job.jobtype = this.type
+            //   console.log(this.job);
+            //   this.postDataService.postJobList(this.job).then(work => {
+            //     this.listpm = work;
+            //     console.log(this.listpm);
+            //     for (let i = 0; i < this.listpm.length; i++) {
+            //       this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
+            //     }
+            //     // console.log('listpm', this.listpm);
+            //     if (this.listpm == false) {
+            //       this.load = false;
+            //     }
+            //   });
+            // });
         });
     }
     //#endregion
     //#region start
     ngOnInit() {
-        this.storageService.getUser().then(items => {
-            this.items = items;
-            // console.log(items);      
-            for (let i = 0; i < this.items.length; i++) {
-                this.empid = this.items[i].empID;
-                this.name = this.items[i].name;
-            }
-        });
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   // console.log(items);      
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.empid = this.items[i].empID
+        //     this.name = this.items[i].name;
+        //   }
+        // });
     }
     //#endregion
     //#region load
@@ -518,7 +582,8 @@ ReportcheckpmPage.ctorParameters = () => [
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["NavController"] },
     { type: _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"] },
-    { type: _post_data_service__WEBPACK_IMPORTED_MODULE_5__["PostDataService"] }
+    { type: _post_data_service__WEBPACK_IMPORTED_MODULE_5__["PostDataService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["LoadingController"] }
 ];
 ReportcheckpmPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -531,7 +596,8 @@ ReportcheckpmPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["NavController"],
         _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"],
-        _post_data_service__WEBPACK_IMPORTED_MODULE_5__["PostDataService"]])
+        _post_data_service__WEBPACK_IMPORTED_MODULE_5__["PostDataService"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_6__["LoadingController"]])
 ], ReportcheckpmPage);
 
 

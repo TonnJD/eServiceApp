@@ -154,155 +154,153 @@ var JobdetailPage = /** @class */ (function () {
         this.img = [];
         this.route.queryParams.subscribe(function (params) {
             _this.query = JSON.parse(params["data"]);
+            _this.items = _this.query;
+            _this.empID = _this.items.empID;
             _this.data = _this.query.data;
             _this.insID = _this.query.installID;
             _this.newinsID = _this.query.newinstallID;
             _this.tranID = _this.query.tranID;
             _this.type = _this.query.type;
             _this.planID = _this.query.planID;
-            console.log("query", _this.query);
-            _this.ngOnInit();
-        });
-        this.storageService.getUser().then(function (items) {
-            _this.items = items;
-            // console.log(items);      
-            for (var i = 0; i < _this.items.length; i++) {
-                _this.empID = _this.items[i].empID;
-                console.log(_this.planID);
-                console.log(_this.insID);
-                console.log(_this.empID);
-            }
-            _this.postDataService.apiServer_url;
             _this.url = sanitizer.bypassSecurityTrustResourceUrl(_this.postDataService.apiServer_url + 'Web/CK_CheckInfo.aspx' + '?empID=' + _this.empID + '&serviceplanid=' + _this.planID + '&installplanid=' + _this.insID);
+            if (_this.type == "INSTALL") {
+                _this.typethai = "งานติดตั้ง";
+                _this.typeeng = 'Install';
+                console.log(_this.typethai);
+            }
+            else if (_this.type == "CM") {
+                _this.typethai = "งานซ่อม";
+                _this.typeeng = 'TK';
+                _this.checkcm();
+            }
+            else if (_this.type == "PM") {
+                _this.typethai = "งานตรวจเช็ค";
+                _this.typeeng = 'PM';
+            }
+            else if (_this.type == "UNINSTALL") {
+                _this.typethai = "งานถอนการติดตั้ง";
+                _this.typeeng = 'Uninstall';
+            }
+            if (_this.type != "PM") {
+                _this.ShowList = false;
+            }
+            if (_this.type == "CM") {
+                _this.jobdetail.insID = _this.newinsID;
+            }
+            else {
+                _this.jobdetail.insID = _this.insID;
+            }
+            _this.jobdetail.planID = _this.planID;
+            _this.jobdetail.tranID = _this.tranID;
+            _this.jobdetail.type = _this.type;
+            console.log(_this.jobdetail);
+            _this.postDataService.postjobDetail(_this.jobdetail).then(function (jobdetail) {
+                _this.result = jobdetail;
+                console.log('this.result', _this.result);
+                if (_this.result.length > 0) {
+                    for (var i = 0; i < _this.result.length; i++) {
+                        _this.image = JSON.parse(_this.result[i].image);
+                    }
+                    console.log(_this.image);
+                    for (var v = 0; v < _this.image.length; v++) {
+                        if (_this.image[v].type == "step1_pic1") {
+                            _this.img.src1 = _this.postDataService.apiServer_url + _this.image[v].file_path;
+                            _this.booimg1 = true;
+                            //console.log("1", this.img.src1);
+                        }
+                        if (_this.image[v].type == "step1_pic2") {
+                            _this.img.src2 = _this.postDataService.apiServer_url + _this.image[v].file_path;
+                            _this.booimg2 = true;
+                            //console.log("2", this.img.src2);
+                        }
+                        if (_this.image[v].type == "step1_pic3") {
+                            _this.img.src3 = _this.postDataService.apiServer_url + _this.image[v].file_path;
+                            _this.booimg3 = true;
+                            //console.log("3", this.img.src3);
+                        }
+                        if (_this.image[v].type == "step1_pic4") {
+                            _this.img.src4 = _this.postDataService.apiServer_url + _this.image[v].file_path;
+                            _this.booimg4 = true;
+                            //console.log("4", this.img.src4);
+                        }
+                        if (_this.image[v].type == "step1_pic5") {
+                            _this.img.src5 = _this.postDataService.apiServer_url + _this.image[v].file_path;
+                            _this.booimg5 = true;
+                            //console.log("5", this.img.src5);
+                        }
+                        if (_this.image[v].type == "step1_pic6") {
+                            _this.img.src6 = _this.postDataService.apiServer_url + _this.image[v].file_path;
+                            _this.booimg6 = true;
+                            //console.log("6", this.img.src6);
+                        }
+                        if (_this.image[v].type == "step1_pic7") {
+                            _this.img.src7 = _this.postDataService.apiServer_url + _this.image[v].file_path;
+                            _this.booimg7 = true;
+                            //console.log("7", this.img.src7);
+                        }
+                        if (_this.image[v].type == "step1_pic8") {
+                            _this.img.src8 = _this.postDataService.apiServer_url + _this.image[v].file_path;
+                            _this.booimg8 = true;
+                            //console.log("8", this.img.src8);
+                        }
+                        if (_this.image[v].type == "step3_pic1") {
+                            _this.img.src9 = _this.postDataService.apiServer_url + _this.image[v].file_path;
+                            _this.booimg9 = true;
+                            //console.log("9", this.img.src9);
+                        }
+                        if (_this.image[v].type == "step3_pic2") {
+                            _this.img.src10 = _this.postDataService.apiServer_url + _this.image[v].file_path;
+                            _this.booimg10 = true;
+                            //console.log("10", this.img.src10);
+                        }
+                        if (_this.image[v].type == "step3_pic3") {
+                            _this.img.src11 = _this.postDataService.apiServer_url + _this.image[v].file_path;
+                            _this.booimg11 = true;
+                            //console.log("11", this.img.src11);
+                        }
+                        if (_this.image[v].type == "step3_pic4") {
+                            _this.img.src12 = _this.postDataService.apiServer_url + _this.image[v].file_path;
+                            _this.booimg12 = true;
+                            //console.log("12", this.img.src12);
+                        }
+                        if (_this.image[v].type == "step3_pic5") {
+                            _this.img.src13 = _this.postDataService.apiServer_url + _this.image[v].file_path;
+                            _this.booimg13 = true;
+                            //console.log("13", this.img.src13);
+                        }
+                        //console.log(this.booimg12);
+                        //console.log(this.booimg13)
+                    }
+                }
+                _this.isShowImage1 = _this.booimg1;
+                _this.isShowImage2 = _this.booimg2;
+                _this.isShowImage3 = _this.booimg3;
+                _this.isShowImage4 = _this.booimg4;
+                _this.isShowImage5 = _this.booimg5;
+                _this.isShowImage6 = _this.booimg6;
+                _this.isShowImage7 = _this.booimg7;
+                _this.isShowImage8 = _this.booimg8;
+                _this.isShowImage9 = _this.booimg9;
+                _this.isShowImage10 = _this.booimg10;
+                _this.isShowImage11 = _this.booimg11;
+                _this.isShowImage12 = _this.booimg12;
+                _this.isShowImage13 = _this.booimg13;
+            });
         });
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   // console.log(items);      
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.empID = this.items[i].empID;
+        //   }
+        //   this.postDataService.apiServer_url
+        //   this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/CK_CheckInfo.aspx' + '?empID=' + this.empID + '&serviceplanid=' + this.planID + '&installplanid=' + this.insID);
+        // });
+        //this.postDataService.apiServer_url
     }
     //#endregion
     //#region start
     JobdetailPage.prototype.ngOnInit = function () {
-        var _this = this;
-        if (this.type == "INSTALL") {
-            this.typethai = "งานติดตั้ง";
-            this.typeeng = 'Install';
-            console.log(this.typethai);
-        }
-        else if (this.type == "CM") {
-            this.typethai = "งานซ่อม";
-            this.typeeng = 'TK';
-            this.checkcm();
-        }
-        else if (this.type == "PM") {
-            this.typethai = "งานตรวจเช็ค";
-            this.typeeng = 'PM';
-        }
-        else if (this.type == "UNINSTALL") {
-            this.typethai = "งานถอนการติดตั้ง";
-            this.typeeng = 'Uninstall';
-        }
-        if (this.type != "PM") {
-            this.ShowList = false;
-        }
-        if (this.type == "CM") {
-            this.jobdetail.insID = this.newinsID;
-        }
-        else {
-            this.jobdetail.insID = this.insID;
-        }
-        this.jobdetail.planID = this.planID;
-        this.jobdetail.tranID = this.tranID;
-        this.jobdetail.type = this.type;
-        console.log(this.jobdetail);
-        this.postDataService.postjobDetail(this.jobdetail).then(function (jobdetail) {
-            _this.result = jobdetail;
-            console.log('this.result', _this.result);
-            if (_this.result.length > 0) {
-                for (var i = 0; i < _this.result.length; i++) {
-                    _this.image = JSON.parse(_this.result[i].image);
-                }
-                console.log(_this.image);
-                for (var v = 0; v < _this.image.length; v++) {
-                    if (_this.image[v].type == "step1_pic1") {
-                        _this.img.src1 = _this.postDataService.apiServer_url + _this.image[v].file_path;
-                        _this.booimg1 = true;
-                        console.log("1", _this.img.src1);
-                    }
-                    if (_this.image[v].type == "step1_pic2") {
-                        _this.img.src2 = _this.postDataService.apiServer_url + _this.image[v].file_path;
-                        _this.booimg2 = true;
-                        console.log("2", _this.img.src2);
-                    }
-                    if (_this.image[v].type == "step1_pic3") {
-                        _this.img.src3 = _this.postDataService.apiServer_url + _this.image[v].file_path;
-                        _this.booimg3 = true;
-                        console.log("3", _this.img.src3);
-                    }
-                    if (_this.image[v].type == "step1_pic4") {
-                        _this.img.src4 = _this.postDataService.apiServer_url + _this.image[v].file_path;
-                        _this.booimg4 = true;
-                        console.log("4", _this.img.src4);
-                    }
-                    if (_this.image[v].type == "step1_pic5") {
-                        _this.img.src5 = _this.postDataService.apiServer_url + _this.image[v].file_path;
-                        _this.booimg5 = true;
-                        console.log("5", _this.img.src5);
-                    }
-                    if (_this.image[v].type == "step1_pic6") {
-                        _this.img.src6 = _this.postDataService.apiServer_url + _this.image[v].file_path;
-                        _this.booimg6 = true;
-                        console.log("6", _this.img.src6);
-                    }
-                    if (_this.image[v].type == "step1_pic7") {
-                        _this.img.src7 = _this.postDataService.apiServer_url + _this.image[v].file_path;
-                        _this.booimg7 = true;
-                        console.log("7", _this.img.src7);
-                    }
-                    if (_this.image[v].type == "step1_pic8") {
-                        _this.img.src8 = _this.postDataService.apiServer_url + _this.image[v].file_path;
-                        _this.booimg8 = true;
-                        console.log("8", _this.img.src8);
-                    }
-                    if (_this.image[v].type == "step3_pic1") {
-                        _this.img.src9 = _this.postDataService.apiServer_url + _this.image[v].file_path;
-                        _this.booimg9 = true;
-                        console.log("9", _this.img.src9);
-                    }
-                    if (_this.image[v].type == "step3_pic2") {
-                        _this.img.src10 = _this.postDataService.apiServer_url + _this.image[v].file_path;
-                        _this.booimg10 = true;
-                        console.log("10", _this.img.src10);
-                    }
-                    if (_this.image[v].type == "step3_pic3") {
-                        _this.img.src11 = _this.postDataService.apiServer_url + _this.image[v].file_path;
-                        _this.booimg11 = true;
-                        console.log("11", _this.img.src11);
-                    }
-                    if (_this.image[v].type == "step3_pic4") {
-                        _this.img.src12 = _this.postDataService.apiServer_url + _this.image[v].file_path;
-                        _this.booimg12 = true;
-                        console.log("12", _this.img.src12);
-                    }
-                    if (_this.image[v].type == "step3_pic5") {
-                        _this.img.src13 = _this.postDataService.apiServer_url + _this.image[v].file_path;
-                        _this.booimg13 = true;
-                        console.log("13", _this.img.src13);
-                    }
-                    console.log(_this.booimg12);
-                    console.log(_this.booimg13);
-                }
-            }
-            _this.isShowImage1 = _this.booimg1;
-            _this.isShowImage2 = _this.booimg2;
-            _this.isShowImage3 = _this.booimg3;
-            _this.isShowImage4 = _this.booimg4;
-            _this.isShowImage5 = _this.booimg5;
-            _this.isShowImage6 = _this.booimg6;
-            _this.isShowImage7 = _this.booimg7;
-            _this.isShowImage8 = _this.booimg8;
-            _this.isShowImage9 = _this.booimg9;
-            _this.isShowImage10 = _this.booimg10;
-            _this.isShowImage11 = _this.booimg11;
-            _this.isShowImage12 = _this.booimg12;
-            _this.isShowImage13 = _this.booimg13;
-        });
     };
     //#endregion
     JobdetailPage.prototype.checkcm = function () {

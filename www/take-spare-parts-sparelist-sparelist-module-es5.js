@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>รายการเบิกอะไหล่</ion-title>\r\n    <ion-buttons slot=\"primary\">\r\n      <ion-button (click)=\"loadpage()\">\r\n        <ion-icon slot=\"icon-only\" name=\"refresh\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n\r\n\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div class=\"container-fluid\">\r\n    <div class=\"row\" style=\"padding: 5px;\">\r\n      <div class=\"col-12\" style=\"text-align: center; margin-top: 20px;\" *ngIf=\"loads == false\">\r\n        <label>ไม่พบข้อมูล</label>\r\n      </div>\r\n      <div class=\"col-md-12 col-12\" *ngIf=\"loads == true\">\r\n        <div class=\"portlet box blue\">\r\n          <div class=\"portlet-title\">\r\n            <div class=\"caption\">\r\n              <i class=\"fa fa-user\"></i>รายการเบิกอะไหล่\r\n            </div>\r\n            <!-- <div class=\"tools\">\r\n              <span class=\"label label-sm label-success circle\" (click)=\"NewSpare()\">เปิดใบเบิกอะไหล่</span>\r\n            </div> -->\r\n          </div>\r\n          <div class=\"portlet-body\">\r\n            <div class=\"tab-content\">\r\n              <div class=\"tab-pane active\">\r\n                <div class=\"row\">\r\n                  <div class=\"col-12 text-right\" style=\"padding-top: 10px; padding-bottom: 10px;\">\r\n                    <ion-button color=\"primary\" (click)=\"NewSpare()\">\r\n                      <ion-icon name=\"add\"></ion-icon> เปิดใบเบิกอะไหล่</ion-button>\r\n                  </div>\r\n                </div>\r\n                <div class=\"row\">\r\n                  <div class=\"col-12\">\r\n                    <div class=\"table-scrollable\">\r\n                      <table class=\"table table-hover\">\r\n                        <thead>\r\n                          <tr>\r\n                            <!-- <th> ลำดับที่ </th> -->\r\n                            <th> เลขที่เอกสาร </th>\r\n                            <th> ชื่อลูกค้า </th>\r\n                            <th> สถานะ </th>\r\n                            <th style=\"text-align: center;\"> วันที่<br>สร้างเอกสาร </th>\r\n                            <th></th>\r\n                          </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                          <tr *ngFor=\"let item of list; let i = index\">\r\n                            <!-- <td style=\"text-align: center;\"> {{i+1}}</td> -->\r\n                            <td> {{item.ServiceReportNo}} </td>\r\n                            <td> {{item.CustomerName}} </td>\r\n                            <td> {{item.Status}} </td>\r\n                            <td> {{item.CreatedDate}} </td>\r\n                            <td *ngIf=\"item.Status != 'ช่างขอเบิกอะไหล่'; else lblEdit\">\r\n                              <ion-button size=\"small\" color=\"warning\" (click)=\"Detail(item)\">\r\n                                <ion-icon name=\"eye\"></ion-icon>  \r\n                              </ion-button>\r\n                            </td>\r\n                            <td *ngIf=\"item.Status == 'ช่างขอเบิกอะไหล่'; else lblView\">\r\n                              <span class=\"label label-sm label-warning circle\" #lblView\r\n                                (click)=\"Detail(item)\">แก้ไข</span>\r\n                            </td>\r\n                            <td *ngIf=\"item.Status == 'ช่างขอเบิกอะไหล่'; else lblView\">\r\n                              <span class=\"label label-sm label-danger circle\" #lblView (click)=\"Delete(item)\">ลบ</span>\r\n                            </td>\r\n                          </tr>\r\n                        </tbody>\r\n                      </table>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title>รายการเบิกอะไหล่</ion-title>\r\n    <ion-buttons slot=\"primary\">\r\n      <ion-button (click)=\"loadpage()\">\r\n        <ion-icon slot=\"icon-only\" name=\"refresh\"></ion-icon>\r\n      </ion-button>\r\n    </ion-buttons>\r\n\r\n\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div class=\"container-fluid\">\r\n    <div class=\"col-12 text-right\" style=\"padding-top: 10px; padding-bottom: 10px;\">\r\n      <ion-button color=\"primary\" (click)=\"NewSpare()\">\r\n      <ion-icon name=\"add\"></ion-icon> เปิดใบเบิกอะไหล่</ion-button>\r\n    </div>\r\n\r\n    <div class=\"row\" style=\"padding: 5px;\">\r\n      <div class=\"col-12\" style=\"text-align: center; margin-top: 20px;\" *ngIf=\"loads == false\">\r\n        <label>ไม่พบข้อมูล</label>\r\n      </div>\r\n      <div class=\"col-md-12 col-12\" *ngIf=\"loads == true\">\r\n        <div class=\"portlet box blue\">\r\n          <div class=\"portlet-title\">\r\n            <div class=\"caption\">\r\n              <i class=\"fa fa-user\"></i>รายการเบิกอะไหล่\r\n            </div>\r\n            <!-- <div class=\"tools\">\r\n              <span class=\"label label-sm label-success circle\" (click)=\"NewSpare()\">เปิดใบเบิกอะไหล่</span>\r\n            </div> -->\r\n          </div>\r\n          <div class=\"portlet-body\">\r\n            <div class=\"tab-content\">\r\n              <div class=\"tab-pane active\">\r\n                \r\n                <div class=\"row\">\r\n                  <div class=\"col-12\">\r\n                    <div class=\"table-scrollable\">\r\n                      <table class=\"table table-hover\">\r\n                        <thead>\r\n                          <tr>\r\n                            <!-- <th> ลำดับที่ </th> -->\r\n                            <th> เลขที่เอกสาร </th>\r\n                            <th> ชื่อลูกค้า </th>\r\n                            <th> สถานะ </th>\r\n                            <th style=\"text-align: center;\"> วันที่<br>สร้างเอกสาร </th>\r\n                            <th></th>\r\n                          </tr>\r\n                        </thead>\r\n                        <tbody>\r\n                          <tr *ngFor=\"let item of list; let i = index\">\r\n                            <!-- <td style=\"text-align: center;\"> {{i+1}}</td> -->\r\n                            <td> {{item.ServiceReportNo}} </td>\r\n                            <td> {{item.CustomerName}} </td>\r\n                            <td> {{item.Status}} </td>\r\n                            <td> {{item.CreatedDate}} </td>\r\n                            <td *ngIf=\"item.Status != 'ช่างขอเบิกอะไหล่'; else lblEdit\">\r\n                              <ion-button size=\"small\" color=\"warning\" (click)=\"Detail(item)\">\r\n                                <ion-icon name=\"eye\"></ion-icon>  \r\n                              </ion-button>\r\n                            </td>\r\n                            <td *ngIf=\"item.Status == 'ช่างขอเบิกอะไหล่'; else lblView\">\r\n                              <span class=\"label label-sm label-warning circle\" #lblView\r\n                                (click)=\"Detail(item)\">แก้ไข</span>\r\n                            </td>\r\n                            <td *ngIf=\"item.Status == 'ช่างขอเบิกอะไหล่'; else lblView\">\r\n                              <span class=\"label label-sm label-danger circle\" #lblView (click)=\"Delete(item)\">ลบ</span>\r\n                            </td>\r\n                          </tr>\r\n                        </tbody>\r\n                      </table>\r\n                    </div>\r\n                  </div>\r\n                </div>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>"
 
 /***/ }),
 
@@ -87,20 +87,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _post_data_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../post-data.service */ "./src/app/post-data.service.ts");
 /* harmony import */ var _storage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../storage.service */ "./src/app/storage.service.ts");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+
 
 
 
 
 
 var SparelistPage = /** @class */ (function () {
-    function SparelistPage(postDataService, storageService, alertController, loadingController, navCtrl) {
+    function SparelistPage(postDataService, storageService, alertController, loadingController, navCtrl, route) {
         var _this = this;
         this.postDataService = postDataService;
         this.storageService = storageService;
         this.alertController = alertController;
         this.loadingController = loadingController;
         this.navCtrl = navCtrl;
+        this.route = route;
         this.loads = false;
         setTimeout(function () {
             _this.ngOnInit();
@@ -137,15 +140,14 @@ var SparelistPage = /** @class */ (function () {
     };
     SparelistPage.prototype.load = function () {
         var _this = this;
-        this.storageService.getUser().then(function (items) {
-            for (var i = 0; i < items.length; i++) {
-                _this.empID = items[i].empID;
-            }
-            var params = {
+        this.route.queryParams.subscribe(function (params) {
+            _this.items = JSON.parse(params["data"]);
+            _this.empID = _this.items.empID;
+            var param = {
                 EmpID: _this.empID,
                 Type: "List",
             };
-            _this.postDataService.PostCus(params).then(function (list) {
+            _this.postDataService.PostCus(param).then(function (list) {
                 _this.list = list;
                 console.log(list);
                 if (_this.list.length == 0) {
@@ -156,6 +158,25 @@ var SparelistPage = /** @class */ (function () {
                 }
             });
         });
+        // this.storageService.getUser().then(items => {
+        //   for (let i = 0; i < items.length; i++) {
+        //     this.empID = items[i].empID;
+        //   }
+        //   let params =
+        //   {
+        //     EmpID: this.empID,
+        //     Type: "List",
+        //   }
+        //   this.postDataService.PostCus(params).then(list => {
+        //     this.list = list
+        //     console.log(list);
+        //     if (this.list.length == 0) {
+        //       this.loads = false;
+        //     } else{
+        //       this.loads = true;
+        //     }
+        //   });
+        // });
     };
     SparelistPage.prototype.Detail = function (item) {
         console.log(item);
@@ -175,16 +196,11 @@ var SparelistPage = /** @class */ (function () {
         this.navCtrl.navigateForward(['take-spare-parts'], navigationExtras);
     };
     SparelistPage.prototype.NewSpare = function () {
-        var params = {
-            type: "new"
-        };
-        console.log(params);
         var navigationExtras = {
             queryParams: {
-                data: JSON.stringify(params)
+                data: JSON.stringify(this.items)
             }
         };
-        console.log(navigationExtras);
         this.navCtrl.navigateForward(['request-sparepart'], navigationExtras);
     };
     SparelistPage.prototype.Delete = function (item) {
@@ -232,9 +248,10 @@ var SparelistPage = /** @class */ (function () {
     SparelistPage.ctorParameters = function () { return [
         { type: _post_data_service__WEBPACK_IMPORTED_MODULE_2__["PostDataService"] },
         { type: _storage_service__WEBPACK_IMPORTED_MODULE_3__["StorageService"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["LoadingController"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"] }
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["LoadingController"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["NavController"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] }
     ]; };
     SparelistPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -244,9 +261,10 @@ var SparelistPage = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_post_data_service__WEBPACK_IMPORTED_MODULE_2__["PostDataService"],
             _storage_service__WEBPACK_IMPORTED_MODULE_3__["StorageService"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["LoadingController"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"]])
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["AlertController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["LoadingController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_5__["NavController"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]])
     ], SparelistPage);
     return SparelistPage;
 }());

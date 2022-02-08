@@ -121,6 +121,8 @@ var JobresponsPage = /** @class */ (function () {
             _this.ItemsName = _this.data.ItemsName;
             _this.cusID = _this.item.cusID;
             _this.Type = _this.data.Type;
+            _this.items = _this.data.items.items;
+            console.log('this.items', _this.data.items.items);
             _this.url = sanitizer.bypassSecurityTrustResourceUrl(_this.postDataService.apiServer_url + 'Web/TabletRespone.aspx' + '?planID=' + _this.planID + "&empId=" + _this.empID);
         });
     }
@@ -129,7 +131,13 @@ var JobresponsPage = /** @class */ (function () {
         this.postDataService.CheckJobResponse(this.planID).then(function (res) {
             _this.jobResponse = res;
             if (_this.jobResponse.StatusID == 'Response') {
-                _this.router.navigateByUrl('/menu/overview');
+                var navigationExtras = {
+                    queryParams: {
+                        data: JSON.stringify(_this.items)
+                    }
+                };
+                console.log('this.items', _this.items);
+                _this.router.navigate(['/menu/overview'], navigationExtras);
             }
         });
     };

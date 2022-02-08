@@ -87,9 +87,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _post_data_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../post-data.service */ "./src/app/post-data.service.ts");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../storage.service */ "./src/app/storage.service.ts");
-/* harmony import */ var _req_detail_req_detail_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../req-detail/req-detail.page */ "./src/app/page/sparepart/req-detail/req-detail.page.ts");
-/* harmony import */ var _add_sparepart_add_sparepart_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../add-sparepart/add-sparepart.page */ "./src/app/page/sparepart/add-sparepart/add-sparepart.page.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _storage_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../storage.service */ "./src/app/storage.service.ts");
+/* harmony import */ var _req_detail_req_detail_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../req-detail/req-detail.page */ "./src/app/page/sparepart/req-detail/req-detail.page.ts");
+/* harmony import */ var _add_sparepart_add_sparepart_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../add-sparepart/add-sparepart.page */ "./src/app/page/sparepart/add-sparepart/add-sparepart.page.ts");
+
 
 
 
@@ -98,7 +100,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var RequestSparepartPage = /** @class */ (function () {
-    function RequestSparepartPage(postDataService, alertCtrl, navCtrl, storageService, toastCtrl, loadCtrl, modalCtrl) {
+    function RequestSparepartPage(postDataService, alertCtrl, navCtrl, storageService, toastCtrl, loadCtrl, modalCtrl, route) {
+        var _this = this;
         this.postDataService = postDataService;
         this.alertCtrl = alertCtrl;
         this.navCtrl = navCtrl;
@@ -106,19 +109,23 @@ var RequestSparepartPage = /** @class */ (function () {
         this.toastCtrl = toastCtrl;
         this.loadCtrl = loadCtrl;
         this.modalCtrl = modalCtrl;
+        this.route = route;
         this.partData = [];
         this.selectSpareList = [];
         this.isSearching = false;
         this.cusID = '';
         this.cusName = '';
+        this.route.queryParams.subscribe(function (params) {
+            _this.items = JSON.parse(params["data"]);
+            _this.empID = _this.items.empID;
+        });
     }
     RequestSparepartPage.prototype.ngOnInit = function () {
-        var _this = this;
-        this.storageService.getUser().then(function (items) {
-            for (var i = 0; i < items.length; i++) {
-                _this.empID = items[i].empID;
-            }
-        });
+        // this.storageService.getUser().then(items => {
+        //   for (let i = 0; i < items.length; i++) {
+        //     this.empID = items[i].empID;
+        //   }
+        // });
     };
     RequestSparepartPage.prototype.searchCustomer = function (ev) {
         var _this = this;
@@ -273,6 +280,7 @@ var RequestSparepartPage = /** @class */ (function () {
                 switch (_a.label) {
                     case 0:
                         console.log('this.reqType', this.reqType);
+                        console.log('this.items', this.items);
                         if (this.reqType == undefined) {
                             this.alertReqType();
                             return [2 /*return*/];
@@ -284,14 +292,15 @@ var RequestSparepartPage = /** @class */ (function () {
                             }
                         }
                         return [4 /*yield*/, this.modalCtrl.create({
-                                component: _req_detail_req_detail_page__WEBPACK_IMPORTED_MODULE_5__["ReqDetailPage"],
+                                component: _req_detail_req_detail_page__WEBPACK_IMPORTED_MODULE_6__["ReqDetailPage"],
                                 cssClass: 'my-custom-modal-css',
                                 componentProps: {
-                                    empID: this.empID,
+                                    empID: this.items.empID,
                                     cusID: this.cusID,
                                     cusName: this.cusName,
                                     reqType: this.reqType,
-                                    sparelist: this.selectSpareList
+                                    sparelist: this.selectSpareList,
+                                    items: this.items
                                 }
                             })];
                     case 1:
@@ -300,7 +309,7 @@ var RequestSparepartPage = /** @class */ (function () {
                             var type = res.data;
                             if (type == 'submit') {
                                 var params_1 = {
-                                    empID: _this.empID,
+                                    empID: _this.items.empID,
                                     cusID: _this.cusID,
                                     reqType: _this.reqType,
                                     sparelist: _this.selectSpareList
@@ -336,7 +345,7 @@ var RequestSparepartPage = /** @class */ (function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.modalCtrl.create({
-                            component: _add_sparepart_add_sparepart_page__WEBPACK_IMPORTED_MODULE_6__["AddSparepartPage"],
+                            component: _add_sparepart_add_sparepart_page__WEBPACK_IMPORTED_MODULE_7__["AddSparepartPage"],
                             //cssClass: 'my-custom-modal-css',
                             componentProps: {}
                         })];
@@ -420,10 +429,11 @@ var RequestSparepartPage = /** @class */ (function () {
         { type: _post_data_service__WEBPACK_IMPORTED_MODULE_2__["PostDataService"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] },
-        { type: _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"] },
+        { type: _storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"] }
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] }
     ]; };
     RequestSparepartPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -434,10 +444,11 @@ var RequestSparepartPage = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_post_data_service__WEBPACK_IMPORTED_MODULE_2__["PostDataService"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"],
-            _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"],
+            _storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"]])
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]])
     ], RequestSparepartPage);
     return RequestSparepartPage;
 }());

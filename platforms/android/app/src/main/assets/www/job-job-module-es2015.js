@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"text-left\">งานในความรับผิดชอบ</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div class=\"container-fluid\">\r\n    <div class=\"page-content-inner\">\r\n      <div class=\"row\" style=\"padding:5px;\">\r\n        <div class=\"col-lg-4 background\" style=\"padding: 0px; background-color: white;\">\r\n          <div class=\"col-12\" style=\"padding: 2px;\">\r\n            <button type=\"button\" class=\"btn default\" (click)=\"next('pm')\">\r\n              <i class=\"fa fa-check\"></i> รายการตรวจเช็ค (PM)\r\n            </button>\r\n          </div>\r\n          <div class=\"col-12\" style=\"padding: 2px;\">\r\n            <button type=\"button\" class=\"btn default\" (click)=\"next('cm')\">\r\n              <i class=\"fa fa-check\"></i> รายการซ่อม (CM)\r\n            </button>\r\n          </div>\r\n          <div class=\"col-12\" style=\"padding: 2px;\">\r\n            <button type=\"button\" class=\"btn default\" (click)=\"next('install')\">\r\n              <i class=\"fa fa-check\"></i> รายการติดตั้ง (Install)\r\n            </button>\r\n          </div>\r\n          <div class=\"col-12\" style=\"padding: 2px;\">\r\n            <button type=\"button\" class=\"btn default\" (click)=\"next('uninstall')\">\r\n              <i class=\"fa fa-check\"> </i> รายการถอนการติดตั้ง (Uninstall)\r\n            </button>\r\n          </div>\r\n          <div class=\"col-12\" style=\"padding: 2px;\">\r\n            <button type=\"button\" class=\"btn default\" [routerLink]=\"['/job/calendarpm']\">\r\n              <i class=\"fa fa-calendar\"></i> ปฏิทิน\r\n            </button>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-lg-8\" style=\"padding: 0px; padding-left: 5px;\">\r\n          <div class=\"portlet blue box\" style=\"margin-top:0px!important;\">\r\n            <div class=\"portlet-title\" style=\"margin-top:0px;\">\r\n              <div class=\"caption\">\r\n                <i class=\"fa fa-check\"></i>รายการผ่านการตรวจเช็คล่าสุด </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"padding-top: 5px;\" *ngIf=\"isShow\">\r\n              <div class=\"row\" style=\"padding: 5px;\">\r\n                <label class=\"col-12\" style=\"text-align: center; font-size: 0.9em;\">\r\n                  ไม่พบข้อมูล\r\n                </label>\r\n              </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"padding-top: 5px;\">\r\n              <div class=\"row\" *ngFor=\"let item of jobresolve\" (click)=\"click(item)\"\r\n                style=\"padding: 5px;\">\r\n                <label class=\"col-6 head\">\r\n                  ชื่อลูกค้า: {{item.CustomerName}} {{item.CustomerNameEng}}\r\n                </label>\r\n\r\n                <label class=\"col-6 head\">\r\n                  วันที่กำหนด: {{item.service_date_plan}}\r\n                  <!-- วันที่กำหนด: {{item.service_date_plan | date: 'dd-MM-yyyy HH:mm:ss'}} -->\r\n                </label>\r\n\r\n\r\n                <label class=\"col-6 head\">\r\n                  สินค้าที่ติดตั้ง: {{item.InstallPlanName}}\r\n                </label>\r\n\r\n                <label class=\"col-6 head\">\r\n                  เริ่มทำงาน: {{item.start_service_date}}\r\n                </label>\r\n\r\n\r\n                <label class=\"col-6 head\">\r\n                  ชื่อสินค้า: {{item.ItemsName}}\r\n                </label>\r\n\r\n                <label class=\"col-6 head\">\r\n                  เสร็จงาน: {{item.end_service_date}}\r\n                </label>\r\n\r\n                <label class=\"col-6 head\">\r\n                  Serial No: {{item.SerialNo}}\r\n                </label>\r\n\r\n                <label class=\"col-6 head\">\r\n                  เวลาที่ใช้: {{item.TimeSpent}}\r\n                </label>\r\n\r\n                <label class=\"col-6 head\">\r\n                  ประเภทงาน: {{item.JobTypeName}} ({{item.JobTypeNameEng}})\r\n                </label>\r\n                <label class=\"col-6 head\" *ngIf=\"item.JobType == 'CM'else CM \" #CM>\r\n                  การปิดงาน: {{item.WorkClose}}\r\n                </label>\r\n                <hr>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>"
+module.exports = "<ion-header>\r\n  <ion-toolbar color=\"primary\">\r\n    <ion-buttons slot=\"start\">\r\n      <ion-menu-button></ion-menu-button>\r\n    </ion-buttons>\r\n    <ion-title class=\"text-left\">งานในความรับผิดชอบ</ion-title>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <div class=\"container-fluid\">\r\n    <div class=\"page-content-inner\">\r\n      <div class=\"row\" style=\"padding:5px;\">\r\n        <div class=\"col-lg-4 background\" style=\"padding: 0px; background-color: white;\">\r\n          <div class=\"col-12\" style=\"padding: 2px;\">\r\n            <button type=\"button\" class=\"btn default\" (click)=\"next('pm')\">\r\n              <i class=\"fa fa-check\"></i> รายการตรวจเช็ค (PM)\r\n            </button>\r\n          </div>\r\n          <div class=\"col-12\" style=\"padding: 2px;\">\r\n            <button type=\"button\" class=\"btn default\" (click)=\"next('cm')\">\r\n              <i class=\"fa fa-check\"></i> รายการซ่อม (CM)\r\n            </button>\r\n          </div>\r\n          <div class=\"col-12\" style=\"padding: 2px;\">\r\n            <button type=\"button\" class=\"btn default\" (click)=\"next('install')\">\r\n              <i class=\"fa fa-check\"></i> รายการติดตั้ง (Install)\r\n            </button>\r\n          </div>\r\n          <div class=\"col-12\" style=\"padding: 2px;\">\r\n            <button type=\"button\" class=\"btn default\" (click)=\"next('uninstall')\">\r\n              <i class=\"fa fa-check\"> </i> รายการถอนการติดตั้ง (Uninstall)\r\n            </button>\r\n          </div>\r\n          <div class=\"col-12\" style=\"padding: 2px;\">\r\n            <button type=\"button\" class=\"btn default\" (click)=\"next('calendarpm')\">\r\n              <i class=\"fa fa-calendar\"></i> ปฏิทิน\r\n            </button>\r\n          </div>\r\n        </div>\r\n\r\n        <div class=\"col-lg-8\" style=\"padding: 0px; padding-left: 5px;\">\r\n          <div class=\"portlet blue box\" style=\"margin-top:0px!important;\">\r\n            <div class=\"portlet-title\" style=\"margin-top:0px;\">\r\n              <div class=\"caption\">\r\n                <i class=\"fa fa-check\"></i>รายการผ่านการตรวจเช็คล่าสุด </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"padding-top: 5px;\" *ngIf=\"isShow\">\r\n              <div class=\"row\" style=\"padding: 5px;\">\r\n                <label class=\"col-12\" style=\"text-align: center; font-size: 0.9em;\">\r\n                  ไม่พบข้อมูล\r\n                </label>\r\n              </div>\r\n            </div>\r\n            <div class=\"portlet-body\" style=\"padding-top: 5px;\">\r\n              <div class=\"row\" *ngFor=\"let item of jobresolve\" (click)=\"click(item)\"\r\n                style=\"padding: 5px;\">\r\n                <label class=\"col-6 head\">\r\n                  ชื่อลูกค้า: {{item.CustomerName}} {{item.CustomerNameEng}}\r\n                </label>\r\n\r\n                <label class=\"col-6 head\">\r\n                  วันที่กำหนด: {{item.service_date_plan}}\r\n                  <!-- วันที่กำหนด: {{item.service_date_plan | date: 'dd-MM-yyyy HH:mm:ss'}} -->\r\n                </label>\r\n\r\n\r\n                <label class=\"col-6 head\">\r\n                  สินค้าที่ติดตั้ง: {{item.InstallPlanName}}\r\n                </label>\r\n\r\n                <label class=\"col-6 head\">\r\n                  เริ่มทำงาน: {{item.start_service_date}}\r\n                </label>\r\n\r\n\r\n                <label class=\"col-6 head\">\r\n                  ชื่อสินค้า: {{item.ItemsName}}\r\n                </label>\r\n\r\n                <label class=\"col-6 head\">\r\n                  เสร็จงาน: {{item.end_service_date}}\r\n                </label>\r\n\r\n                <label class=\"col-6 head\">\r\n                  Serial No: {{item.SerialNo}}\r\n                </label>\r\n\r\n                <label class=\"col-6 head\">\r\n                  เวลาที่ใช้: {{item.TimeSpent}}\r\n                </label>\r\n\r\n                <label class=\"col-6 head\">\r\n                  ประเภทงาน: {{item.JobTypeName}} ({{item.JobTypeNameEng}})\r\n                </label>\r\n                <label class=\"col-6 head\" *ngIf=\"item.JobType == 'CM'else CM \" #CM>\r\n                  การปิดงาน: {{item.WorkClose}}\r\n                </label>\r\n                <hr>\r\n              </div>\r\n            </div>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </div>\r\n  </div>\r\n</ion-content>"
 
 /***/ }),
 
@@ -97,7 +97,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
 let JobPage = class JobPage {
     //#endregion
     //#region constructor
@@ -111,6 +110,10 @@ let JobPage = class JobPage {
         this.isShow = false;
         this.job = [];
         this.jobdetail = [];
+        this.route.queryParams.subscribe(params => {
+            this.items = JSON.parse(params["data"]);
+            this.empID = this.items.empID;
+        });
     }
     //#endregion
     //#region click
@@ -163,60 +166,72 @@ let JobPage = class JobPage {
     loadItems() {
         this.month = new Date().getMonth() + 1;
         this.year = new Date().getFullYear();
-        this.storageService.getUser().then(items => {
-            this.items = items;
-            console.log('job item', items);
-            for (let i = 0; i < this.items.length; i++) {
-                this.empID = this.items[i].empID;
-                // console.log(this.empID, this.month, this.year);
-                this.job.empID = this.empID;
-                this.job.month = this.month;
-                this.job.year = this.year;
-                // console.log(this.job);
-                // this.postDataService.postjob(this.job).then(work => {
-                //   this.jobresolve = work;
-                //   console.log(this.jobresolve)
-                //   if (this.jobresolve == false) {
-                //     this.isShow = true;
-                //   }
-                //   for (let i = 0; i < this.jobresolve.length; i++) {
-                //     this.type = this.jobresolve[i].JobType
-                //   }
-                // });
+        let parJob = {
+            empID: this.items.empID,
+            month: this.month,
+            year: this.year,
+        };
+        console.log('job', parJob);
+        this.postDataService.postjob(parJob).then(work => {
+            this.jobresolve = work;
+            console.log('job postjob', this.jobresolve);
+            if (this.jobresolve == false) {
+                this.isShow = true;
             }
-            console.log('job', this.job);
-            this.postDataService.postjob(this.job).then(work => {
-                this.jobresolve = work;
-                console.log('job postjob', this.jobresolve);
-                if (this.jobresolve == false) {
-                    this.isShow = true;
-                }
-                for (let i = 0; i < this.jobresolve.length; i++) {
-                    this.type = this.jobresolve[i].JobType;
-                }
-            });
+            for (let i = 0; i < this.jobresolve.length; i++) {
+                this.type = this.jobresolve[i].JobType;
+            }
         });
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   console.log('job item', items);
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.empID = this.items[i].empID;
+        //     // console.log(this.empID, this.month, this.year);
+        //     this.job.empID = this.empID;
+        //     this.job.month = this.month;
+        //     this.job.year = this.year;
+        //     // console.log(this.job);
+        //     // this.postDataService.postjob(this.job).then(work => {
+        //     //   this.jobresolve = work;
+        //     //   console.log(this.jobresolve)
+        //     //   if (this.jobresolve == false) {
+        //     //     this.isShow = true;
+        //     //   }
+        //     //   for (let i = 0; i < this.jobresolve.length; i++) {
+        //     //     this.type = this.jobresolve[i].JobType
+        //     //   }
+        //     // });
+        //   }
+        // });
     }
     //#endregion
     //#region start
     ngOnInit() {
-        this.loadItems();
+        //this.loadItems();
     }
     //#endregion
     //#region next
     next(type) {
-        console.log(type);
+        const navigationExtras = {
+            queryParams: {
+                data: JSON.stringify(this.items)
+            }
+        };
         if (type == 'pm') {
-            this.router.navigate(['/job/reportcheckpm']);
+            this.router.navigate(['/job/reportcheckpm'], navigationExtras);
         }
         if (type == 'cm') {
-            this.router.navigate(['/job/cm']);
+            this.router.navigate(['/job/cm'], navigationExtras);
         }
         if (type == 'install') {
-            this.router.navigate(['/job/install']);
+            this.router.navigate(['/job/install'], navigationExtras);
         }
         if (type == 'uninstall') {
-            this.router.navigate(['/job/uninstall']);
+            this.router.navigate(['/job/uninstall'], navigationExtras);
+        }
+        if (type == 'calendarpm') {
+            this.router.navigate(['/job/calendarpm'], navigationExtras);
         }
     }
 };

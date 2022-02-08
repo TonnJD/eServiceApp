@@ -3892,7 +3892,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _post_data_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../post-data.service */ "./src/app/post-data.service.ts");
 /* harmony import */ var _storage_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../storage.service */ "./src/app/storage.service.ts");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
-/* harmony import */ var _auth_authentication_service__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../../auth/authentication.service */ "./src/app/auth/authentication.service.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 
 
 
@@ -3905,28 +3905,38 @@ __webpack_require__.r(__webpack_exports__);
 var CalendarpmPage = /** @class */ (function () {
     //#endregion
     //#region constructor
-    function CalendarpmPage(postDataService, storageService, auth, sanitizer) {
+    function CalendarpmPage(postDataService, storageService, sanitizer, route) {
         var _this = this;
         this.postDataService = postDataService;
         this.storageService = storageService;
-        this.auth = auth;
+        this.route = route;
         this.calendarPlugins = [_fullcalendar_daygrid__WEBPACK_IMPORTED_MODULE_2__["default"], _fullcalendar_interaction__WEBPACK_IMPORTED_MODULE_3__["default"]];
         this.str = "123";
-        this.storageService.getUser().then(function (items) {
-            _this.items = items;
-            // console.log(items);      
-            for (var i = 0; i < _this.items.length; i++) {
-                _this.myempID = _this.items[i].empID;
-                console.log(_this.myempID);
-            }
+        this.route.queryParams.subscribe(function (params) {
+            _this.items = JSON.parse(params["data"]);
+            _this.myempID = _this.items.empID;
             var month = new Date().getMonth() + 1;
             var year = new Date().getFullYear();
             _this.myempID = _this.myempID;
             _this.month = month;
             _this.year = year;
             _this.url = sanitizer.bypassSecurityTrustResourceUrl(_this.postDataService.apiServer_url + 'Web/WebFormCalendar.aspx' + '?empid=' + _this.myempID + '&year=' + _this.year + '&month=' + _this.month);
-            // this.url = sanitizer.bypassSecurityTrustResourceUrl('http://localhost:41669/Web/RP_CusTransToReport.aspx' + '?tranID=83203a1c-89d7-4090-a9cb-a351e4c90953');
         });
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   // console.log(items);      
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.myempID = this.items[i].empID;
+        //     console.log(this.myempID);
+        //   }
+        //   const month = new Date().getMonth() + 1;
+        //   const year = new Date().getFullYear();
+        //   this.myempID = this.myempID
+        //   this.month = month
+        //   this.year = year
+        //   this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/WebFormCalendar.aspx' + '?empid=' + this.myempID + '&year=' + this.year + '&month=' + this.month);
+        //   // this.url = sanitizer.bypassSecurityTrustResourceUrl('http://localhost:41669/Web/RP_CusTransToReport.aspx' + '?tranID=83203a1c-89d7-4090-a9cb-a351e4c90953');
+        // });
     }
     //#endregion
     //#region start
@@ -3935,8 +3945,8 @@ var CalendarpmPage = /** @class */ (function () {
     CalendarpmPage.ctorParameters = function () { return [
         { type: _post_data_service__WEBPACK_IMPORTED_MODULE_5__["PostDataService"] },
         { type: _storage_service__WEBPACK_IMPORTED_MODULE_6__["StorageService"] },
-        { type: _auth_authentication_service__WEBPACK_IMPORTED_MODULE_8__["AuthenticationService"] },
-        { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__["DomSanitizer"] }
+        { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__["DomSanitizer"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_8__["ActivatedRoute"] }
     ]; };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])("fullcalendar", { static: true }),
@@ -3954,8 +3964,8 @@ var CalendarpmPage = /** @class */ (function () {
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_post_data_service__WEBPACK_IMPORTED_MODULE_5__["PostDataService"],
             _storage_service__WEBPACK_IMPORTED_MODULE_6__["StorageService"],
-            _auth_authentication_service__WEBPACK_IMPORTED_MODULE_8__["AuthenticationService"],
-            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__["DomSanitizer"]])
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_7__["DomSanitizer"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_8__["ActivatedRoute"]])
     ], CalendarpmPage);
     return CalendarpmPage;
 }());

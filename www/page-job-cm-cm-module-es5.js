@@ -114,22 +114,28 @@ var CmPage = /** @class */ (function () {
         this.listpmdetail = [];
         this.job = [];
         this.route.queryParams.subscribe(function (params) {
+            _this.items = JSON.parse(params["data"]);
             _this.listpm = null;
-            _this.ngOnInit();
+            _this.myempID = _this.items.empID;
+            _this.name = _this.items.name;
+            _this.ChangeMonth();
         });
-        this.storageService.getUser().then(function (items) {
-            _this.items = items;
-            // console.log(items);      
-            for (var i = 0; i < _this.items.length; i++) {
-                _this.myempID = _this.items[i].empID;
-                _this.name = _this.items[i].name;
-                console.log(_this.myempID);
-            }
-        });
-        setTimeout(function () {
-            _this.ngOnInit();
-        }, 500);
-        this.ChangeMonth();
+        // this.route.queryParams.subscribe(params => {
+        //   this.listpm = null;
+        //   //this.ngOnInit();      
+        // });
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   // console.log(items);      
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.myempID = this.items[i].empID;
+        //     this.name = this.items[i].name;
+        //     console.log(this.myempID);
+        //   }
+        // });
+        // setTimeout(() => {
+        //   this.ngOnInit();
+        // }, 500);    
     }
     //#endregion
     //#region loaditem
@@ -148,34 +154,33 @@ var CmPage = /** @class */ (function () {
     //#region click
     CmPage.prototype.click = function (item, data) {
         var _this = this;
-        console.log(item);
         var param = {
             planID: item.value.planID,
-            empID: this.empid,
-            type: "checkstatus",
+            empID: this.items.empID,
+            type: "checkstatus"
         };
-        console.log(param);
+        console.log('param', param);
         this.postDataService.postcheck(param).then(function (status) {
-            console.log(status);
             if (status == true) {
                 var params = {
+                    empID: _this.items.empID,
                     item: item.value,
                     type: _this.type,
                     date: data.planDate,
+                    items: _this.items
                 };
+                console.log('params', params);
                 var navigationExtras = {
                     queryParams: {
                         data: JSON.stringify(params)
                     }
                 };
-                console.log(navigationExtras);
                 _this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
             }
             else {
                 _this.status();
             }
         });
-        console.log(item);
     };
     //#endregion
     //#region alert status
@@ -202,6 +207,8 @@ var CmPage = /** @class */ (function () {
     //#region ChangeMonth
     CmPage.prototype.ChangeMonth = function () {
         var _this = this;
+        this.load = true;
+        this.listpm = false;
         var month = new Date().getMonth() + 1;
         this.intMonth = month;
         var year = new Date().getFullYear();
@@ -268,26 +275,47 @@ var CmPage = /** @class */ (function () {
             this.textShow = this.month + " " + this.intYear;
         }
         //#endregion
-        this.storageService.getUser().then(function (items) {
-            _this.items = items;
-            // console.log(items);      
-            for (var i = 0; i < _this.items.length; i++) {
-                _this.empid = _this.items[i].empID;
-                _this.name = _this.items[i].name;
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   // console.log(items);      
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.empid = this.items[i].empID
+        //     this.name = this.items[i].name;
+        //   }
+        //   this.job.empID = this.empid;
+        //   this.job.month = this.intMonth;
+        //   this.job.year = this.intYear;
+        //   this.job.jobtype = this.type
+        //   console.log(this.job);
+        //   this.postDataService.postJobList(this.job).then(work => {
+        //     this.listpm = work;
+        //     console.log(this.listpm);
+        //     for (let i = 0; i < this.listpm.length; i++) {
+        //       this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
+        //     }
+        //     console.log('listpm', this.listpm);
+        //   });
+        // });
+        // this.job.empID = this.empid;
+        // this.job.month = this.intMonth;
+        // this.job.year = this.intYear;
+        // this.job.jobtype = this.type
+        // console.log(this.job);
+        var parJob = {
+            empID: this.items.empID,
+            month: this.intMonth,
+            year: this.intYear,
+            jobtype: this.type,
+        };
+        this.postDataService.postJobList(parJob).then(function (work) {
+            _this.listpm = work;
+            console.log(_this.listpm);
+            for (var i = 0; i < _this.listpm.length; i++) {
+                _this.listpm[i].customerdata = JSON.parse(_this.listpm[i].customerdata);
             }
-            _this.job.empID = _this.empid;
-            _this.job.month = _this.intMonth;
-            _this.job.year = _this.intYear;
-            _this.job.jobtype = _this.type;
-            console.log(_this.job);
-            _this.postDataService.postJobList(_this.job).then(function (work) {
-                _this.listpm = work;
-                console.log(_this.listpm);
-                for (var i = 0; i < _this.listpm.length; i++) {
-                    _this.listpm[i].customerdata = JSON.parse(_this.listpm[i].customerdata);
-                }
-                console.log('listpm', _this.listpm);
-            });
+            if (_this.listpm == false || _this.listpm.length > 0) {
+                _this.load = false;
+            }
         });
     };
     //#endregion
@@ -295,6 +323,7 @@ var CmPage = /** @class */ (function () {
     CmPage.prototype.changeMonthNext = function (value) {
         var _this = this;
         this.load = true;
+        this.listpm = false;
         // const year = new Date().getFullYear();
         //#region nextmonth
         if (this.month == 'มกราคม') {
@@ -362,57 +391,73 @@ var CmPage = /** @class */ (function () {
         //   this.intYear = year
         // }
         //#endregion
-        if (value == false) {
-            this.job.empID = this.empid;
-            this.job.month = this.intMonth;
-            this.job.year = this.intYear;
-            this.job.jobtype = this.type;
-            console.log(this.job);
-            this.postDataService.postJobList(this.job).then(function (work) {
-                _this.listpm = work;
-                console.log(_this.listpm);
-                for (var i = 0; i < _this.listpm.length; i++) {
-                    _this.listpm[i].customerdata = JSON.parse(_this.listpm[i].customerdata);
-                }
-                console.log('listpm', _this.listpm);
-            });
-        }
-        if (value != false) {
-            this.listpm = false;
-        }
-        console.log(this.intMonth);
-        console.log(this.intYear);
-        console.log(this.empid);
-        this.storageService.getUser().then(function (items) {
-            _this.items = items;
-            // console.log(items);      
-            for (var i = 0; i < _this.items.length; i++) {
-                _this.empid = _this.items[i].empID;
-                _this.name = _this.items[i].name;
+        var parJob = {
+            empID: this.items.empID,
+            month: this.intMonth,
+            year: this.intYear,
+            jobtype: this.type,
+        };
+        this.postDataService.postJobList(parJob).then(function (work) {
+            _this.listpm = work;
+            for (var i = 0; i < _this.listpm.length; i++) {
+                _this.listpm[i].customerdata = JSON.parse(_this.listpm[i].customerdata);
             }
-            _this.job.empID = _this.empid;
-            _this.job.month = _this.intMonth;
-            _this.job.year = _this.intYear;
-            _this.job.jobtype = _this.type;
-            console.log(_this.job);
-            _this.postDataService.postJobList(_this.job).then(function (work) {
-                _this.listpm = work;
-                console.log(_this.listpm);
-                for (var i = 0; i < _this.listpm.length; i++) {
-                    _this.listpm[i].customerdata = JSON.parse(_this.listpm[i].customerdata);
-                }
-                console.log('listpm', _this.listpm);
-                if (_this.listpm == false) {
-                    _this.load = false;
-                }
-            });
+            if (_this.listpm == false || _this.listpm.length > 0) {
+                _this.load = false;
+            }
         });
+        // if (value == false) {
+        //   this.job.empID = this.empid;
+        //   this.job.month = this.intMonth;
+        //   this.job.year = this.intYear;
+        //   this.job.jobtype = this.type
+        //   console.log(this.job);
+        //   this.postDataService.postJobList(this.job).then(work => {
+        //     this.listpm = work;
+        //     console.log(this.listpm);
+        //     for (let i = 0; i < this.listpm.length; i++) {
+        //       this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
+        //     }
+        //     console.log('listpm', this.listpm);
+        //   });
+        // }
+        // if (value != false) {
+        //   this.listpm = false;      
+        // }
+        // console.log(this.intMonth)
+        // console.log(this.intYear)
+        // console.log(this.empid);
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   // console.log(items);      
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.empid = this.items[i].empID
+        //     this.name = this.items[i].name;
+        //   }
+        //   this.job.empID = this.empid;
+        //   this.job.month = this.intMonth;
+        //   this.job.year = this.intYear;
+        //   this.job.jobtype = this.type
+        //   console.log(this.job);
+        //   this.postDataService.postJobList(this.job).then(work => {
+        //     this.listpm = work;
+        //     console.log(this.listpm);
+        //     for (let i = 0; i < this.listpm.length; i++) {
+        //       this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
+        //     }
+        //     console.log('listpm', this.listpm);
+        //     if (this.listpm == false) {
+        //       this.load = false;
+        //     }
+        //   });
+        // });
     };
     //#endregion
     //#region changeMonthBack
     CmPage.prototype.changeMonthBack = function (value) {
         var _this = this;
         this.load = true;
+        this.listpm = false;
         //#region 
         if (this.month == 'มกราคม') {
             this.month = 'ธันวาคม';
@@ -476,85 +521,95 @@ var CmPage = /** @class */ (function () {
             this.textShow = this.month + " " + this.intYear;
         }
         //#endregion
-        console.log(this.intMonth);
-        console.log(this.intYear);
-        console.log(this.empid);
-        if (value == false) {
-            this.job.empID = this.empid;
-            this.job.month = this.intMonth;
-            this.job.year = this.intYear;
-            this.job.jobtype = this.type;
-            console.log(this.job);
-            this.postDataService.postJobList(this.job).then(function (work) {
-                _this.listpm = work;
-                console.log(_this.listpm);
-                for (var i = 0; i < _this.listpm.length; i++) {
-                    _this.listpm[i].customerdata = JSON.parse(_this.listpm[i].customerdata);
-                }
-                console.log('listpm', _this.listpm);
-            });
-        }
-        if (value != false) {
-            this.listpm = false;
-        }
-        this.storageService.getUser().then(function (items) {
-            _this.items = items;
-            // console.log(items);      
-            for (var i = 0; i < _this.items.length; i++) {
-                _this.empid = _this.items[i].empID;
-                _this.name = _this.items[i].name;
+        var parJob = {
+            empID: this.items.empID,
+            month: this.intMonth,
+            year: this.intYear,
+            jobtype: this.type,
+        };
+        this.postDataService.postJobList(parJob).then(function (work) {
+            _this.listpm = work;
+            for (var i = 0; i < _this.listpm.length; i++) {
+                _this.listpm[i].customerdata = JSON.parse(_this.listpm[i].customerdata);
             }
-            _this.job.empID = _this.empid;
-            _this.job.month = _this.intMonth;
-            _this.job.year = _this.intYear;
-            _this.job.jobtype = _this.type;
-            console.log(_this.job);
-            _this.postDataService.postJobList(_this.job).then(function (work) {
-                _this.listpm = work;
-                console.log(_this.listpm);
-                for (var i = 0; i < _this.listpm.length; i++) {
-                    _this.listpm[i].customerdata = JSON.parse(_this.listpm[i].customerdata);
-                }
-                console.log('listpm', _this.listpm);
-                if (_this.listpm == false) {
-                    _this.load = false;
-                }
-            });
+            if (_this.listpm == false || _this.listpm.length > 0) {
+                _this.load = false;
+            }
         });
+        // if (value == false) {
+        //   this.job.empID = this.empid;
+        //   this.job.month = this.intMonth;
+        //   this.job.year = this.intYear;
+        //   this.job.jobtype = this.type
+        //   console.log(this.job);
+        //   this.postDataService.postJobList(this.job).then(work => {
+        //     this.listpm = work;
+        //     console.log(this.listpm);
+        //     for (let i = 0; i < this.listpm.length; i++) {
+        //       this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
+        //     }
+        //     console.log('listpm', this.listpm);
+        //   }); 
+        // }
+        // if (value != false) {
+        //   this.listpm = false;      
+        // }
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   // console.log(items);      
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.empid = this.items[i].empID
+        //     this.name = this.items[i].name;
+        //   }
+        //   this.job.empID = this.empid;
+        //   this.job.month = this.intMonth;
+        //   this.job.year = this.intYear;
+        //   this.job.jobtype = this.type
+        //   console.log(this.job);
+        //   this.postDataService.postJobList(this.job).then(work => {
+        //     this.listpm = work;
+        //     console.log(this.listpm);
+        //     for (let i = 0; i < this.listpm.length; i++) {
+        //       this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
+        //     }
+        //     if (this.listpm == false || this.listpm.length > 0) {
+        //       this.load = false;
+        //     }
+        //   });
+        // });
     };
     //#endregion
     //#region start
     CmPage.prototype.ngOnInit = function () {
-        var _this = this;
-        this.storageService.getUser().then(function (items) {
-            _this.items = items;
-            // console.log(items);      
-            for (var i = 0; i < _this.items.length; i++) {
-                _this.empid = _this.items[i].empID;
-                _this.name = _this.items[i].name;
-            }
-        });
-        this.storageService.getUser().then(function (items) {
-            _this.items = items;
-            // console.log(items);      
-            for (var i = 0; i < _this.items.length; i++) {
-                _this.empid = _this.items[i].empID;
-                _this.name = _this.items[i].name;
-            }
-            _this.job.empID = _this.empid;
-            _this.job.month = _this.intMonth;
-            _this.job.year = _this.intYear;
-            _this.job.jobtype = _this.type;
-            console.log(_this.job);
-            _this.postDataService.postJobList(_this.job).then(function (work) {
-                _this.listpm = work;
-                console.log(_this.listpm);
-                for (var i = 0; i < _this.listpm.length; i++) {
-                    _this.listpm[i].customerdata = JSON.parse(_this.listpm[i].customerdata);
-                }
-                console.log('listpm', _this.listpm);
-            });
-        });
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   // console.log(items);      
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.empid = this.items[i].empID
+        //     this.name = this.items[i].name;
+        //   }
+        // });
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   // console.log(items);      
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.empid = this.items[i].empID
+        //     this.name = this.items[i].name;
+        //   }
+        //   this.job.empID = this.empid;
+        //   this.job.month = this.intMonth;
+        //   this.job.year = this.intYear;
+        //   this.job.jobtype = this.type
+        //   console.log(this.job);
+        //   this.postDataService.postJobList(this.job).then(work => {
+        //     this.listpm = work;
+        //     console.log(this.listpm);
+        //     for (let i = 0; i < this.listpm.length; i++) {
+        //       this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
+        //     }
+        //     console.log('listpm', this.listpm);
+        //   });
+        // });
     };
     //#endregion
     //#region load

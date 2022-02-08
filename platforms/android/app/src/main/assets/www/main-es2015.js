@@ -896,15 +896,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-/* harmony import */ var _app_auth_auth_guard_guard__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../app/auth/auth-guard.guard */ "./src/app/auth/auth-guard.guard.ts");
-
 
 
 
 const routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-    { path: 'menu', loadChildren: './page/menu/menu.module#MenuPageModule', canActivate: [_app_auth_auth_guard_guard__WEBPACK_IMPORTED_MODULE_3__["AuthGuardGuard"]] },
+    { path: 'menu', loadChildren: './page/menu/menu.module#MenuPageModule' },
     { path: 'home', loadChildren: './home/home.module#HomePageModule' },
     { path: 'job/jobdetail', loadChildren: './page/job/jobdetail/jobdetail.module#JobdetailPageModule' },
     { path: 'job/reportcheckpm', loadChildren: './page/job/reportcheckpm/reportcheckpm.module#ReportcheckpmPageModule' },
@@ -1608,6 +1606,7 @@ let DeviceSpareListPage = class DeviceSpareListPage {
         this.navParams = navParams;
         this.load = false;
         this.navData = this.navParams.data;
+        console.log('this.navData', this.navData);
         this.empID = this.navData.empID;
         this.postDataService.SparepartWaitReturnList(this.navData.item.SKUID, this.empID).then(res => {
             this.spareList = res;
@@ -3464,6 +3463,7 @@ let ChecklistcmPage = class ChecklistcmPage {
         this.jobtype = this.navParams.data.jobtype;
         this.stock = [];
         console.log('this.jobtype', this.jobtype);
+        console.log('this.navParams.data', this.navParams.data);
         let param = {
             installID: this.installID,
             typedevice: "CheckCM",
@@ -4295,17 +4295,22 @@ let CustomerevaluationPage = class CustomerevaluationPage {
             this.myId = JSON.parse(params["data"]);
             this.item = this.myId.item;
             this.date = this.myId.date;
+            this.items = this.myId.items;
         });
+        console.log('this.items', this.items);
+        console.log('this.navParams', this.navParams);
+        console.log('this.navParams.data', this.navParams.data);
         this.resolution = this.navParams.data.resolution;
         this.resolutiondetail = this.navParams.data.resolutiondetail;
         this.installID = this.navParams.data.installID;
         this.jobtype = this.navParams.data.jobtype;
         this.planID = this.navParams.data.planID;
         this.header = this.navParams.data.header;
-        this.empID = this.navParams.data.empID;
+        this.empID = (this.navParams.data.empID == undefined) ? this.items.empID : this.navParams.data.empID;
         this.workclose = this.navParams.data.workclose;
         this.problemby = this.navParams.data.problemby;
         this.TecComment = this.navParams.data.TecComment;
+        console.log('this.empID', this.empID);
         this.postDataService.SelectSignatureTech(this.planID, this.installID).then(res => {
             if (res != null) {
                 this.isShow = true;
@@ -4474,25 +4479,28 @@ let CustomerevaluationPage = class CustomerevaluationPage {
                     let params = {
                         installID: this.installID,
                         planID: this.planID,
-                        empID: this.empID,
+                        empID: (this.empID != undefined) ? this.empID : this.items.empID,
                         workclose: this.workclose,
                         jobtype: "saveclosecustomer",
                         resolution: this.resolution,
                         resolutiondetail: this.resolutiondetail,
                         problemby: this.problemby,
                     };
+                    console.log('params', params);
                     this.postDataService.SaveCaseAll(params).then(data => {
                         if (data == true) {
                             this.alertSuccess();
-                            let params = {
+                            let param = {
+                                empID: (this.empID != undefined) ? this.empID : this.items.empID,
                                 item: this.item,
                                 type: "getCM",
                                 date: this.date,
+                                items: this.items
                             };
-                            console.log(params);
+                            console.log('getCM params', param);
                             let navigationExtras = {
                                 queryParams: {
-                                    data: JSON.stringify(params)
+                                    data: JSON.stringify(param)
                                 }
                             };
                             this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
@@ -6532,13 +6540,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
 
 
 
 let ReqDetailPage = class ReqDetailPage {
-    constructor(modalCtrl, navParams) {
+    constructor(modalCtrl, navParams, route) {
         this.modalCtrl = modalCtrl;
         this.navParams = navParams;
+        this.route = route;
+        this.route.queryParams.subscribe(params => {
+            this.items = JSON.parse(params["data"]);
+            console.log('this.items', this.items);
+        });
+        console.log('this.navParams.data', this.navParams.data);
         this.data = this.navParams.data;
         this.empID = this.data.empID;
         this.cusID = this.data.cusID;
@@ -6566,7 +6582,8 @@ let ReqDetailPage = class ReqDetailPage {
 };
 ReqDetailPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"] }
 ];
 ReqDetailPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -6575,7 +6592,8 @@ ReqDetailPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         styles: [__webpack_require__(/*! ./req-detail.page.scss */ "./src/app/page/sparepart/req-detail/req-detail.page.scss")]
     }),
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["ModalController"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"]])
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavParams"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_3__["ActivatedRoute"]])
 ], ReqDetailPage);
 
 
@@ -7529,11 +7547,11 @@ let PostDataService = class PostDataService {
         // apiServer_url = 'http://localhost:41669/';
         // apiStock = 'https://localhost:6379/';
         //จาก Server จริง
-        this.apiServer_url = 'https://erpsuperior.com/';
-        this.apiStock = 'https://wms.erpsuperior.com/';
+        // apiServer_url = 'https://erpsuperior.com/';
+        // apiStock = 'https://wms.erpsuperior.com/';
         //จาก Server เทส
-        // apiServer_url = 'https://test.erpsuperior.com/';
-        // apiStock = 'https://wmstest.erpsuperior.com/';
+        this.apiServer_url = 'https://test.erpsuperior.com/';
+        this.apiStock = 'https://wmstest.erpsuperior.com/';
         // apiServer_url = 'https://cors-anywhere.herokuapp.com/http://superior2.wingplusweb.com/';
         // apiServer_url = 'https://cors-anywhere.herokuapp.com/https://superior2.wingplusweb.com/';
         this.httpOptions = {

@@ -86,11 +86,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _post_data_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../post-data.service */ "./src/app/post-data.service.ts");
-/* harmony import */ var _storage_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../storage.service */ "./src/app/storage.service.ts");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _device_spare_list_device_spare_list_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./device-spare-list/device-spare-list.page */ "./src/app/page/devices-acessory/device-spare-list/device-spare-list.page.ts");
-
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _device_spare_list_device_spare_list_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./device-spare-list/device-spare-list.page */ "./src/app/page/devices-acessory/device-spare-list/device-spare-list.page.ts");
 
 
 
@@ -99,31 +97,37 @@ __webpack_require__.r(__webpack_exports__);
 
 var TOKEN_KEY = 'auth-token';
 var DevicesAcessoryPage = /** @class */ (function () {
-    function DevicesAcessoryPage(postDataService, storage, storageService, alertCtrl, navCtrl, router, toastCtrl, modalCtrl) {
+    function DevicesAcessoryPage(postDataService, 
+    //private storage: StorageService,
+    //private storageService: StorageService,
+    alertCtrl, navCtrl, router, toastCtrl, modalCtrl, route) {
         var _this = this;
         this.postDataService = postDataService;
-        this.storage = storage;
-        this.storageService = storageService;
         this.alertCtrl = alertCtrl;
         this.navCtrl = navCtrl;
         this.router = router;
         this.toastCtrl = toastCtrl;
         this.modalCtrl = modalCtrl;
+        this.route = route;
         this.isShowDetail = false;
         this.load = false;
-        setTimeout(function () {
-            _this.ngOnInit();
-        }, 500);
+        this.route.queryParams.subscribe(function (params) {
+            _this.items = JSON.parse(params["data"]);
+            _this.empID = _this.items.empID;
+            _this.loadProduct();
+        });
+        // setTimeout(() => {
+        //   this.ngOnInit();
+        // }, 500);
     }
     DevicesAcessoryPage.prototype.ngOnInit = function () {
-        var _this = this;
-        this.storageService.getUser().then(function (items) {
-            _this.items = items;
-            for (var i = 0; i < _this.items.length; i++) {
-                _this.empID = _this.items[i].empID;
-            }
-        });
-        this.loadProduct();
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.empID = this.items[i].empID;
+        //   }
+        // });
+        // this.loadProduct();
     };
     DevicesAcessoryPage.prototype.loadpage = function () {
         this.loadProduct();
@@ -222,7 +226,7 @@ var DevicesAcessoryPage = /** @class */ (function () {
             return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.modalCtrl.create({
-                            component: _device_spare_list_device_spare_list_page__WEBPACK_IMPORTED_MODULE_6__["DeviceSpareListPage"],
+                            component: _device_spare_list_device_spare_list_page__WEBPACK_IMPORTED_MODULE_5__["DeviceSpareListPage"],
                             cssClass: 'my-custom-modal-css',
                             componentProps: {
                                 empID: this.empID,
@@ -266,13 +270,12 @@ var DevicesAcessoryPage = /** @class */ (function () {
     };
     DevicesAcessoryPage.ctorParameters = function () { return [
         { type: _post_data_service__WEBPACK_IMPORTED_MODULE_2__["PostDataService"] },
-        { type: _storage_service__WEBPACK_IMPORTED_MODULE_3__["StorageService"] },
-        { type: _storage_service__WEBPACK_IMPORTED_MODULE_3__["StorageService"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"] },
-        { type: _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"] }
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] }
     ]; };
     DevicesAcessoryPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -281,13 +284,12 @@ var DevicesAcessoryPage = /** @class */ (function () {
             styles: [__webpack_require__(/*! ./devices-acessory.page.scss */ "./src/app/page/devices-acessory/devices-acessory.page.scss")]
         }),
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_post_data_service__WEBPACK_IMPORTED_MODULE_2__["PostDataService"],
-            _storage_service__WEBPACK_IMPORTED_MODULE_3__["StorageService"],
-            _storage_service__WEBPACK_IMPORTED_MODULE_3__["StorageService"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["AlertController"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["NavController"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_5__["Router"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ToastController"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_4__["ModalController"]])
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["Router"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]])
     ], DevicesAcessoryPage);
     return DevicesAcessoryPage;
 }());

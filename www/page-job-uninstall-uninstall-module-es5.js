@@ -115,22 +115,24 @@ var UninstallPage = /** @class */ (function () {
         this.job = [];
         this.route.queryParams.subscribe(function (params) {
             _this.listpm = null;
+            _this.items = JSON.parse(params["data"]);
+            _this.myempID = _this.items.empID;
+            _this.name = _this.items.name;
             _this.ChangeMonth();
-            _this.ngOnInit();
         });
-        this.storageService.getUser().then(function (items) {
-            _this.items = items;
-            // console.log(items);      
-            for (var i = 0; i < _this.items.length; i++) {
-                _this.myempID = _this.items[i].empID;
-                _this.name = _this.items[i].name;
-                console.log(_this.myempID);
-            }
-        });
-        this.ChangeMonth();
-        setTimeout(function () {
-            _this.ngOnInit();
-        }, 500);
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   // console.log(items);      
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.myempID = this.items[i].empID;
+        //     this.name = this.items[i].name;
+        //     console.log(this.myempID);
+        //   }
+        // });
+        // this.ChangeMonth();
+        // setTimeout(() => {
+        //   this.ngOnInit();
+        // }, 500);
     }
     //#endregion
     //#region click
@@ -149,17 +151,15 @@ var UninstallPage = /** @class */ (function () {
     ////#endregion
     UninstallPage.prototype.click = function (item, data) {
         var _this = this;
-        console.log(item);
         var param = {
             planID: item.value.planID,
-            empID: this.empid,
+            empID: this.items.empID,
             type: "checkstatus",
         };
-        console.log(param);
         this.postDataService.postcheck(param).then(function (status) {
-            console.log(status);
             if (status == true) {
                 var params = {
+                    empID: _this.items.empID,
                     item: item.value,
                     type: _this.type,
                     date: data.planDate,
@@ -169,7 +169,6 @@ var UninstallPage = /** @class */ (function () {
                         data: JSON.stringify(params)
                     }
                 };
-                console.log(navigationExtras);
                 _this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
             }
             else {
@@ -202,6 +201,8 @@ var UninstallPage = /** @class */ (function () {
     //#region ChangMonth
     UninstallPage.prototype.ChangeMonth = function () {
         var _this = this;
+        this.load = true;
+        this.listpm = false;
         var month = new Date().getMonth() + 1;
         this.intMonth = month;
         var year = new Date().getFullYear();
@@ -268,39 +269,55 @@ var UninstallPage = /** @class */ (function () {
             this.textShow = this.month + " " + this.intYear;
         }
         //#endregion
+        var parJob = {
+            empID: this.items.empID,
+            month: this.intMonth,
+            year: this.intYear,
+            jobtype: this.type,
+        };
+        this.postDataService.postJobList(parJob).then(function (work) {
+            _this.listpm = work;
+            for (var i = 0; i < _this.listpm.length; i++) {
+                _this.listpm[i].customerdata = JSON.parse(_this.listpm[i].customerdata);
+            }
+            if (_this.listpm == false || _this.listpm.length > 0) {
+                _this.load = false;
+            }
+        });
         // if (this.intYear > year) {
         //   this.intYear = year
         // }
-        console.log(this.intMonth);
-        console.log(this.intYear);
-        console.log(this.empid);
-        this.storageService.getUser().then(function (items) {
-            _this.items = items;
-            // console.log(items);      
-            for (var i = 0; i < _this.items.length; i++) {
-                _this.empid = _this.items[i].empID;
-                _this.name = _this.items[i].name;
-            }
-            _this.job.empID = _this.empid;
-            _this.job.month = _this.intMonth;
-            _this.job.year = _this.intYear;
-            _this.job.jobtype = _this.type;
-            console.log(_this.job);
-            _this.postDataService.postJobList(_this.job).then(function (work) {
-                _this.listpm = work;
-                console.log(_this.listpm);
-                for (var i = 0; i < _this.listpm.length; i++) {
-                    _this.listpm[i].customerdata = JSON.parse(_this.listpm[i].customerdata);
-                }
-                console.log('listpm', _this.listpm);
-            });
-        });
+        // console.log(this.intMonth)
+        // console.log(this.intYear)
+        // console.log(this.empid);
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   // console.log(items);      
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.empid = this.items[i].empID
+        //     this.name = this.items[i].name;
+        //   }
+        //   this.job.empID = this.empid;
+        //   this.job.month = this.intMonth;
+        //   this.job.year = this.intYear;
+        //   this.job.jobtype = this.type
+        //   console.log(this.job);
+        //   this.postDataService.postJobList(this.job).then(work => {
+        //     this.listpm = work;
+        //     console.log(this.listpm);
+        //     for (let i = 0; i < this.listpm.length; i++) {
+        //       this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
+        //     }
+        //     console.log('listpm', this.listpm);
+        //   });
+        // });
     };
     //#endregion
     //#region Chang MonthNext
     UninstallPage.prototype.changeMonthNext = function () {
         var _this = this;
         this.load = true;
+        this.listpm = false;
         // const year = new Date().getFullYear();
         //#region nextmonth
         if (this.month == 'มกราคม') {
@@ -367,40 +384,56 @@ var UninstallPage = /** @class */ (function () {
         // if (this.intYear > year) {
         //   this.intYear = year
         // }
-        console.log(this.intMonth);
-        console.log(this.intYear);
-        console.log(this.empid);
-        this.storageService.getUser().then(function (items) {
-            _this.items = items;
-            // console.log(items);      
-            for (var i = 0; i < _this.items.length; i++) {
-                _this.empid = _this.items[i].empID;
-                _this.name = _this.items[i].name;
-            }
-            _this.job.empID = _this.empid;
-            _this.job.month = _this.intMonth;
-            _this.job.year = _this.intYear;
-            _this.job.jobtype = _this.type;
-            console.log(_this.job);
-            _this.postDataService.postJobList(_this.job).then(function (work) {
-                _this.listpm = work;
-                console.log(_this.listpm);
-                for (var i = 0; i < _this.listpm.length; i++) {
-                    _this.listpm[i].customerdata = JSON.parse(_this.listpm[i].customerdata);
-                }
-                console.log('listpm', _this.listpm);
-                if (_this.listpm == false) {
-                    _this.load = false;
-                }
-            });
-        });
+        // console.log(this.intMonth)
+        // console.log(this.intYear)
+        // console.log(this.empid);
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   // console.log(items);      
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.empid = this.items[i].empID
+        //     this.name = this.items[i].name;
+        //   }
+        //   this.job.empID = this.empid;
+        //   this.job.month = this.intMonth;
+        //   this.job.year = this.intYear;
+        //   this.job.jobtype = this.type
+        //   console.log(this.job);
+        //   this.postDataService.postJobList(this.job).then(work => {
+        //     this.listpm = work;
+        //     console.log(this.listpm);
+        //     for (let i = 0; i < this.listpm.length; i++) {
+        //       this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
+        //     }
+        //     console.log('listpm', this.listpm);
+        //     if (this.listpm == false) {
+        //       this.load = false;
+        //     }
+        //   });
+        // });
         //#endregion
+        var parJob = {
+            empID: this.items.empID,
+            month: this.intMonth,
+            year: this.intYear,
+            jobtype: this.type,
+        };
+        this.postDataService.postJobList(parJob).then(function (work) {
+            _this.listpm = work;
+            for (var i = 0; i < _this.listpm.length; i++) {
+                _this.listpm[i].customerdata = JSON.parse(_this.listpm[i].customerdata);
+            }
+            if (_this.listpm == false || _this.listpm.length > 0) {
+                _this.load = false;
+            }
+        });
     };
     //#endregion
     //#region ChangMonthBack
     UninstallPage.prototype.changeMonthBack = function (value) {
         var _this = this;
         this.load = true;
+        this.listpm = false;
         //#region 
         if (this.month == 'มกราคม') {
             this.month = 'ธันวาคม';
@@ -464,61 +497,75 @@ var UninstallPage = /** @class */ (function () {
             this.textShow = this.month + " " + this.intYear;
         }
         //#endregion
-        if (value == false) {
-            this.job.empID = this.empid;
-            this.job.month = this.intMonth;
-            this.job.year = this.intYear;
-            this.job.jobtype = this.type;
-            console.log(this.job);
-            this.postDataService.postJobList(this.job).then(function (work) {
-                _this.listpm = work;
-                console.log(_this.listpm);
-                for (var i = 0; i < _this.listpm.length; i++) {
-                    _this.listpm[i].customerdata = JSON.parse(_this.listpm[i].customerdata);
-                }
-                console.log('listpm', _this.listpm);
-            });
-        }
-        if (value != false) {
-            this.listpm = false;
-        }
-        this.storageService.getUser().then(function (items) {
-            _this.items = items;
-            // console.log(items);      
-            for (var i = 0; i < _this.items.length; i++) {
-                _this.empid = _this.items[i].empID;
-                _this.name = _this.items[i].name;
+        var parJob = {
+            empID: this.items.empID,
+            month: this.intMonth,
+            year: this.intYear,
+            jobtype: this.type,
+        };
+        this.postDataService.postJobList(parJob).then(function (work) {
+            _this.listpm = work;
+            for (var i = 0; i < _this.listpm.length; i++) {
+                _this.listpm[i].customerdata = JSON.parse(_this.listpm[i].customerdata);
             }
-            _this.job.empID = _this.empid;
-            _this.job.month = _this.intMonth;
-            _this.job.year = _this.intYear;
-            _this.job.jobtype = _this.type;
-            console.log(_this.job);
-            _this.postDataService.postJobList(_this.job).then(function (work) {
-                _this.listpm = work;
-                console.log(_this.listpm);
-                for (var i = 0; i < _this.listpm.length; i++) {
-                    _this.listpm[i].customerdata = JSON.parse(_this.listpm[i].customerdata);
-                }
-                console.log('listpm', _this.listpm);
-                if (_this.listpm == false) {
-                    _this.load = false;
-                }
-            });
+            if (_this.listpm == false || _this.listpm.length > 0) {
+                _this.load = false;
+            }
         });
+        // if (value == false) {
+        //   this.job.empID = this.empid;
+        //   this.job.month = this.intMonth;
+        //   this.job.year = this.intYear;
+        //   this.job.jobtype = this.type
+        //   console.log(this.job);
+        //   this.postDataService.postJobList(this.job).then(work => {
+        //     this.listpm = work;
+        //     console.log(this.listpm);
+        //     for (let i = 0; i < this.listpm.length; i++) {
+        //       this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
+        //     }
+        //     console.log('listpm', this.listpm);
+        //   });
+        // }
+        // if (value != false) {
+        //   this.listpm = false;
+        // }
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   // console.log(items);      
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.empid = this.items[i].empID
+        //     this.name = this.items[i].name;
+        //   }
+        //   this.job.empID = this.empid;
+        //   this.job.month = this.intMonth;
+        //   this.job.year = this.intYear;
+        //   this.job.jobtype = this.type
+        //   console.log(this.job);
+        //   this.postDataService.postJobList(this.job).then(work => {
+        //     this.listpm = work;
+        //     console.log(this.listpm);
+        //     for (let i = 0; i < this.listpm.length; i++) {
+        //       this.listpm[i].customerdata = JSON.parse(this.listpm[i].customerdata);
+        //     }
+        //     console.log('listpm', this.listpm);
+        //     if (this.listpm == false) {
+        //       this.load = false;
+        //     }
+        //   });
+        // });
     };
     //#endregion
     //#region start
     UninstallPage.prototype.ngOnInit = function () {
-        var _this = this;
-        this.storageService.getUser().then(function (items) {
-            _this.items = items;
-            // console.log(items);      
-            for (var i = 0; i < _this.items.length; i++) {
-                _this.empid = _this.items[i].empID;
-                _this.name = _this.items[i].name;
-            }
-        });
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   // console.log(items);      
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.empid = this.items[i].empID
+        //     this.name = this.items[i].name;
+        //   }
+        // });
     };
     //#endregion
     //#region load

@@ -84,9 +84,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
 /* harmony import */ var _post_data_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../post-data.service */ "./src/app/post-data.service.ts");
 /* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../storage.service */ "./src/app/storage.service.ts");
-/* harmony import */ var _req_detail_req_detail_page__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../req-detail/req-detail.page */ "./src/app/page/sparepart/req-detail/req-detail.page.ts");
-/* harmony import */ var _add_sparepart_add_sparepart_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../add-sparepart/add-sparepart.page */ "./src/app/page/sparepart/add-sparepart/add-sparepart.page.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _storage_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../storage.service */ "./src/app/storage.service.ts");
+/* harmony import */ var _req_detail_req_detail_page__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../req-detail/req-detail.page */ "./src/app/page/sparepart/req-detail/req-detail.page.ts");
+/* harmony import */ var _add_sparepart_add_sparepart_page__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../add-sparepart/add-sparepart.page */ "./src/app/page/sparepart/add-sparepart/add-sparepart.page.ts");
+
 
 
 
@@ -95,7 +97,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let RequestSparepartPage = class RequestSparepartPage {
-    constructor(postDataService, alertCtrl, navCtrl, storageService, toastCtrl, loadCtrl, modalCtrl) {
+    constructor(postDataService, alertCtrl, navCtrl, storageService, toastCtrl, loadCtrl, modalCtrl, route) {
         this.postDataService = postDataService;
         this.alertCtrl = alertCtrl;
         this.navCtrl = navCtrl;
@@ -103,18 +105,23 @@ let RequestSparepartPage = class RequestSparepartPage {
         this.toastCtrl = toastCtrl;
         this.loadCtrl = loadCtrl;
         this.modalCtrl = modalCtrl;
+        this.route = route;
         this.partData = [];
         this.selectSpareList = [];
         this.isSearching = false;
         this.cusID = '';
         this.cusName = '';
+        this.route.queryParams.subscribe(params => {
+            this.items = JSON.parse(params["data"]);
+            this.empID = this.items.empID;
+        });
     }
     ngOnInit() {
-        this.storageService.getUser().then(items => {
-            for (let i = 0; i < items.length; i++) {
-                this.empID = items[i].empID;
-            }
-        });
+        // this.storageService.getUser().then(items => {
+        //   for (let i = 0; i < items.length; i++) {
+        //     this.empID = items[i].empID;
+        //   }
+        // });
     }
     searchCustomer(ev) {
         //this.presentLoading();
@@ -236,6 +243,7 @@ let RequestSparepartPage = class RequestSparepartPage {
     modalReqDetail() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             console.log('this.reqType', this.reqType);
+            console.log('this.items', this.items);
             if (this.reqType == undefined) {
                 this.alertReqType();
                 return;
@@ -247,21 +255,22 @@ let RequestSparepartPage = class RequestSparepartPage {
                 }
             }
             const modal = yield this.modalCtrl.create({
-                component: _req_detail_req_detail_page__WEBPACK_IMPORTED_MODULE_5__["ReqDetailPage"],
+                component: _req_detail_req_detail_page__WEBPACK_IMPORTED_MODULE_6__["ReqDetailPage"],
                 cssClass: 'my-custom-modal-css',
                 componentProps: {
-                    empID: this.empID,
+                    empID: this.items.empID,
                     cusID: this.cusID,
                     cusName: this.cusName,
                     reqType: this.reqType,
-                    sparelist: this.selectSpareList
+                    sparelist: this.selectSpareList,
+                    items: this.items
                 }
             });
             modal.onDidDismiss().then(res => {
                 let type = res.data;
                 if (type == 'submit') {
                     let params = {
-                        empID: this.empID,
+                        empID: this.items.empID,
                         cusID: this.cusID,
                         reqType: this.reqType,
                         sparelist: this.selectSpareList
@@ -290,7 +299,7 @@ let RequestSparepartPage = class RequestSparepartPage {
     addSparepart() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             const modal = yield this.modalCtrl.create({
-                component: _add_sparepart_add_sparepart_page__WEBPACK_IMPORTED_MODULE_6__["AddSparepartPage"],
+                component: _add_sparepart_add_sparepart_page__WEBPACK_IMPORTED_MODULE_7__["AddSparepartPage"],
                 //cssClass: 'my-custom-modal-css',
                 componentProps: {}
             });
@@ -340,10 +349,11 @@ RequestSparepartPage.ctorParameters = () => [
     { type: _post_data_service__WEBPACK_IMPORTED_MODULE_2__["PostDataService"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] },
-    { type: _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"] },
+    { type: _storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"] },
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"] }
 ];
 RequestSparepartPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -354,10 +364,11 @@ RequestSparepartPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_post_data_service__WEBPACK_IMPORTED_MODULE_2__["PostDataService"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"],
-        _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"],
+        _storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ToastController"],
         _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"]])
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_4__["ActivatedRoute"]])
 ], RequestSparepartPage);
 
 

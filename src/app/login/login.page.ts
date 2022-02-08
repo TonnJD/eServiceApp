@@ -143,14 +143,14 @@ export class LoginPage implements OnInit {
           }
         };
 
-        alert('Login Success');
+        alert('เข้าสู่ระบบเรียบร้อย');
         this.router.navigate(['/menu/overview'], navigationExtras);
       }
       else {
-        alert('Incorrect password');
+        alert('ชื่อผู้ใช้ หรือ รหัสผ่าน ไม่ถูกต้อง');
       }
 
-    }, error => alert('can\'t login'));
+    }, error => alert('ไม่สามารถเข้าสู่ระบบได้'));
 
     // this.load();
     // this.user.email = this.user.email;

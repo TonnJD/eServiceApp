@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-content>\r\n  <div class=\"centered\">   \r\n    <form #form=\"ngForm\" (ngSubmit)=\"login(form)\" class=\"text-center\">\r\n      <img src=\"../../assets/img/logo.png\" alt=\"\"/>\r\n      <div class=\"row\">\r\n        <div class=\"col-12\" style=\"padding: 5px;margin-bottom: 30px;\">\r\n          <div style=\"font-size: 20px;font-weight: bold;\">Login your account</div>\r\n          <div class=\"text-center\" style=\"text-align: center;color: red;\"> {{text}}</div>\r\n        </div>    \r\n      </div> \r\n      <ion-item>\r\n        <ion-input name=\"username\" type=\"text\" [(ngModel)]=\"user.email\" placeholder=\"ชื่อผู้ใช้\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-input name=\"password\" type=\"password\" [(ngModel)]=\"user.password\" placeholder=\"รหัสผ่าน\" ngModel required>\r\n        </ion-input>\r\n      </ion-item>\r\n      <ion-button shape=\"round\" [disabled]=\"form.invalid\" (click)=\"login()\">Login</ion-button>\r\n    </form>\r\n  </div> \r\n  <!-- <iframe [src]=\"url\" style=\"width:100%;height:100%\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->\r\n</ion-content>"
+module.exports = "<ion-content>\r\n  <div class=\"centered\">   \r\n    <form #form=\"ngForm\" (ngSubmit)=\"login(form)\" class=\"text-center\">\r\n      <img src=\"../../assets/img/logo.png\" alt=\"\"/>\r\n      <div class=\"row\">\r\n        <div class=\"col-12\" style=\"padding: 5px;margin-bottom: 30px;\">\r\n          <div style=\"font-size: 20px;font-weight: bold;\">Login your account</div>\r\n          <div class=\"text-center\" style=\"text-align: center;color: red;\"> {{text}}</div>\r\n        </div>    \r\n      </div> \r\n      <ion-item>\r\n        <ion-input name=\"username\" type=\"text\" [(ngModel)]=\"username\" placeholder=\"ชื่อผู้ใช้\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-input name=\"password\" type=\"password\" [(ngModel)]=\"password\" placeholder=\"รหัสผ่าน\" ngModel required>\r\n        </ion-input>\r\n      </ion-item>\r\n      <ion-button shape=\"round\" [disabled]=\"form.invalid\" (click)=\"login()\">Login</ion-button>\r\n    </form>\r\n  </div> \r\n  <!-- <iframe [src]=\"url\" style=\"width:100%;height:100%\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->\r\n</ion-content>"
 
 /***/ }),
 
@@ -86,16 +86,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPage", function() { return LoginPage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _auth_service_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../auth-service.service */ "./src/app/auth-service.service.ts");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _post_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../post-data.service */ "./src/app/post-data.service.ts");
-/* harmony import */ var _storage_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../storage.service */ "./src/app/storage.service.ts");
-/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
-/* harmony import */ var _auth_authentication_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../auth/authentication.service */ "./src/app/auth/authentication.service.ts");
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-
-
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _post_data_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../post-data.service */ "./src/app/post-data.service.ts");
+/* harmony import */ var _storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../storage.service */ "./src/app/storage.service.ts");
+/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
 
 
 
@@ -107,7 +103,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var LoginPage = /** @class */ (function () {
-    function LoginPage(alertController, loadingController, postDataService, navCtrl, platform, storageService, network, authService, DataService, sanitizer, router, route) {
+    function LoginPage(alertController, loadingController, postDataService, navCtrl, platform, storageService, network, 
+    // private authService: AuthenticationService,
+    // private DataService: AuthServiceService,
+    sanitizer, router, route) {
         var _this = this;
         this.alertController = alertController;
         this.loadingController = loadingController;
@@ -116,10 +115,9 @@ var LoginPage = /** @class */ (function () {
         this.platform = platform;
         this.storageService = storageService;
         this.network = network;
-        this.authService = authService;
-        this.DataService = DataService;
         this.router = router;
         this.route = route;
+        this.userStatus = false;
         this.items = [];
         this.newUser = {};
         this.text = "";
@@ -131,16 +129,15 @@ var LoginPage = /** @class */ (function () {
             // this.checkNetwork();
         }, 500);
         this.user = [];
-        this.route.queryParams.subscribe(function (params) {
-            _this.authService.authenticationState.subscribe(function (state) {
-                if (state) {
-                    _this.router.navigate(['/menu/overview']);
-                }
-                else {
-                    _this.router.navigate(['login']);
-                }
-            });
-        });
+        // this.route.queryParams.subscribe(params => {
+        //   // this.authService.authenticationState.subscribe(state => {
+        //   //   if (state) {
+        //   //     this.router.navigate(['/menu/overview']);
+        //   //   } else {
+        //   //     this.router.navigate(['login']);
+        //   //   }
+        //   // });
+        // });
     }
     //#endregion
     //#region Check Network
@@ -180,36 +177,67 @@ var LoginPage = /** @class */ (function () {
     //#region login
     LoginPage.prototype.login = function () {
         var _this = this;
-        this.load();
-        this.user.email = this.user.email;
-        this.user.password = this.user.password;
-        this.user.type = "eservice";
-        console.log(this.user);
-        this.postDataService.login(this.user).then(function (data) {
-            _this.data = data;
-            console.log(_this.data);
-            for (var i = 0; i < _this.data.length; i++) {
-                _this.status = _this.data[i].Status;
-                _this.name = _this.data[i].Name;
-                _this.username = _this.data[i].Username;
-                _this.position = _this.data[i].Position;
-                _this.workall = _this.data[i].WorkAll;
-                _this.workfinish = _this.data[i].WorkFinish;
-                _this.empID = _this.data[i].empID;
-                _this.role = _this.data[i].roleID;
-                _this.Tablet = _this.data[i].Tablet;
-                _this.link = _this.data[i].Link;
-            }
-            if (_this.status == false) {
-                _this.false();
-            }
-            else if (_this.Tablet == "On" && _this.status == true) {
-                _this.true();
+        var params = {
+            email: this.username,
+            password: this.password,
+        };
+        console.log('params', params);
+        this.postDataService.login(params).then(function (res) {
+            _this.user = res;
+            console.log('this.user', _this.user);
+            _this.newUser.id = _this.user[0].id;
+            _this.newUser.name = _this.user[0].Name;
+            _this.newUser.username = _this.user[0].Username;
+            _this.newUser.position = _this.user[0].Position;
+            _this.newUser.empID = _this.user[0].empID;
+            _this.newUser.role = _this.user[0].roleID;
+            _this.newUser.status = _this.user[0].Status;
+            _this.newUser.link = _this.user[0].link;
+            //console.log('this.newUser', this.newUser);      
+            _this.userStatus = _this.user[0].Status;
+            if (_this.userStatus) {
+                var navigationExtras = {
+                    queryParams: {
+                        data: JSON.stringify(_this.newUser)
+                    }
+                };
+                alert('Login Success');
+                _this.router.navigate(['/menu/overview'], navigationExtras);
             }
             else {
-                _this.access();
+                alert('Incorrect password');
             }
-        });
+        }, function (error) { return alert('can\'t login'); });
+        // this.load();
+        // this.user.email = this.user.email;
+        // this.user.password = this.user.password;
+        // this.user.type = "eservice"
+        // console.log(this.user);
+        // this.postDataService.login(this.user).then(data => {
+        //   this.data = data;
+        //   console.log(this.data);
+        //   for (let i = 0; i < this.data.length; i++) {
+        //     this.status = this.data[i].Status;
+        //     this.name = this.data[i].Name;
+        //     this.username = this.data[i].Username;
+        //     this.position = this.data[i].Position;
+        //     this.workall = this.data[i].WorkAll;
+        //     this.workfinish = this.data[i].WorkFinish;
+        //     this.empID = this.data[i].empID;
+        //     this.role = this.data[i].roleID;
+        //     this.Tablet = this.data[i].Tablet;
+        //     this.link = this.data[i].Link;
+        //   }
+        //   if (this.status == false) {
+        //     this.false();
+        //   }
+        //   else if (this.Tablet == "On" && this.status == true) {
+        //     this.true();
+        //   }
+        //   else  {
+        //     this.access();
+        //   }
+        // });
     };
     //#endregion
     //#region check  
@@ -254,7 +282,6 @@ var LoginPage = /** @class */ (function () {
         });
     };
     LoginPage.prototype.true = function () {
-        var _this = this;
         this.newUser.id = 1;
         this.newUser.name = this.name;
         this.newUser.username = this.username;
@@ -263,11 +290,12 @@ var LoginPage = /** @class */ (function () {
         this.newUser.role = this.role;
         this.newUser.status = this.status;
         this.newUser.link = this.link;
-        console.log(this.newUser);
-        this.authService.login(this.newUser);
-        this.storageService.addUser(this.newUser).then(function (item) {
-            _this.newUser = {};
-        });
+        console.log('true', this.newUser);
+        this.router.navigate(['/menu/overview']);
+        // this.authService.login(this.newUser);
+        // this.storageService.addUser(this.newUser).then(item => {
+        //   this.newUser = <User>{};
+        // });
     };
     //#endregion
     //#region checkspace
@@ -285,22 +313,20 @@ var LoginPage = /** @class */ (function () {
         // this.checkspace();
     };
     LoginPage.ctorParameters = function () { return [
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"] },
-        { type: _post_data_service__WEBPACK_IMPORTED_MODULE_4__["PostDataService"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] },
-        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"] },
-        { type: _storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"] },
-        { type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_6__["Network"] },
-        { type: _auth_authentication_service__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"] },
-        { type: _auth_service_service__WEBPACK_IMPORTED_MODULE_2__["AuthServiceService"] },
-        { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_8__["DomSanitizer"] },
-        { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"] },
-        { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__["ActivatedRoute"] }
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
+        { type: _post_data_service__WEBPACK_IMPORTED_MODULE_3__["PostDataService"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"] },
+        { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
+        { type: _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"] },
+        { type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_5__["Network"] },
+        { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__["DomSanitizer"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"] }
     ]; };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('mylist', { static: false }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonList"])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["IonList"])
     ], LoginPage.prototype, "mylist", void 0);
     LoginPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -308,18 +334,16 @@ var LoginPage = /** @class */ (function () {
             template: __webpack_require__(/*! raw-loader!./login.page.html */ "./node_modules/raw-loader/index.js!./src/app/login/login.page.html"),
             styles: [__webpack_require__(/*! ./login.page.scss */ "./src/app/login/login.page.scss")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"],
-            _post_data_service__WEBPACK_IMPORTED_MODULE_4__["PostDataService"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"],
-            _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"],
-            _storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"],
-            _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_6__["Network"],
-            _auth_authentication_service__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"],
-            _auth_service_service__WEBPACK_IMPORTED_MODULE_2__["AuthServiceService"],
-            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_8__["DomSanitizer"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_9__["ActivatedRoute"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"],
+            _post_data_service__WEBPACK_IMPORTED_MODULE_3__["PostDataService"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"],
+            _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
+            _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"],
+            _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_5__["Network"],
+            _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__["DomSanitizer"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"]])
     ], LoginPage);
     return LoginPage;
 }());

@@ -142,9 +142,42 @@ var OverviewPage = /** @class */ (function () {
         this.browserTab = browserTab;
         this.barcodeScanner = barcodeScanner;
         this.router = router;
-        this.items = [];
+        this.route.queryParams.subscribe(function (params) {
+            _this.items = JSON.parse(params["data"]);
+            console.log('this.items', _this.items);
+            _this.empID = _this.items.empID;
+            _this.name = _this.items.name;
+            _this.position = _this.items.position;
+            _this.username = _this.items.username;
+            console.log('this.empID', _this.empID);
+            _this.postDataService.RoundFilterList(_this.empID).then(function (res) {
+                _this.filterList = res;
+                console.log('this.filterList', _this.filterList);
+            });
+            _this.user.empID = _this.empID;
+            _this.user.month = _this.intMonth;
+            _this.user.year = _this.intYear;
+            console.log(_this.user);
+            _this.postDataService.postjobOverview(_this.user).then(function (work) {
+                console.log('worknow', work);
+                _this.jobOverview = work;
+                for (var i = 0; i < _this.jobOverview.length; i++) {
+                    _this.workall = _this.jobOverview[i].WorkAll;
+                    _this.workfinish = _this.jobOverview[i].WorkFinish;
+                    _this.cm = _this.jobOverview[i].cm;
+                    _this.pm = _this.jobOverview[i].pm;
+                    _this.install = _this.jobOverview[i].install;
+                    _this.uninstall = _this.jobOverview[i].uninstall;
+                    _this.job = _this.jobOverview[i].job;
+                    _this.wait = _this.jobOverview[i].wait;
+                    _this.ice = _this.jobOverview[i].ice;
+                    _this.jobupload = _this.jobOverview[i].jobupload;
+                    _this.worknew = _this.jobOverview[i].worknew;
+                }
+            });
+        });
         setTimeout(function () {
-            _this.ngOnInit();
+            //this.ngOnInit();
             _this.checkversion();
         }, 500);
         this.user = [];
@@ -155,11 +188,46 @@ var OverviewPage = /** @class */ (function () {
     }
     OverviewPage.prototype.loadpage = function () {
         var _this = this;
-        setTimeout(function () {
-            _this.load();
-            _this.ngOnInit();
-            _this.noti();
-        }, 500);
+        this.route.queryParams.subscribe(function (params) {
+            _this.items = JSON.parse(params["data"]);
+            console.log('this.items', _this.items);
+            _this.empID = _this.items.empID;
+            _this.name = _this.items.name;
+            _this.position = _this.items.position;
+            _this.username = _this.items.username;
+            console.log('this.empID', _this.empID);
+            _this.postDataService.RoundFilterList(_this.empID).then(function (res) {
+                _this.filterList = res;
+                console.log('this.filterList', _this.filterList);
+            });
+            _this.user.empID = _this.empID;
+            _this.user.month = _this.intMonth;
+            _this.user.year = _this.intYear;
+            console.log(_this.user);
+            _this.postDataService.postjobOverview(_this.user).then(function (work) {
+                console.log('worknow', work);
+                _this.jobOverview = work;
+                for (var i = 0; i < _this.jobOverview.length; i++) {
+                    _this.workall = _this.jobOverview[i].WorkAll;
+                    _this.workfinish = _this.jobOverview[i].WorkFinish;
+                    _this.cm = _this.jobOverview[i].cm;
+                    _this.pm = _this.jobOverview[i].pm;
+                    _this.install = _this.jobOverview[i].install;
+                    _this.uninstall = _this.jobOverview[i].uninstall;
+                    _this.job = _this.jobOverview[i].job;
+                    _this.wait = _this.jobOverview[i].wait;
+                    _this.ice = _this.jobOverview[i].ice;
+                    _this.jobupload = _this.jobOverview[i].jobupload;
+                    _this.worknew = _this.jobOverview[i].worknew;
+                }
+            });
+        });
+        this.load();
+        // setTimeout(() => {
+        //   this.load();
+        //   //this.ngOnInit();
+        //   //this.noti();
+        // }, 500);
     };
     OverviewPage.prototype.onReload = function () {
         var _this = this;
@@ -509,43 +577,42 @@ var OverviewPage = /** @class */ (function () {
         console.log('ionViewWillEnter ');
     };
     OverviewPage.prototype.ngOnInit = function () {
-        var _this = this;
-        this.storageService.getUser().then(function (items) {
-            _this.items = items;
-            console.log('this.items', _this.items);
-            for (var i = 0; i < _this.items.length; i++) {
-                _this.empID = _this.items[i].empID;
-                _this.name = _this.items[i].name;
-                _this.position = _this.items[i].position;
-                _this.username = _this.items[i].username;
-                console.log(_this.empID);
-            }
-            _this.postDataService.RoundFilterList(_this.empID).then(function (res) {
-                _this.filterList = res;
-                console.log('this.filterList', _this.filterList);
-            });
-            _this.user.empID = _this.empID;
-            _this.user.month = _this.intMonth;
-            _this.user.year = _this.intYear;
-            console.log(_this.user);
-            _this.postDataService.postjobOverview(_this.user).then(function (work) {
-                console.log('worknow', work);
-                _this.jobOverview = work;
-                for (var i = 0; i < _this.jobOverview.length; i++) {
-                    _this.workall = _this.jobOverview[i].WorkAll;
-                    _this.workfinish = _this.jobOverview[i].WorkFinish;
-                    _this.cm = _this.jobOverview[i].cm;
-                    _this.pm = _this.jobOverview[i].pm;
-                    _this.install = _this.jobOverview[i].install;
-                    _this.uninstall = _this.jobOverview[i].uninstall;
-                    _this.job = _this.jobOverview[i].job;
-                    _this.wait = _this.jobOverview[i].wait;
-                    _this.ice = _this.jobOverview[i].ice;
-                    _this.jobupload = _this.jobOverview[i].jobupload;
-                    _this.worknew = _this.jobOverview[i].worknew;
-                }
-            });
-        });
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   console.log('this.items', this.items);
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.empID = this.items[i].empID;
+        //     this.name = this.items[i].name
+        //     this.position = this.items[i].position
+        //     this.username = this.items[i].username
+        //     console.log(this.empID);
+        //   }
+        //   this.postDataService.RoundFilterList(this.empID).then(res => {
+        //     this.filterList = res;
+        //     console.log('this.filterList', this.filterList);
+        //   });
+        //   this.user.empID = this.empID;
+        //   this.user.month = this.intMonth;
+        //   this.user.year = this.intYear;
+        //   console.log(this.user);
+        //   this.postDataService.postjobOverview(this.user).then(work => {
+        //     console.log('worknow', work);
+        //     this.jobOverview = work;
+        //     for (let i = 0; i < this.jobOverview.length; i++) {
+        //       this.workall = this.jobOverview[i].WorkAll;
+        //       this.workfinish = this.jobOverview[i].WorkFinish;
+        //       this.cm = this.jobOverview[i].cm;
+        //       this.pm = this.jobOverview[i].pm;
+        //       this.install = this.jobOverview[i].install;
+        //       this.uninstall = this.jobOverview[i].uninstall;
+        //       this.job = this.jobOverview[i].job;
+        //       this.wait = this.jobOverview[i].wait;
+        //       this.ice = this.jobOverview[i].ice;
+        //       this.jobupload = this.jobOverview[i].jobupload;
+        //       this.worknew = this.jobOverview[i].worknew
+        //     }
+        //   });
+        // });
         // this.localNotifications.schedule({
         //   id: 1,
         //   text: 'งานทั้งหมด' + this.job + "งาน",
@@ -784,26 +851,30 @@ var OverviewPage = /** @class */ (function () {
         });
     };
     OverviewPage.prototype.next = function (type) {
-        console.log(type);
+        var navigationExtras = {
+            queryParams: {
+                data: JSON.stringify(this.items)
+            }
+        };
         if (type == 'worknew') {
-            this.router.navigate(['/job/worknew']);
-            this.popoverController.dismiss();
+            this.router.navigate(['/job/worknew'], navigationExtras);
+            //this.popoverController.dismiss();
         }
         if (type == 'pm') {
-            this.router.navigate(['/job/reportcheckpm']);
-            this.popoverController.dismiss();
+            this.router.navigate(['/job/reportcheckpm'], navigationExtras);
+            //this.popoverController.dismiss();
         }
         if (type == 'cm') {
-            this.router.navigate(['/job/cm']);
-            this.popoverController.dismiss();
+            this.router.navigate(['/job/cm'], navigationExtras);
+            //this.popoverController.dismiss();
         }
         if (type == 'install') {
-            this.router.navigate(['/job/install']);
-            this.popoverController.dismiss();
+            this.router.navigate(['/job/install'], navigationExtras);
+            //this.popoverController.dismiss();
         }
         if (type == 'uninstall') {
-            this.router.navigate(['/job/uninstall']);
-            this.popoverController.dismiss();
+            this.router.navigate(['/job/uninstall'], navigationExtras);
+            //this.popoverController.dismiss();
         }
         if (type == 'waiting') {
             this.router.navigate(['/waitspare']);
@@ -814,14 +885,14 @@ var OverviewPage = /** @class */ (function () {
                 type: 'icelist'
             };
             console.log(params);
-            var navigationExtras = {
+            var navigationExtras_1 = {
                 queryParams: {
                     data: JSON.stringify(params)
                 }
             };
-            this.navCtrl.navigateForward(['/iceimg'], navigationExtras);
+            this.navCtrl.navigateForward(['/iceimg'], navigationExtras_1);
             this.popoverController.dismiss();
-            console.log(navigationExtras);
+            console.log(navigationExtras_1);
         }
     };
     OverviewPage.ctorParameters = function () { return [

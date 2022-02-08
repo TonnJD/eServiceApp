@@ -229,19 +229,31 @@ var TakeSparePartsPage = /** @class */ (function () {
     };
     TakeSparePartsPage.prototype.loadItems = function () {
         var _this = this;
-        this.storageService.getUser().then(function (items) {
-            for (var i = 0; i < items.length; i++) {
-                _this.empID = items[i].empID;
-                _this.name = items[i].name;
-            }
-            var params = {
+        this.route.queryParams.subscribe(function (params) {
+            _this.items = JSON.parse(params["data"]);
+            _this.empID = _this.items.empID;
+            _this.name = _this.items.name;
+            var param = {
                 EmpID: _this.empID,
                 Type: "Customer"
             };
-            _this.postDataService.PostCus(params).then(function (Cus) {
+            _this.postDataService.PostCus(param).then(function (Cus) {
                 // this.Cus = Cus;
             });
         });
+        // this.storageService.getUser().then(items => {
+        //   for (let i = 0; i < items.length; i++) {
+        //     this.empID = items[i].empID;
+        //     this.name = items[i].name;
+        //   }
+        //   let params = {
+        //     EmpID: this.empID,
+        //     Type: "Customer"
+        //   }
+        //   this.postDataService.PostCus(params).then(Cus => {
+        //     // this.Cus = Cus;
+        //   });
+        // });
     };
     TakeSparePartsPage.prototype.onChange = function (value, type) {
         var _this = this;

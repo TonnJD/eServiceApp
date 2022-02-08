@@ -122,13 +122,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 var DetailofdetaillistpmPage = /** @class */ (function () {
     //#region constructor
-    function DetailofdetaillistpmPage(camera, modalController, route, navCtrl, sanitizer, storageService, alertController, auth, postDataService, toastCtrl) {
+    function DetailofdetaillistpmPage(camera, modalController, route, router, navCtrl, sanitizer, storageService, alertController, auth, postDataService, toastCtrl) {
         var _this = this;
         this.camera = camera;
         this.modalController = modalController;
         this.route = route;
+        this.router = router;
         this.navCtrl = navCtrl;
         this.sanitizer = sanitizer;
         this.storageService = storageService;
@@ -264,20 +266,26 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
         this.tran = [];
         this.img = [];
         this.imginstall = [];
-        this.storageService.getUser().then(function (items) {
-            _this.items = items;
-            // console.log(items);
-            for (var i = 0; i < _this.items.length; i++) {
-                _this.empID = _this.items[i].empID;
-                console.log(_this.empID);
-            }
-        });
+        // this.route.queryParams.subscribe(params => {
+        //   this.items = JSON.parse(params["data"]);
+        //   console.log('params', JSON.parse(params["data"]));      
+        //   console.log('this.items fist', this.items);
+        // });
+        // console.log('this.items', this.items);
+        // console.log('this.empID', this.empID);
+        // this.storageService.getUser().then(items => {
+        //   this.items = items;
+        //   // console.log(items);
+        //   for (let i = 0; i < this.items.length; i++) {
+        //     this.empID = this.items[i].empID;
+        //     console.log(this.empID);
+        //   }
+        // });
         this.apiServer_url = this.postDataService.apiServer_url;
         this.checkimgPM = false;
         this.CheckimgPM();
         this.route.queryParams.subscribe(function (params) {
             _this.myId = JSON.parse(params["data"]);
-            //console.log('JSON.parse(params["sparelist"])', JSON.parse(params["sparelist"]));
             try {
                 _this.spareList = JSON.parse(params["sparelist"]);
             }
@@ -313,6 +321,7 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
             _this.serviceReportNo = _this.install.ServiceReportNo;
             _this.url = sanitizer.bypassSecurityTrustResourceUrl(_this.postDataService.apiServer_url + 'Web/TabletCountTime.aspx' + '?planID=' + _this.planID + "&installID=" + _this.installID);
             console.log('this.myId', _this.myId);
+            console.log('this.empID', _this.empID);
             if (_this.type == 'CM') {
                 _this.postDataService.UpdateInprogress(_this.planID).then(function (res) {
                 });
@@ -329,6 +338,198 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
                         _this.isenabledcuseva = true;
                     }
                 });
+            }
+            var param = {
+                planID: _this.planID,
+                installID: _this.installID,
+                empID: _this.empID,
+                jobtype: "Photo"
+            };
+            _this.postDataService.SaveCaseAll(param).then(function (Photo) {
+                _this.Photo = Photo;
+                //console.log('this.Photo', this.Photo);
+                if (_this.Photo != null) {
+                    for (var v = 0; v < _this.Photo.length; v++) {
+                        if (_this.Photo[v].type == "step1_pic1") {
+                            _this.photo1 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
+                            _this.id1 = _this.Photo[v].id;
+                            _this.status1 = "1";
+                            _this.boo1 = true;
+                            // console.log(this.boo1);
+                            // console.log("bf1", this.photo1);
+                        }
+                        else if (_this.Photo[v].type == "step1_pic2") {
+                            _this.photo2 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
+                            _this.id2 = _this.Photo[v].id;
+                            _this.status2 = "1";
+                            _this.boo2 = true;
+                            //console.log("bf2", this.photo2);
+                        }
+                        else if (_this.Photo[v].type == "step1_pic3") {
+                            _this.photo3 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
+                            _this.id3 = _this.Photo[v].id;
+                            _this.status3 = "1";
+                            _this.boo3 = true;
+                            //console.log("bf3", this.photo3);
+                        }
+                        else if (_this.Photo[v].type == "step1_pic4") {
+                            _this.photo4 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
+                            _this.id4 = _this.Photo[v].id;
+                            _this.status4 = "1";
+                            _this.boo4 = true;
+                            //console.log("bf4", this.photo4);
+                        }
+                        else if (_this.Photo[v].type == "step1_pic5") {
+                            _this.photo5 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
+                            _this.id5 = _this.Photo[v].id;
+                            _this.status5 = "1";
+                            _this.boo5 = true;
+                            //console.log("bf5", this.photo5);
+                        }
+                        else if (_this.Photo[v].type == "step3_pic1") {
+                            _this.photo6 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
+                            _this.id6 = _this.Photo[v].id;
+                            _this.status6 = "1";
+                            _this.boo6 = true;
+                            // console.log("bf6", this.photo6);
+                            // console.log("this.boo6", this.boo6);
+                        }
+                        else if (_this.Photo[v].type == "step3_pic2") {
+                            _this.photo7 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
+                            _this.id7 = _this.Photo[v].id;
+                            _this.status7 = "1";
+                            _this.boo7 = true;
+                            //console.log("bf7", this.photo7);
+                        }
+                        else if (_this.Photo[v].type == "step3_pic3") {
+                            _this.photo8 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
+                            _this.id8 = _this.Photo[v].id;
+                            _this.status8 = "1";
+                            _this.boo8 = true;
+                            //console.log("bf8", this.photo8);
+                        }
+                        else if (_this.Photo[v].type == "step3_pic4") {
+                            _this.photo9 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
+                            _this.id9 = _this.Photo[v].id;
+                            _this.status9 = "1";
+                            _this.boo9 = true;
+                            //console.log("bf9", this.photo9);
+                        }
+                        else if (_this.Photo[v].type == "step3_pic5") {
+                            _this.photo10 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
+                            _this.id10 = _this.Photo[v].id;
+                            _this.status10 = "1";
+                            _this.boo10 = true;
+                            //console.log("bf10", this.photo10);
+                        }
+                        else if (_this.Photo[v].type == "signature") {
+                            _this.sign = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
+                            _this.id11 = _this.Photo[v].id;
+                            _this.boo11 = true;
+                            //console.log("bf10", this.sign);
+                        }
+                        else if (_this.Photo[v].type == "step_request") {
+                            _this.request = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
+                            _this.id12 = _this.Photo[v].id;
+                            _this.boo12 = true;
+                            //console.log("bf10", this.request);
+                        }
+                    }
+                    _this.isShow1 = _this.boo1;
+                    _this.isShow2 = _this.boo2;
+                    _this.isShow3 = _this.boo3;
+                    _this.isShow4 = _this.boo4;
+                    _this.isShow5 = _this.boo5;
+                    _this.isShow6 = _this.boo6;
+                    _this.isShow7 = _this.boo7;
+                    _this.isShow8 = _this.boo8;
+                    _this.isShow9 = _this.boo9;
+                    _this.isShow10 = _this.boo10;
+                    _this.showSig = _this.boo11;
+                    _this.isShowrequest = _this.boo12;
+                }
+                if (_this.boo11 == true) {
+                    _this.isenabledadddevice = true;
+                    //
+                    _this.isenabledeva = true;
+                    _this.isenabledsig = true;
+                    _this.isenabledcuspass = true;
+                    _this.isenabledsave = false;
+                }
+                if (_this.jobtype == "INSTALL" || _this.jobtype == "CM" || _this.jobtype == "UNINSTALL") {
+                    if (_this.isShow1 == true || _this.isShow2 == true || _this.isShow3 == true || _this.isShow4 == true || _this.isShow5 == true ||
+                        _this.isShow6 == true || _this.isShow7 == true || _this.isShow8 == true || _this.isShow9 == true || _this.isShow10 == true) {
+                        _this.isenabledcheck = true;
+                    }
+                    else {
+                        _this.isenabledcheck = false;
+                    }
+                }
+                _this.checktakeback();
+                _this.checklist();
+                _this.CheckimgTechCloseJob();
+                console.log(_this.request);
+            });
+            if (_this.jobtype == "CM") {
+                _this.worktype = "งานซ่อม";
+                _this.title2 = "รายการที่ 1 รูปภาพงานซ่อม";
+                _this.title3 = "รายการที่ 2 รายการที่ต้องตรวจซ่อม";
+                _this.title4 = "รายการที่ 5 ลายเซ็นต์ผู้รับผิดชอบ";
+                _this.title5 = "รายการที่ 4 ประเมินการทำงาน (ลูกค้าประเมิน)";
+                _this.title6 = "รายการที่ 6 ยืนยันการปิดงาน";
+                _this.title7 = "รายการที่ 3 แบบประเมินปัญหา";
+                _this.title8 = "รายการที่ 7 บันทึกข้อมูลและส่งข้อมุลเข้าระบบ";
+                _this.isenabledtitle1 = false;
+                _this.isenabledTakeback = true;
+                _this.isenabledcheck = false;
+                _this.isenabledrequest = true;
+                _this.checkcm();
+                _this.GetSpareCM();
+            }
+            else if (_this.jobtype == "INSTALL") {
+                _this.worktype = "งานติดตั้ง";
+                _this.title1 = "รายการที่ 1 รูปภาพหน้างาน";
+                _this.title2 = "รายการที่ 2 รูปภาพงานติดตั้ง";
+                _this.title3 = "รายการที่ 3 เลือกเครื่องหลักและอุปกรณ์เสริม";
+                _this.title7 = "รายการที่ 4 ความคิดเห็นของช่าง";
+                _this.title5 = "รายการที่ 5 ประเมินการทำงาน (ลูกค้าประเมิน)";
+                _this.title4 = "รายการที่ 6 ลายเซ็นต์ผู้รับผิดชอบ";
+                _this.title6 = "รายการที่ 7 ความคิดเห็นจากลูกค้า";
+                _this.title8 = "รายการที่ 8 บันทึกข้อมูลและส่งข้อมุลเข้าระบบ";
+                _this.isenabledtitle3 = true;
+                _this.isenabledadddevice = false;
+                _this.isenabledcheck = false;
+                _this.isenabledTakeback = true;
+                _this.isInstall = false;
+                _this.getImgInstall();
+                _this.checkIn();
+            }
+            else if (_this.jobtype == "UNINSTALL") {
+                _this.isenabledtitle1 = false;
+                _this.worktype = "งานถอนการติดตั้ง";
+                _this.title2 = "รายการที่ 1 รูปภาพงานรื้อถอน";
+                _this.title7 = "รายการที่ 2 ความคิดเห็นของช่าง";
+                _this.title5 = "รายการที่ 3 ประเมินการทำงาน (ลูกค้าประเมิน)";
+                _this.title4 = "รายการที่ 4 ลายเซ็นต์ผู้รับผิดชอบ";
+                _this.title6 = "รายการที่ 5 ความคิดเห็นจากลูกค้า";
+                _this.title8 = "รายการที่ 6 บันทึกข้อมูลและส่งข้อมุลเข้าระบบ";
+                _this.isenabledtitle3 = false;
+                _this.isenabledTakeback = true;
+            }
+            else if (_this.jobtype == "PM") {
+                _this.getproductphoto();
+                _this.isnotPM = false;
+                _this.isInstall = false;
+                _this.isenabledtitle2 = false;
+                _this.isenabledcheck = false;
+                _this.isPM = true;
+                _this.worktype = "งานตรวจเช็ค";
+                _this.title3 = "รายการที่ 2 รายการที่ต้องตรวจเช็ค";
+                _this.title7 = "รายการที่ 3 ความคิดเห็นของช่าง";
+                _this.title5 = "รายการที่ 4 ประเมินการทำงาน (ลูกค้าประเมิน)";
+                _this.title4 = "รายการที่ 5 ลายเซ็นต์ผู้รับผิดชอบ";
+                _this.title6 = "รายการที่ 6 ยืนยันการปิดงาน";
+                _this.title8 = "รายการที่ 7 บันทึกข้อมูลและส่งข้อมุลเข้าระบบ";
             }
         });
     }
@@ -428,233 +629,6 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
     };
     //#region start
     DetailofdetaillistpmPage.prototype.ngOnInit = function () {
-        var _this = this;
-        this.route.queryParams.subscribe(function (params) {
-            _this.myId = JSON.parse(params["data"]);
-            _this.item = _this.myId.item;
-            _this.type = _this.myId.type;
-            _this.date = _this.myId.date;
-            _this.planmonth = _this.myId.month;
-            _this.planyear = _this.myId.year;
-            _this.install = _this.myId.install;
-            _this.cusID = _this.myId.data.cusID;
-            _this.CustomerName = _this.myId.data.CustomerName;
-            _this.CustomerNameEng = _this.myId.data.CustomerNameEng;
-            _this.sparetype = _this.myId.sparetype;
-            _this.planID = _this.install.planID;
-            _this.InstallPlanName = _this.install.InstallPlanName;
-            _this.SerialNo = _this.install.SerialNo;
-            _this.SerialNoInstall = _this.install.SerialNo;
-            _this.ItemsName = _this.install.ItemsName;
-            _this.OldItemsName = _this.install.OldAssetName;
-            _this.ItemCode = _this.install.ItemCode;
-            _this.ProductCode = _this.install.ProductCode;
-            _this.password = _this.install.Password;
-            _this.installID = _this.install.installId;
-            _this.Category = _this.install.Category;
-            _this.planDate = _this.install.planDate;
-            _this.jobtype = _this.install.JobType;
-            var params1 = {
-                installID: _this.installID,
-                planID: _this.planID,
-                typedevice: "chkpassword"
-            };
-            _this.postDataService.postdevice(params1).then(function (chkpassword) {
-                _this.password = chkpassword;
-            });
-        });
-        var params = {
-            planID: this.planID,
-            installID: this.installID,
-            empID: this.empID,
-            jobtype: "Photo"
-        };
-        this.postDataService.SaveCaseAll(params).then(function (Photo) {
-            _this.Photo = Photo;
-            console.log('this.Photo', _this.Photo);
-            if (_this.Photo != null) {
-                for (var v = 0; v < _this.Photo.length; v++) {
-                    if (_this.Photo[v].type == "step1_pic1") {
-                        _this.photo1 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
-                        _this.id1 = _this.Photo[v].id;
-                        _this.status1 = "1";
-                        _this.boo1 = true;
-                        console.log(_this.boo1);
-                        console.log("bf1", _this.photo1);
-                    }
-                    else if (_this.Photo[v].type == "step1_pic2") {
-                        _this.photo2 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
-                        _this.id2 = _this.Photo[v].id;
-                        _this.status2 = "1";
-                        _this.boo2 = true;
-                        console.log("bf2", _this.photo2);
-                    }
-                    else if (_this.Photo[v].type == "step1_pic3") {
-                        _this.photo3 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
-                        _this.id3 = _this.Photo[v].id;
-                        _this.status3 = "1";
-                        _this.boo3 = true;
-                        console.log("bf3", _this.photo3);
-                    }
-                    else if (_this.Photo[v].type == "step1_pic4") {
-                        _this.photo4 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
-                        _this.id4 = _this.Photo[v].id;
-                        _this.status4 = "1";
-                        _this.boo4 = true;
-                        console.log("bf4", _this.photo4);
-                    }
-                    else if (_this.Photo[v].type == "step1_pic5") {
-                        _this.photo5 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
-                        _this.id5 = _this.Photo[v].id;
-                        _this.status5 = "1";
-                        _this.boo5 = true;
-                        console.log("bf5", _this.photo5);
-                    }
-                    else if (_this.Photo[v].type == "step3_pic1") {
-                        _this.photo6 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
-                        _this.id6 = _this.Photo[v].id;
-                        _this.status6 = "1";
-                        _this.boo6 = true;
-                        console.log("bf6", _this.photo6);
-                        console.log("this.boo6", _this.boo6);
-                    }
-                    else if (_this.Photo[v].type == "step3_pic2") {
-                        _this.photo7 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
-                        _this.id7 = _this.Photo[v].id;
-                        _this.status7 = "1";
-                        _this.boo7 = true;
-                        console.log("bf7", _this.photo7);
-                    }
-                    else if (_this.Photo[v].type == "step3_pic3") {
-                        _this.photo8 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
-                        _this.id8 = _this.Photo[v].id;
-                        _this.status8 = "1";
-                        _this.boo8 = true;
-                        console.log("bf8", _this.photo8);
-                    }
-                    else if (_this.Photo[v].type == "step3_pic4") {
-                        _this.photo9 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
-                        _this.id9 = _this.Photo[v].id;
-                        _this.status9 = "1";
-                        _this.boo9 = true;
-                        console.log("bf9", _this.photo9);
-                    }
-                    else if (_this.Photo[v].type == "step3_pic5") {
-                        _this.photo10 = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
-                        _this.id10 = _this.Photo[v].id;
-                        _this.status10 = "1";
-                        _this.boo10 = true;
-                        console.log("bf10", _this.photo10);
-                    }
-                    else if (_this.Photo[v].type == "signature") {
-                        _this.sign = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
-                        _this.id11 = _this.Photo[v].id;
-                        _this.boo11 = true;
-                        console.log("bf10", _this.sign);
-                    }
-                    else if (_this.Photo[v].type == "step_request") {
-                        _this.request = _this.postDataService.apiServer_url + _this.Photo[v].file_path;
-                        _this.id12 = _this.Photo[v].id;
-                        _this.boo12 = true;
-                        console.log("bf10", _this.request);
-                    }
-                }
-                _this.isShow1 = _this.boo1;
-                _this.isShow2 = _this.boo2;
-                _this.isShow3 = _this.boo3;
-                _this.isShow4 = _this.boo4;
-                _this.isShow5 = _this.boo5;
-                _this.isShow6 = _this.boo6;
-                _this.isShow7 = _this.boo7;
-                _this.isShow8 = _this.boo8;
-                _this.isShow9 = _this.boo9;
-                _this.isShow10 = _this.boo10;
-                _this.showSig = _this.boo11;
-                _this.isShowrequest = _this.boo12;
-            }
-            if (_this.boo11 == true) {
-                _this.isenabledadddevice = true;
-                //
-                _this.isenabledeva = true;
-                _this.isenabledsig = true;
-                _this.isenabledcuspass = true;
-                _this.isenabledsave = false;
-            }
-            if (_this.jobtype == "INSTALL" || _this.jobtype == "CM" || _this.jobtype == "UNINSTALL") {
-                if (_this.isShow1 == true || _this.isShow2 == true || _this.isShow3 == true || _this.isShow4 == true || _this.isShow5 == true ||
-                    _this.isShow6 == true || _this.isShow7 == true || _this.isShow8 == true || _this.isShow9 == true || _this.isShow10 == true) {
-                    _this.isenabledcheck = true;
-                }
-                else {
-                    _this.isenabledcheck = false;
-                }
-            }
-            _this.checktakeback();
-            _this.checklist();
-            _this.CheckimgTechCloseJob();
-            console.log(_this.request);
-        });
-        if (this.jobtype == "CM") {
-            this.worktype = "งานซ่อม";
-            this.title2 = "รายการที่ 1 รูปภาพงานซ่อม";
-            this.title3 = "รายการที่ 2 รายการที่ต้องตรวจซ่อม";
-            this.title4 = "รายการที่ 5 ลายเซ็นต์ผู้รับผิดชอบ";
-            this.title5 = "รายการที่ 4 ประเมินการทำงาน (ลูกค้าประเมิน)";
-            this.title6 = "รายการที่ 6 ยืนยันการปิดงาน";
-            this.title7 = "รายการที่ 3 แบบประเมินปัญหา";
-            this.title8 = "รายการที่ 7 บันทึกข้อมูลและส่งข้อมุลเข้าระบบ";
-            this.isenabledtitle1 = false;
-            this.isenabledTakeback = true;
-            this.isenabledcheck = false;
-            this.isenabledrequest = true;
-            this.checkcm();
-            this.GetSpareCM();
-        }
-        else if (this.jobtype == "INSTALL") {
-            this.worktype = "งานติดตั้ง";
-            this.title1 = "รายการที่ 1 รูปภาพหน้างาน";
-            this.title2 = "รายการที่ 2 รูปภาพงานติดตั้ง";
-            this.title3 = "รายการที่ 3 เลือกเครื่องหลักและอุปกรณ์เสริม";
-            this.title7 = "รายการที่ 4 ความคิดเห็นของช่าง";
-            this.title5 = "รายการที่ 5 ประเมินการทำงาน (ลูกค้าประเมิน)";
-            this.title4 = "รายการที่ 6 ลายเซ็นต์ผู้รับผิดชอบ";
-            this.title6 = "รายการที่ 7 ความคิดเห็นจากลูกค้า";
-            this.title8 = "รายการที่ 8 บันทึกข้อมูลและส่งข้อมุลเข้าระบบ";
-            this.isenabledtitle3 = true;
-            this.isenabledadddevice = false;
-            this.isenabledcheck = false;
-            this.isenabledTakeback = true;
-            this.isInstall = false;
-            this.getImgInstall();
-            this.checkIn();
-        }
-        else if (this.jobtype == "UNINSTALL") {
-            this.isenabledtitle1 = false;
-            this.worktype = "งานถอนการติดตั้ง";
-            this.title2 = "รายการที่ 1 รูปภาพงานรื้อถอน";
-            this.title7 = "รายการที่ 2 ความคิดเห็นของช่าง";
-            this.title5 = "รายการที่ 3 ประเมินการทำงาน (ลูกค้าประเมิน)";
-            this.title4 = "รายการที่ 4 ลายเซ็นต์ผู้รับผิดชอบ";
-            this.title6 = "รายการที่ 5 ความคิดเห็นจากลูกค้า";
-            this.title8 = "รายการที่ 6 บันทึกข้อมูลและส่งข้อมุลเข้าระบบ";
-            this.isenabledtitle3 = false;
-            this.isenabledTakeback = true;
-        }
-        else if (this.jobtype == "PM") {
-            this.getproductphoto();
-            this.isnotPM = false;
-            this.isInstall = false;
-            this.isenabledtitle2 = false;
-            this.isenabledcheck = false;
-            this.isPM = true;
-            this.worktype = "งานตรวจเช็ค";
-            this.title3 = "รายการที่ 2 รายการที่ต้องตรวจเช็ค";
-            this.title7 = "รายการที่ 3 ความคิดเห็นของช่าง";
-            this.title5 = "รายการที่ 4 ประเมินการทำงาน (ลูกค้าประเมิน)";
-            this.title4 = "รายการที่ 5 ลายเซ็นต์ผู้รับผิดชอบ";
-            this.title6 = "รายการที่ 6 ยืนยันการปิดงาน";
-            this.title8 = "รายการที่ 7 บันทึกข้อมูลและส่งข้อมุลเข้าระบบ";
-        }
     };
     DetailofdetaillistpmPage.prototype.checkIn = function () {
         var params = {
@@ -938,20 +912,20 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
                     }
                 }, function (err) {
                     //Test local PM
-                    // this.photo1 = "data:image/png;base64,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"
-                    // let params = {
-                    //   planID: this.planID,
-                    //   installID: this.installID,
-                    //   photo: this.photo1,
-                    //   empID: this.empID,
-                    //   type: value.type,
-                    //   jobtype: "SaveImgPM"
-                    // }
-                    // console.log(params);
-                    // this.postDataService.SaveCaseAll(params).then(photoID => {
-                    //   console.log(photoID);
-                    //   this.getproductphoto();
-                    // });
+                    _this.photo1 = "data:image/png;base64,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";
+                    var params = {
+                        planID: _this.planID,
+                        installID: _this.installID,
+                        photo: _this.photo1,
+                        empID: _this.empID,
+                        type: value.type,
+                        jobtype: "SaveImgPM"
+                    };
+                    console.log(params);
+                    _this.postDataService.SaveCaseAll(params).then(function (photoID) {
+                        console.log(photoID);
+                        _this.getproductphoto();
+                    });
                 });
                 return [2 /*return*/];
             });
@@ -1203,80 +1177,77 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
         var _this = this;
         this.storageService.getSig().then(function (items) {
             _this.sign = items;
-            // console.log(this.sign);
         });
     };
     //#endregion
     //#region รูปหน้างาน
     DetailofdetaillistpmPage.prototype.getImgInstall = function () {
+        // this.items = items;
+        // // console.log(items);
+        // for (let i = 0; i < this.items.length; i++) {
+        //   this.empID = this.items[i].empID;
+        //   // console.log(this.empID);
+        // }
         var _this = this;
-        this.storageService.getUser().then(function (items) {
-            _this.items = items;
-            // console.log(items);
-            for (var i = 0; i < _this.items.length; i++) {
-                _this.empID = _this.items[i].empID;
-                // console.log(this.empID);
-            }
-            var params = {
-                installID: _this.installID,
-                empID: _this.empID,
-                planID: _this.planID,
-            };
-            console.log(params);
-            _this.postDataService.getImage(params).then(function (resultimg) {
-                _this.resultimg = resultimg;
-                console.log(_this.resultimg);
-                for (var v = 0; v < _this.resultimg.length; v++) {
-                    if (_this.resultimg[v].type == "step1_pic1") {
-                        _this.img.src1 = _this.postDataService.apiServer_url + _this.resultimg[v].file_path;
-                        _this.booimg1 = true;
-                        console.log("bf1", _this.img.src1);
-                    }
-                    else if (_this.resultimg[v].type == "step1_pic2") {
-                        _this.img.src2 = _this.postDataService.apiServer_url + _this.resultimg[v].file_path;
-                        _this.booimg2 = true;
-                        console.log("bf1", _this.img.src2);
-                    }
-                    else if (_this.resultimg[v].type == "step1_pic3") {
-                        _this.img.src3 = _this.postDataService.apiServer_url + _this.resultimg[v].file_path;
-                        _this.booimg3 = true;
-                        console.log("bf1", _this.img.src3);
-                    }
-                    else if (_this.resultimg[v].type == "step1_pic4") {
-                        _this.img.src4 = _this.postDataService.apiServer_url + _this.resultimg[v].file_path;
-                        _this.booimg4 = true;
-                        console.log("bf1", _this.img.src4);
-                    }
-                    else if (_this.resultimg[v].type == "step1_pic5") {
-                        _this.img.src5 = _this.postDataService.apiServer_url + _this.resultimg[v].file_path;
-                        _this.booimg5 = true;
-                        console.log("bf1", _this.img.src5);
-                    }
-                    else if (_this.resultimg[v].type == "step1_pic6") {
-                        _this.img.src6 = _this.postDataService.apiServer_url + _this.resultimg[v].file_path;
-                        _this.booimg6 = true;
-                        console.log("bf1", _this.img.src6);
-                    }
-                    else if (_this.resultimg[v].type == "step1_pic7") {
-                        _this.img.src7 = _this.postDataService.apiServer_url + _this.resultimg[v].file_path;
-                        _this.booimg7 = true;
-                        console.log("bf1", _this.img.src7);
-                    }
-                    else if (_this.resultimg[v].type == "step1_pic8") {
-                        _this.img.src8 = _this.postDataService.apiServer_url + _this.resultimg[v].file_path;
-                        _this.booimg8 = true;
-                        console.log("bf1", _this.img.src8);
-                    }
+        var params = {
+            installID: this.installID,
+            empID: this.empID,
+            planID: this.planID,
+        };
+        console.log('getImgInstall', params);
+        this.postDataService.getImage(params).then(function (resultimg) {
+            _this.resultimg = resultimg;
+            console.log(_this.resultimg);
+            for (var v = 0; v < _this.resultimg.length; v++) {
+                if (_this.resultimg[v].type == "step1_pic1") {
+                    _this.img.src1 = _this.postDataService.apiServer_url + _this.resultimg[v].file_path;
+                    _this.booimg1 = true;
+                    console.log("bf1", _this.img.src1);
                 }
-                _this.isShowImage1 = _this.booimg1;
-                _this.isShowImage2 = _this.booimg2;
-                _this.isShowImage3 = _this.booimg3;
-                _this.isShowImage4 = _this.booimg4;
-                _this.isShowImage5 = _this.booimg5;
-                _this.isShowImage6 = _this.booimg6;
-                _this.isShowImage7 = _this.booimg7;
-                _this.isShowImage8 = _this.booimg8;
-            });
+                else if (_this.resultimg[v].type == "step1_pic2") {
+                    _this.img.src2 = _this.postDataService.apiServer_url + _this.resultimg[v].file_path;
+                    _this.booimg2 = true;
+                    console.log("bf1", _this.img.src2);
+                }
+                else if (_this.resultimg[v].type == "step1_pic3") {
+                    _this.img.src3 = _this.postDataService.apiServer_url + _this.resultimg[v].file_path;
+                    _this.booimg3 = true;
+                    console.log("bf1", _this.img.src3);
+                }
+                else if (_this.resultimg[v].type == "step1_pic4") {
+                    _this.img.src4 = _this.postDataService.apiServer_url + _this.resultimg[v].file_path;
+                    _this.booimg4 = true;
+                    console.log("bf1", _this.img.src4);
+                }
+                else if (_this.resultimg[v].type == "step1_pic5") {
+                    _this.img.src5 = _this.postDataService.apiServer_url + _this.resultimg[v].file_path;
+                    _this.booimg5 = true;
+                    console.log("bf1", _this.img.src5);
+                }
+                else if (_this.resultimg[v].type == "step1_pic6") {
+                    _this.img.src6 = _this.postDataService.apiServer_url + _this.resultimg[v].file_path;
+                    _this.booimg6 = true;
+                    console.log("bf1", _this.img.src6);
+                }
+                else if (_this.resultimg[v].type == "step1_pic7") {
+                    _this.img.src7 = _this.postDataService.apiServer_url + _this.resultimg[v].file_path;
+                    _this.booimg7 = true;
+                    console.log("bf1", _this.img.src7);
+                }
+                else if (_this.resultimg[v].type == "step1_pic8") {
+                    _this.img.src8 = _this.postDataService.apiServer_url + _this.resultimg[v].file_path;
+                    _this.booimg8 = true;
+                    console.log("bf1", _this.img.src8);
+                }
+            }
+            _this.isShowImage1 = _this.booimg1;
+            _this.isShowImage2 = _this.booimg2;
+            _this.isShowImage3 = _this.booimg3;
+            _this.isShowImage4 = _this.booimg4;
+            _this.isShowImage5 = _this.booimg5;
+            _this.isShowImage6 = _this.booimg6;
+            _this.isShowImage7 = _this.booimg7;
+            _this.isShowImage8 = _this.booimg8;
         });
     };
     //#endregion
@@ -1353,23 +1324,23 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
                             });
                         }
                     }, function (err) {
-                        // this.photo1 = "data:image/png;base64,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"
-                        // let params = {
-                        //   planID: this.planID,
-                        //   installID: this.installID,
-                        //   photo1: this.photo1,
-                        //   empID: this.empID,
-                        //   photoID: this.id1,
-                        //   jobtype: this.jobtype
-                        // }
-                        // console.log(params);
-                        // this.postDataService.SaveCaseAll(params).then(photoID => {
-                        //   this.photo1 = this.postDataService.apiServer_url + photoID
-                        //   this.isTake1 = false;
-                        //   this.isShow1 = true;
-                        //   this.status1 = "1"
-                        //   this.checklist();
-                        // });
+                        _this.photo1 = "data:image/png;base64,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";
+                        var params = {
+                            planID: _this.planID,
+                            installID: _this.installID,
+                            photo1: _this.photo1,
+                            empID: _this.empID,
+                            photoID: _this.id1,
+                            jobtype: _this.jobtype
+                        };
+                        console.log(params);
+                        _this.postDataService.SaveCaseAll(params).then(function (photoID) {
+                            _this.photo1 = _this.postDataService.apiServer_url + photoID;
+                            _this.isTake1 = false;
+                            _this.isShow1 = true;
+                            _this.status1 = "1";
+                            _this.checklist();
+                        });
                     });
                 }
                 if (id == 2) {
@@ -3107,7 +3078,7 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
                                 ItemCode: this.ItemCode,
                                 SerialNo: this.SerialNo,
                                 Cat: this.Category,
-                                jobtype: this.jobtype
+                                jobtype: this.jobtype,
                             }
                         })];
                     case 1:
@@ -3229,6 +3200,7 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
                         modal = _a.sent();
                         modal.onDidDismiss().then(function (res) {
                             _this.list = res;
+                            console.log('this.list', _this.list);
                             for (var i = 0; i < _this.list.length; i++) {
                                 _this.list = _this.list[i];
                             }
@@ -3351,7 +3323,13 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
     };
     //#endregion
     DetailofdetaillistpmPage.prototype.onBackToPageMain = function () {
+        var _this = this;
+        this.route.queryParams.subscribe(function (params) {
+            _this.items = JSON.parse(params["data"]);
+            console.log('this.items onBackToPageMain', _this.items);
+        });
         var params1 = {
+            empID: this.empID,
             item: this.item,
             type: this.type,
             date: this.date,
@@ -3361,14 +3339,15 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
             workfinish: 0,
             month: this.planmonth,
             year: this.planyear,
+            items: this.items,
         };
         var navigationExtras = {
             queryParams: {
                 data: JSON.stringify(params1)
             }
         };
-        console.log(navigationExtras);
-        this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
+        console.log('params1', params1);
+        this.router.navigate(['/joball/listpm/detaillistpm'], navigationExtras);
     };
     //#region save All
     DetailofdetaillistpmPage.prototype.saveData = function () {
@@ -3443,7 +3422,6 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
                     };
                     _this.postDataService.GetTran(params_2).then(function (tranid) {
                         _this.tranid = tranid;
-                        console.log(_this.tranid);
                         _this.GenReport();
                         _this.onBackToPageMain();
                     });
@@ -3477,10 +3455,15 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
                             };
                             _this.postDataService.RequestQuotation(params1);
                         }
+                        var parItem = {
+                            empID: _this.empID
+                        };
                         var params_3 = {
                             item: _this.item,
                             type: "getCM",
                             date: _this.date,
+                            empID: _this.empID,
+                            items: parItem
                         };
                         console.log('params', params_3);
                         var navigationExtras = {
@@ -3491,20 +3474,29 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
                         _this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
                     }
                     else if (_this.jobtype == 'INSTALL') {
+                        _this.route.queryParams.subscribe(function (params) {
+                            _this.items = JSON.parse(params["data"]);
+                            console.log('this.items install', _this.items);
+                        });
                         var params_4 = {
                             item: _this.item,
                             type: "getIN",
                             date: _this.date,
+                            items: _this.items
                         };
                         var navigationExtras = {
                             queryParams: {
-                                data: JSON.stringify(params_4)
+                                data: JSON.stringify(_this.items)
                             }
                         };
-                        _this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
-                        // this.navCtrl.navigateForward(['/menu/overview']);
+                        //this.router.navigate(['/joball/listpm/detaillistpm'], navigationExtras);
+                        _this.router.navigate(['/job/install'], navigationExtras);
                     }
                     else if (_this.jobtype == 'UNINSTALL') {
+                        _this.route.queryParams.subscribe(function (params) {
+                            _this.items = JSON.parse(params["data"]);
+                            console.log('this.items uninstall', _this.items);
+                        });
                         var params_5 = {
                             item: _this.item,
                             type: "getUN",
@@ -3512,10 +3504,10 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
                         };
                         var navigationExtras = {
                             queryParams: {
-                                data: JSON.stringify(params_5)
+                                data: JSON.stringify(_this.items)
                             }
                         };
-                        _this.navCtrl.navigateForward(['/joball/listpm/detaillistpm'], navigationExtras);
+                        _this.router.navigate(['/job/uninstall'], navigationExtras);
                         // this.navCtrl.navigateForward(['/menu/overview']);
                     }
                 }
@@ -3618,7 +3610,8 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
                                 installID: this.installID,
                                 planID: this.planID,
                                 jobtype: this.jobtype,
-                                workclose: 'workclose'
+                                workclose: 'workclose',
+                                empID: this.empID
                             }
                         })];
                     case 1:
@@ -4233,6 +4226,7 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
         { type: _ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_2__["Camera"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["ActivatedRoute"] },
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] },
         { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_15__["DomSanitizer"] },
         { type: _storage_service__WEBPACK_IMPORTED_MODULE_7__["StorageService"] },
@@ -4254,6 +4248,7 @@ var DetailofdetaillistpmPage = /** @class */ (function () {
         tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_native_camera_ngx__WEBPACK_IMPORTED_MODULE_2__["Camera"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["ModalController"],
             _angular_router__WEBPACK_IMPORTED_MODULE_6__["ActivatedRoute"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_6__["Router"],
             _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"],
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_15__["DomSanitizer"],
             _storage_service__WEBPACK_IMPORTED_MODULE_7__["StorageService"],

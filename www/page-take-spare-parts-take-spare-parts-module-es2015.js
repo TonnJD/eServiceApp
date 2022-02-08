@@ -214,19 +214,31 @@ let TakeSparePartsPage = class TakeSparePartsPage {
         });
     }
     loadItems() {
-        this.storageService.getUser().then(items => {
-            for (let i = 0; i < items.length; i++) {
-                this.empID = items[i].empID;
-                this.name = items[i].name;
-            }
-            let params = {
+        this.route.queryParams.subscribe(params => {
+            this.items = JSON.parse(params["data"]);
+            this.empID = this.items.empID;
+            this.name = this.items.name;
+            let param = {
                 EmpID: this.empID,
                 Type: "Customer"
             };
-            this.postDataService.PostCus(params).then(Cus => {
+            this.postDataService.PostCus(param).then(Cus => {
                 // this.Cus = Cus;
             });
         });
+        // this.storageService.getUser().then(items => {
+        //   for (let i = 0; i < items.length; i++) {
+        //     this.empID = items[i].empID;
+        //     this.name = items[i].name;
+        //   }
+        //   let params = {
+        //     EmpID: this.empID,
+        //     Type: "Customer"
+        //   }
+        //   this.postDataService.PostCus(params).then(Cus => {
+        //     // this.Cus = Cus;
+        //   });
+        // });
     }
     onChange(value, type) {
         if (type == 'SearchCustomerName') {

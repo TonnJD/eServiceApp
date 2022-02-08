@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-content>\r\n  <div class=\"centered\">   \r\n    <form #form=\"ngForm\" (ngSubmit)=\"login(form)\" class=\"text-center\">\r\n      <img src=\"../../assets/img/logo.png\" alt=\"\"/>\r\n      <div class=\"row\">\r\n        <div class=\"col-12\" style=\"padding: 5px;margin-bottom: 30px;\">\r\n          <div style=\"font-size: 20px;font-weight: bold;\">Login your account</div>\r\n          <div class=\"text-center\" style=\"text-align: center;color: red;\"> {{text}}</div>\r\n        </div>    \r\n      </div> \r\n      <ion-item>\r\n        <ion-input name=\"username\" type=\"text\" [(ngModel)]=\"user.email\" placeholder=\"ชื่อผู้ใช้\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-input name=\"password\" type=\"password\" [(ngModel)]=\"user.password\" placeholder=\"รหัสผ่าน\" ngModel required>\r\n        </ion-input>\r\n      </ion-item>\r\n      <ion-button shape=\"round\" [disabled]=\"form.invalid\" (click)=\"login()\">Login</ion-button>\r\n    </form>\r\n  </div> \r\n  <!-- <iframe [src]=\"url\" style=\"width:100%;height:100%\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->\r\n</ion-content>"
+module.exports = "<ion-content>\r\n  <div class=\"centered\">   \r\n    <form #form=\"ngForm\" (ngSubmit)=\"login(form)\" class=\"text-center\">\r\n      <img src=\"../../assets/img/logo.png\" alt=\"\"/>\r\n      <div class=\"row\">\r\n        <div class=\"col-12\" style=\"padding: 5px;margin-bottom: 30px;\">\r\n          <div style=\"font-size: 20px;font-weight: bold;\">Login your account</div>\r\n          <div class=\"text-center\" style=\"text-align: center;color: red;\"> {{text}}</div>\r\n        </div>    \r\n      </div> \r\n      <ion-item>\r\n        <ion-input name=\"username\" type=\"text\" [(ngModel)]=\"username\" placeholder=\"ชื่อผู้ใช้\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-input name=\"password\" type=\"password\" [(ngModel)]=\"password\" placeholder=\"รหัสผ่าน\" ngModel required>\r\n        </ion-input>\r\n      </ion-item>\r\n      <ion-button shape=\"round\" [disabled]=\"form.invalid\" (click)=\"login()\">Login</ion-button>\r\n    </form>\r\n  </div> \r\n  <!-- <iframe [src]=\"url\" style=\"width:100%;height:100%\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->\r\n</ion-content>"
 
 /***/ }),
 
@@ -83,16 +83,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "LoginPage", function() { return LoginPage; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
-/* harmony import */ var _auth_service_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../auth-service.service */ "./src/app/auth-service.service.ts");
-/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
-/* harmony import */ var _post_data_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../post-data.service */ "./src/app/post-data.service.ts");
-/* harmony import */ var _storage_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../storage.service */ "./src/app/storage.service.ts");
-/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
-/* harmony import */ var _auth_authentication_service__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../auth/authentication.service */ "./src/app/auth/authentication.service.ts");
-/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
-/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
-
-
+/* harmony import */ var _ionic_angular__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @ionic/angular */ "./node_modules/@ionic/angular/dist/fesm5.js");
+/* harmony import */ var _post_data_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../post-data.service */ "./src/app/post-data.service.ts");
+/* harmony import */ var _storage_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../storage.service */ "./src/app/storage.service.ts");
+/* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
 
 
 
@@ -104,7 +100,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 let LoginPage = class LoginPage {
-    constructor(alertController, loadingController, postDataService, navCtrl, platform, storageService, network, authService, DataService, sanitizer, router, route) {
+    constructor(alertController, loadingController, postDataService, navCtrl, platform, storageService, network, 
+    // private authService: AuthenticationService,
+    // private DataService: AuthServiceService,
+    sanitizer, router, route) {
         this.alertController = alertController;
         this.loadingController = loadingController;
         this.postDataService = postDataService;
@@ -112,10 +111,9 @@ let LoginPage = class LoginPage {
         this.platform = platform;
         this.storageService = storageService;
         this.network = network;
-        this.authService = authService;
-        this.DataService = DataService;
         this.router = router;
         this.route = route;
+        this.userStatus = false;
         this.items = [];
         this.newUser = {};
         this.text = "";
@@ -127,16 +125,15 @@ let LoginPage = class LoginPage {
             // this.checkNetwork();
         }, 500);
         this.user = [];
-        this.route.queryParams.subscribe(params => {
-            this.authService.authenticationState.subscribe(state => {
-                if (state) {
-                    this.router.navigate(['/menu/overview']);
-                }
-                else {
-                    this.router.navigate(['login']);
-                }
-            });
-        });
+        // this.route.queryParams.subscribe(params => {
+        //   // this.authService.authenticationState.subscribe(state => {
+        //   //   if (state) {
+        //   //     this.router.navigate(['/menu/overview']);
+        //   //   } else {
+        //   //     this.router.navigate(['login']);
+        //   //   }
+        //   // });
+        // });
     }
     //#endregion
     //#region Check Network
@@ -167,36 +164,67 @@ let LoginPage = class LoginPage {
     //#endregion
     //#region login
     login() {
-        this.load();
-        this.user.email = this.user.email;
-        this.user.password = this.user.password;
-        this.user.type = "eservice";
-        console.log(this.user);
-        this.postDataService.login(this.user).then(data => {
-            this.data = data;
-            console.log(this.data);
-            for (let i = 0; i < this.data.length; i++) {
-                this.status = this.data[i].Status;
-                this.name = this.data[i].Name;
-                this.username = this.data[i].Username;
-                this.position = this.data[i].Position;
-                this.workall = this.data[i].WorkAll;
-                this.workfinish = this.data[i].WorkFinish;
-                this.empID = this.data[i].empID;
-                this.role = this.data[i].roleID;
-                this.Tablet = this.data[i].Tablet;
-                this.link = this.data[i].Link;
-            }
-            if (this.status == false) {
-                this.false();
-            }
-            else if (this.Tablet == "On" && this.status == true) {
-                this.true();
+        let params = {
+            email: this.username,
+            password: this.password,
+        };
+        console.log('params', params);
+        this.postDataService.login(params).then(res => {
+            this.user = res;
+            console.log('this.user', this.user);
+            this.newUser.id = this.user[0].id;
+            this.newUser.name = this.user[0].Name;
+            this.newUser.username = this.user[0].Username;
+            this.newUser.position = this.user[0].Position;
+            this.newUser.empID = this.user[0].empID;
+            this.newUser.role = this.user[0].roleID;
+            this.newUser.status = this.user[0].Status;
+            this.newUser.link = this.user[0].link;
+            //console.log('this.newUser', this.newUser);      
+            this.userStatus = this.user[0].Status;
+            if (this.userStatus) {
+                const navigationExtras = {
+                    queryParams: {
+                        data: JSON.stringify(this.newUser)
+                    }
+                };
+                alert('Login Success');
+                this.router.navigate(['/menu/overview'], navigationExtras);
             }
             else {
-                this.access();
+                alert('Incorrect password');
             }
-        });
+        }, error => alert('can\'t login'));
+        // this.load();
+        // this.user.email = this.user.email;
+        // this.user.password = this.user.password;
+        // this.user.type = "eservice"
+        // console.log(this.user);
+        // this.postDataService.login(this.user).then(data => {
+        //   this.data = data;
+        //   console.log(this.data);
+        //   for (let i = 0; i < this.data.length; i++) {
+        //     this.status = this.data[i].Status;
+        //     this.name = this.data[i].Name;
+        //     this.username = this.data[i].Username;
+        //     this.position = this.data[i].Position;
+        //     this.workall = this.data[i].WorkAll;
+        //     this.workfinish = this.data[i].WorkFinish;
+        //     this.empID = this.data[i].empID;
+        //     this.role = this.data[i].roleID;
+        //     this.Tablet = this.data[i].Tablet;
+        //     this.link = this.data[i].Link;
+        //   }
+        //   if (this.status == false) {
+        //     this.false();
+        //   }
+        //   else if (this.Tablet == "On" && this.status == true) {
+        //     this.true();
+        //   }
+        //   else  {
+        //     this.access();
+        //   }
+        // });
     }
     //#endregion
     //#region check  
@@ -229,11 +257,12 @@ let LoginPage = class LoginPage {
         this.newUser.role = this.role;
         this.newUser.status = this.status;
         this.newUser.link = this.link;
-        console.log(this.newUser);
-        this.authService.login(this.newUser);
-        this.storageService.addUser(this.newUser).then(item => {
-            this.newUser = {};
-        });
+        console.log('true', this.newUser);
+        this.router.navigate(['/menu/overview']);
+        // this.authService.login(this.newUser);
+        // this.storageService.addUser(this.newUser).then(item => {
+        //   this.newUser = <User>{};
+        // });
     }
     //#endregion
     //#region checkspace
@@ -252,22 +281,20 @@ let LoginPage = class LoginPage {
     }
 };
 LoginPage.ctorParameters = () => [
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"] },
-    { type: _post_data_service__WEBPACK_IMPORTED_MODULE_4__["PostDataService"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"] },
-    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"] },
-    { type: _storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"] },
-    { type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_6__["Network"] },
-    { type: _auth_authentication_service__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"] },
-    { type: _auth_service_service__WEBPACK_IMPORTED_MODULE_2__["AuthServiceService"] },
-    { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_8__["DomSanitizer"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_9__["ActivatedRoute"] }
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
+    { type: _post_data_service__WEBPACK_IMPORTED_MODULE_3__["PostDataService"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"] },
+    { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"] },
+    { type: _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"] },
+    { type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_5__["Network"] },
+    { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__["DomSanitizer"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('mylist', { static: false }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["IonList"])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:type", _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["IonList"])
 ], LoginPage.prototype, "mylist", void 0);
 LoginPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -275,18 +302,16 @@ LoginPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         template: __webpack_require__(/*! raw-loader!./login.page.html */ "./node_modules/raw-loader/index.js!./src/app/login/login.page.html"),
         styles: [__webpack_require__(/*! ./login.page.scss */ "./src/app/login/login.page.scss")]
     }),
-    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_3__["AlertController"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["LoadingController"],
-        _post_data_service__WEBPACK_IMPORTED_MODULE_4__["PostDataService"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["NavController"],
-        _ionic_angular__WEBPACK_IMPORTED_MODULE_3__["Platform"],
-        _storage_service__WEBPACK_IMPORTED_MODULE_5__["StorageService"],
-        _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_6__["Network"],
-        _auth_authentication_service__WEBPACK_IMPORTED_MODULE_7__["AuthenticationService"],
-        _auth_service_service__WEBPACK_IMPORTED_MODULE_2__["AuthServiceService"],
-        _angular_platform_browser__WEBPACK_IMPORTED_MODULE_8__["DomSanitizer"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_9__["Router"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_9__["ActivatedRoute"]])
+    tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"],
+        _post_data_service__WEBPACK_IMPORTED_MODULE_3__["PostDataService"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["NavController"],
+        _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["Platform"],
+        _storage_service__WEBPACK_IMPORTED_MODULE_4__["StorageService"],
+        _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_5__["Network"],
+        _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__["DomSanitizer"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"],
+        _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"]])
 ], LoginPage);
 
 
