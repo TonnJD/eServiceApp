@@ -595,7 +595,7 @@ export class DetaillistpmPage implements OnInit {
       });
     }
     else {
-      this.click(data, item)
+      this.click(data, item);
     }
   }
   //#region click

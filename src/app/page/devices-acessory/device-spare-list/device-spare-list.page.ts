@@ -122,7 +122,7 @@ export class DeviceSpareListPage implements OnInit {
           cssClass: 'btn btn-primary',
           text: 'ยืนยัน',
           handler: () => {
-            this.postDataService.ReturnProduct(item.SKUID, this.empID, item.Count, item.CusID).then(res => {
+            this.postDataService.ReturnProduct(item.SKUID, this.empID, value, item.CusID).then(res => {
 
               this.postDataService.SparepartWaitReturnList(this.navData.item.SKUID, this.empID).then(res => {
                 this.spareList = res;

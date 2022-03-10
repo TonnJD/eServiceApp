@@ -46,6 +46,7 @@ export class WorknewPage implements OnInit {
 
     this.route.queryParams.subscribe(params => {
       this.items = JSON.parse(params["data"]);
+      this.name = this.items.name;
       this.ChangeMonth();
     });
 
@@ -190,6 +191,8 @@ export class WorknewPage implements OnInit {
     //   this.empid = this.items[i].empID
     //   this.name = this.items[i].name;
     // }
+
+    this.name = this.items.name
 
     let parJob = {
       empID: this.items.empID,
@@ -349,6 +352,8 @@ export class WorknewPage implements OnInit {
     // this.job.year = this.intYear;
     // this.job.jobtype = this.type
 
+    this.name = this.items.name
+
     let parJob = {
       empID: this.items.empID,
       month: this.intMonth,
@@ -497,6 +502,8 @@ export class WorknewPage implements OnInit {
     // this.job.month = this.intMonth;
     // this.job.year = this.intYear;
     // this.job.jobtype = this.type
+
+    this.name = this.items.name
 
     let parJob = {
       empID: this.items.empID,

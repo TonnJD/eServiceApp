@@ -148,7 +148,7 @@ export class OverviewPage implements OnInit {
     this.test = [];
     this.ChangeMonth();
     this.Today = new Date();
-    //this.onReload();
+    this.load();
   }
   
   loadpage() {
@@ -221,7 +221,7 @@ export class OverviewPage implements OnInit {
   async load() {
     const loading = await this.loadingController.create({
       message: 'กำลังโหลดข้อมูล...',
-      duration: 500,
+      duration: 1000,
       translucent: true,
       cssClass: 'custom-class custom-loading'
     });

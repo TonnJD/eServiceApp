@@ -30,12 +30,19 @@
         <small>* กรุณากรอกมากกว่า 4 ตัวอักษร</small>
       </div>
     </ion-card-content> -->
-    
+    <hr />
     <ion-card-header>
-      <ion-card-title>ประเภทข้อมูล</ion-card-title>
+      <ion-card-title>กรุณาระบุ ชื่อ/รุ่นเครื่อง</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-radio-group (ionChange)="onChange($event.detail.value)">
+      <div class="row">
+        <div class="col-12">
+          <input type="text" class="form-control" [(ngModel)]="installName" placeholder="โปรดระบุ" maxlength="100" />
+          <small>* กรุณากรอกมากว่า 4 ตัวอักษร</small>
+        </div>
+      </div>
+
+      <!-- <ion-radio-group (ionChange)="onChange($event.detail.value)">
         <div class="row">
           <div class="col-md-12">
             <ion-item>
@@ -52,16 +59,16 @@
             </ion-item>
           </div>
         </div>
-      </ion-radio-group>
+      </ion-radio-group> -->
     </ion-card-content>
-    <ion-card-content *ngIf="showInstallName">
+    <!-- <ion-card-content *ngIf="showInstallName">
       <div class="row">
         <div class="col-12">
           <input type="text" class="form-control" [(ngModel)]="installName" placeholder="โปรดระบุ" maxlength="100" />
           <small>* กรุณากรอกมากว่า 4 ตัวอักษร</small>
         </div>
       </div>
-    </ion-card-content>
+    </ion-card-content> -->
     
     <hr />
     <ion-card-content>

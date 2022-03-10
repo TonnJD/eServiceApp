@@ -143,7 +143,7 @@ export class LoginPage implements OnInit {
           }
         };
 
-        alert('เข้าสู่ระบบเรียบร้อย');
+        //alert('เข้าสู่ระบบเรียบร้อย');
         this.router.navigate(['/menu/overview'], navigationExtras);
       }
       else {

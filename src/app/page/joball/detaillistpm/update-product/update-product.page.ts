@@ -15,7 +15,7 @@ export class UpdateProductPage implements OnInit {
   data;
   item;
   showInstallName = false;
-  installName;
+  installName = '';
   dataType = '';
   tran;
   params;
@@ -46,21 +46,12 @@ export class UpdateProductPage implements OnInit {
   }
 
   async submit() {
-    console.log('this.dataType', this.dataType);
+    console.log('this.installName', this.installName);
     
-    if (this.showInstallName && (this.installName == '' || this.installName.length < 4)) {
+    if (this.installName == '' || this.installName.length < 4) {
       const alert = await this.alertCtrl.create({
         header: 'แจ้งเตือน',
         message: 'กรุณากรอกมากกว่า 4 ตัวอักษร',
-        buttons: ['OK']
-      });
-  
-      await alert.present();
-    }
-    else if (this.dataType == '') {
-      const alert = await this.alertCtrl.create({
-        header: 'แจ้งเตือน',
-        message: 'กรุณาเลือกประเภทข้อมูล',
         buttons: ['OK']
       });
   
@@ -72,6 +63,31 @@ export class UpdateProductPage implements OnInit {
         this.modalCtrl.dismiss('success');
       });
     }
+
+    // if (this.showInstallName && (this.installName == '' || this.installName.length < 4)) {
+    //   const alert = await this.alertCtrl.create({
+    //     header: 'แจ้งเตือน',
+    //     message: 'กรุณากรอกมากกว่า 4 ตัวอักษร',
+    //     buttons: ['OK']
+    //   });
+  
+    //   await alert.present();
+    // }
+    // else if (this.dataType == '') {
+    //   const alert = await this.alertCtrl.create({
+    //     header: 'แจ้งเตือน',
+    //     message: 'กรุณาเลือกประเภทข้อมูล',
+    //     buttons: ['OK']
+    //   });
+  
+    //   await alert.present();
+    // }
+    // else {
+    //   this.postDataService.RecheckInstallPlan(this.tran.insID, this.installName).then(res => {
+    //     this.SuccessAlert();
+    //     this.modalCtrl.dismiss('success');
+    //   });
+    // }
   }
 
   onChange(type) {
