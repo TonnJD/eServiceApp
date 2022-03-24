@@ -80,11 +80,13 @@ export class SettingPage implements OnInit {
     this.appVersion.getVersionNumber().then((s) => {
       this.VersionNumber = s;
       console.log(this.VersionNumber);
+      
       let param = {
         version: this.VersionNumber,
         typedevice: "checkversion",
       }
       console.log(param);
+
       this.postDataService.postdevice(param).then(data => {
         this.statusversion = data;
         console.log(this.statusversion);
