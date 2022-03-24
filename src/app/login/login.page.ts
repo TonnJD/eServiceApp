@@ -9,6 +9,7 @@ import { AuthenticationService } from '../auth/authentication.service';
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
 import { Router, NavigationExtras } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 
 @Component({
   selector: 'app-login',
@@ -41,6 +42,8 @@ export class LoginPage implements OnInit {
   connectSubscription;
   text ="";
   error;
+  VersionNumber;
+  statusversion;
   //#endregion
 
   //#region constructor
@@ -56,27 +59,36 @@ export class LoginPage implements OnInit {
     // private DataService: AuthServiceService,
     sanitizer: DomSanitizer,
     private router: Router,
-    private route: ActivatedRoute,) {    
+    private route: ActivatedRoute,
+    private appVersion: AppVersion) {    
       this.network.onDisconnect().subscribe(() => {
-        this.text = "...กรุณาเชื่อมต่ออินเทอร์เน็ต..."        
+        this.text = "...กรุณาเชื่อมต่ออินเทอร์เน็ต...";
       });
 
-    setTimeout(() => {
-      this.ngOnInit();
-      // this.checkNetwork();
-    }, 500);
+      this.appVersion.getVersionNumber().then((s) => {
+        this.VersionNumber = s;
+        alert('Version in ' + this.VersionNumber);
+      });
 
-    this.user = [];
-    // this.route.queryParams.subscribe(params => {
-    //   // this.authService.authenticationState.subscribe(state => {
-    //   //   if (state) {
-    //   //     this.router.navigate(['/menu/overview']);
-    //   //   } else {
-    //   //     this.router.navigate(['login']);
-    //   //   }
-    //   // });
-      
-    // });
+      alert('Version out ' + this.VersionNumber);
+      console.log('this.VersionNumber',this.VersionNumber);
+
+      setTimeout(() => {
+        this.ngOnInit();
+        // this.checkNetwork();
+      }, 500);
+
+      this.user = [];
+      // this.route.queryParams.subscribe(params => {
+      //   // this.authService.authenticationState.subscribe(state => {
+      //   //   if (state) {
+      //   //     this.router.navigate(['/menu/overview']);
+      //   //   } else {
+      //   //     this.router.navigate(['login']);
+      //   //   }
+      //   // });
+        
+      // });
     
   }
   //#endregion
@@ -112,13 +124,14 @@ export class LoginPage implements OnInit {
 
   //#region login
   login() {
+    alert('Version ' + this.VersionNumber);
+
     let params = {
       email: this.username,
       password: this.password,
+      version: this.VersionNumber
     }
-
     console.log('params', params);
-
 
     this.postDataService.login(params).then(res => {
       this.user = res;
@@ -224,7 +237,6 @@ export class LoginPage implements OnInit {
     //   this.newUser = <User>{};
     // });
   }
-
   //#endregion
 
   //#region checkspace
@@ -245,5 +257,48 @@ export class LoginPage implements OnInit {
   }
   //#endregion
 
+  //#region Check Version
+  checkversion() {
+    this.appVersion.getVersionNumber().then((s) => {
+      this.VersionNumber = s;
+      console.log(this.VersionNumber);
+      let param = {
+        version: this.VersionNumber,
+        typedevice: "checkversion",
+      }
+      console.log(param);
+      this.postDataService.postdevice(param).then(data => {
+        this.statusversion = data;
+        console.log(this.statusversion);
+
+        if (this.statusversion == true) {
+
+        } else {
+          this.link = this.statusversion;
+          this.alertversion();
+        }
+      });
+    })
+  }
+
+  async alertversion() {
+    const alert = await this.alertController.create({
+      message: 'กรุณาดาวน์โหลดเวอร์ชั่นใหม่',
+      buttons: [
+        {
+          text: 'ดาวน์โหลดเวอร์ชั่นใหม่',
+          handler: () => {
+            //this.openUrl();
+          }
+        }, {
+          text: 'ยกเลิก',
+          handler: () => {
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+  //#endregion
 }
  

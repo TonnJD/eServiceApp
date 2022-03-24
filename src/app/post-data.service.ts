@@ -69,7 +69,7 @@ export class PostDataService {
     return new Promise((resovle, reject) => {
       let option: any = new HttpHeaders({ 'Content-Type': 'application/json' });
 
-      this.http.get(this.apiServer_url + '/API/User.asmx/Login?email=' + user.email + '&password=' + user.password, option).subscribe(data => {
+      this.http.get(this.apiServer_url + '/API/User.asmx/Login?email=' + user.email + '&password=' + user.password + '&version=' + user.version, option).subscribe(data => {
         resovle(data);
       }, error => {
         reject(error)
