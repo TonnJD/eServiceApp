@@ -115,6 +115,7 @@ var WorknewPage = /** @class */ (function () {
         this.load = false;
         this.route.queryParams.subscribe(function (params) {
             _this.items = JSON.parse(params["data"]);
+            _this.name = _this.items.name;
             _this.ChangeMonth();
         });
         // this.route.queryParams.subscribe(params => {
@@ -260,6 +261,7 @@ var WorknewPage = /** @class */ (function () {
         //   this.empid = this.items[i].empID
         //   this.name = this.items[i].name;
         // }
+        this.name = this.items.name;
         var parJob = {
             empID: this.items.empID,
             month: this.intMonth,
@@ -403,6 +405,7 @@ var WorknewPage = /** @class */ (function () {
         // this.job.month = this.intMonth;
         // this.job.year = this.intYear;
         // this.job.jobtype = this.type
+        this.name = this.items.name;
         var parJob = {
             empID: this.items.empID,
             month: this.intMonth,
@@ -536,6 +539,7 @@ var WorknewPage = /** @class */ (function () {
         // this.job.month = this.intMonth;
         // this.job.year = this.intYear;
         // this.job.jobtype = this.type
+        this.name = this.items.name;
         var parJob = {
             empID: this.items.empID,
             month: this.intMonth,

@@ -41,10 +41,10 @@
       </div>
     </ion-card-content>
 
-    <ion-card-header #hide *ngIf="jobtype == 'CM' && this.workclose == 'workclose'">
+    <ion-card-header #hide *ngIf="(jobtype == 'CM' || jobtype == 'INSTALL') && this.workclose == 'workclose'">
       <ion-card-title>ลายเซ็นช่าง</ion-card-title>
     </ion-card-header>
-    <ion-card-content #hide *ngIf="jobtype == 'CM' && this.workclose == 'workclose'">
+    <ion-card-content #hide *ngIf="(jobtype == 'CM' || jobtype == 'INSTALL') && this.workclose == 'workclose'">
       <div class="col-12">
         <div id="sig" class="sig">
           <div *ngIf="isShow" style="border: 1px solid black;">

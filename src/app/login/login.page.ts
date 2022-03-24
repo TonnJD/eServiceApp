@@ -67,11 +67,7 @@ export class LoginPage implements OnInit {
 
       this.appVersion.getVersionNumber().then((s) => {
         this.VersionNumber = s;
-        alert('Version in ' + this.VersionNumber);
       });
-
-      alert('Version out ' + this.VersionNumber);
-      console.log('this.VersionNumber',this.VersionNumber);
 
       setTimeout(() => {
         this.ngOnInit();
@@ -124,8 +120,6 @@ export class LoginPage implements OnInit {
 
   //#region login
   login() {
-    alert('Version ' + this.VersionNumber);
-
     let params = {
       email: this.username,
       password: this.password,

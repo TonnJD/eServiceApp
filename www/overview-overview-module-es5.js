@@ -184,7 +184,7 @@ var OverviewPage = /** @class */ (function () {
         this.test = [];
         this.ChangeMonth();
         this.Today = new Date();
-        //this.onReload();
+        this.load();
     }
     OverviewPage.prototype.loadpage = function () {
         var _this = this;
@@ -250,7 +250,7 @@ var OverviewPage = /** @class */ (function () {
                 switch (_a.label) {
                     case 0: return [4 /*yield*/, this.loadingController.create({
                             message: 'กำลังโหลดข้อมูล...',
-                            duration: 500,
+                            duration: 1000,
                             translucent: true,
                             cssClass: 'custom-class custom-loading'
                         })];

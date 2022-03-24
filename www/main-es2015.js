@@ -681,7 +681,7 @@ module.exports = "<ion-toolbar>\r\n  <ion-title>ภาพหน้างาน</
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>ตรวจสอบความถูกต้อง</ion-title>\r\n    <ion-buttons slot=\"primary\">\r\n      <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-card>\r\n    <div class=\"col-12\" style=\"margin-top: 15px;\">\r\n      <div class=\"alert alert-warning\" role=\"alert\">\r\n        <h4>กรุณาตรวจสอบเครื่องในร้าน (สำคัญมาก)</h4>\r\n      </div>\r\n    </div>\r\n    <ion-card-header>\r\n      <ion-card-title>ข้อมูลเครื่องปัจจุบัน</ion-card-title>\r\n      <div style=\"margin-top:15px;\">\r\n        <h5>{{item.ItemsName}}</h5>\r\n      </div>\r\n    </ion-card-header>\r\n\r\n    <!-- <ion-card-header>\r\n      <ion-card-title>กรอกข้อมูลเครื่องที่ถูกต้องในร้าน</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <div class=\"col-12\">\r\n        <input type=\"text\" class=\"form-control\" />\r\n        <small>* กรุณากรอกมากกว่า 4 ตัวอักษร</small>\r\n      </div>\r\n    </ion-card-content> -->\r\n    \r\n    <ion-card-header>\r\n      <ion-card-title>ประเภทข้อมูล</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <ion-radio-group (ionChange)=\"onChange($event.detail.value)\">\r\n        <div class=\"row\">\r\n          <div class=\"col-md-12\">\r\n            <ion-item>\r\n              <ion-label>ข้อมูลถูกต้อง</ion-label>\r\n              <ion-radio slot=\"start\" value=\"matched\"></ion-radio>\r\n            </ion-item>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-12\">\r\n            <ion-item>\r\n              <ion-label>ข้อมูลไม่ถูกต้อง</ion-label>\r\n              <ion-radio slot=\"start\" value=\"not-matched\"></ion-radio>\r\n            </ion-item>\r\n          </div>\r\n        </div>\r\n      </ion-radio-group>\r\n    </ion-card-content>\r\n    <ion-card-content *ngIf=\"showInstallName\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"installName\" placeholder=\"โปรดระบุ\" maxlength=\"100\" />\r\n          <small>* กรุณากรอกมากว่า 4 ตัวอักษร</small>\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n    \r\n    <hr />\r\n    <ion-card-content>\r\n      <div class=\"col-md-12 text-center\" style=\"margin-bottom: 30px;\">\r\n        <ion-button (click)=\"submit()\" color=\"success\">ส่งข้อมูลและเริ่มงาน</ion-button>\r\n      </div>\r\n    </ion-card-content>\r\n  </ion-card>\r\n\r\n</ion-content>\r\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>ตรวจสอบความถูกต้อง</ion-title>\r\n    <ion-buttons slot=\"primary\">\r\n      <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-card>\r\n    <div class=\"col-12\" style=\"margin-top: 15px;\">\r\n      <div class=\"alert alert-warning\" role=\"alert\">\r\n        <h4>กรุณาตรวจสอบเครื่องในร้าน (สำคัญมาก)</h4>\r\n      </div>\r\n    </div>\r\n    <ion-card-header>\r\n      <ion-card-title>ข้อมูลเครื่องปัจจุบัน</ion-card-title>\r\n      <div style=\"margin-top:15px;\">\r\n        <h5>{{item.ItemsName}}</h5>\r\n      </div>\r\n    </ion-card-header>\r\n\r\n    <!-- <ion-card-header>\r\n      <ion-card-title>กรอกข้อมูลเครื่องที่ถูกต้องในร้าน</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <div class=\"col-12\">\r\n        <input type=\"text\" class=\"form-control\" />\r\n        <small>* กรุณากรอกมากกว่า 4 ตัวอักษร</small>\r\n      </div>\r\n    </ion-card-content> -->\r\n    <hr />\r\n    <ion-card-header>\r\n      <ion-card-title>กรุณาระบุ ชื่อ/รุ่นเครื่อง</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"installName\" placeholder=\"โปรดระบุ\" maxlength=\"100\" />\r\n          <small>* กรุณากรอกมากว่า 4 ตัวอักษร</small>\r\n        </div>\r\n      </div>\r\n\r\n      <!-- <ion-radio-group (ionChange)=\"onChange($event.detail.value)\">\r\n        <div class=\"row\">\r\n          <div class=\"col-md-12\">\r\n            <ion-item>\r\n              <ion-label>ข้อมูลถูกต้อง</ion-label>\r\n              <ion-radio slot=\"start\" value=\"matched\"></ion-radio>\r\n            </ion-item>\r\n          </div>\r\n        </div>\r\n        <div class=\"row\">\r\n          <div class=\"col-md-12\">\r\n            <ion-item>\r\n              <ion-label>ข้อมูลไม่ถูกต้อง</ion-label>\r\n              <ion-radio slot=\"start\" value=\"not-matched\"></ion-radio>\r\n            </ion-item>\r\n          </div>\r\n        </div>\r\n      </ion-radio-group> -->\r\n    </ion-card-content>\r\n    <!-- <ion-card-content *ngIf=\"showInstallName\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"installName\" placeholder=\"โปรดระบุ\" maxlength=\"100\" />\r\n          <small>* กรุณากรอกมากว่า 4 ตัวอักษร</small>\r\n        </div>\r\n      </div>\r\n    </ion-card-content> -->\r\n    \r\n    <hr />\r\n    <ion-card-content>\r\n      <div class=\"col-md-12 text-center\" style=\"margin-bottom: 30px;\">\r\n        <ion-button (click)=\"submit()\" color=\"success\">ส่งข้อมูลและเริ่มงาน</ion-button>\r\n      </div>\r\n    </ion-card-content>\r\n  </ion-card>\r\n\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -1701,7 +1701,7 @@ let DeviceSpareListPage = class DeviceSpareListPage {
                         cssClass: 'btn btn-primary',
                         text: 'ยืนยัน',
                         handler: () => {
-                            this.postDataService.ReturnProduct(item.SKUID, this.empID, item.Count, item.CusID).then(res => {
+                            this.postDataService.ReturnProduct(item.SKUID, this.empID, value, item.CusID).then(res => {
                                 this.postDataService.SparepartWaitReturnList(this.navData.item.SKUID, this.empID).then(res => {
                                     this.spareList = res;
                                     console.log('this.spareList', this.spareList);
@@ -2067,6 +2067,7 @@ let UpdateProductPage = class UpdateProductPage {
         this.navCtrl = navCtrl;
         this.toastCtrl = toastCtrl;
         this.showInstallName = false;
+        this.installName = '';
         this.dataType = '';
         this.data = this.navParams.data;
         this.item = this.data.params.install;
@@ -2081,19 +2082,11 @@ let UpdateProductPage = class UpdateProductPage {
     }
     submit() {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
-            console.log('this.dataType', this.dataType);
-            if (this.showInstallName && (this.installName == '' || this.installName.length < 4)) {
+            console.log('this.installName', this.installName);
+            if (this.installName == '' || this.installName.length < 4) {
                 const alert = yield this.alertCtrl.create({
                     header: 'แจ้งเตือน',
                     message: 'กรุณากรอกมากกว่า 4 ตัวอักษร',
-                    buttons: ['OK']
-                });
-                yield alert.present();
-            }
-            else if (this.dataType == '') {
-                const alert = yield this.alertCtrl.create({
-                    header: 'แจ้งเตือน',
-                    message: 'กรุณาเลือกประเภทข้อมูล',
                     buttons: ['OK']
                 });
                 yield alert.present();
@@ -2104,6 +2097,28 @@ let UpdateProductPage = class UpdateProductPage {
                     this.modalCtrl.dismiss('success');
                 });
             }
+            // if (this.showInstallName && (this.installName == '' || this.installName.length < 4)) {
+            //   const alert = await this.alertCtrl.create({
+            //     header: 'แจ้งเตือน',
+            //     message: 'กรุณากรอกมากกว่า 4 ตัวอักษร',
+            //     buttons: ['OK']
+            //   });
+            //   await alert.present();
+            // }
+            // else if (this.dataType == '') {
+            //   const alert = await this.alertCtrl.create({
+            //     header: 'แจ้งเตือน',
+            //     message: 'กรุณาเลือกประเภทข้อมูล',
+            //     buttons: ['OK']
+            //   });
+            //   await alert.present();
+            // }
+            // else {
+            //   this.postDataService.RecheckInstallPlan(this.tran.insID, this.installName).then(res => {
+            //     this.SuccessAlert();
+            //     this.modalCtrl.dismiss('success');
+            //   });
+            // }
         });
     }
     onChange(type) {
@@ -7586,7 +7601,7 @@ let PostDataService = class PostDataService {
     login(user) {
         return new Promise((resovle, reject) => {
             let option = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
-            this.http.get(this.apiServer_url + '/API/User.asmx/Login?email=' + user.email + '&password=' + user.password, option).subscribe(data => {
+            this.http.get(this.apiServer_url + '/API/User.asmx/Login?email=' + user.email + '&password=' + user.password + '&version=' + user.version, option).subscribe(data => {
                 resovle(data);
             }, error => {
                 reject(error);

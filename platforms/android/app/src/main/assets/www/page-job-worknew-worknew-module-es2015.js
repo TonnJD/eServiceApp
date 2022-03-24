@@ -111,6 +111,7 @@ let WorknewPage = class WorknewPage {
         this.load = false;
         this.route.queryParams.subscribe(params => {
             this.items = JSON.parse(params["data"]);
+            this.name = this.items.name;
             this.ChangeMonth();
         });
         // this.route.queryParams.subscribe(params => {
@@ -245,6 +246,7 @@ let WorknewPage = class WorknewPage {
         //   this.empid = this.items[i].empID
         //   this.name = this.items[i].name;
         // }
+        this.name = this.items.name;
         let parJob = {
             empID: this.items.empID,
             month: this.intMonth,
@@ -387,6 +389,7 @@ let WorknewPage = class WorknewPage {
         // this.job.month = this.intMonth;
         // this.job.year = this.intYear;
         // this.job.jobtype = this.type
+        this.name = this.items.name;
         let parJob = {
             empID: this.items.empID,
             month: this.intMonth,
@@ -519,6 +522,7 @@ let WorknewPage = class WorknewPage {
         // this.job.month = this.intMonth;
         // this.job.year = this.intYear;
         // this.job.jobtype = this.type
+        this.name = this.items.name;
         let parJob = {
             empID: this.items.empID,
             month: this.intMonth,

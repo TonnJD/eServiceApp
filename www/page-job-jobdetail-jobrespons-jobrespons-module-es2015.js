@@ -109,7 +109,7 @@ let JobresponsPage = class JobresponsPage {
         this.route.queryParams.subscribe(params => {
             this.data = JSON.parse(params["data"]);
             this.insID = this.data.insID;
-            this.empID = this.data.empID;
+            this.empID = this.data.items.items.empID;
             this.planID = this.data.planID;
             this.item = this.data.item;
             this.type = this.data.type;
@@ -118,8 +118,10 @@ let JobresponsPage = class JobresponsPage {
             this.cusID = this.item.cusID;
             this.Type = this.data.Type;
             this.items = this.data.items.items;
+            console.log('this.data', this.data);
             console.log('this.items', this.data.items.items);
             this.url = sanitizer.bypassSecurityTrustResourceUrl(this.postDataService.apiServer_url + 'Web/TabletRespone.aspx' + '?planID=' + this.planID + "&empId=" + this.empID);
+            console.log('this.url', this.url);
         });
     }
     goBack() {

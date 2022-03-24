@@ -113,7 +113,7 @@ var JobresponsPage = /** @class */ (function () {
         this.route.queryParams.subscribe(function (params) {
             _this.data = JSON.parse(params["data"]);
             _this.insID = _this.data.insID;
-            _this.empID = _this.data.empID;
+            _this.empID = _this.data.items.items.empID;
             _this.planID = _this.data.planID;
             _this.item = _this.data.item;
             _this.type = _this.data.type;
@@ -122,8 +122,10 @@ var JobresponsPage = /** @class */ (function () {
             _this.cusID = _this.item.cusID;
             _this.Type = _this.data.Type;
             _this.items = _this.data.items.items;
+            console.log('this.data', _this.data);
             console.log('this.items', _this.data.items.items);
             _this.url = sanitizer.bypassSecurityTrustResourceUrl(_this.postDataService.apiServer_url + 'Web/TabletRespone.aspx' + '?planID=' + _this.planID + "&empId=" + _this.empID);
+            console.log('this.url', _this.url);
         });
     }
     JobresponsPage.prototype.goBack = function () {

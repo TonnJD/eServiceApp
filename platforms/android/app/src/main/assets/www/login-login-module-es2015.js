@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-content>\r\n  <div class=\"centered\">   \r\n    <form #form=\"ngForm\" (ngSubmit)=\"login(form)\" class=\"text-center\">\r\n      <img src=\"../../assets/img/logo.png\" alt=\"\"/>\r\n      <div class=\"row\">\r\n        <div class=\"col-12\" style=\"padding: 5px;margin-bottom: 30px;\">\r\n          <div style=\"font-size: 20px;font-weight: bold;\">Login your account</div>\r\n          <div class=\"text-center\" style=\"text-align: center;color: red;\"> {{text}}</div>\r\n        </div>    \r\n      </div> \r\n      <ion-item>\r\n        <ion-input name=\"username\" type=\"text\" [(ngModel)]=\"username\" placeholder=\"ชื่อผู้ใช้\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-input name=\"password\" type=\"password\" [(ngModel)]=\"password\" placeholder=\"รหัสผ่าน\" ngModel required>\r\n        </ion-input>\r\n      </ion-item>\r\n      <ion-button shape=\"round\" [disabled]=\"form.invalid\" (click)=\"login()\">Login</ion-button>\r\n    </form>\r\n  </div> \r\n  <!-- <iframe [src]=\"url\" style=\"width:100%;height:100%\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->\r\n</ion-content>"
+module.exports = "<ion-content>\r\n  <div class=\"centered\">   \r\n    <form #form=\"ngForm\" (ngSubmit)=\"login(form)\" class=\"text-center\">\r\n      <img src=\"../../assets/img/logo.png\" alt=\"\"/>\r\n      <div class=\"row\">\r\n        <div class=\"col-12\" style=\"padding: 5px;margin-bottom: 30px;\">\r\n          <div style=\"font-size: 20px;font-weight: bold;\">Login your account</div>\r\n          <div class=\"text-center\" style=\"text-align: center;\"> version: {{VersionNumber}} </div>\r\n        </div>    \r\n      </div> \r\n      <ion-item>\r\n        <ion-input name=\"username\" type=\"text\" [(ngModel)]=\"username\" placeholder=\"ชื่อผู้ใช้\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-input name=\"password\" type=\"password\" [(ngModel)]=\"password\" placeholder=\"รหัสผ่าน\" ngModel required>\r\n        </ion-input>\r\n      </ion-item>\r\n      <ion-button shape=\"round\" [disabled]=\"form.invalid\" (click)=\"login()\">Login</ion-button>\r\n    </form>\r\n  </div>\r\n  <!-- <iframe [src]=\"url\" style=\"width:100%;height:100%\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->\r\n</ion-content>"
 
 /***/ }),
 
@@ -89,6 +89,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/app-version/ngx */ "./node_modules/@ionic-native/app-version/ngx/index.js");
+
 
 
 
@@ -103,7 +105,7 @@ let LoginPage = class LoginPage {
     constructor(alertController, loadingController, postDataService, navCtrl, platform, storageService, network, 
     // private authService: AuthenticationService,
     // private DataService: AuthServiceService,
-    sanitizer, router, route) {
+    sanitizer, router, route, appVersion) {
         this.alertController = alertController;
         this.loadingController = loadingController;
         this.postDataService = postDataService;
@@ -113,6 +115,7 @@ let LoginPage = class LoginPage {
         this.network = network;
         this.router = router;
         this.route = route;
+        this.appVersion = appVersion;
         this.userStatus = false;
         this.items = [];
         this.newUser = {};
@@ -120,6 +123,12 @@ let LoginPage = class LoginPage {
         this.network.onDisconnect().subscribe(() => {
             this.text = "...กรุณาเชื่อมต่ออินเทอร์เน็ต...";
         });
+        this.appVersion.getVersionNumber().then((s) => {
+            this.VersionNumber = s;
+            alert('Version in ' + this.VersionNumber);
+        });
+        alert('Version out ' + this.VersionNumber);
+        console.log('this.VersionNumber', this.VersionNumber);
         setTimeout(() => {
             this.ngOnInit();
             // this.checkNetwork();
@@ -164,9 +173,11 @@ let LoginPage = class LoginPage {
     //#endregion
     //#region login
     login() {
+        alert('Version ' + this.VersionNumber);
         let params = {
             email: this.username,
             password: this.password,
+            version: this.VersionNumber
         };
         console.log('params', params);
         this.postDataService.login(params).then(res => {
@@ -188,13 +199,13 @@ let LoginPage = class LoginPage {
                         data: JSON.stringify(this.newUser)
                     }
                 };
-                alert('Login Success');
+                //alert('เข้าสู่ระบบเรียบร้อย');
                 this.router.navigate(['/menu/overview'], navigationExtras);
             }
             else {
-                alert('Incorrect password');
+                alert('ชื่อผู้ใช้ หรือ รหัสผ่าน ไม่ถูกต้อง');
             }
-        }, error => alert('can\'t login'));
+        }, error => alert('ไม่สามารถเข้าสู่ระบบได้'));
         // this.load();
         // this.user.email = this.user.email;
         // this.user.password = this.user.password;
@@ -279,6 +290,49 @@ let LoginPage = class LoginPage {
         //this.storageService.resetLocalStorage();
         // this.checkspace();
     }
+    //#endregion
+    //#region Check Version
+    checkversion() {
+        this.appVersion.getVersionNumber().then((s) => {
+            this.VersionNumber = s;
+            console.log(this.VersionNumber);
+            let param = {
+                version: this.VersionNumber,
+                typedevice: "checkversion",
+            };
+            console.log(param);
+            this.postDataService.postdevice(param).then(data => {
+                this.statusversion = data;
+                console.log(this.statusversion);
+                if (this.statusversion == true) {
+                }
+                else {
+                    this.link = this.statusversion;
+                    this.alertversion();
+                }
+            });
+        });
+    }
+    alertversion() {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
+            const alert = yield this.alertController.create({
+                message: 'กรุณาดาวน์โหลดเวอร์ชั่นใหม่',
+                buttons: [
+                    {
+                        text: 'ดาวน์โหลดเวอร์ชั่นใหม่',
+                        handler: () => {
+                            //this.openUrl();
+                        }
+                    }, {
+                        text: 'ยกเลิก',
+                        handler: () => {
+                        }
+                    }
+                ]
+            });
+            yield alert.present();
+        });
+    }
 };
 LoginPage.ctorParameters = () => [
     { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] },
@@ -290,7 +344,8 @@ LoginPage.ctorParameters = () => [
     { type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_5__["Network"] },
     { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__["DomSanitizer"] },
     { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"] },
-    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"] }
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"] },
+    { type: _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_8__["AppVersion"] }
 ];
 tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('mylist', { static: false }),
@@ -311,7 +366,8 @@ LoginPage = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_5__["Network"],
         _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__["DomSanitizer"],
         _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"],
-        _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"]])
+        _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"],
+        _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_8__["AppVersion"]])
 ], LoginPage);
 
 

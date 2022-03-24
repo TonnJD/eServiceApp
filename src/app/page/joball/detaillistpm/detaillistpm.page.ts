@@ -1206,9 +1206,11 @@ export class DetaillistpmPage implements OnInit {
       console.log(status);
     });
   }
+
   SaveSerialBarcode(value) {
     this.barcodeScanner.scan().then(barcodeData => {
       let barcode = barcodeData
+
       if (barcode != null || barcode.text != '') {
         let params = {
           insID: value.installId,
@@ -1217,6 +1219,7 @@ export class DetaillistpmPage implements OnInit {
           SerialNo: barcode.text
         }
         console.log(params);
+
         this.postDataService.PostCus(params).then(status => {
           console.log(status);
           if (status == true) {
@@ -1225,15 +1228,18 @@ export class DetaillistpmPage implements OnInit {
             alert('Asset No. ซ้ำ !!!');
           }
         });
-        this.ngOnInit();
+        //this.ngOnInit();
       }
     }).catch(err => {
-      console.log('Error', err);
+      alert('error ' + err);
+      //console.log('Error', err);
     });
   }
+
   fab() {
     console.log('test');
   }
+
   imgice(value) {
     console.log(value);
 

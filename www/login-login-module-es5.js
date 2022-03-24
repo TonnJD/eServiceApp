@@ -7,7 +7,7 @@
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-content>\r\n  <div class=\"centered\">   \r\n    <form #form=\"ngForm\" (ngSubmit)=\"login(form)\" class=\"text-center\">\r\n      <img src=\"../../assets/img/logo.png\" alt=\"\"/>\r\n      <div class=\"row\">\r\n        <div class=\"col-12\" style=\"padding: 5px;margin-bottom: 30px;\">\r\n          <div style=\"font-size: 20px;font-weight: bold;\">Login your account</div>\r\n          <div class=\"text-center\" style=\"text-align: center;color: red;\"> {{text}}</div>\r\n        </div>    \r\n      </div> \r\n      <ion-item>\r\n        <ion-input name=\"username\" type=\"text\" [(ngModel)]=\"username\" placeholder=\"ชื่อผู้ใช้\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-input name=\"password\" type=\"password\" [(ngModel)]=\"password\" placeholder=\"รหัสผ่าน\" ngModel required>\r\n        </ion-input>\r\n      </ion-item>\r\n      <ion-button shape=\"round\" [disabled]=\"form.invalid\" (click)=\"login()\">Login</ion-button>\r\n    </form>\r\n  </div> \r\n  <!-- <iframe [src]=\"url\" style=\"width:100%;height:100%\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->\r\n</ion-content>"
+module.exports = "<ion-content>\r\n  <div class=\"centered\">   \r\n    <form #form=\"ngForm\" (ngSubmit)=\"login(form)\" class=\"text-center\">\r\n      <img src=\"../../assets/img/logo.png\" alt=\"\"/>\r\n      <div class=\"row\">\r\n        <div class=\"col-12\" style=\"padding: 5px;margin-bottom: 30px;\">\r\n          <div style=\"font-size: 20px;font-weight: bold;\">Login your account</div>\r\n          <div class=\"text-center\" style=\"text-align: center;\"> version: {{VersionNumber}} </div>\r\n        </div>    \r\n      </div> \r\n      <ion-item>\r\n        <ion-input name=\"username\" type=\"text\" [(ngModel)]=\"username\" placeholder=\"ชื่อผู้ใช้\" ngModel required></ion-input>\r\n      </ion-item>\r\n      <ion-item>\r\n        <ion-input name=\"password\" type=\"password\" [(ngModel)]=\"password\" placeholder=\"รหัสผ่าน\" ngModel required>\r\n        </ion-input>\r\n      </ion-item>\r\n      <ion-button shape=\"round\" [disabled]=\"form.invalid\" (click)=\"login()\">Login</ion-button>\r\n    </form>\r\n  </div>\r\n  <!-- <iframe [src]=\"url\" style=\"width:100%;height:100%\" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> -->\r\n</ion-content>"
 
 /***/ }),
 
@@ -92,6 +92,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @ionic-native/network/ngx */ "./node_modules/@ionic-native/network/ngx/index.js");
 /* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm5/platform-browser.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
+/* harmony import */ var _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @ionic-native/app-version/ngx */ "./node_modules/@ionic-native/app-version/ngx/index.js");
+
 
 
 
@@ -106,7 +108,7 @@ var LoginPage = /** @class */ (function () {
     function LoginPage(alertController, loadingController, postDataService, navCtrl, platform, storageService, network, 
     // private authService: AuthenticationService,
     // private DataService: AuthServiceService,
-    sanitizer, router, route) {
+    sanitizer, router, route, appVersion) {
         var _this = this;
         this.alertController = alertController;
         this.loadingController = loadingController;
@@ -117,6 +119,7 @@ var LoginPage = /** @class */ (function () {
         this.network = network;
         this.router = router;
         this.route = route;
+        this.appVersion = appVersion;
         this.userStatus = false;
         this.items = [];
         this.newUser = {};
@@ -124,6 +127,12 @@ var LoginPage = /** @class */ (function () {
         this.network.onDisconnect().subscribe(function () {
             _this.text = "...กรุณาเชื่อมต่ออินเทอร์เน็ต...";
         });
+        this.appVersion.getVersionNumber().then(function (s) {
+            _this.VersionNumber = s;
+            alert('Version in ' + _this.VersionNumber);
+        });
+        alert('Version out ' + this.VersionNumber);
+        console.log('this.VersionNumber', this.VersionNumber);
         setTimeout(function () {
             _this.ngOnInit();
             // this.checkNetwork();
@@ -177,9 +186,11 @@ var LoginPage = /** @class */ (function () {
     //#region login
     LoginPage.prototype.login = function () {
         var _this = this;
+        alert('Version ' + this.VersionNumber);
         var params = {
             email: this.username,
             password: this.password,
+            version: this.VersionNumber
         };
         console.log('params', params);
         this.postDataService.login(params).then(function (res) {
@@ -201,13 +212,13 @@ var LoginPage = /** @class */ (function () {
                         data: JSON.stringify(_this.newUser)
                     }
                 };
-                alert('Login Success');
+                //alert('เข้าสู่ระบบเรียบร้อย');
                 _this.router.navigate(['/menu/overview'], navigationExtras);
             }
             else {
-                alert('Incorrect password');
+                alert('ชื่อผู้ใช้ หรือ รหัสผ่าน ไม่ถูกต้อง');
             }
-        }, function (error) { return alert('can\'t login'); });
+        }, function (error) { return alert('ไม่สามารถเข้าสู่ระบบได้'); });
         // this.load();
         // this.user.email = this.user.email;
         // this.user.password = this.user.password;
@@ -312,6 +323,60 @@ var LoginPage = /** @class */ (function () {
         //this.storageService.resetLocalStorage();
         // this.checkspace();
     };
+    //#endregion
+    //#region Check Version
+    LoginPage.prototype.checkversion = function () {
+        var _this = this;
+        this.appVersion.getVersionNumber().then(function (s) {
+            _this.VersionNumber = s;
+            console.log(_this.VersionNumber);
+            var param = {
+                version: _this.VersionNumber,
+                typedevice: "checkversion",
+            };
+            console.log(param);
+            _this.postDataService.postdevice(param).then(function (data) {
+                _this.statusversion = data;
+                console.log(_this.statusversion);
+                if (_this.statusversion == true) {
+                }
+                else {
+                    _this.link = _this.statusversion;
+                    _this.alertversion();
+                }
+            });
+        });
+    };
+    LoginPage.prototype.alertversion = function () {
+        return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function () {
+            var alert;
+            return tslib__WEBPACK_IMPORTED_MODULE_0__["__generator"](this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.alertController.create({
+                            message: 'กรุณาดาวน์โหลดเวอร์ชั่นใหม่',
+                            buttons: [
+                                {
+                                    text: 'ดาวน์โหลดเวอร์ชั่นใหม่',
+                                    handler: function () {
+                                        //this.openUrl();
+                                    }
+                                }, {
+                                    text: 'ยกเลิก',
+                                    handler: function () {
+                                    }
+                                }
+                            ]
+                        })];
+                    case 1:
+                        alert = _a.sent();
+                        return [4 /*yield*/, alert.present()];
+                    case 2:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
     LoginPage.ctorParameters = function () { return [
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["AlertController"] },
         { type: _ionic_angular__WEBPACK_IMPORTED_MODULE_2__["LoadingController"] },
@@ -322,7 +387,8 @@ var LoginPage = /** @class */ (function () {
         { type: _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_5__["Network"] },
         { type: _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__["DomSanitizer"] },
         { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"] },
-        { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"] }
+        { type: _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"] },
+        { type: _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_8__["AppVersion"] }
     ]; };
     tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewChild"])('mylist', { static: false }),
@@ -343,7 +409,8 @@ var LoginPage = /** @class */ (function () {
             _ionic_native_network_ngx__WEBPACK_IMPORTED_MODULE_5__["Network"],
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_6__["DomSanitizer"],
             _angular_router__WEBPACK_IMPORTED_MODULE_7__["Router"],
-            _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"]])
+            _angular_router__WEBPACK_IMPORTED_MODULE_7__["ActivatedRoute"],
+            _ionic_native_app_version_ngx__WEBPACK_IMPORTED_MODULE_8__["AppVersion"]])
     ], LoginPage);
     return LoginPage;
 }());

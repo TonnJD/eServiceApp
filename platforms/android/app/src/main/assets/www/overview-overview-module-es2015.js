@@ -180,7 +180,7 @@ let OverviewPage = class OverviewPage {
         this.test = [];
         this.ChangeMonth();
         this.Today = new Date();
-        //this.onReload();
+        this.load();
     }
     loadpage() {
         this.route.queryParams.subscribe(params => {
@@ -241,7 +241,7 @@ let OverviewPage = class OverviewPage {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             const loading = yield this.loadingController.create({
                 message: 'กำลังโหลดข้อมูล...',
-                duration: 500,
+                duration: 1000,
                 translucent: true,
                 cssClass: 'custom-class custom-loading'
             });
