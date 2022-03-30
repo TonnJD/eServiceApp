@@ -129,10 +129,7 @@ var LoginPage = /** @class */ (function () {
         });
         this.appVersion.getVersionNumber().then(function (s) {
             _this.VersionNumber = s;
-            alert('Version in ' + _this.VersionNumber);
         });
-        alert('Version out ' + this.VersionNumber);
-        console.log('this.VersionNumber', this.VersionNumber);
         setTimeout(function () {
             _this.ngOnInit();
             // this.checkNetwork();
@@ -186,7 +183,6 @@ var LoginPage = /** @class */ (function () {
     //#region login
     LoginPage.prototype.login = function () {
         var _this = this;
-        alert('Version ' + this.VersionNumber);
         var params = {
             email: this.username,
             password: this.password,

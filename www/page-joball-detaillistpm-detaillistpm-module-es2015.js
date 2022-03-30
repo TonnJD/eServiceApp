@@ -1137,10 +1137,11 @@ let DetaillistpmPage = class DetaillistpmPage {
                         alert('Asset No. ซ้ำ !!!');
                     }
                 });
-                this.ngOnInit();
+                //this.ngOnInit();
             }
         }).catch(err => {
-            console.log('Error', err);
+            alert('error ' + err);
+            //console.log('Error', err);
         });
     }
     fab() {

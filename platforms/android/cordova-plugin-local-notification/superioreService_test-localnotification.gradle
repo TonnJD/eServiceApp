@@ -28,5 +28,5 @@ if (!project.ext.has('appShortcutBadgerVersion')) {
 }
 
 dependencies {
-    implementation "me.leolin:ShortcutBadger:1.1.22@aar"
+    compile "me.leolin:ShortcutBadger:${appShortcutBadgerVersion}@aar"
 }

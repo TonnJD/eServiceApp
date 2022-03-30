@@ -125,10 +125,7 @@ let LoginPage = class LoginPage {
         });
         this.appVersion.getVersionNumber().then((s) => {
             this.VersionNumber = s;
-            alert('Version in ' + this.VersionNumber);
         });
-        alert('Version out ' + this.VersionNumber);
-        console.log('this.VersionNumber', this.VersionNumber);
         setTimeout(() => {
             this.ngOnInit();
             // this.checkNetwork();
@@ -173,7 +170,6 @@ let LoginPage = class LoginPage {
     //#endregion
     //#region login
     login() {
-        alert('Version ' + this.VersionNumber);
         let params = {
             email: this.username,
             password: this.password,

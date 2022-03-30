@@ -1128,10 +1128,11 @@ var DetaillistpmPage = /** @class */ (function () {
                         alert('Asset No. ซ้ำ !!!');
                     }
                 });
-                _this.ngOnInit();
+                //this.ngOnInit();
             }
         }).catch(function (err) {
-            console.log('Error', err);
+            alert('error ' + err);
+            //console.log('Error', err);
         });
     };
     DetaillistpmPage.prototype.fab = function () {
