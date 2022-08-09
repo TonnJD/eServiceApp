@@ -17,7 +17,8 @@
     <ion-card-header>
       <ion-card-title>ข้อมูลเครื่องปัจจุบัน</ion-card-title>
       <div style="margin-top:15px;">
-        <h5>{{item.ItemsName}}</h5>
+        <h5>{{item.ItemsName}}</h5><br/>
+        <!-- <h5>Asset No.: {{item.AssetplateSFS}}</h5> -->
       </div>
     </ion-card-header>
 
@@ -38,28 +39,21 @@
       <div class="row">
         <div class="col-12">
           <input type="text" class="form-control" [(ngModel)]="installName" placeholder="โปรดระบุ" maxlength="100" />
-          <small>* กรุณากรอกมากว่า 4 ตัวอักษร</small>
+          <span class="text-danger">* กรุณากรอกมากกว่า 4 ตัวอักษร</span>
         </div>
       </div>
+    </ion-card-content>
 
-      <!-- <ion-radio-group (ionChange)="onChange($event.detail.value)">
-        <div class="row">
-          <div class="col-md-12">
-            <ion-item>
-              <ion-label>ข้อมูลถูกต้อง</ion-label>
-              <ion-radio slot="start" value="matched"></ion-radio>
-            </ion-item>
-          </div>
+    <ion-card-header>
+      <ion-card-title>กรุณาระบุ Asset No.</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <div class="row">
+        <div class="col-12">
+          <input type="text" class="form-control" [(ngModel)]="assetNo" placeholder="SFS20xxxxxx" maxlength="20" />
+          <span class="text-danger">* กรุณากรอก Asset No. ที่ติดบนตัวเครื่อง ตัวอย่าง: SFS20xxxxxx ถ้าไม่มีให้ใส่ ไม่มี </span>
         </div>
-        <div class="row">
-          <div class="col-md-12">
-            <ion-item>
-              <ion-label>ข้อมูลไม่ถูกต้อง</ion-label>
-              <ion-radio slot="start" value="not-matched"></ion-radio>
-            </ion-item>
-          </div>
-        </div>
-      </ion-radio-group> -->
+      </div>
     </ion-card-content>
     <!-- <ion-card-content *ngIf="showInstallName">
       <div class="row">

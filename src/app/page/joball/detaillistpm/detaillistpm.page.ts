@@ -825,7 +825,7 @@ export class DetaillistpmPage implements OnInit {
         if (this.type == 'PM') {
           const modal = await this.modalController.create({
             component: UpdateProductPage,
-            //cssClass: 'my-custom-modal-css',
+            cssClass: 'my-custom-modal-css-stock',
             componentProps: {
               tran: tran,
               params: params

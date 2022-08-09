@@ -123,7 +123,7 @@ export class LoginPage implements OnInit {
     let params = {
       email: this.username,
       password: this.password,
-      version: this.VersionNumber
+      version: '1.2.9'
     }
     console.log('params', params);
 

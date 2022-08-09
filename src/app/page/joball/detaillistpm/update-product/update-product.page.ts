@@ -16,6 +16,7 @@ export class UpdateProductPage implements OnInit {
   item;
   showInstallName = false;
   installName = '';
+  assetNo = '';
   dataType = '';
   tran;
   params;
@@ -47,6 +48,7 @@ export class UpdateProductPage implements OnInit {
 
   async submit() {
     console.log('this.installName', this.installName);
+    console.log('this.assetNo', this.assetNo.indexOf("SFS"));
     
     if (this.installName == '' || this.installName.length < 4) {
       const alert = await this.alertCtrl.create({
@@ -57,8 +59,26 @@ export class UpdateProductPage implements OnInit {
   
       await alert.present();
     }
+    else if (this.assetNo != 'ไม่มี' && this.assetNo == '') {
+      const alert = await this.alertCtrl.create({
+        header: 'แจ้งเตือน',
+        message: 'กรุณากรอก "ไม่มี" ถ้าไม่มี Asset No. บนตัวเครื่อง',
+        buttons: ['OK']
+      });
+
+      await alert.present();
+    }
+    else if (this.assetNo.indexOf("SFS") !== 0) {
+      const alert = await this.alertCtrl.create({
+        header: 'แจ้งเตือน',
+        message: 'รูปแบบของ Asset No. ไม่ถูกต้อง ตรวจสอบใหม่อีกครั้ง',
+        buttons: ['OK']
+      });
+
+      await alert.present();
+    }
     else {
-      this.postDataService.RecheckInstallPlan(this.tran.insID, this.installName).then(res => {
+      this.postDataService.RecheckInstallPlan(this.tran.insID, this.installName, this.assetNo).then(res => {
         this.SuccessAlert();
         this.modalCtrl.dismiss('success');
       });

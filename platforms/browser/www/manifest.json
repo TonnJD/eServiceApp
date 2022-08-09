@@ -1,0 +1,11 @@
+{
+  "background_color": "#FFF",
+  "display": "standalone",
+  "name": "eService 1.2.8",
+  "short_name": "eService 1.2.8",
+  "version": "io.ionic.superioreService",
+  "description": "eService by Wingplus",
+  "author": "WingPlusSolution",
+  "icons": [],
+  "start_url": "index.html"
+}

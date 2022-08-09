@@ -142,13 +142,19 @@
             <div class="row col-12">
               <label class="col-5 text">Asset No:</label>
               <div class="col-7" *ngIf="data.value.JobType == 'PM'">
-                <label>{{data.value.AssetplateSFS}}</label>&nbsp;
-                <ion-button size="small" (click)="SaveSerialBarcode(data.value)" style="margin-top: 0px;"
-                  title="สแกน Barcode">
+                <label>{{data.value.AssetplateSFS}}</label>
+              </div>
+            </div>
+
+            <div class="row col-12" style="margin-bottom: 10px;">
+              <label class="col-5 text"></label>
+              <div class="col-7" *ngIf="data.value.JobType == 'PM'">
+                <ion-button size="small" (click)="SaveSerialBarcode(data.value)" style="margin-top: 0px;" title="สแกน Barcode">
                   <ion-icon name="barcode"></ion-icon>
                 </ion-button>
               </div>
             </div>
+
             <div class="row col-12" *ngIf="data.value.JobType == 'CM' || data.value.JobType == 'INSTALL' || data.value.JobType == 'UNINSTALL'">
               <label class="col-5 text">Case ID:</label>
               <label class="col-7 subtext">{{data.value.ServiceReportNo}}</label>
