@@ -31,14 +31,6 @@ module.exports = [
         "runs": true
     },
     {
-        "file": "plugins/cordova-plugin-browsertab/www/browsertab.js",
-        "id": "cordova-plugin-browsertab.BrowserTab",
-        "pluginId": "cordova-plugin-browsertab",
-        "clobbers": [
-            "cordova.plugins.browsertab"
-        ]
-    },
-    {
         "file": "plugins/cordova-plugin-camera/www/CameraConstants.js",
         "id": "cordova-plugin-camera.Camera",
         "pluginId": "cordova-plugin-camera",
@@ -296,20 +288,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
-        "id": "cordova-plugin-splashscreen.SplashScreen",
-        "pluginId": "cordova-plugin-splashscreen",
-        "clobbers": [
-            "navigator.splashscreen"
-        ]
-    },
-    {
-        "file": "plugins/cordova-plugin-splashscreen/src/browser/SplashScreenProxy.js",
-        "id": "cordova-plugin-splashscreen.SplashScreenProxy",
-        "pluginId": "cordova-plugin-splashscreen",
-        "runs": true
-    },
-    {
         "file": "plugins/cordova-plugin-statusbar/www/statusbar.js",
         "id": "cordova-plugin-statusbar.statusbar",
         "pluginId": "cordova-plugin-statusbar",
@@ -344,6 +322,28 @@ module.exports = [
         "id": "phonegap-plugin-barcodescanner.BarcodeScannerProxy",
         "pluginId": "phonegap-plugin-barcodescanner",
         "runs": true
+    },
+    {
+        "file": "plugins/cordova-plugin-splashscreen/src/browser/SplashScreenProxy.js",
+        "id": "cordova-plugin-splashscreen.SplashScreenProxy",
+        "pluginId": "cordova-plugin-splashscreen",
+        "runs": true
+    },
+    {
+        "file": "plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+        "id": "cordova-plugin-splashscreen.SplashScreen",
+        "pluginId": "cordova-plugin-splashscreen",
+        "clobbers": [
+            "navigator.splashscreen"
+        ]
+    },
+    {
+        "file": "plugins/cordova-plugin-browsertab/www/browsertab.js",
+        "id": "cordova-plugin-browsertab.BrowserTab",
+        "pluginId": "cordova-plugin-browsertab",
+        "clobbers": [
+            "cordova.plugins.browsertab"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -352,18 +352,17 @@ module.exports.metadata =
     "cordova-plugin-app-version": "0.1.9",
     "cordova-plugin-badge": "0.8.8",
     "cordova-plugin-compat": "1.2.0",
-    "cordova-plugin-browsertab": "0.2.0",
     "cordova-plugin-camera": "2.4.1",
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-file": "4.3.3",
     "cordova-plugin-ionic-keyboard": "2.1.3",
     "cordova-plugin-ionic-webview": "4.1.1",
     "cordova-plugin-local-notification": "0.9.0-beta.2",
-    "cordova-plugin-splashscreen": "5.0.2",
     "cordova-plugin-statusbar": "2.4.2",
-    "cordova-plugin-whitelist": "1.3.4",
     "cordova-sqlite-storage": "3.3.0",
-    "phonegap-plugin-barcodescanner": "8.1.1-dev"
+    "phonegap-plugin-barcodescanner": "8.1.1-dev",
+    "cordova-plugin-splashscreen": "6.0.1",
+    "cordova-plugin-browsertab": "0.2.0"
 }
 // BOTTOM OF METADATA
 });

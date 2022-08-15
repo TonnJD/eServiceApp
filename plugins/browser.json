@@ -10,9 +10,6 @@
     "cordova-plugin-app-version": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
-    "cordova-plugin-browsertab": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
     "cordova-plugin-camera": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
@@ -31,13 +28,7 @@
     "cordova-plugin-local-notification": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
-    "cordova-plugin-splashscreen": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
     "cordova-plugin-statusbar": {
-      "PACKAGE_NAME": "io.cordova.hellocordova"
-    },
-    "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
     },
     "cordova-sqlite-storage": {
@@ -45,6 +36,12 @@
     },
     "phonegap-plugin-barcodescanner": {
       "PACKAGE_NAME": "io.cordova.hellocordova"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "io.ionic.superioreService"
+    },
+    "cordova-plugin-browsertab": {
+      "PACKAGE_NAME": "io.ionic.superioreService"
     }
   },
   "dependent_plugins": {
