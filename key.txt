@@ -1,9 +1,18 @@
 e-service keystore:
-file password: w1ngpluss0luti0n
+Passphrase: w1ngpluss0luti0n
 
 alias: devwingplus
 password: @0866556629
 
 Samut Prakan
 
+-- As add Grable properties --
+-- grable.properties --
+cdvMinSdkVersion=22
 
+-- Build aab --
+cd C:\Solution\Github\eServiceApp\platforms\android\
+.\gradlew.bat bundle
+
+-- Build Signer --
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore C:\Solution\Github\eServiceApp\my-release-key.jks C:\Solution\Github\eServiceApp\platforms\android\app\build\outputs\bundle\release\app-release.aab devwingplus
