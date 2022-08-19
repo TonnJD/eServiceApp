@@ -1402,4 +1402,17 @@ export class DetaillistpmPage implements OnInit {
     return await modal.present();
   }
 
+  checkCurrentWork(data:any) {
+    let selectData = this.data[0].productInstall.find((x: { tranID: string; summitDate: string; }) => x.tranID != null && x.summitDate == "False");
+    if (selectData != null) {
+      if (selectData.installId == data.installId){
+        return true;
+      } else {
+        return false;
+      }
+    } else {
+      return true;
+    }
+  }
+
 }
