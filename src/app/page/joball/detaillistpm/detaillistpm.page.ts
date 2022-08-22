@@ -1403,8 +1403,12 @@ export class DetaillistpmPage implements OnInit {
   }
 
   checkCurrentWork(data:any) {
+    let cusName = this.items.item.Customer;
+    // console.log('cusName', cusName);
+    // console.log('includes', cusName.includes('อินาบะ'));
+    
     let selectData = this.data[0].productInstall.find((x: { tranID: string; summitDate: string; }) => x.tranID != null && x.summitDate == "False");
-    if (selectData != null) {
+    if (selectData != null && !cusName.includes('อินาบะ')) {
       if (selectData.installId == data.installId){
         return true;
       } else {
