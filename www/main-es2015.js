@@ -681,7 +681,7 @@ module.exports = "<ion-toolbar>\r\n  <ion-title>ภาพหน้างาน</
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>ตรวจสอบความถูกต้อง</ion-title>\r\n    <ion-buttons slot=\"primary\">\r\n      <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-card>\r\n    <div class=\"col-12\" style=\"margin-top: 15px;\">\r\n      <div class=\"alert alert-warning\" role=\"alert\">\r\n        <h4>กรุณาตรวจสอบเครื่องในร้าน (สำคัญมาก)</h4>\r\n      </div>\r\n    </div>\r\n    <ion-card-header>\r\n      <ion-card-title>ข้อมูลเครื่องปัจจุบัน</ion-card-title>\r\n      <div style=\"margin-top:15px;\">\r\n        <h5>{{item.ItemsName}}</h5><br/>\r\n        <!-- <h5>Asset No.: {{item.AssetplateSFS}}</h5> -->\r\n      </div>\r\n    </ion-card-header>\r\n\r\n    <!-- <ion-card-header>\r\n      <ion-card-title>กรอกข้อมูลเครื่องที่ถูกต้องในร้าน</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <div class=\"col-12\">\r\n        <input type=\"text\" class=\"form-control\" />\r\n        <small>* กรุณากรอกมากกว่า 4 ตัวอักษร</small>\r\n      </div>\r\n    </ion-card-content> -->\r\n    <hr />\r\n    <ion-card-header>\r\n      <ion-card-title>กรุณาระบุ ชื่อ/รุ่นเครื่อง</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"installName\" placeholder=\"โปรดระบุ\" maxlength=\"100\" />\r\n          <span class=\"text-danger\">* กรุณากรอกมากกว่า 4 ตัวอักษร</span>\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-header>\r\n      <ion-card-title>กรุณาระบุ Asset No.</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"assetNo\" placeholder='SFS20xxxxxx หรือใส่ \"ไม่มี\"' maxlength=\"20\" />\r\n          <span class=\"text-danger\">* กรุณากรอก Asset No. ที่ติดบนตัวเครื่อง ตัวอย่าง: SFS20xxxxxx ถ้าไม่มีให้ใส่ ไม่มี </span>\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n    <!-- <ion-card-content *ngIf=\"showInstallName\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"installName\" placeholder=\"โปรดระบุ\" maxlength=\"100\" />\r\n          <small>* กรุณากรอกมากว่า 4 ตัวอักษร</small>\r\n        </div>\r\n      </div>\r\n    </ion-card-content> -->\r\n    \r\n    <hr />\r\n    <ion-card-content>\r\n      <div class=\"col-md-12 text-center\" style=\"margin-bottom: 30px;\">\r\n        <ion-button (click)=\"submit()\" color=\"success\">ส่งข้อมูลและเริ่มงาน</ion-button>\r\n      </div>\r\n    </ion-card-content>\r\n  </ion-card>\r\n\r\n</ion-content>\r\n"
+module.exports = "<ion-header>\r\n  <ion-toolbar>\r\n    <ion-title>ตรวจสอบความถูกต้อง</ion-title>\r\n    <ion-buttons slot=\"primary\">\r\n      <ion-icon slot=\"end\" name=\"close\" (click)=\"close()\"></ion-icon>\r\n    </ion-buttons>\r\n  </ion-toolbar>\r\n</ion-header>\r\n\r\n<ion-content>\r\n  <ion-card>\r\n    <div class=\"col-12\" style=\"margin-top: 15px;\">\r\n      <div class=\"alert alert-warning\" role=\"alert\">\r\n        <h4>กรุณาตรวจสอบเครื่องในร้าน (สำคัญมาก)</h4>\r\n      </div>\r\n    </div>\r\n    <ion-card-header>\r\n      <ion-card-title>ข้อมูลเครื่องปัจจุบัน</ion-card-title>\r\n      <div style=\"margin-top:15px;\">\r\n        <h5>{{item.ItemsName}}</h5><br/>\r\n        <!-- <h5>Asset No.: {{item.AssetplateSFS}}</h5> -->\r\n      </div>\r\n    </ion-card-header>\r\n\r\n    <!-- <ion-card-header>\r\n      <ion-card-title>กรอกข้อมูลเครื่องที่ถูกต้องในร้าน</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <div class=\"col-12\">\r\n        <input type=\"text\" class=\"form-control\" />\r\n        <small>* กรุณากรอกมากกว่า 4 ตัวอักษร</small>\r\n      </div>\r\n    </ion-card-content> -->\r\n    <hr />\r\n    <ion-card-header>\r\n      <ion-card-title>กรุณาระบุ ชื่อ/รุ่นเครื่อง</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"installName\" placeholder=\"โปรดระบุ\" maxlength=\"100\" />\r\n          <div style=\"padding-top: 5px;\">\r\n            <span class=\"text-danger\">* กรุณากรอกมากกว่า 4 ตัวอักษร</span>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n\r\n    <ion-card-header>\r\n      <ion-card-title>กรุณาระบุ Asset No.</ion-card-title>\r\n    </ion-card-header>\r\n    <ion-card-content>\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"assetNo\" placeholder='SFS20xxxxxx หรือใส่ \"ไม่มี\"' maxlength=\"20\" />\r\n          <div style=\"padding-top: 5px;\">\r\n            <span class=\"text-danger\">* กรุณากรอก Asset No. ที่ติดบนตัวเครื่อง ตัวอย่าง: SFS20xxxxxx ถ้าไม่มีให้ใส่ ไม่มี </span>\r\n          </div>\r\n        </div>\r\n      </div>\r\n    </ion-card-content>\r\n    <!-- <ion-card-content *ngIf=\"showInstallName\">\r\n      <div class=\"row\">\r\n        <div class=\"col-12\">\r\n          <input type=\"text\" class=\"form-control\" [(ngModel)]=\"installName\" placeholder=\"โปรดระบุ\" maxlength=\"100\" />\r\n          <small>* กรุณากรอกมากว่า 4 ตัวอักษร</small>\r\n        </div>\r\n      </div>\r\n    </ion-card-content> -->\r\n    \r\n    <hr />\r\n    <ion-card-content>\r\n      <div class=\"col-md-12 text-center\" style=\"margin-bottom: 30px;\">\r\n        <ion-button (click)=\"submit()\" color=\"success\">ส่งข้อมูลและเริ่มงาน</ion-button>\r\n      </div>\r\n    </ion-card-content>\r\n  </ion-card>\r\n\r\n</ion-content>\r\n"
 
 /***/ }),
 
@@ -2085,10 +2085,18 @@ let UpdateProductPage = class UpdateProductPage {
         return tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"](this, void 0, void 0, function* () {
             console.log('this.installName', this.installName);
             console.log('this.assetNo', this.assetNo.indexOf("SFS"));
-            if (this.installName == '' || this.installName.length < 4) {
+            console.log('assetno None', this.assetNo.indexOf("ไม่มี"));
+            if ((this.installName == '' || this.installName.length < 4) || (this.assetNo == '' || this.assetNo.length < 4)) {
+                let text;
+                if (this.installName.length < 4) {
+                    text = 'กรุณากรอกชื่อ/รุ่นเครื่อง มากกว่า 4 ตัวอักษร';
+                }
+                else if ((this.assetNo.length < 4)) {
+                    text = 'กรุณากรอก Asset No. มากกว่า 4 ตัวอักษร';
+                }
                 const alert = yield this.alertCtrl.create({
                     header: 'แจ้งเตือน',
-                    message: 'กรุณากรอกมากกว่า 4 ตัวอักษร',
+                    message: text,
                     buttons: ['OK']
                 });
                 yield alert.present();
@@ -2097,14 +2105,6 @@ let UpdateProductPage = class UpdateProductPage {
                 const alert = yield this.alertCtrl.create({
                     header: 'แจ้งเตือน',
                     message: 'กรุณากรอก "ไม่มี" ถ้าไม่มี Asset No. บนตัวเครื่อง',
-                    buttons: ['OK']
-                });
-                yield alert.present();
-            }
-            else if (this.assetNo.indexOf("SFS") !== 0) {
-                const alert = yield this.alertCtrl.create({
-                    header: 'แจ้งเตือน',
-                    message: 'รูปแบบของ Asset No. ไม่ถูกต้อง ตรวจสอบใหม่อีกครั้ง',
                     buttons: ['OK']
                 });
                 yield alert.present();
@@ -7580,11 +7580,11 @@ let PostDataService = class PostDataService {
         // apiServer_url = 'http://localhost:41669/';
         // apiStock = 'https://localhost:6379/';
         //จาก Server จริง
-        // apiServer_url = 'https://erpsuperior.com/';
-        // apiStock = 'https://wms.erpsuperior.com/';
+        this.apiServer_url = 'https://erpsuperior.com/';
+        this.apiStock = 'https://wms.erpsuperior.com/';
         //จาก Server เทส
-        this.apiServer_url = 'https://test.erpsuperior.com/';
-        this.apiStock = 'https://wmstest.erpsuperior.com/';
+        // apiServer_url = 'https://test.erpsuperior.com/';
+        // apiStock = 'https://wmstest.erpsuperior.com/';
         // apiServer_url = 'https://cors-anywhere.herokuapp.com/http://superior2.wingplusweb.com/';
         // apiServer_url = 'https://cors-anywhere.herokuapp.com/https://superior2.wingplusweb.com/';
         this.httpOptions = {

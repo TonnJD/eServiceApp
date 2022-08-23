@@ -49,11 +49,20 @@ export class UpdateProductPage implements OnInit {
   async submit() {
     console.log('this.installName', this.installName);
     console.log('this.assetNo', this.assetNo.indexOf("SFS"));
+    console.log('assetno None', this.assetNo.indexOf("ไม่มี"));
     
-    if (this.installName == '' || this.installName.length < 4) {
+    if ((this.installName == '' || this.installName.length < 4) || (this.assetNo == '' || this.assetNo.length < 4)) {
+      let text;
+      if (this.installName.length < 4) {
+        text = 'กรุณากรอกชื่อ/รุ่นเครื่อง มากกว่า 4 ตัวอักษร';
+      }
+      else if ((this.assetNo.length < 4)) {
+        text = 'กรุณากรอก Asset No. มากกว่า 4 ตัวอักษร';
+      }
+
       const alert = await this.alertCtrl.create({
         header: 'แจ้งเตือน',
-        message: 'กรุณากรอกมากกว่า 4 ตัวอักษร',
+        message: text,
         buttons: ['OK']
       });
   
@@ -63,15 +72,6 @@ export class UpdateProductPage implements OnInit {
       const alert = await this.alertCtrl.create({
         header: 'แจ้งเตือน',
         message: 'กรุณากรอก "ไม่มี" ถ้าไม่มี Asset No. บนตัวเครื่อง',
-        buttons: ['OK']
-      });
-
-      await alert.present();
-    }
-    else if (this.assetNo.indexOf("SFS") !== 0) {
-      const alert = await this.alertCtrl.create({
-        header: 'แจ้งเตือน',
-        message: 'รูปแบบของ Asset No. ไม่ถูกต้อง ตรวจสอบใหม่อีกครั้ง',
         buttons: ['OK']
       });
 
