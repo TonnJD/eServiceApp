@@ -218,7 +218,7 @@
               </ion-button>
               
               <ion-button expand="block" color="success" size="small" (click)="scan(item, data.value)"
-                *ngIf="data.value.JobType != 'CM' && data.value.Workfinish == 0 && checkCurrentWork(data.value) else wait" #wait>เริ่มงาน</ion-button>
+                *ngIf="data.value.JobType != 'CM' && data.value.Workfinish == 0" #wait>เริ่มงาน</ion-button>
 
               <!-- <ion-button expand="block" color="primary" size="small" (click)="scan(item, data.value)"
                 *ngIf="data.value.JobType != 'CM' && data.value.Workfinish == 0 else wait" #wait>ตรวจสอบข้อมูล</ion-button> -->

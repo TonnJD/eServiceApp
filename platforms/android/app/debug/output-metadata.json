@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "artifactType": {
+    "type": "APK",
+    "kind": "Directory"
+  },
+  "applicationId": "io.ionic.superioreService",
+  "variantName": "debug",
+  "elements": [
+    {
+      "type": "SINGLE",
+      "filters": [],
+      "versionCode": 10209,
+      "versionName": "1.2.9.1",
+      "outputFile": "app-debug.apk"
+    }
+  ]
+}

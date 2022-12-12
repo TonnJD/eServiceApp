@@ -15,8 +15,8 @@ export class PostDataService {
   // apiStock = 'https://localhost:6379/';
 
   //จาก Server จริง
-  apiServer_url = 'https://erpsuperior.com/';
-  apiStock = 'https://wms.erpsuperior.com/';
+  apiServer_url = 'http://erpsuperior.com/';
+  apiStock = 'http://wms.erpsuperior.com/';
 
   //จาก Server เทส
   // apiServer_url = 'https://test.erpsuperior.com/';

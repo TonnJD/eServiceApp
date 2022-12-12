@@ -6,6 +6,11 @@ password: @0866556629
 
 Samut Prakan
 
+-- Build Cordova --
+ionic cordova platform rm android
+ionic cordova platform add android
+ionic cordova build android
+
 -- As add Grable properties --
 -- grable.properties --
 cdvMinSdkVersion=22
