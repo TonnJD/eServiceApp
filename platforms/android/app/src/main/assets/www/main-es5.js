@@ -8363,8 +8363,8 @@ var PostDataService = /** @class */ (function () {
         // apiServer_url = 'http://localhost:41669/';
         // apiStock = 'https://localhost:6379/';
         //จาก Server จริง
-        this.apiServer_url = 'https://erpsuperior.com/';
-        this.apiStock = 'https://wms.erpsuperior.com/';
+        this.apiServer_url = 'http://erpsuperior.com/';
+        this.apiStock = 'http://wms.erpsuperior.com/';
         //จาก Server เทส
         // apiServer_url = 'https://test.erpsuperior.com/';
         // apiStock = 'https://wmstest.erpsuperior.com/';
