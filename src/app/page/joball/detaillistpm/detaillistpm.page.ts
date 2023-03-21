@@ -605,13 +605,16 @@ export class DetaillistpmPage implements OnInit {
 
     if (item.Workfinish == 0 || item.Workfinish == 2) {
       if (item.status == "Pending") {
-        const alert = await this.alertController.create({
-          message: 'กรุณาติดต่อแอดมินบริษัทสุพีเรีย',
-          buttons: ['OK']
-        });
-        await alert.present();
+        // const alert = await this.alertController.create({
+        //   message: 'กรุณาติดต่อแอดมินบริษัทสุพีเรีย',
+        //   buttons: ['OK']
+        // });
+        // await alert.present();
+        
+        this.UpdateStatus(item);
       }
-      else if (this.type == "CM") {
+
+      if (this.type == "CM") {
         if (item.tranID != null) {
           console.log('item.WorkCloseID', item.WorkCloseID);
           let tran = {
@@ -978,6 +981,12 @@ export class DetaillistpmPage implements OnInit {
     }
   }
   //#endregion
+
+  UpdateStatus(item) {
+    let serviceNo = item.ServiceReportNo;
+    let planid = item.planID;
+    this.postDataService.UpdatePendingToInprogress(serviceNo, planid);
+  }
 
   async NotRecheckAlert() {
     const toast = await this.toastCtrl.create({
